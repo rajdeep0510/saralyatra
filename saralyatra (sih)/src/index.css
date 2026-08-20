@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: Cinzel, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-
   --color-stone-50: #faf9f5;
   --color-stone-100: #f5f3ed;
   --color-stone-200: #e7e2d9;
@@ -87,7 +84,7 @@ body {
   padding: 0;
   background-color: #faf9f5;
   color: #1c1917;
-  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   letter-spacing: -0.01em;
 }
 
