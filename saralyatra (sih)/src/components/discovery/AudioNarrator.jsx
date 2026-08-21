@@ -20,7 +20,7 @@ export default function AudioNarrator({ text, currentLang }) {
       return prev;
     });
   }
-
+// this is a comment for git issue nothign related to this. 
   function stopDrone() {
     if (oscillatorsRef.current.length > 0) {
       oscillatorsRef.current.forEach(osc => {
