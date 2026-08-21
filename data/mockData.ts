@@ -1,10 +1,56 @@
 import { Monument, Homestay, PreloadedTrip, Translations } from "../types";
 
+export interface StateInfo {
+  id: string;
+  name: string;
+  zone: "North" | "South" | "West" | "East" | "Central" | "North-East";
+  popularAttractions: string[];
+}
+
+export const indianStates: StateInfo[] = [
+  // NORTH
+  { id: "Himachal Pradesh", name: "Himachal Pradesh", zone: "North", popularAttractions: ["Manali", "Spiti", "Shimla", "Dharamshala"] },
+  { id: "Uttarakhand", name: "Uttarakhand", zone: "North", popularAttractions: ["Rishikesh", "Kedarnath", "Valley of Flowers", "Nainital"] },
+  { id: "Ladakh", name: "Ladakh", zone: "North", popularAttractions: ["Pangong Tso", "Nubra Valley", "Thiksey Monastery"] },
+  { id: "Jammu & Kashmir", name: "Jammu & Kashmir", zone: "North", popularAttractions: ["Gulmarg", "Pahalgam", "Dal Lake", "Vaishno Devi"] },
+  { id: "Punjab", name: "Punjab", zone: "North", popularAttractions: ["Golden Temple", "Wagah Border"] },
+  { id: "Delhi", name: "Delhi", zone: "North", popularAttractions: ["Qutub Minar", "Red Fort", "Humayun's Tomb"] },
+  
+  // SOUTH
+  { id: "Kerala", name: "Kerala", zone: "South", popularAttractions: ["Munnar", "Alleppey", "Wayanad", "Varkala"] },
+  { id: "Karnataka", name: "Karnataka", zone: "South", popularAttractions: ["Hampi", "Coorg", "Mysore", "Gokarna", "Chikmagalur"] },
+  { id: "Tamil Nadu", name: "Tamil Nadu", zone: "South", popularAttractions: ["Madurai", "Rameswaram", "Ooty", "Mahabalipuram", "Kanyakumari"] },
+  { id: "Andhra Pradesh", name: "Andhra Pradesh", zone: "South", popularAttractions: ["Tirupati", "Araku Valley", "Gandikota"] },
+  { id: "Telangana", name: "Telangana", zone: "South", popularAttractions: ["Hyderabad", "Warangal"] },
+
+  // WEST
+  { id: "Rajasthan", name: "Rajasthan", zone: "West", popularAttractions: ["Jaipur", "Udaipur", "Jaisalmer", "Jodhpur", "Pushkar"] },
+  { id: "Gujarat", name: "Gujarat", zone: "West", popularAttractions: ["Rann of Kutch", "Rani ki Vav", "Gir National Park", "Somnath", "Dwarka"] },
+  { id: "Maharashtra", name: "Maharashtra", zone: "West", popularAttractions: ["Ajanta & Ellora", "Mahabaleshwar", "Lonavala", "Tadoba"] },
+  { id: "Goa", name: "Goa", zone: "West", popularAttractions: ["Dudhsagar Falls", "Old Goa Churches", "Palolem Beach"] },
+
+  // CENTRAL
+  { id: "Madhya Pradesh", name: "Madhya Pradesh", zone: "Central", popularAttractions: ["Khajuraho", "Kanha & Bandhavgarh", "Ujjain", "Bhimbetka"] },
+  { id: "Uttar Pradesh", name: "Uttar Pradesh", zone: "Central", popularAttractions: ["Varanasi", "Taj Mahal Agra", "Ayodhya", "Sarnath", "Vrindavan"] },
+  { id: "Chhattisgarh", name: "Chhattisgarh", zone: "Central", popularAttractions: ["Chitrakote Falls", "Bastar"] },
+
+  // EAST
+  { id: "Odisha", name: "Odisha", zone: "East", popularAttractions: ["Puri Jagannath", "Konark Sun Temple", "Chilika Lake"] },
+  { id: "West Bengal", name: "West Bengal", zone: "East", popularAttractions: ["Darjeeling", "Sundarbans", "Kolkata Heritage"] },
+  { id: "Bihar", name: "Bihar", zone: "East", popularAttractions: ["Bodh Gaya", "Nalanda"] },
+  { id: "Sikkim", name: "Sikkim", zone: "East", popularAttractions: ["Gangtok", "Gurudongmar Lake", "Pelling"] },
+
+  // NORTH-EAST
+  { id: "Meghalaya", name: "Meghalaya", zone: "North-East", popularAttractions: ["Living Root Bridges", "Cherrapunji", "Dawki River"] },
+  { id: "Assam", name: "Assam", zone: "North-East", popularAttractions: ["Kaziranga National Park", "Majuli Island"] },
+  { id: "Arunachal Pradesh", name: "Arunachal Pradesh", zone: "North-East", popularAttractions: ["Tawang Monastery", "Ziro Valley"] }
+];
+
 export const translations: Translations = {
   en: {
     brand: "Saral Yatra",
-    tagline: "Smart Multi-Category Trip Planner for India",
-    searchPlaceholder: "Search nature spots, sacred pilgrimages, heritage sites, or homestays...",
+    tagline: "Universal AI Trip Planner for India",
+    searchPlaceholder: "Search 100+ destinations across all states...",
     exploreTab: "Wonders & Stories",
     plannerTab: "AI Trip Planner",
     itineraryTab: "Itinerary & Live Map",
@@ -20,8 +66,8 @@ export const translations: Translations = {
     bookNow: "Reserve Stay",
     exploreTitle: "Discover India's Wonders",
     exploreSub: "Explore majestic nature, sacred shrines, ancient heritage, and regional lore in your preferred dialect.",
-    plannerTitle: "Configure Your Smart Yatra",
-    plannerSub: "Tailor your journey's theme (Nature, Spiritual, Heritage, Adventure), pacing, dietary customs, and stay style.",
+    plannerTitle: "Universal AI Trip Planner",
+    plannerSub: "Generate customized journeys for any Indian state with custom duration, pacing, and dietary profiling.",
     homestaysTitle: "Verified Regional & Nature Stays",
     homestaysSub: "Stay with verified hosts matching your dietary traditions, native dialects, and environmental preferences.",
     viewDetails: "View Details",
@@ -34,33 +80,17 @@ export const translations: Translations = {
     totalDistance: "Total Distance",
     travelTime: "Travel Time",
     monuments: "Attractions",
-    jainKitchen: "Separate Jain Kitchen",
-    pureVegKitchen: "100% Pure Vegetarian",
-    halalKitchen: "Halal Certified Kitchen",
-    hostLanguage: "Host Speaks My Dialect",
-    monumentLabel: "Heritage Landmark",
-    natureLabel: "Scenic Nature Stop",
-    spiritualLabel: "Sacred Shrine Stop",
-    adventureLabel: "Adventure & Wildlife",
-    lunchLabel: "Regional Culinary Stop",
-    hotelLabel: "Homestay / Eco-Retreat",
-    transitLabel: "Scenic Transit",
     startWizard: "Start AI Wizard",
     previous: "Previous",
     next: "Next",
-    generate: "Generate Custom Yatra",
+    generate: "Generate Custom Itinerary",
     rebuild: "Rebuild Itinerary",
-    activeTrip: "Active Itinerary",
-    noTripAlert: "No custom itinerary generated yet. Configure options in the wizard or load a pre-loaded trail below.",
-    loadDemoKerala: "3-Day Kerala Nature & Backwaters",
-    loadDemoVaranasi: "3-Day Divine Kashi Pilgrimage",
-    loadDemoGujarat: "3-Day Gujarat Heritage Trail",
-    loadDemoHampi: "3-Day Hampi Architectural Circuit"
+    activeTrip: "Active Itinerary"
   },
   hi: {
     brand: "सरल यात्रा",
-    tagline: "भारत का संपूर्ण स्मार्ट ट्रिप प्लानर",
-    searchPlaceholder: "प्राकृतिक स्थल, तीर्थ, धरोहर या होमस्टे खोजें...",
+    tagline: "भारत का संपूर्ण एआई ट्रिप प्लानर",
+    searchPlaceholder: "सभी राज्यों के 100+ स्थल खोजें...",
     exploreTab: "स्थल और कहानियाँ",
     plannerTab: "एआई ट्रिप प्लानर",
     itineraryTab: "यात्रा मार्ग और मानचित्र",
@@ -76,8 +106,8 @@ export const translations: Translations = {
     bookNow: "आरक्षित करें",
     exploreTitle: "भारत के अद्भुत स्थलों की खोज करें",
     exploreSub: "अपनी पसंदीदा भाषा में प्रकृति, तीर्थ, धरोहर और लोककथाओं का अनुभव करें।",
-    plannerTitle: "अपनी अनुकूलित यात्रा तैयार करें",
-    plannerSub: "प्रकृति, तीर्थ, धरोहर या रोमांच में से अपनी पसंद और खान-पान के अनुसार योजना बनाएं।",
+    plannerTitle: "यूनिवर्सल एआई ट्रिप प्लानर",
+    plannerSub: "किसी भी राज्य के लिए अनुकूलित यात्रा तैयार करें।",
     homestaysTitle: "सत्यापित होमस्टे और फार्मस्टे",
     homestaysSub: "अपनी भाषा और भोजन परंपराओं से मेल खाने वाले सत्यापित मेजबानों के साथ ठहरें।",
     viewDetails: "विवरण देखें",
@@ -90,33 +120,17 @@ export const translations: Translations = {
     totalDistance: "कुल दूरी",
     travelTime: "यात्रा समय",
     monuments: "आकर्षण",
-    jainKitchen: "अलग जैन रसोई",
-    pureVegKitchen: "100% शुद्ध शाकाहारी",
-    halalKitchen: "हलाल प्रमाणित रसोई",
-    hostLanguage: "मेजबान मेरी भाषा बोलते हैं",
-    monumentLabel: "धरोहर स्थल",
-    natureLabel: "प्राकृतिक पड़ाव",
-    spiritualLabel: "पवित्र तीर्थ स्थल",
-    adventureLabel: "रोमांचक गतिविधि",
-    lunchLabel: "स्थानीय भोजन",
-    hotelLabel: "होमस्टे / आवास",
-    transitLabel: "यात्रा पड़ाव",
     startWizard: "एआई विज़ार्ड शुरू करें",
     previous: "पिछला",
     next: "अगला",
     generate: "यात्रा तैयार करें",
     rebuild: "मार्ग फिर से बनाएं",
-    activeTrip: "सक्रिय यात्रा",
-    noTripAlert: "अभी तक कोई कस्टम यात्रा नहीं बनी है। विज़ार्ड में विकल्प चुनें या डेमो यात्रा लोड करें।",
-    loadDemoKerala: "3-दिवसीय केरल प्रकृति व बैकवाटर्स",
-    loadDemoVaranasi: "3-दिवसीय दिव्य काशी तीर्थ यात्रा",
-    loadDemoGujarat: "3-दिवसीय गुजरात धरोहर यात्रा",
-    loadDemoHampi: "3-दिवसीय हम्पी वास्तुकला सर्किट"
+    activeTrip: "सक्रिय यात्रा"
   },
   gu: {
     brand: "સરળ યાત્રા",
     tagline: "ભારત માટે સર્વગ્રાહી સ્માર્ટ ટ્રિપ પ્લાનર",
-    searchPlaceholder: "કુદરતી સ્થળો, તીર્થસ્થાનો, વારસો કે હોમસ્ટે શોધો...",
+    searchPlaceholder: "ભારતના તમામ રાજ્યોના સ્થળો શોધો...",
     exploreTab: "અદ્ભુત સ્થળો અને વાર્તાઓ",
     plannerTab: "એઆઈ ટ્રિપ પ્લાનર",
     itineraryTab: "પ્રવાસ માર્ગ અને નકશો",
@@ -132,8 +146,8 @@ export const translations: Translations = {
     bookNow: "હોમસ્ટે બુક કરો",
     exploreTitle: "ભારતના વૈવિધ્યસભર સ્થળો જાણો",
     exploreSub: "કુદરતી સૌંદર્ય, તીર્થસ્થાનો અને ઐતિહાસિક વારસાની માહિતી તમારી ભાષામાં મેળવો.",
-    plannerTitle: "તમારી મનપસંદ યાત્રા પ્લાન કરો",
-    plannerSub: "કુદરત, ધાર્મિક કે વારસા આધારિત પ્રવાસ નક્કી કરો.",
+    plannerTitle: "યૂનિવર્સલ એઆઈ પ્લાનર",
+    plannerSub: "કોઈપણ રાજ્ય માટે કસ્ટમ પ્રવાસ પ્લાન કરો.",
     homestaysTitle: "પ્રમાણિત પ્રાદેશિક હોમસ્ટે",
     homestaysSub: "તમારી ભોજન પરંપરા અને ભાષા અનુસાર અનુકૂળ યજમાનો સાથે રહો.",
     viewDetails: "વિગત જુઓ",
@@ -146,33 +160,17 @@ export const translations: Translations = {
     totalDistance: "કુલ અંતર",
     travelTime: "મુસાફરી સમય",
     monuments: "સ્થળો",
-    jainKitchen: "અલગ જૈન રસોડું",
-    pureVegKitchen: "100% શુદ્ધ શાકાહારી",
-    halalKitchen: "હલાલ પ્રમાણિત રસોડું",
-    hostLanguage: "યજમાન મારી બોલી બોલે છે",
-    monumentLabel: "વારસો સ્ટોપ",
-    natureLabel: "કુદરતી સ્ટોપ",
-    spiritualLabel: "તીર્થ સ્ટોપ",
-    adventureLabel: "સાહસિક સ્ટોપ",
-    lunchLabel: "સ્થાનિક ભોજન",
-    hotelLabel: "હોમસ્ટે / રિસોર્ટ",
-    transitLabel: "મુસાફરી સ્ટોપ",
     startWizard: "એઆઈ વિઝાર્ડ શરૂ કરો",
     previous: "પાછળ",
     next: "આગળ",
     generate: "યાત્રા બનાવો",
     rebuild: "ફરી ગણતરી કરો",
-    activeTrip: "સક્રિય પ્રવાસ",
-    noTripAlert: "હજી પ્રવાસ માર્ગ બનાવ્યો નથી. ઉપરથી વિકલ્પ પસંદ કરો.",
-    loadDemoKerala: "3-દિવસીય કેરળ નેચર ટૂર",
-    loadDemoVaranasi: "3-દિવસીય કાશી તીર્થ યાત્રા",
-    loadDemoGujarat: "3-દિવસીય ગુજરાત વારસા યાત્રા",
-    loadDemoHampi: "3-દિવસીય હમ્પી આર્કિટેક્ચર સર્કિટ"
+    activeTrip: "સક્રિય પ્રવાસ"
   },
   ta: {
     brand: "சரல் யாத்ரா",
     tagline: "இந்தியாவிற்கான பல்துறை ஸ்மார்ட் பயண திட்டமிடுபவர்",
-    searchPlaceholder: "இயற்கை இடங்கள், ஆன்மீக தலங்கள், பாரம்பரிய சின்னங்கள்...",
+    searchPlaceholder: "அனைத்து மாநிலங்களின் இடங்களையும் தேடுங்கள்...",
     exploreTab: "இடங்கள் & கதைகள்",
     plannerTab: "ஏஐ பயணத் திட்டம்",
     itineraryTab: "பயணத் திட்டம் & வரைபடம்",
@@ -188,8 +186,8 @@ export const translations: Translations = {
     bookNow: "முன்பதிவு செய்",
     exploreTitle: "இந்தியாவின் அதிசயங்களைக் கண்டறியுங்கள்",
     exploreSub: "இயற்கை வனப்பு, ஆன்மீக தலங்கள், வரலாற்று எச்சங்களை உங்கள் மொழியில் அனுபவியுங்கள்.",
-    plannerTitle: "உங்கள் பயணத்தை வடிவமைக்கவும்",
-    plannerSub: "இயற்கை, ஆன்மீகம், பாரம்பரியம் ஆகியவற்றில் உங்கள் விருப்பத்திற்கேற்ப திட்டமிடுங்கள்.",
+    plannerTitle: "ஏஐ பயணத் திட்டமிடுபவர்",
+    plannerSub: "எந்தவொரு மாநிலத்திற்கும் தனிப்பயனாக்கப்பட்ட பயணத்தை உருவாக்குங்கள்.",
     homestaysTitle: "உண்மையான ஹோம்ஸ்டேக்கள்",
     homestaysSub: "உங்கள் மொழி, உணவுப் பழக்கத்திற்கு ஏற்ற புரவலர்களுடன் தங்குங்கள்.",
     viewDetails: "விவரங்களைக் காண்க",
@@ -202,33 +200,97 @@ export const translations: Translations = {
     totalDistance: "மொத்த தூரம்",
     travelTime: "பயண நேரம்",
     monuments: "இடங்கள்",
-    jainKitchen: "தனி ஜெயின் சமையலறை",
-    pureVegKitchen: "100% சுத்த சைவம்",
-    halalKitchen: "ஹலால் சமையலறை",
-    hostLanguage: "புரவலர் என் மொழி பேசுகிறார்",
-    monumentLabel: "பாரம்பரிய இடம்",
-    natureLabel: "இயற்கை நிறுத்தம்",
-    spiritualLabel: "ஆன்மீக நிறுத்தம்",
-    adventureLabel: "சாகச நிறுத்தம்",
-    lunchLabel: "பாரம்பரிய உணவு",
-    hotelLabel: "ஹோம்ஸ்டே / தங்குமிடம்",
-    transitLabel: "போக்குவரத்து",
     startWizard: "ஏஐ வழிகாட்டியைத் தொடங்கு",
     previous: "முந்தைய",
     next: "அடுத்தது",
     generate: "பயணத்தை உருவாக்கு",
     rebuild: "மீண்டும் உருவாக்கு",
-    activeTrip: "செயலில் உள்ள பயணம்",
-    noTripAlert: "பயணத் திட்டம் தேர்ந்தெடுக்கப்படவில்லை.",
-    loadDemoKerala: "3 நாள் கேரளா இயற்கை பயணம்",
-    loadDemoVaranasi: "3 நாள் காசி ஆன்மீக யாத்திரை",
-    loadDemoGujarat: "3 நாள் குஜராத் பாரம்பரிய பயணம்",
-    loadDemoHampi: "3 நாள் ஹம்பி கட்டிடக்கலை பயணம்"
+    activeTrip: "செயலில் உள்ள பயணம்"
+  },
+  mr: {
+    brand: "सरल यात्रा",
+    tagline: "भारतासाठी स्मार्ट प्रवास आणि पर्यटन नियोजक",
+    searchPlaceholder: "सर्व राज्यांमधील १००+ ठिकाणे शोधा...",
+    exploreTab: "अद्भूत ठिकाणे आणि कथा",
+    plannerTab: "एआय ट्रिप प्लॅनर",
+    itineraryTab: "प्रवास योजना आणि नकाशा",
+    homestaysTab: "प्रादेशिक होमस्टे",
+    listenStory: "कथा ऐका",
+    stopNarration: "थांबवा",
+    virtualTour: "३६०° व्हर्च्युअल टूर",
+    hiddenGem: "अप्रतिम गुप्त ठिकाण",
+    famousGem: "प्रसिद्ध आकर्षण",
+    culturalMatch: "सुसंगतता प्रमाण",
+    hostDialect: "स्थानिक भाषा",
+    dietarySafety: "आहार खात्री",
+    bookNow: "होमस्टे बुक करा",
+    exploreTitle: "भारतातील आश्चर्यकारक ठिकाणे शोधा",
+    exploreSub: "निसर्ग सौंदर्य, पवित्र तीर्थक्षेत्रे आणि ऐतिहासिक वारसा तुमच्या भाषेत अनुभवा.",
+    plannerTitle: "एआय ट्रिप प्लॅनर",
+    plannerSub: "कोणत्याही भारतीय राज्यासाठी सानुकूल प्रवास योजना तयार करा.",
+    homestaysTitle: "प्रमाणित प्रादेशिक होमस्टे",
+    homestaysSub: "तुमच्या आहाराच्या गरजा आणि भाषेशी सुसंगत असलेल्या स्थानिक यजमानांसोबत राहा.",
+    viewDetails: "तपशील पहा",
+    era: "वैशिष्ट्य",
+    state: "राज्य",
+    languages: "उपलब्ध भाषा",
+    readStory: "माहिती व कथा वाचा",
+    close: "बंद करा",
+    days: "दिवस",
+    totalDistance: "एकूण अंतर",
+    travelTime: "प्रवासाचा वेळ",
+    monuments: "ठिकाणे",
+    startWizard: "एआय विझार्ड सुरू करा",
+    previous: "मागे",
+    next: "पुढे",
+    generate: "यात्रा तयार करा",
+    rebuild: "पुन्हा तयार करा",
+    activeTrip: "सक्रिय प्रवास योजना"
+  },
+  bn: {
+    brand: "সরল যাত্রা",
+    tagline: "ভারতের জন্য সর্বজনীন এআই ভ্রমণ পরিকল্পনাকারী",
+    searchPlaceholder: "সব রাজ্যের ১০০+ পর্যটন কেন্দ্র খুঁজুন...",
+    exploreTab: "দর্শনীয় স্থান ও লোকগাথা",
+    plannerTab: "এআই ট্রিপ প্ল্যানার",
+    itineraryTab: "ভ্রমণসূচি ও লাইভ মানচিত্র",
+    homestaysTab: "ঐতিহ্যবাহী হোমস্টে",
+    listenStory: "কাহিনী শুনুন",
+    stopNarration: "থামুন",
+    virtualTour: "৩৬০° ভার্চুয়াল ট্যুর",
+    hiddenGem: "লুকানো রত্ন",
+    famousGem: "বিখ্যাত আকর্ষণ",
+    culturalMatch: "সামঞ্জস্যের স্কোর",
+    hostDialect: "আঞ্চলিক ভাষা",
+    dietarySafety: "খাদ্য সুরক্ষা ও নিয়ম",
+    bookNow: "বুক করুন",
+    exploreTitle: "ভারতের সৌন্দর্য ও রূপকথা আবিষ্কার করুন",
+    exploreSub: "প্রাকৃতিক উপত্যকা, পবিত্র তীর্থস্থান এবং প্রাচীন ঐতিহ্যবাহী স্থানগুলো আপনার মাতৃভাষায় অন্বেষণ করুন।",
+    plannerTitle: "এআই ট্রিপ প্ল্যানার",
+    plannerSub: "ভারতের যেকোনো রাজ্যের জন্য নিজস্ব পছন্দ অনুযায়ী ভ্রমণসূচি তৈরি করুন।",
+    homestaysTitle: "যাচাইকৃত আঞ্চলিক হোমস্টে",
+    homestaysSub: "আপনার খাদ্য সংস্কৃতি ও ভাষার সাথে মানানসই স্থানীয় মেহমানদারদের সাথে থাকুন।",
+    viewDetails: "বিস্তারিত দেখুন",
+    era: "ঐতিহাসিক কাল",
+    state: "রাজ্য",
+    languages: "ভাষা",
+    readStory: "কাহিনী পড়ুন",
+    close: "বন্ধ করুন",
+    days: "দিন",
+    totalDistance: "মোট দূরত্ব",
+    travelTime: "যাত্রার সময়",
+    monuments: "দর্শনীয় স্থান",
+    startWizard: "এআই উইজার্ড শুরু করুন",
+    previous: "পূর্ববর্তী",
+    next: "পরবর্তী",
+    generate: "ভ্রমণসূচি তৈরি করুন",
+    rebuild: "পুনরায় হিসাব করুন",
+    activeTrip: "সক্রিয় ভ্রমণসূচি"
   }
 };
 
 export const monuments: Monument[] = [
-  // NATURE & SCENIC
+  // 1. KERALA (NATURE & BACKWATERS)
   {
     id: "munnar_tea",
     name: "Munnar Tea Valleys & Mattupetty",
@@ -242,9 +304,9 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "ta"],
     coordinates: { lat: 10.0889, lng: 77.0595 },
     folklore: {
-      en: "Perched at 1,600m in the Western Ghats, Munnar's undulating emerald hills were historically known as the 'High Range'. Home to the endangered Nilgiri Tahr and the blooming Neelakurinji flower which covers hills in violet once every 12 years. The cool mountain mist creates an unforgettable tranquil sanctuary.",
-      hi: "पश्चिमी घाट में 1,600 मीटर की ऊंचाई पर स्थित मुन्नार की हरी-भरी पहाड़ियां प्राकृतिक सुंदरता का स्वर्ग हैं। यहाँ दुर्लभ नीलगिरि तहर और 12 साल में एक बार खिलने वाला नीलकुरिंजी फूल पाया जाता है। ठंडी धुंध और चाय के बागान मन को शांति देते हैं।",
-      ta: "மேற்குத் தொடர்ச்சி மலையில் 1,600 மீட்டர் உயரத்தில் அமைந்துள்ள மூணாறின் தேயிலைத் தோட்டங்கள் இயற்கை எழில் கொஞ்சும் பகுதியாகும். 12 ஆண்டுகளுக்கு ஒருமுறை பூக்கும் நீலக்குறிஞ்சி மலரும், வரையாடுகளும் இதன் சிறப்பம்சமாகும்."
+      en: "Perched at 1,600m in the Western Ghats, Munnar's undulating emerald hills were historically known as the 'High Range'. Home to the endangered Nilgiri Tahr and the blooming Neelakurinji flower which covers hills in violet once every 12 years.",
+      hi: "पश्चिमी घाट में 1,600 मीटर की ऊंचाई पर स्थित मुन्नार की हरी-भरी पहाड़ियां प्राकृतिक सुंदरता का स्वर्ग हैं। यहाँ दुर्लभ नीलगिरि तहर और 12 साल में खिलने वाला नीलकुरिंजी फूल पाया जाता है।",
+      ta: "மேற்குத் தொடர்ச்சி மலையில் 1,600 மீட்டர் உயரத்தில் அமைந்துள்ள மூணாறின் தேயிலைத் தோட்டங்கள் இயற்கை எழில் கொஞ்சும் பகுதியாகும்."
     }
   },
   {
@@ -260,9 +322,8 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "ta"],
     coordinates: { lat: 9.4981, lng: 76.3388 },
     folklore: {
-      en: "A mesmerizing network of interconnected brackish lagoons, rivers, and canals fringed by swaying coconut palms. Traditional Kettuvallam houseboats gently cruise through serene waters where local villagers sustain centuries-old paddy farming below sea level in the Kuttanad region.",
-      hi: "नारियल के पेड़ों से घिरी झीलों, नहरों और नदियों का अद्भुत प्राकृतिक नेटवर्क। पारंपरिक हाउसबोट शांत पानी में तैरती हैं, जहाँ स्थानीय किसान समुद्र तल से नीचे धान की अनोखी खेती करते हैं।",
-      ta: "தென்னை மரங்கள் சூழ்ந்த உப்பங்கழிகள் மற்றும் கால்வாய்களின் அமைதியான வலைப்பின்னல். பாரம்பரிய கெட்டுவள்ளம் படகு வீடுகள் மூலம் கேரள கிராமப்புற அழகை ரசிக்கலாம்."
+      en: "A mesmerizing network of interconnected brackish lagoons, rivers, and canals fringed by swaying coconut palms. Traditional Kettuvallam houseboats gently cruise through serene waters where local villagers sustain centuries-old paddy farming below sea level.",
+      hi: "नारियल के पेड़ों से घिरी झीलों, नहरों और नदियों का अद्भुत प्राकृतिक नेटवर्क। पारंपरिक हाउसबोट शांत पानी में तैरती हैं।"
     }
   },
   {
@@ -278,13 +339,137 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "ta"],
     coordinates: { lat: 10.2851, lng: 76.5698 },
     folklore: {
-      en: "Surging down from a height of 80 feet, Athirappilly is India's most dramatic waterfall. Flowing through the dense riparian forests of the Anamudi range, it is the only place in the Western Ghats where four endangered hornbill species thrive together.",
-      hi: "80 फीट की ऊंचाई से गिरता अतिरापिल्ली भारत का सबसे भव्य जलप्रपात है। शोलायर के घने वर्षावनों से गुजरती चालक्कुडी नदी की गरजती धाराएं मन मोह लेती हैं।",
-      ta: "80 அடி உயரத்திலிருந்து ஆர்ப்பரித்துக் கொட்டும் அதிரப்பள்ளி நீர்வீழ்ச்சி இந்தியாவின் நயாகரா என அழைக்கப்படுகிறது. அடர்ந்த சோலையார் மழைக்காடுகளின் நடுவே இது அமைந்துள்ளது."
+      en: "Surging down from a height of 80 feet, Athirappilly is India's most dramatic waterfall. Flowing through the dense riparian forests of the Anamudi range, it is home to four endangered hornbill species.",
+      hi: "80 फीट की ऊंचाई से गिरता अतिरापिल्ली भारत का सबसे भव्य जलप्रपात है।"
     }
   },
 
-  // SPIRITUAL & PILGRIMAGE
+  // 2. RAJASTHAN (ROYAL HERITAGE & DESERT)
+  {
+    id: "amber_fort",
+    name: "Amber Palace & Sheesh Mahal",
+    state: "Rajasthan",
+    era: "Kachwaha Rajput Dynasty (16th Century)",
+    category: "heritage",
+    subCategory: "Hilltop Rajput Fortress",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi", "gu"],
+    coordinates: { lat: 26.9855, lng: 75.8513 },
+    folklore: {
+      en: "Perched high on the Aravalli hills overlooking Maota Lake. Famous for its Sheesh Mahal (Mirror Palace) where a single candle flame reflects across thousands of Belgian glass mirrors to illuminate the entire royal chamber.",
+      hi: "आमेर का किला अपने शीश महल के लिए प्रसिद्ध है, जहाँ एक मोमबत्ती की रोशनी हजारों बेल्जियम शीशों में परावर्तित होकर पूरे कक्ष को रोशन कर देती है।"
+    }
+  },
+  {
+    id: "jaisalmer_fort",
+    name: "Jaisalmer Living Fort (Sonar Qila)",
+    state: "Rajasthan",
+    era: "Bhati Rajput Dynasty (1156 AD)",
+    category: "heritage",
+    subCategory: "Golden Sandstone Living Citadel",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi", "gu"],
+    coordinates: { lat: 26.9124, lng: 70.9127 },
+    folklore: {
+      en: "One of the few fully functioning living forts in the world, where one-fourth of the old city's population still resides within golden sandstone walls that glow in the Thar desert sunlight.",
+      hi: "थार मरुस्थल के बीच स्थित सोनार किला दुनिया के दुर्लभ जीवित किलों में से एक है।"
+    }
+  },
+  {
+    id: "sam_sand_dunes",
+    name: "Sam Sand Dunes & Desert Safari",
+    state: "Rajasthan",
+    era: "Great Thar Desert Ecosystem",
+    category: "adventure",
+    subCategory: "Sunset Camel Trek & Folk Dunes",
+    isOffbeat: true,
+    imageUrl: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi", "gu"],
+    coordinates: { lat: 26.8306, lng: 70.5100 },
+    folklore: {
+      en: "Miles of sweeping, wind-carved golden dunes in the Thar desert. Famous for sunset camel safaris and vibrant Kalbelia gypsy folk dance performances under starlit desert skies.",
+      hi: "थार मरुस्थल के रेतीले टीले, जहाँ सूर्यास्त के समय ऊंट की सवारी और कालबेलिया लोक नृत्य का मनमोहक अनुभव होता है।"
+    }
+  },
+
+  // 3. HIMACHAL PRADESH (HIMALAYAN NATURE & ADVENTURE)
+  {
+    id: "spiti_valley",
+    name: "Spiti Valley & Key Monastery",
+    state: "Himachal Pradesh",
+    era: "11th Century Tibetan Buddhist Monastery",
+    category: "adventure",
+    subCategory: "High Altitude Cold Desert",
+    isOffbeat: true,
+    imageUrl: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi"],
+    coordinates: { lat: 32.2965, lng: 78.0125 },
+    folklore: {
+      en: "Known as the 'Middle Land' between India and Tibet. Key Monastery sits atop a conical hill at 4,166m, holding ancient thangkas, manuscripts, and spiritual meditation caves amidst stark Himalayan peaks.",
+      hi: "भारत और तिब्बत के बीच स्थित स्पीति घाटी में 4,166 मीटर की ऊंचाई पर की मठ ध्यान और शांति का अद्भुत केंद्र है।"
+    }
+  },
+  {
+    id: "solang_valley",
+    name: "Solang Valley & Rohtang Pass",
+    state: "Himachal Pradesh",
+    era: "Pir Panjal Alpine Range",
+    category: "nature",
+    subCategory: "Snow Peaks, Meadows & Paragliding",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi"],
+    coordinates: { lat: 32.3166, lng: 77.1581 },
+    folklore: {
+      en: "Surrounded by snow-capped peaks and cedar forests, Solang Valley offers exhilarating paragliding, skiing, and sweeping views of the Beas Kund glacier valley.",
+      hi: "बर्फ से ढकी चोटियों और देवदार के जंगलों से घिरी सोलांग घाटी रोमांचक साहसिक खेलों के लिए जानी जाती है।"
+    }
+  },
+
+  // 4. UTTARAKHAND (SPIRITUAL & HIMALAYAN)
+  {
+    id: "rishikesh_triveni",
+    name: "Rishikesh Triveni Ghat & Ganga Aarti",
+    state: "Uttarakhand",
+    era: "Yoga Capital of the World",
+    category: "spiritual",
+    subCategory: "Holy Ganga Aarti & Yoga Ashrams",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b8?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi", "gu"],
+    coordinates: { lat: 30.1033, lng: 78.2948 },
+    folklore: {
+      en: "Where the sacred Ganges emerges from the Himalayas into the plains. Pilgrims gather at Triveni Ghat at dusk for the soul-stirring Maha Aarti, chanting mantras as floating oil lamps drift down emerald waters.",
+      hi: "ऋषिकेश में त्रिवेणी घाट पर होने वाली गंगा आरती और योग आश्रम आत्मिक शांति का दिव्य अनुभव कराते हैं।"
+    }
+  },
+  {
+    id: "valley_of_flowers",
+    name: "Valley of Flowers National Park",
+    state: "Uttarakhand",
+    era: "UNESCO Biosphere Reserve",
+    category: "nature",
+    subCategory: "Endemic Alpine Blossom Meadow",
+    isOffbeat: true,
+    imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi"],
+    coordinates: { lat: 30.7280, lng: 79.6053 },
+    folklore: {
+      en: "A high-altitude Himalayan valley nestled at 3,600m that bursts into a kaleidoscope of over 500 species of wild alpine flowers including the mythical Brahma Kamal during monsoon.",
+      hi: "हिमालय की गोद में बसी फूलों की घाटी में 500 से अधिक दुर्लभ जंगली फूलों की प्रजातियाँ खिलती हैं।"
+    }
+  },
+
+  // 5. UTTAR PRADESH (SPIRITUAL & HERITAGE)
   {
     id: "kashi_vishwanath",
     name: "Kashi Vishwanath & Ganga Ghats",
@@ -298,10 +483,8 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "gu", "ta"],
     coordinates: { lat: 25.3109, lng: 83.0107 },
     folklore: {
-      en: "Varanasi (Kashi) is believed to be one of the oldest continuously inhabited cities in human history, standing on Lord Shiva's trident. The golden spire of Kashi Vishwanath shines over the sacred Ganges. At dusk, the grand Maha Aarti at Dashashwamedh Ghat mesmerizes pilgrims with chanting, brass lamps, and spiritual devotion.",
-      hi: "भगवान शिव के त्रिशूल पर बसी काशी विश्व की सबसे प्राचीन जीवित आध्यात्मिक नगरी है। गंगा किनारे दशाश्वमेध घाट पर होने वाली संध्या महा आरती और काशी विश्वनाथ मंदिर की दिव्यता आत्मा को शांति प्रदान करती है।",
-      gu: "ભગવાન શિવની પવિત્ર નગરી કાશીમાં ગંગા કિનારે દશાશ્વમેધ ઘાટની સાંજની મહાઆરતી અને કાશી વિશ્વનાથ જ્યોતિર્લિંગના દર્શન અલૌકિક આધ્યાત્મિક અનુભવ કરાવે છે.",
-      ta: "சிவபெருமானின் திருநகரமான காசி, உலகின் மிகத் தொன்மையான ஆன்மீக நகரமாகும். கங்கை நதிக்கரையில் நடக்கும் மாலை நேர மகா ஆரத்தி பக்தர்களை மெய்சிலிர்க்க வைக்கிறது."
+      en: "Varanasi (Kashi) is believed to be one of the oldest continuously inhabited cities in human history. The golden spire of Kashi Vishwanath shines over the sacred Ganges alongside the grand Maha Aarti at Dashashwamedh Ghat.",
+      hi: "भगवान शिव के त्रिशूल पर बसी काशी विश्व की सबसे प्राचीन जीवित आध्यात्मिक नगरी है।"
     }
   },
   {
@@ -317,13 +500,12 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "gu", "ta"],
     coordinates: { lat: 25.3811, lng: 83.0214 },
     folklore: {
-      en: "Just 10 km from Varanasi, Sarnath is the sacred Deer Park where Gautama Buddha gave his first sermon after attaining enlightenment, setting in motion the Wheel of Dharma. The massive 43-meter high Dhamek Stupa marks the exact spot of peace and introspection.",
-      hi: "सारनाथ वह पावन स्थल है जहाँ भगवान बुद्ध ने ज्ञान प्राप्ति के बाद अपना पहला उपदेश दिया था। विशाल धमेख स्तूप और शांत हिरण उद्यान ध्यान और आत्मिक शांति का केंद्र हैं।",
-      ta: "புத்தர் ஞானம் பெற்ற பிறகு தனது முதல் போதனையை நிகழ்த்திய புனித இடம் சாரநாத். இங்குள்ள கம்பீரமான தமேக் ஸ்தூபி அமைதிக்கும் தியானத்திற்கும் பெயர் பெற்றது."
+      en: "Just 10 km from Varanasi, Sarnath is the sacred Deer Park where Gautama Buddha gave his first sermon after attaining enlightenment, setting in motion the Wheel of Dharma.",
+      hi: "सारनाथ वह पावन स्थल है जहाँ भगवान बुद्ध ने ज्ञान प्राप्ति के बाद अपना पहला उपदेश दिया था।"
     }
   },
 
-  // HERITAGE & ARCHITECTURE
+  // 6. GUJARAT (STEPWELLS & SOLAR HERITAGE)
   {
     id: "ranikivav",
     name: "Rani ki Vav",
@@ -337,10 +519,8 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "gu", "ta"],
     coordinates: { lat: 23.8589, lng: 72.1017 },
     folklore: {
-      en: "Rani ki Vav was built by Queen Udayamati in memory of her husband King Bhimdev I. Resembling an inverted temple honoring sacred water, it has seven levels of stairs decorated with over 500 principal sculptures representing Vishnu's avatars.",
-      hi: "रानी की वाव का निर्माण रानी उदयमती ने अपने पति की याद में करवाया था। यह 7 मंजिला उल्टे मंदिर के समान बावड़ी है, जिसमें भगवान विष्णु के 500 से अधिक दिव्य रूप उकेरे गए हैं।",
-      gu: "રાણી કી વાવનું નિર્માણ રાણી ઉદયમતીએ કરાવ્યું હતું. આ ૭ માળની ભવ્ય વાવમાં ૫૦૦થી વધુ પૌરાણિક કલાત્મક મૂર્તિઓ કંડારેલી છે.",
-      ta: "ராணி கி வாவ் ராணி உதயமதியால் கட்டப்பட்டது. தலைகீழ் கோயில் வடிவில் அமைந்த இக்கிணற்றில் 500க்கும் மேற்பட்ட விஷ்ணு அவதார சிற்பங்கள் உள்ளன."
+      en: "Built by Queen Udayamati in memory of King Bhimdev I. Resembling an inverted temple honoring water, it has seven levels of stairs with over 500 principal sculptures.",
+      hi: "रानी की वाव का निर्माण रानी उदयमती ने करवाया था। यह 7 मंजिला उल्टे मंदिर के समान बावड़ी है।"
     }
   },
   {
@@ -356,11 +536,12 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "gu", "ta"],
     coordinates: { lat: 23.5835, lng: 72.1330 },
     folklore: {
-      en: "Dedicated to the Sun God Surya on the banks of Pushpavati River. Built so that equinox solar rays struck the deity's gemmed crown directly. Features the stunning Surya Kunda stepped tank with 108 miniature shrines.",
-      hi: "पुष्पावती नदी के तट पर स्थित सूर्य मंदिर स्थापत्य का शिखर है। सूर्यकुंड में 108 छोटे मंदिर बने हैं और विषुव के दिन पहली सूर्य किरण गर्भगृह को आलोकित करती थी।",
-      gu: "પુષ્પાવતી નદીના કિનારે મોઢેરાનું સૂર્યમંદિર સોલંકી કાળની સ્થાપત્ય કલાનો અજોડ નમૂનો છે, જેમાં ૧૦૮ નાના મંદિરોવાળો સૂર્યકુંડ છે."
+      en: "Dedicated to the Sun God Surya on the banks of Pushpavati River. Built so that equinox solar rays struck the deity's gemmed crown directly. Features the stunning Surya Kunda stepped tank.",
+      hi: "पुष्पावती नदी के तट पर स्थित सूर्य मंदिर में 108 छोटे मंदिरों वाला सूर्यकुंड बना है।"
     }
   },
+
+  // 7. KARNATAKA (RUINS & WILDLIFE)
   {
     id: "virupaksha",
     name: "Virupaksha Temple",
@@ -374,8 +555,8 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "ta"],
     coordinates: { lat: 15.3358, lng: 76.4564 },
     folklore: {
-      en: "Continuously active since the 7th century, featuring a 49-meter Gopuram. Known for a unique pinhole camera inverted shadow effect and sacred Tungabhadra riverfront architecture.",
-      hi: "7वीं शताब्दी से लगातार सक्रिय विरूपाक्ष मंदिर अपने 49 मीटर ऊंचे गोपुरम और पिनहोल कैमरा छाया प्रभाव के लिए विश्वविख्यात है।"
+      en: "Continuously active since the 7th century, featuring a 49-meter Gopuram. Known for its pinhole camera inverted shadow effect and sacred Tungabhadra riverfront architecture.",
+      hi: "7वीं शताब्दी से लगातार सक्रिय विरूपाक्ष मंदिर अपने 49 मीटर ऊंचे गोपुरम के लिए प्रसिद्ध है।"
     }
   },
   {
@@ -392,11 +573,9 @@ export const monuments: Monument[] = [
     coordinates: { lat: 15.3428, lng: 76.4772 },
     folklore: {
       en: "Iconic granite shrine dedicated to Garuda. Surrounding hall features 56 musical pillars that produce musical notes (swaras) when tapped gently.",
-      hi: "हम्पी का प्रसिद्ध पत्थर का रथ गरुड़ को समर्पित है। इसके विट्ठल मंदिर परिसर में 56 संगीतमय स्तंभ हैं जो थपथपाने पर सुर उत्पन्न करते हैं।"
+      hi: "हम्पी का प्रसिद्ध पत्थर का रथ गरुड़ को समर्पित है। इसमें 56 संगीतमय स्तंभ हैं।"
     }
   },
-
-  // ADVENTURE & WILDLIFE
   {
     id: "daroji_sloth_bear",
     name: "Daroji Sloth Bear Sanctuary",
@@ -410,8 +589,100 @@ export const monuments: Monument[] = [
     languagesAvailable: ["en", "hi", "ta"],
     coordinates: { lat: 15.2678, lng: 76.5411 },
     folklore: {
-      en: "Spread across rugged granite boulders and scrub forests, Daroji is Asia's first exclusive sloth bear sanctuary. Watch wild bears foraging on cliff sides from watchtowers during afternoon safaris.",
-      hi: "ग्रेनाइट चट्टानों और शुष्क वनों के बीच बसा दरोजी अभयारण्य एशिया का पहला भालू संरक्षण क्षेत्र है, जहाँ प्राकृतिक वातावरण में भालू स्वतंत्र घूमते हैं।"
+      en: "Spread across rugged granite boulders, Daroji is Asia's first exclusive sloth bear sanctuary. Watch wild bears foraging on cliff sides from watchtowers.",
+      hi: "ग्रेनाइट चट्टानों के बीच बसा दरोजी एशिया का पहला भालू संरक्षण क्षेत्र है।"
+    }
+  },
+
+  // 8. MEGHALAYA (NORTH-EAST RAINFORESTS)
+  {
+    id: "living_root_bridges",
+    name: "Nongriat Double Decker Living Root Bridge",
+    state: "Meghalaya",
+    era: "Indigenous Khasi Bio-Engineering",
+    category: "nature",
+    subCategory: "Living Ficus Tree Bio-Bridges",
+    isOffbeat: true,
+    imageUrl: "https://images.unsplash.com/photo-1566833928988-d522132d74d9?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi"],
+    coordinates: { lat: 25.2476, lng: 91.6738 },
+    folklore: {
+      en: "Grown over generations by the indigenous Khasi tribe using the aerial roots of Ficus elastica trees across roaring jungle streams. These living bridges grow stronger with time and can support dozens of people.",
+      hi: "खासी जनजाति द्वारा जीवित पेड़ों की जड़ों से बनाए गए ये अद्भुत प्राकृतिक पुल समय के साथ और अधिक मजबूत होते हैं।"
+    }
+  },
+  {
+    id: "dawki_river",
+    name: "Umngot River & Crystal Waters (Dawki)",
+    state: "Meghalaya",
+    era: "Indo-Bangladesh Border Waterways",
+    category: "nature",
+    subCategory: "Glass-Transparent River Waters",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi"],
+    coordinates: { lat: 25.1878, lng: 92.0163 },
+    folklore: {
+      en: "Famous for emerald crystal-clear waters where traditional wooden boats appear to float on glass as riverbeds and pebbles are visible metres below the surface.",
+      hi: "उमंगोट नदी का पानी इतना पारदर्शी और साफ है कि नावें हवा में तैरती हुई प्रतीत होती हैं।"
+    }
+  },
+
+  // 9. TAMIL NADU (TEMPLE ARCHITECTURE)
+  {
+    id: "madurai_meenakshi",
+    name: "Madurai Meenakshi Amman Temple",
+    state: "Tamil Nadu",
+    era: "Pandya & Nayakar Dynasties (1600 AD)",
+    category: "spiritual",
+    subCategory: "14 Towering Dravidian Gopurams",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi", "ta"],
+    coordinates: { lat: 9.9195, lng: 78.1193 },
+    folklore: {
+      en: "Dedicated to Goddess Meenakshi (Parvati) and Lord Sundareswarar. The temple complex has 14 monumental gateway towers adorned with thousands of colorful sculpted deities and celestial beings.",
+      hi: "मदुरै का मीनाक्षी अम्मन मंदिर द्रविड़ वास्तुकला का अनुपम उदाहरण है, जिसमें 14 विशाल बहुरंगी गोपुरम हैं।",
+      ta: "மதுரை மீனாட்சி அம்மன் கோயில் 14 வானுயர்ந்த வண்ணமயமான கோபுரங்களுடன் அமைந்துள்ள தமிழ்நாட்டின் ஆன்மீகப் பெருமையாகும்."
+    }
+  },
+  {
+    id: "rameswaram_corridor",
+    name: "Ramanathaswamy Temple & Longest Corridor",
+    state: "Tamil Nadu",
+    era: "Sethupathy Dynasty (12th Century)",
+    category: "spiritual",
+    subCategory: "Char Dham & 1,200 Pillared Hall",
+    isOffbeat: false,
+    imageUrl: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi", "ta"],
+    coordinates: { lat: 9.2881, lng: 79.3174 },
+    folklore: {
+      en: "Located on Pamban Island, this sacred Char Dham temple has the world's longest pillared corridor stretching over 1,200 meters with intricately sculpted sandstone pillars.",
+      hi: "रामेश्वरम का रामनाथस्वामी मंदिर 1,200 मीटर लंबे दुनिया के सबसे बड़े स्तंभ गलियारे के लिए विख्यात है।"
+    }
+  },
+
+  // 10. GOA (COASTAL & WATERFALLS)
+  {
+    id: "dudhsagar_falls",
+    name: "Dudhsagar Waterfalls & Bhagwan Mahaveer Sanctuary",
+    state: "Goa",
+    era: "Western Ghats Mandovi River Basin",
+    category: "nature",
+    subCategory: "Four-Tiered Sea of Milk Cascade",
+    isOffbeat: true,
+    imageUrl: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+    panoramaUrl: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2400&q=80",
+    languagesAvailable: ["en", "hi"],
+    coordinates: { lat: 15.3144, lng: 74.3143 },
+    folklore: {
+      en: "Surging down 310 meters through dense Western Ghats jungle, Dudhsagar literally means 'Sea of Milk' as frothy white waters cascade over railway arches in the rainforest.",
+      hi: "दूधसागर जलप्रपात 310 मीटर की ऊंचाई से गिरता है, जिसका सफेद झागदार पानी दूध की धारा जैसा दिखता है।"
     }
   }
 ];
@@ -454,6 +725,42 @@ export const homestays: Homestay[] = [
     about: "Overlooking the sacred Ganges ghats with private terrace for morning yoga, meditation, and direct guidance on rituals."
   },
   {
+    id: "rajasthan_haveli_stay",
+    name: "Rawla Heritage Haveli & Desert Camp",
+    category: "heritage",
+    hostName: "Rana Digvijay Singh",
+    hostOrigin: "Rajasthan (Jaipur/Jaisalmer)",
+    languagesSpoken: ["Hindi", "English", "Marwari"],
+    foodSpecialty: "Dal Baati Churma, Gatte ki Sabzi, Ker Sangri",
+    dietaryReady: "pureVeg",
+    pricePerNight: 3100,
+    compatibilityScore: {
+      food: 95,
+      language: 90,
+      heritage: 98,
+      overall: 96
+    },
+    about: "Restored 200-year-old carved sandstone mansion with evening courtyard folk music and pure vegetarian dining."
+  },
+  {
+    id: "himachal_apple_stay",
+    name: "Cedar Whispers Apple Orchard Cottage",
+    category: "nature",
+    hostName: "Sunil & Meenakshi Thakur",
+    hostOrigin: "Himachal Pradesh (Manali)",
+    languagesSpoken: ["Hindi", "English", "Punjabi"],
+    foodSpecialty: "Himachali Dham, Siddu, Fresh Apple Cider",
+    dietaryReady: "pureVeg",
+    pricePerNight: 2600,
+    compatibilityScore: {
+      food: 95,
+      language: 90,
+      heritage: 92,
+      overall: 94
+    },
+    about: "Wooden chalet surrounded by snow peaks and apple orchards with wood-burning fireplace and organic meals."
+  },
+  {
     id: "guj_veg_house",
     name: "Heritage Pol Haveli Homestay",
     category: "heritage",
@@ -472,24 +779,6 @@ export const homestays: Homestay[] = [
     about: "A restored 150-year-old wooden Haveli in Ahmedabad's UNESCO old city with daily cooking workshops on separate vegetarian kitchens."
   },
   {
-    id: "guj_jain_house",
-    name: "Vav Heritage Retreat",
-    category: "heritage",
-    hostName: "Ketan Shah",
-    hostOrigin: "Gujarat (Patan)",
-    languagesSpoken: ["Gujarati", "Hindi"],
-    foodSpecialty: "Strict Jain Kitchen (No onion, garlic, or root vegetables)",
-    dietaryReady: "jain",
-    pricePerNight: 3200,
-    compatibilityScore: {
-      food: 100,
-      language: 90,
-      heritage: 95,
-      overall: 95
-    },
-    about: "Located 1 km from Rani ki Vav, providing strictly Jain-compliant dining on pure silver thalis."
-  },
-  {
     id: "karnataka_veg_house",
     name: "Kishkindha Heritage Farmstay",
     category: "adventure",
@@ -506,24 +795,6 @@ export const homestays: Homestay[] = [
       overall: 93
     },
     about: "Nestled among banana plantations on the Tungabhadra river with red oxide floors and personal folklore tours."
-  },
-  {
-    id: "karnataka_halal_house",
-    name: "Tungabhadra River Vista",
-    category: "nature",
-    hostName: "Imran Khan",
-    hostOrigin: "Karnataka (Hampi)",
-    languagesSpoken: ["Kannada", "Hindi", "English", "Urdu"],
-    foodSpecialty: "Halal Mughlai & Deccani regional cuisine",
-    dietaryReady: "halal",
-    pricePerNight: 2500,
-    compatibilityScore: {
-      food: 100,
-      language: 80,
-      heritage: 90,
-      overall: 90
-    },
-    about: "A beautiful riverside cottage offering fully halal certified dining with private balconies overlooking rocky hills."
   }
 ];
 
@@ -545,7 +816,7 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
     stats: {
       totalDistance: "210 km",
       travelTime: "5 hours total driving",
-      monumentsCount: 4
+      monumentsCount: 3
     },
     itinerary: [
       {
@@ -571,14 +842,6 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
             duration: "1.5 hours",
             lat: 10.0800,
             lng: 77.0600
-          },
-          {
-            id: "ker-3",
-            time: "03:30 PM",
-            type: "transit",
-            title: "Scenic Drive through Sholayar Rainforest",
-            desc: "Drive past mist-clad Western Ghats passes towards Athirappilly.",
-            duration: "2.5 hours"
           }
         ]
       },
@@ -636,7 +899,86 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
       }
     ]
   },
-
+  rajasthan: {
+    id: "rajasthan-royal",
+    title: "3-Day Royal Forts & Desert Dunes Circuit",
+    category: "heritage",
+    region: "Rajasthan",
+    duration: 3,
+    pacing: "Moderate",
+    siteMix: "70% Royal Heritage / 30% Desert Adventure",
+    culturalFilter: {
+      category: "heritage",
+      dietary: "pureVeg",
+      language: "Hindi",
+      interests: ["Forts", "Palaces", "Desert"]
+    },
+    stats: {
+      totalDistance: "330 km",
+      travelTime: "6 hours total driving",
+      monumentsCount: 3
+    },
+    itinerary: [
+      {
+        day: 1,
+        stops: [
+          {
+            id: "raj-1",
+            time: "09:30 AM",
+            type: "heritage",
+            title: "Amber Palace & Sheesh Mahal",
+            desc: "Explore the mirror palace and ramparts overlooking Maota Lake.",
+            monumentId: "amber_fort",
+            duration: "3 hours",
+            lat: 26.9855,
+            lng: 75.8513
+          },
+          {
+            id: "raj-2",
+            time: "01:30 PM",
+            type: "lunch",
+            title: "Royal Rajasthani Thali Lunch",
+            desc: "Dal Baati Churma, Gatte ki Sabzi, and sweet Ghevar.",
+            duration: "1.5 hours",
+            lat: 26.9800,
+            lng: 75.8500
+          }
+        ]
+      },
+      {
+        day: 2,
+        stops: [
+          {
+            id: "raj-3",
+            time: "10:00 AM",
+            type: "heritage",
+            title: "Jaisalmer Living Fort (Sonar Qila)",
+            desc: "Wander through centuries-old golden sandstone havelis and Jain temples.",
+            monumentId: "jaisalmer_fort",
+            duration: "3 hours",
+            lat: 26.9124,
+            lng: 70.9127
+          }
+        ]
+      },
+      {
+        day: 3,
+        stops: [
+          {
+            id: "raj-4",
+            time: "04:00 PM",
+            type: "adventure",
+            title: "Sam Sand Dunes Sunset Safari",
+            desc: "Camel safari and starlit Kalbelia folk performances across golden sand dunes.",
+            monumentId: "sam_sand_dunes",
+            duration: "4 hours",
+            lat: 26.8306,
+            lng: 70.5100
+          }
+        ]
+      }
+    ]
+  },
   varanasi: {
     id: "varanasi-spiritual",
     title: "3-Day Divine Kashi & Sarnath Pilgrimage",
@@ -654,7 +996,7 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
     stats: {
       totalDistance: "35 km",
       travelTime: "1.5 hours total transit",
-      monumentsCount: 4
+      monumentsCount: 2
     },
     itinerary: [
       {
@@ -664,20 +1006,10 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
             id: "var-1",
             time: "06:00 AM",
             type: "spiritual",
-            title: "Ganga Sunrise Boat Ride & Subah-e-Banaras",
-            desc: "Witness morning chants, rituals, and rising sun over ancient ghats.",
+            title: "Ganga Sunrise Boat Ride & Kashi Vishwanath Darshan",
+            desc: "Witness morning chants, rituals, and golden spire of Kashi Vishwanath.",
             monumentId: "kashi_vishwanath",
-            duration: "2.5 hours",
-            lat: 25.3109,
-            lng: 83.0107
-          },
-          {
-            id: "var-2",
-            time: "10:00 AM",
-            type: "spiritual",
-            title: "Kashi Vishwanath Jyotirlinga Darshan",
-            desc: "Visit the golden temple of Lord Shiva with priority pilgrimage access.",
-            duration: "2 hours",
+            duration: "3.5 hours",
             lat: 25.3109,
             lng: 83.0107
           },
@@ -706,230 +1038,21 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
             duration: "3 hours",
             lat: 25.3811,
             lng: 83.0214
-          },
-          {
-            id: "var-5",
-            time: "01:30 PM",
-            type: "lunch",
-            title: "Banarasi Satvik Thali Lunch",
-            desc: "Pure Satvik lunch prepared without onion or garlic.",
-            duration: "1.5 hours",
-            lat: 25.3800,
-            lng: 83.0200
           }
         ]
       },
       {
         day: 3,
         stops: [
-          {
-            id: "var-6",
-            time: "09:00 AM",
-            type: "spiritual",
-            title: "Varanasi Heritage Silk Weaving & Ghats Walk",
-            desc: "Discover centuries-old Banarasi silk handlooms and holy shrines.",
-            duration: "3 hours",
-            lat: 25.3150,
-            lng: 83.0120
-          },
           {
             id: "var-7",
             time: "02:00 PM",
             type: "hotel",
-            title: "Vedic Ashram Blessing & Checkout",
+            title: "Vedic Ashram Blessing & Wrap",
             desc: "Farewell blessings with Pandit Ramashankar Tripathi.",
             duration: "1 hour",
             lat: 25.3100,
             lng: 83.0100
-          }
-        ]
-      }
-    ]
-  },
-
-  gujarat: {
-    id: "gujarat-trail",
-    title: "3-Day Heritage Trail of Gujarat",
-    category: "heritage",
-    region: "Gujarat",
-    duration: 3,
-    pacing: "Moderate",
-    siteMix: "60% Famous / 40% Offbeat",
-    culturalFilter: {
-      category: "heritage",
-      dietary: "pureVeg",
-      language: "Gujarati",
-      interests: ["Architecture", "Heritage"]
-    },
-    stats: {
-      totalDistance: "190 km",
-      travelTime: "4.5 hours total driving",
-      monumentsCount: 4
-    },
-    itinerary: [
-      {
-        day: 1,
-        stops: [
-          {
-            id: "act-1",
-            time: "09:00 AM",
-            type: "monument",
-            title: "Adalaj Stepwell",
-            desc: "15th-century Vaghela stepwell known for intricate carvings and legend of devotion.",
-            duration: "2 hours",
-            lat: 23.1667,
-            lng: 72.5801
-          },
-          {
-            id: "act-2",
-            time: "01:00 PM",
-            type: "lunch",
-            title: "Traditional Lunch at Pol Haveli",
-            desc: "Gujarati Thali with Dhokla, Khandvi, and hot Jalebi.",
-            duration: "1.5 hours",
-            lat: 23.0225,
-            lng: 72.5714
-          },
-          {
-            id: "act-3",
-            time: "03:30 PM",
-            type: "transit",
-            title: "Drive to Patan",
-            desc: "Travel north towards the historic Solanki capital.",
-            duration: "2.5 hours (120 km)"
-          }
-        ]
-      },
-      {
-        day: 2,
-        stops: [
-          {
-            id: "act-4",
-            time: "09:30 AM",
-            type: "monument",
-            title: "Rani ki Vav",
-            desc: "Seven-tiered UNESCO World Heritage stepwell with Vishnu avatar sculptures.",
-            monumentId: "ranikivav",
-            duration: "3 hours",
-            lat: 23.8589,
-            lng: 72.1017
-          },
-          {
-            id: "act-6",
-            time: "04:30 PM",
-            type: "monument",
-            title: "Modhera Sun Temple",
-            desc: "Golden hour at the Sun Temple on Pushpavati riverbank.",
-            monumentId: "modherasun",
-            duration: "2 hours",
-            lat: 23.5835,
-            lng: 72.1330
-          }
-        ]
-      },
-      {
-        day: 3,
-        stops: [
-          {
-            id: "act-8",
-            time: "03:00 PM",
-            type: "hotel",
-            title: "Vav Heritage Retreat Wrap",
-            desc: "Farewell tea with local Patan host Ketan Shah.",
-            duration: "1 hour",
-            lat: 23.8500,
-            lng: 72.1100
-          }
-        ]
-      }
-    ]
-  },
-
-  hampi: {
-    id: "hampi-circuit",
-    title: "3-Day Hampi Ruins & Kishkindha Circuit",
-    category: "adventure",
-    region: "Karnataka",
-    duration: 3,
-    pacing: "Intensive",
-    siteMix: "70% Architecture / 30% Wildlife",
-    culturalFilter: {
-      category: "adventure",
-      dietary: "pureVeg",
-      language: "Tamil",
-      interests: ["Architecture", "Adventure", "Wildlife"]
-    },
-    stats: {
-      totalDistance: "48 km",
-      travelTime: "2 hours total driving",
-      monumentsCount: 4
-    },
-    itinerary: [
-      {
-        day: 1,
-        stops: [
-          {
-            id: "act-9",
-            time: "08:30 AM",
-            type: "monument",
-            title: "Virupaksha Temple",
-            desc: "Explore India's oldest active Shiva temple with 49m Gopuram.",
-            monumentId: "virupaksha",
-            duration: "2.5 hours",
-            lat: 15.3358,
-            lng: 76.4564
-          },
-          {
-            id: "act-10",
-            time: "12:00 PM",
-            type: "lunch",
-            title: "Banana Leaf South Indian Lunch",
-            desc: "Traditional meal in a rustic mango grove.",
-            duration: "1.5 hours",
-            lat: 15.3300,
-            lng: 76.4600
-          }
-        ]
-      },
-      {
-        day: 2,
-        stops: [
-          {
-            id: "act-14",
-            time: "03:00 PM",
-            type: "monument",
-            title: "Stone Chariot & Vittala Complex",
-            desc: "Admire musical pillars and the monolithic granite chariot.",
-            monumentId: "stonechariot",
-            duration: "3 hours",
-            lat: 15.3428,
-            lng: 76.4772
-          }
-        ]
-      },
-      {
-        day: 3,
-        stops: [
-          {
-            id: "act-15",
-            time: "09:00 AM",
-            type: "adventure",
-            title: "Daroji Sloth Bear Sanctuary Safari",
-            desc: "Morning open jeep drive to witness wild sloth bears in granite boulders.",
-            monumentId: "daroji_sloth_bear",
-            duration: "3 hours",
-            lat: 15.2678,
-            lng: 76.5411
-          },
-          {
-            id: "act-16",
-            time: "02:00 PM",
-            type: "hotel",
-            title: "Checkout at Kishkindha Farmstay",
-            desc: "Farewell handmade banana fiber souvenir from host Mallikarjuna Hegde.",
-            duration: "1 hour",
-            lat: 15.3470,
-            lng: 76.4900
           }
         ]
       }

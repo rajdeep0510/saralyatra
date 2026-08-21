@@ -6,20 +6,29 @@ import Footer from "@/components/layout/Footer";
 import DashboardView from "@/views/DashboardView";
 import WondersGalleryView from "@/views/WondersGalleryView";
 import TripPlannerView from "@/views/TripPlannerView";
+import ItineraryMapView from "@/views/ItineraryMapView";
 import HeritageDetailsView from "@/views/HeritageDetailsView";
 import PanoramaViewerModal from "@/components/discovery/PanoramaViewerModal";
 import HomestayCard from "@/components/homestays/HomestayCard";
 import { preloadedTrips, monuments, homestays, translations } from "@/data/mockData";
-import { FilterPreferences, Homestay, LanguageCode, Monument, PreloadedTrip } from "@/types";
+import { generateDynamicItinerary } from "@/utils/tripEngine";
+import { FilterPreferences, Homestay, LanguageCode, Monument, PreloadedTrip, UserProfile } from "@/types";
 
 export default function Home() {
   const [currentLang, setCurrentLang] = useState<LanguageCode>("en");
   const [activeTab, setActiveTab] = useState<string>("home");
   const [searchQuery, setSearchQuery] = useState<string>("");
   
-  // Preloaded trip state (defaulting to Kerala Nature & Backwaters Retreat)
-  const [activeTrip, setActiveTrip] = useState<PreloadedTrip>(preloadedTrips.kerala);
-  const [activeStopId, setActiveStopId] = useState<string>("ker-1");
+  // Custom User Profile & Customs State (Interactive in top right Navbar)
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    name: "Yaksh Patel",
+    dietary: "pureVeg",
+    homeState: "Gujarat"
+  });
+
+  // Preloaded trip state (null initially until planned or loaded)
+  const [activeTrip, setActiveTrip] = useState<PreloadedTrip | null>(null);
+  const [activeStopId, setActiveStopId] = useState<string>("");
 
   // Modals
   const [selectedDetailMonument, setSelectedDetailMonument] = useState<Monument | null>(null);
@@ -30,23 +39,46 @@ export default function Home() {
     category: "nature",
     region: "Kerala",
     duration: 3,
-    dates: "2026-08-20",
+    dates: new Date().toISOString().split("T")[0],
     travelers: 2,
     pacing: "Relaxed",
     famousRatio: 70,
-    dietary: "pureVeg",
+    dietary: userProfile.dietary,
     language: "Tamil",
     interests: ["Nature", "Scenic", "Waterfalls"]
   });
 
   const t = translations[currentLang] || translations.en;
 
-  // Load demo trips across all 4 categories and navigate to itinerary view
+  // Load demo trips or dynamically generate for any requested state/region
   const handleLoadDemoTrip = (regionKey: string) => {
-    const trip = preloadedTrips[regionKey] || preloadedTrips.kerala;
-    setActiveTrip(trip);
-    if (trip.itinerary[0]?.stops[0]) {
-      setActiveStopId(trip.itinerary[0].stops[0].id);
+    if (preloadedTrips[regionKey]) {
+      const trip = preloadedTrips[regionKey];
+      setActiveTrip(trip);
+      if (trip.itinerary[0]?.stops[0]) {
+        setActiveStopId(trip.itinerary[0].stops[0].id);
+      }
+    } else {
+      // Dynamically generate for state
+      const dynamicTrip = generateDynamicItinerary(
+        {
+          category: "all",
+          region: regionKey,
+          duration: 3,
+          dates: new Date().toISOString().split("T")[0],
+          travelers: 2,
+          pacing: "Moderate",
+          famousRatio: 60,
+          dietary: "pureVeg",
+          language: "Hindi",
+          interests: []
+        },
+        monuments
+      );
+      setActiveTrip(dynamicTrip);
+      if (dynamicTrip.itinerary[0]?.stops[0]) {
+        setActiveStopId(dynamicTrip.itinerary[0].stops[0].id);
+      }
     }
     
     if (regionKey === "kerala") {
@@ -54,7 +86,7 @@ export default function Home() {
         category: "nature",
         region: "Kerala",
         duration: 3,
-        dates: "2026-08-20",
+        dates: new Date().toISOString().split("T")[0],
         travelers: 2,
         pacing: "Relaxed",
         famousRatio: 70,
@@ -62,44 +94,31 @@ export default function Home() {
         language: "Tamil",
         interests: ["Nature", "Scenic", "Waterfalls"]
       });
+    } else if (regionKey === "rajasthan") {
+      setFilterPreferences({
+        category: "heritage",
+        region: "Rajasthan",
+        duration: 3,
+        dates: new Date().toISOString().split("T")[0],
+        travelers: 2,
+        pacing: "Moderate",
+        famousRatio: 70,
+        dietary: "pureVeg",
+        language: "Hindi",
+        interests: ["Forts", "Palaces", "Desert"]
+      });
     } else if (regionKey === "varanasi") {
       setFilterPreferences({
         category: "spiritual",
         region: "Uttar Pradesh",
         duration: 3,
-        dates: "2026-08-21",
+        dates: new Date().toISOString().split("T")[0],
         travelers: 2,
         pacing: "Moderate",
         famousRatio: 80,
         dietary: "pureVeg",
         language: "Hindi",
         interests: ["Spiritual", "Pilgrimage", "Rituals"]
-      });
-    } else if (regionKey === "gujarat") {
-      setFilterPreferences({
-        category: "heritage",
-        region: "Gujarat",
-        duration: 3,
-        dates: "2026-08-20",
-        travelers: 2,
-        pacing: "Moderate",
-        famousRatio: 60,
-        dietary: "pureVeg",
-        language: "Gujarati",
-        interests: ["Architecture", "Heritage"]
-      });
-    } else {
-      setFilterPreferences({
-        category: "adventure",
-        region: "Karnataka",
-        duration: 3,
-        dates: "2026-08-22",
-        travelers: 3,
-        pacing: "Intensive",
-        famousRatio: 80,
-        dietary: "pureVeg",
-        language: "Tamil",
-        interests: ["Architecture", "Adventure", "Wildlife"]
       });
     }
     setActiveTab("itinerary");
@@ -183,6 +202,11 @@ export default function Home() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         userPreferences={filterPreferences}
+        userProfile={userProfile}
+        setUserProfile={(newProfile) => {
+          setUserProfile(newProfile);
+          setFilterPreferences((prev) => ({ ...prev, dietary: newProfile.dietary }));
+        }}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
@@ -198,7 +222,7 @@ export default function Home() {
           />
         )}
 
-        {/* 2. Dedicated Multi-Category Wonders of India Archive */}
+        {/* 2. Dedicated Pan-India Wonders & Folklore Archive */}
         {(activeTab === "wonders" || activeTab === "explore") && (
           <WondersGalleryView
             currentLang={currentLang}
@@ -209,20 +233,34 @@ export default function Home() {
           />
         )}
 
-        {/* 3. AI Trip Planner & Itinerary Builder */}
-        {(activeTab === "planner" || activeTab === "itinerary") && (
+        {/* 3. DEDICATED FEATURE: AI Trip Planner (Architect Studio) */}
+        {activeTab === "planner" && (
           <TripPlannerView
+            currentLang={currentLang}
+            activeTrip={activeTrip}
+            setActiveTrip={setActiveTrip}
+            setActiveStopId={setActiveStopId}
+            setFilterPreferences={setFilterPreferences}
+            onNavigateToItinerary={() => setActiveTab("itinerary")}
+            onLoadPresetTrip={handleLoadDemoTrip}
+          />
+        )}
+
+        {/* 4. DEDICATED FEATURE: Itinerary & Live Route Map (With live add/remove destinations) */}
+        {activeTab === "itinerary" && (
+          <ItineraryMapView
             currentLang={currentLang}
             activeTrip={activeTrip}
             setActiveTrip={setActiveTrip}
             activeStopId={activeStopId}
             setActiveStopId={setActiveStopId}
             onOpenDetails={handleOpenDetailsById}
-            setFilterPreferences={setFilterPreferences}
+            onNavigateToPlanner={() => setActiveTab("planner")}
+            onLoadPresetTrip={handleLoadDemoTrip}
           />
         )}
 
-        {/* 4. Culturally Matched Regional & Nature Homestays */}
+        {/* 5. DEDICATED FEATURE: Culturally Matched Homestays & Eco-Retreats */}
         {activeTab === "homestays" && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in duration-300">
             <div>
@@ -233,7 +271,7 @@ export default function Home() {
                 {t.homestaysTitle || "Authentic Regional & Nature Homestays"}
               </h2>
               <p className="text-sm text-stone-500 font-normal mt-1 max-w-2xl">
-                {t.homestaysSub || "Stay in tea estate bungalows, sacred river ashrams, and heritage havelis matching your diet and dialect."}
+                {t.homestaysSub || "Stay in tea estate bungalows, desert havelis, and sacred river ashrams matching your diet and dialect."}
               </p>
             </div>
 

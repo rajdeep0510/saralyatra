@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Compass } from "lucide-react";
+import { Compass, PlusCircle } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, PreloadedTrip } from "@/types";
 import ActivitySlot from "./ActivitySlot";
@@ -12,6 +12,8 @@ interface ItineraryTimelineProps {
   activeStopId: string;
   onSelectStop: (id: string) => void;
   onOpenDetails?: (monumentId: string) => void;
+  onRemoveStop?: (dayNumber: number, stopId: string) => void;
+  onAddStopClick?: (dayNumber: number) => void;
 }
 
 export default function ItineraryTimeline({
@@ -19,7 +21,9 @@ export default function ItineraryTimeline({
   currentLang,
   activeStopId,
   onSelectStop,
-  onOpenDetails
+  onOpenDetails,
+  onRemoveStop,
+  onAddStopClick
 }: ItineraryTimelineProps) {
   const t = translations[currentLang] || translations.en;
   const [activeDay, setActiveDay] = useState<number>(1);
@@ -75,24 +79,27 @@ export default function ItineraryTimeline({
       </div>
 
       {/* Day Tabs Navigation */}
-      <div className="flex border-b border-stone-200 bg-stone-100/60 p-2 gap-1">
+      <div className="flex border-b border-stone-200 bg-stone-100/60 p-2 gap-1 overflow-x-auto no-scrollbar">
         {days.map((dayGroup) => (
           <button
             key={dayGroup.day}
             onClick={() => setActiveDay(dayGroup.day)}
-            className={`flex-1 text-center py-2 text-xs font-bold rounded-lg transition-all ${
+            className={`flex-1 min-w-[70px] text-center py-2 px-2 text-xs font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${
               activeDay === dayGroup.day
                 ? "bg-white text-stone-900 shadow-sm border border-stone-200 font-bold"
-                : "text-stone-500 hover:text-stone-800"
+                : "text-stone-500 hover:text-stone-800 hover:bg-white/50"
             }`}
           >
             Day {dayGroup.day}
+            {dayGroup.date && dayGroup.date !== `Day ${dayGroup.day}` && (
+              <span className="block text-[9px] font-normal text-stone-400 truncate">{dayGroup.date}</span>
+            )}
           </button>
         ))}
       </div>
 
       {/* Timeline Scroll Area */}
-      <div className="p-6 overflow-y-auto max-h-[440px] bg-white">
+      <div className="p-6 overflow-y-auto max-h-[480px] bg-white space-y-1">
         {currentDayObj && currentDayObj.stops.map((stop, idx) => (
           <ActivitySlot
             key={stop.id || idx}
@@ -100,9 +107,23 @@ export default function ItineraryTimeline({
             isActive={activeStopId === stop.id}
             onSelect={onSelectStop}
             onOpenDetails={onOpenDetails}
+            onRemove={onRemoveStop ? (id) => onRemoveStop(currentDayObj.day, id) : undefined}
             currentLang={currentLang}
           />
         ))}
+
+        {/* Add Destination Button for current day */}
+        {onAddStopClick && (
+          <div className="pt-2 pl-6">
+            <button
+              onClick={() => onAddStopClick(currentDayObj?.day || activeDay)}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-dashed border-stone-300 hover:border-terracotta-500 hover:bg-terracotta-50/50 text-stone-600 hover:text-terracotta-700 text-xs font-bold transition-all cursor-pointer group"
+            >
+              <PlusCircle className="h-4 w-4 text-stone-400 group-hover:text-terracotta-600 transition-colors" />
+              <span>+ Add Destination to Day {currentDayObj?.day || activeDay}</span>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

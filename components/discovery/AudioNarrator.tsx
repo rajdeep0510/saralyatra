@@ -131,7 +131,9 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
       en: "en-IN",
       hi: "hi-IN",
       gu: "gu-IN",
-      ta: "ta-IN"
+      ta: "ta-IN",
+      mr: "mr-IN",
+      bn: "bn-IN"
     };
 
     utterance.lang = langMap[currentLang] || "en-IN";

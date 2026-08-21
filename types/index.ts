@@ -1,4 +1,4 @@
-export type LanguageCode = "en" | "hi" | "gu" | "ta";
+export type LanguageCode = "en" | "hi" | "gu" | "ta" | "mr" | "bn";
 
 export type TripCategory = "all" | "heritage" | "nature" | "spiritual" | "adventure" | "culinary";
 
@@ -36,6 +36,12 @@ export interface CompatibilityScore {
 }
 
 export type DietaryType = "pureVeg" | "jain" | "halal" | "any" | string;
+
+export interface UserProfile {
+  name: string;
+  dietary: DietaryType;
+  homeState: string;
+}
 
 export interface Homestay {
   id: string;
@@ -80,7 +86,7 @@ export interface TripStats {
 export interface PreloadedTrip {
   id?: string;
   title: string;
-  category?: "heritage" | "nature" | "spiritual" | "adventure";
+  category?: TripCategory;
   region?: string;
   duration?: number;
   pacing?: string;

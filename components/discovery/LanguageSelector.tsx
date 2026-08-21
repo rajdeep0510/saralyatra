@@ -13,7 +13,9 @@ export default function LanguageSelector({ currentLang, onChange }: LanguageSele
   const languages: { code: LanguageCode; label: string; native: string }[] = [
     { code: "en", label: "English", native: "English" },
     { code: "hi", label: "Hindi", native: "हिन्दी" },
+    { code: "mr", label: "Marathi", native: "मराठी" },
     { code: "gu", label: "Gujarati", native: "ગુજરાતી" },
+    { code: "bn", label: "Bengali", native: "বাংলা" },
     { code: "ta", label: "Tamil", native: "தமிழ்" }
   ];
 

@@ -40,7 +40,7 @@ export default function DashboardView({
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-stone-100 text-xs font-semibold shadow-sm">
             <Sparkles className="h-3.5 w-3.5 text-amber-300" />
-            <span>Universal AI Trip Architect • All-Category Tourism</span>
+            <span>Universal AI Trip Architect • Pan-India Tourism</span>
           </div>
 
           {/* Heading */}
@@ -50,7 +50,7 @@ export default function DashboardView({
 
           {/* Subtitle */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-200 font-light leading-relaxed drop-shadow-sm">
-            Plan smart journeys across majestic green valleys, sacred pilgrimage shrines, monumental heritage, and untamed wilderness — tailored to your dietary customs and pacing.
+            Plan smart journeys across majestic green valleys, royal desert citadels, sacred pilgrimage shrines, and ancient monuments — personalized for any state and duration.
           </p>
 
           {/* Category Quick-Launch Pills */}
@@ -75,29 +75,29 @@ export default function DashboardView({
             })}
           </div>
 
-          {/* Curated Demo Action Chips */}
+          {/* Curated Demo Action Chips Across Diverse States */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={() => onLoadTrip("kerala")}
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-stone-950 hover:bg-stone-100 text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
             >
-              <span>🌿 3-Day Kerala Nature Retreat</span>
+              <span>🌿 Kerala Nature Retreat</span>
               <ArrowRight className="h-3.5 w-3.5 text-stone-900 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => onLoadTrip("rajasthan")}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            >
+              <span>🏰 Rajasthan Royal Forts</span>
+              <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={() => onLoadTrip("varanasi")}
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
             >
-              <span>🛕 3-Day Kashi Pilgrimage</span>
-              <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
-            </button>
-
-            <button
-              onClick={() => onLoadTrip("gujarat")}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
-            >
-              <span>🏛️ 3-Day Gujarat Heritage Trail</span>
+              <span>🛕 Kashi Pilgrimage</span>
               <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -121,7 +121,7 @@ export default function DashboardView({
               </h3>
             </div>
             <p className="text-xs text-stone-500 max-w-sm">
-              Click any module to launch smart itinerary generation, interactive Leaflet route maps, Indic voice narrators, or verified regional homestays.
+              Click any module to launch dynamic itinerary generation, interactive Leaflet route maps, Indic voice narrators, or verified regional homestays.
             </p>
           </div>
 
@@ -140,11 +140,11 @@ export default function DashboardView({
                   Wonders & Oral Lore
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Explore Nature Valleys, Sacred Shrines, and Heritage Sites with 360° virtual tours and voice narrators in regional Indic dialects.
+                  Explore Nature Valleys, Sacred Shrines, and Heritage Sites across India with 360° virtual tours and voice narrators in regional Indic dialects.
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900 group-hover:text-terracotta-700">
-                <span>Browse All Categories</span>
+                <span>Browse All States</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
@@ -159,10 +159,10 @@ export default function DashboardView({
                   <Compass className="h-6 w-6" />
                 </div>
                 <h4 className="font-serif text-base font-bold text-stone-900 group-hover:text-terracotta-700 transition-colors">
-                  AI Trip Architect
+                  Universal AI Architect
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Multi-step preference wizard configuring trip theme (Nature, Spiritual, Heritage, Adventure), pacing, and dietary profiling.
+                  Generate customized itineraries for any Indian state (1 to 7+ days) configuring trip theme, pacing, and dietary profiling.
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900 group-hover:text-terracotta-700">
@@ -181,10 +181,10 @@ export default function DashboardView({
                   <Map className="h-6 w-6" />
                 </div>
                 <h4 className="font-serif text-base font-bold text-stone-900 group-hover:text-stone-700 transition-colors">
-                  Live Itinerary & Map
+                  Live Route Map
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Draggable day-by-day timeline paired with interactive Leaflet route polylines, scenic stops, and live transit indicators.
+                  Day-by-day draggable timeline paired with interactive Leaflet route polylines, scenic stops, and live transit indicators.
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900">
@@ -206,7 +206,7 @@ export default function DashboardView({
                   Eco & Heritage Stays
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Curated tea plantation farmstays, Vedic ashrams, and heritage havelis featuring dynamic compatibility scores.
+                  Curated tea plantation farmstays, desert havelis, and Vedic ashrams featuring dynamic compatibility scores.
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900 group-hover:text-emerald-800">

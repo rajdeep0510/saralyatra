@@ -81,11 +81,12 @@ export default function HeritageDetailsView({
                   onChange={(e) => setCurrentLang(e.target.value as LanguageCode)}
                   className="bg-stone-100 border border-stone-200 rounded-full px-3 py-1 text-xs font-bold text-stone-800 focus:outline-none cursor-pointer"
                 >
-                  {languagesAvailable.map((lang) => (
-                    <option key={lang} value={lang}>
-                      {lang.toUpperCase() === "EN" ? "English" : lang.toUpperCase() === "HI" ? "हिन्दी (Hindi)" : lang.toUpperCase() === "GU" ? "ગુજરાતી (Gujarati)" : "தமிழ் (Tamil)"}
-                    </option>
-                  ))}
+                  <option value="en">English</option>
+                  <option value="hi">हिन्दी (Hindi)</option>
+                  <option value="mr">मराठी (Marathi)</option>
+                  <option value="gu">ગુજરાતી (Gujarati)</option>
+                  <option value="bn">বাংলা (Bengali)</option>
+                  <option value="ta">தமிழ் (Tamil)</option>
                 </select>
               </div>
             </div>

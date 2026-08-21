@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Clock, Eye, Car } from "lucide-react";
+import { Clock, Eye, Car, Trash2 } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { ItineraryStop, LanguageCode } from "@/types";
 
@@ -10,6 +10,7 @@ interface ActivitySlotProps {
   isActive: boolean;
   onSelect?: (id: string) => void;
   onOpenDetails?: (monumentId: string) => void;
+  onRemove?: (id: string) => void;
   currentLang: LanguageCode;
 }
 
@@ -18,6 +19,7 @@ export default function ActivitySlot({
   isActive,
   onSelect,
   onOpenDetails,
+  onRemove,
   currentLang
 }: ActivitySlotProps) {
   const t = translations[currentLang] || translations.en;
@@ -25,11 +27,25 @@ export default function ActivitySlot({
   // If it's a transit stop, render as a connector pill
   if (stop.type === "transit") {
     return (
-      <div className="flex items-center gap-2.5 ml-6 my-3 py-1.5 px-3 bg-stone-100 border border-stone-200 rounded-full w-fit">
-        <Car className="h-3.5 w-3.5 text-terracotta-600" />
-        <span className="text-[11px] font-semibold text-stone-600">
-          {stop.title} — {stop.duration}
-        </span>
+      <div className="flex items-center justify-between gap-2.5 ml-6 my-3 py-1.5 px-3 bg-stone-100 border border-stone-200 rounded-full w-fit max-w-full">
+        <div className="flex items-center gap-2">
+          <Car className="h-3.5 w-3.5 text-terracotta-600 shrink-0" />
+          <span className="text-[11px] font-semibold text-stone-600 truncate">
+            {stop.title} — {stop.duration}
+          </span>
+        </div>
+        {onRemove && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemove(stop.id);
+            }}
+            className="text-stone-400 hover:text-red-600 transition-colors p-0.5"
+            title="Remove stop"
+          >
+            <Trash2 className="h-3 w-3" />
+          </button>
+        )}
       </div>
     );
   }
@@ -41,11 +57,31 @@ export default function ActivitySlot({
   let indicatorColor = "bg-stone-900 ring-stone-200";
   if (stop.type === "lunch") indicatorColor = "bg-amber-600 ring-amber-200";
   if (stop.type === "hotel") indicatorColor = "bg-emerald-600 ring-emerald-200";
+  if (stop.type === "nature") indicatorColor = "bg-emerald-700 ring-emerald-200";
+  if (stop.type === "spiritual") indicatorColor = "bg-amber-700 ring-amber-200";
+  if (stop.type === "adventure") indicatorColor = "bg-teal-700 ring-teal-200";
+
+  const getStopTypeLabel = () => {
+    switch (stop.type) {
+      case "nature":
+        return t.natureLabel || "Scenic Stop";
+      case "spiritual":
+        return t.spiritualLabel || "Sacred Shrine";
+      case "adventure":
+        return t.adventureLabel || "Wilderness";
+      case "lunch":
+        return t.lunchLabel || "Regional Dining";
+      case "hotel":
+        return t.hotelLabel || "Overnight Stay";
+      default:
+        return t.monumentLabel || "Heritage Landmark";
+    }
+  };
 
   return (
     <div 
       onClick={() => onSelect && onSelect(stop.id)}
-      className={`relative flex items-start gap-4 pl-6 pb-6 cursor-pointer group transition-all`}
+      className="relative flex items-start gap-4 pl-6 pb-6 cursor-pointer group transition-all"
     >
       {/* Vertical connector line */}
       <div className="absolute left-[9px] top-6 bottom-0 w-[2px] bg-stone-200 group-last:bg-transparent" />
@@ -63,18 +99,30 @@ export default function ActivitySlot({
               <Clock className="h-3 w-3 text-terracotta-600" />
               <span>{stop.time}</span>
             </span>
-            <span className={`text-[10px] font-bold uppercase tracking-wider ${
-              stop.type === "monument" ? "text-terracotta-700" : stop.type === "lunch" ? "text-amber-700" : "text-emerald-700"
-            }`}>
-              {stop.type === "monument" ? t.monumentLabel : stop.type === "lunch" ? t.lunchLabel : t.hotelLabel}
+            <span className="text-[10px] font-bold uppercase tracking-wider text-terracotta-700">
+              {getStopTypeLabel()}
             </span>
           </div>
 
-          {stop.duration && (
-            <span className="text-[10px] text-stone-400 font-medium">
-              {stop.duration}
-            </span>
-          )}
+          <div className="flex items-center gap-2">
+            {stop.duration && (
+              <span className="text-[10px] text-stone-400 font-medium">
+                {stop.duration}
+              </span>
+            )}
+            {onRemove && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemove(stop.id);
+                }}
+                className="opacity-60 group-hover:opacity-100 text-stone-400 hover:text-red-600 p-1 rounded-md hover:bg-red-50 transition-all cursor-pointer"
+                title="Remove destination from itinerary"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
         </div>
 
         <h4 className="text-sm font-serif font-bold text-stone-900 group-hover:text-terracotta-700 transition-colors">
@@ -94,7 +142,7 @@ export default function ActivitySlot({
             className="mt-3 flex items-center gap-1 text-[10px] font-bold text-terracotta-700 hover:text-terracotta-800 transition-all uppercase tracking-wider cursor-pointer"
           >
             <Eye className="h-3 w-3" />
-            <span>Read Site Folklore</span>
+            <span>Read Site Lore & Details</span>
           </button>
         )}
       </div>
