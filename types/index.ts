@@ -16,6 +16,7 @@ export interface Monument {
   subCategory?: string;
   isOffbeat: boolean;
   imageUrl: string;
+  images?: string[];
   panoramaUrl: string;
   folklore: {
     en: string;
@@ -41,6 +42,7 @@ export interface UserProfile {
   name: string;
   dietary: DietaryType;
   homeState: string;
+  savedTrips?: PreloadedTrip[];
 }
 
 export interface Homestay {

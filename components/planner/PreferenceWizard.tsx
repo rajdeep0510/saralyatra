@@ -7,11 +7,12 @@ import { DietaryType, FilterPreferences, LanguageCode, TripCategory } from "@/ty
 
 interface PreferenceWizardProps {
   currentLang: LanguageCode;
+  initialPreferences?: FilterPreferences | null;
   onGenerate?: (formData: FilterPreferences) => void;
   onStepChange?: (step: number, currentFormData: FilterPreferences) => void;
 }
 
-export default function PreferenceWizard({ currentLang, onGenerate, onStepChange }: PreferenceWizardProps) {
+export default function PreferenceWizard({ currentLang, initialPreferences, onGenerate, onStepChange }: PreferenceWizardProps) {
   const t = translations[currentLang] || translations.en;
   const [step, setStep] = useState<number>(1);
   const [selectedZone, setSelectedZone] = useState<string>("All");
@@ -24,18 +25,30 @@ export default function PreferenceWizard({ currentLang, onGenerate, onStepChange
     return d.toISOString().split("T")[0];
   }, []);
 
-  const [formData, setFormData] = useState<FilterPreferences>({
-    category: "nature",
-    region: "Kerala",
-    duration: 3,
-    dates: defaultStartDate,
-    travelers: 2,
-    pacing: "Moderate",
-    famousRatio: 60,
-    dietary: "pureVeg",
-    language: "Hindi",
-    interests: ["Nature", "Scenic"]
+  const [formData, setFormData] = useState<FilterPreferences>(() => {
+    if (initialPreferences) {
+      return { ...initialPreferences };
+    }
+    return {
+      category: "nature",
+      region: "Kerala",
+      duration: 3,
+      dates: defaultStartDate,
+      travelers: 2,
+      pacing: "Moderate",
+      famousRatio: 60,
+      dietary: "pureVeg",
+      language: "Hindi",
+      interests: ["Nature", "Scenic"]
+    };
   });
+
+  // Sync formData if initialPreferences changes
+  React.useEffect(() => {
+    if (initialPreferences) {
+      setFormData({ ...initialPreferences });
+    }
+  }, [initialPreferences]);
 
   const handleNext = () => setStep((prev) => Math.min(prev + 1, 3));
   const handlePrev = () => setStep((prev) => Math.max(prev - 1, 1));

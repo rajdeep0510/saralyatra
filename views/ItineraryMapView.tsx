@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Sparkles, MapPin, Clock, Route, Compass, Printer, PlusCircle, ArrowRight, Trees, Flame, Landmark, Mountain, CheckCircle2, Navigation, Layers } from "lucide-react";
+import { Sparkles, MapPin, Clock, Route, Compass, Printer, PlusCircle, ArrowRight, Trees, Flame, Landmark, Mountain, CheckCircle2, Navigation, Layers, Check, BookmarkCheck, Trash2, X, AlertTriangle, Home } from "lucide-react";
 import { LanguageCode, Monument, PreloadedTrip } from "@/types";
+import { translations } from "@/data/mockData";
 import { removeDestinationFromTrip, addDestinationToTrip } from "@/utils/tripEngine";
 import ItineraryTimeline from "@/components/planner/ItineraryTimeline";
 import MapRouteVisualizer from "@/components/planner/MapRouteVisualizer";
@@ -17,6 +18,9 @@ interface ItineraryMapViewProps {
   onOpenDetails: (monumentId: string) => void;
   onNavigateToPlanner: () => void;
   onLoadPresetTrip?: (key: string) => void;
+  onSaveTrip?: (trip: PreloadedTrip) => void;
+  onCancelTrip?: () => void;
+  isTripSaved?: boolean;
 }
 
 export default function ItineraryMapView({
@@ -27,10 +31,16 @@ export default function ItineraryMapView({
   setActiveStopId,
   onOpenDetails,
   onNavigateToPlanner,
-  onLoadPresetTrip
+  onLoadPresetTrip,
+  onSaveTrip,
+  onCancelTrip,
+  isTripSaved = false
 }: ItineraryMapViewProps) {
+  const t = translations[currentLang] || translations.en;
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [selectedDayForAdd, setSelectedDayForAdd] = useState<number>(1);
+  const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
+  const [showSaveSuccessToast, setShowSaveSuccessToast] = useState<boolean>(false);
 
   // Extract all existing monument IDs in current trip
   const existingMonumentIds = useMemo(() => {
@@ -160,42 +170,35 @@ export default function ItineraryMapView({
               return (
                 <div
                   key={route.id}
-                  className="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-md hover:border-terracotta-400 transition-all flex flex-col justify-between"
+                  className="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-2xs hover:shadow-md hover:border-stone-300 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    {/* Card Image Header */}
-                    <div className="relative h-44 w-full overflow-hidden bg-stone-100">
+                    <div className="relative h-40 w-full overflow-hidden bg-stone-100">
                       <img
                         src={route.image}
                         alt={route.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent" />
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-bold">
-                        <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3 text-amber-300" />
-                          <span>{route.state}</span>
-                        </span>
-                        <span className="bg-black/50 backdrop-blur-md px-2 py-0.5 rounded text-[10px]">
-                          {route.duration} • {route.distance}
+                      <div className="absolute top-2.5 left-2.5">
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border backdrop-blur-md bg-white/90 ${route.iconColor}`}>
+                          <Icon className="h-3 w-3" />
+                          <span>{route.tag}</span>
                         </span>
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <div className="p-4 space-y-3">
-                      <div className="flex items-center gap-2">
-                        <div className={`p-1.5 rounded-lg border ${route.iconColor}`}>
-                          <Icon className="h-3.5 w-3.5" />
-                        </div>
-                        <span className="text-[11px] font-bold text-stone-500 uppercase tracking-wider">
-                          {route.tag}
-                        </span>
-                      </div>
-
-                      <h4 className="font-serif text-sm font-bold text-stone-900 group-hover:text-terracotta-700 transition-colors">
+                    <div className="p-4 space-y-2">
+                      <h4 className="font-serif text-sm font-bold text-stone-900 group-hover:text-terracotta-700 transition-colors leading-snug">
                         {route.title}
                       </h4>
+                      
+                      <div className="flex items-center gap-2 text-[11px] text-stone-500 font-semibold">
+                        <span>{route.state}</span>
+                        <span>•</span>
+                        <span>{route.duration}</span>
+                        <span>•</span>
+                        <span>{route.distance}</span>
+                      </div>
 
                       {/* Stops list preview */}
                       <div className="space-y-1 pt-1">
@@ -284,18 +287,92 @@ export default function ItineraryMapView({
     setActiveTrip(updated);
   };
 
+  const handleConfirmAndSave = () => {
+    if (onSaveTrip) {
+      onSaveTrip(activeTrip);
+    }
+    setShowSaveSuccessToast(true);
+    setTimeout(() => {
+      setShowSaveSuccessToast(false);
+    }, 4000);
+  };
+
   const { title, region, pacing, stats, culturalFilter } = activeTrip;
 
   return (
-    <div className="space-y-6 py-6 animate-in fade-in duration-300 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="space-y-6 py-6 animate-in fade-in duration-300 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       
+      {/* Save Celebration Toast Notification */}
+      {showSaveSuccessToast && (
+        <div className="fixed bottom-6 right-6 z-50 bg-stone-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-emerald-500/50 flex items-center gap-3 animate-in slide-in-from-bottom duration-300">
+          <div className="h-8 w-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold">
+            ✓
+          </div>
+          <div>
+            <h5 className="text-xs font-bold text-white">Yatra Confirmed & Saved!</h5>
+            <p className="text-[11px] text-stone-300">This trip is now saved in your Traveler Profile.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Cancel Trip Confirmation Modal */}
+      {showCancelModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full border border-stone-200 shadow-2xl space-y-4">
+            <div className="h-12 w-12 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200 flex items-center justify-center mx-auto text-xl">
+              <AlertTriangle className="h-6 w-6" />
+            </div>
+            
+            <div className="text-center space-y-1.5">
+              <h3 className="font-serif text-lg font-bold text-stone-900">
+                Cancel & Reset Trip Planning?
+              </h3>
+              <p className="text-xs text-stone-600 leading-relaxed">
+                Are you sure you want to cancel? This will discard your current route blueprint and return you to the home page.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
+              <button
+                onClick={() => setShowCancelModal(false)}
+                className="flex-1 py-2.5 px-4 rounded-xl border border-stone-200 text-xs font-bold text-stone-700 hover:bg-stone-100 transition-all cursor-pointer"
+              >
+                Keep Planning
+              </button>
+              <button
+                onClick={() => {
+                  setShowCancelModal(false);
+                  if (onCancelTrip) {
+                    onCancelTrip();
+                  }
+                }}
+                className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all cursor-pointer shadow-sm flex items-center justify-center gap-1.5"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                <span>Discard & Go Home</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Banner & Trip Overview Controls */}
-      <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-terracotta-50 text-terracotta-700 border border-terracotta-200">
-              Live Navigation & Schedule
+              Live Route Navigation
             </span>
+            {isTripSaved ? (
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
+                <BookmarkCheck className="h-3.5 w-3.5 text-emerald-600" />
+                <span>Confirmed & Saved</span>
+              </span>
+            ) : (
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200">
+                Draft Blueprint
+              </span>
+            )}
             {pacing && (
               <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-stone-100 text-stone-700 border border-stone-200">
                 {pacing} Pacing
@@ -315,54 +392,81 @@ export default function ItineraryMapView({
           {region && (
             <p className="text-xs text-stone-500 font-medium flex items-center gap-1.5">
               <MapPin className="h-3.5 w-3.5 text-terracotta-600" />
-              <span>Destination Region: <strong className="text-stone-800">{region}</strong> • {activeTrip.itinerary.length} Days</span>
+              <span>Destination: <strong className="text-stone-800">{region}</strong> • {activeTrip.itinerary.length} Days Itinerary</span>
             </p>
           )}
         </div>
 
-        {/* Stats & Actions */}
-        <div className="flex flex-wrap items-center gap-3">
+        {/* Stats & Key Actions (2-Row Layout: Utilities above, Confirm & Cancel below) */}
+        <div className="flex flex-col items-start lg:items-end gap-3 shrink-0">
           
-          {/* Quick Stats Pill */}
-          <div className="flex items-center gap-3 bg-stone-50 p-2.5 rounded-xl border border-stone-200 text-xs">
-            <div className="flex items-center gap-1.5 text-stone-700 font-semibold">
-              <Route className="h-4 w-4 text-terracotta-600" />
-              <span>{stats?.totalDistance || "180 km"}</span>
+          {/* Upper Row: Utility & Edit Controls */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Quick Stats Pill */}
+            <div className="flex items-center gap-3 bg-stone-50 p-2.5 rounded-2xl border border-stone-200 text-xs">
+              <div className="flex items-center gap-1.5 text-stone-700 font-semibold">
+                <Route className="h-4 w-4 text-terracotta-600" />
+                <span>{stats?.totalDistance || "180 km"}</span>
+              </div>
+              <div className="h-3 w-px bg-stone-200" />
+              <div className="flex items-center gap-1.5 text-stone-700 font-semibold">
+                <Clock className="h-4 w-4 text-amber-600" />
+                <span>{stats?.travelTime || "4.5 hrs transit"}</span>
+              </div>
             </div>
-            <div className="h-3 w-px bg-stone-200" />
-            <div className="flex items-center gap-1.5 text-stone-700 font-semibold">
-              <Clock className="h-4 w-4 text-amber-600" />
-              <span>{stats?.travelTime || "4.5 hrs transit"}</span>
-            </div>
+
+            {/* Action: Add Place */}
+            <button
+              onClick={() => handleOpenAddModal(1)}
+              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-800 border border-terracotta-200 text-xs font-bold transition-all cursor-pointer shadow-2xs"
+            >
+              <PlusCircle className="h-4 w-4 text-terracotta-600" />
+              <span>{t.addPlace || "+ Add Place"}</span>
+            </button>
+
+            {/* Action: Edit in Planner */}
+            <button
+              onClick={onNavigateToPlanner}
+              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-stone-900 text-white text-xs font-bold hover:bg-stone-800 transition-all cursor-pointer shadow-xs"
+              title="Adjust preferences and dates"
+            >
+              <Compass className="h-4 w-4 text-amber-400" />
+              <span>{t.editInPlanner || "Edit in Planner"}</span>
+            </button>
+
+            {/* Action: Print */}
+            <button
+              onClick={() => window.print()}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-2.5 rounded-2xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold border border-stone-200 transition-all cursor-pointer"
+              title="Print or Save PDF"
+            >
+              <Printer className="h-4 w-4 text-stone-600" />
+              <span>{t.print || "Print"}</span>
+            </button>
           </div>
 
-          {/* Quick Add Destination Action */}
-          <button
-            onClick={() => handleOpenAddModal(1)}
-            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-800 border border-terracotta-200 text-xs font-bold transition-all cursor-pointer shadow-2xs"
-          >
-            <PlusCircle className="h-4 w-4 text-terracotta-600" />
-            <span>+ Add Place</span>
-          </button>
+          {/* Lower Row: Confirm Trip & Cancel Trip (Beside each other) */}
+          <div className="flex items-center gap-2.5 w-full sm:w-auto justify-start lg:justify-end">
+            {/* Confirm Trip Button (Green with White font) */}
+            <button
+              onClick={handleConfirmAndSave}
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+              title="Confirm and save trip to profile"
+            >
+              <Check className="h-4 w-4" />
+              <span>{isTripSaved ? (t.tripConfirmed || "Trip Confirmed ✓") : (t.confirmTrip || "Confirm Trip")}</span>
+            </button>
 
-          {/* Action: Customize in Planner */}
-          <button
-            onClick={onNavigateToPlanner}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-bold hover:bg-stone-800 transition-all cursor-pointer shadow-xs"
-          >
-            <Compass className="h-4 w-4 text-amber-400" />
-            <span>Edit in Planner</span>
-          </button>
-
-          {/* Action: Print */}
-          <button
-            onClick={() => window.print()}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold border border-stone-200 transition-all cursor-pointer"
-            title="Print or Save PDF"
-          >
-            <Printer className="h-4 w-4 text-stone-600" />
-            <span>Print</span>
-          </button>
+            {/* Cancel Trip Button (Red with White font) */}
+            <button
+              onClick={() => setShowCancelModal(true)}
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+              title="Cancel and reset trip"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+              <span>{t.cancelTrip || "Cancel Trip"}</span>
+            </button>
+          </div>
 
         </div>
       </div>
@@ -383,27 +487,30 @@ export default function ItineraryMapView({
           />
         </div>
 
-        {/* Right Column: Large Interactive Leaflet Route Map (7 Cols) */}
-        <div className="lg:col-span-7 flex flex-col h-full min-h-[520px]">
+        {/* Right Column: Interactive Leaflet Map Visualizer (7 Cols) */}
+        <div className="lg:col-span-7 sticky top-24">
           <MapRouteVisualizer
             itinerary={activeTrip}
             currentLang={currentLang}
             activeStopId={activeStopId}
             onSelectStop={setActiveStopId}
+            onOpenDetails={onOpenDetails}
           />
         </div>
 
       </div>
 
-      {/* Add Destination Search Modal (Scoped to Current Trip State) */}
-      <AddDestinationModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        dayNumber={selectedDayForAdd}
-        tripState={activeTrip.region}
-        onAddDestination={handleAddDestination}
-        existingMonumentIds={existingMonumentIds}
-      />
+      {/* Add Custom Destination Modal (Prioritizes attractions in current trip state) */}
+      {isAddModalOpen && (
+        <AddDestinationModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          tripState={region || "Kerala"}
+          dayNumber={selectedDayForAdd}
+          existingMonumentIds={existingMonumentIds}
+          onAddDestination={handleAddDestination}
+        />
+      )}
 
     </div>
   );

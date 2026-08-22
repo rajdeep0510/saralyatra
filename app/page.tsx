@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DashboardView from "@/views/DashboardView";
 import WondersGalleryView from "@/views/WondersGalleryView";
 import TripPlannerView from "@/views/TripPlannerView";
 import ItineraryMapView from "@/views/ItineraryMapView";
-import HeritageDetailsView from "@/views/HeritageDetailsView";
 import PanoramaViewerModal from "@/components/discovery/PanoramaViewerModal";
+import HeritageDetailsView from "@/views/HeritageDetailsView";
 import HomestayCard from "@/components/homestays/HomestayCard";
 import { preloadedTrips, monuments, homestays, translations } from "@/data/mockData";
 import { generateDynamicItinerary } from "@/utils/tripEngine";
@@ -23,8 +23,30 @@ export default function Home() {
   const [userProfile, setUserProfile] = useState<UserProfile>({
     name: "Yaksh Patel",
     dietary: "pureVeg",
-    homeState: "Gujarat"
+    homeState: "Gujarat",
+    savedTrips: []
   });
+
+  // Load userProfile from localStorage on client mount to prevent SSR hydration mismatch
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("saralyatra_user_profile");
+        if (cached) {
+          setUserProfile(JSON.parse(cached));
+        }
+      } catch { }
+    }
+  }, []);
+
+  // Save userProfile to localStorage on update
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("saralyatra_user_profile", JSON.stringify(userProfile));
+      } catch { }
+    }
+  }, [userProfile]);
 
   // Preloaded trip state (null initially until planned or loaded)
   const [activeTrip, setActiveTrip] = useState<PreloadedTrip | null>(null);
@@ -102,10 +124,10 @@ export default function Home() {
         dates: new Date().toISOString().split("T")[0],
         travelers: 2,
         pacing: "Moderate",
-        famousRatio: 70,
+        famousRatio: 60,
         dietary: "pureVeg",
         language: "Hindi",
-        interests: ["Forts", "Palaces", "Desert"]
+        interests: ["Forts", "Palaces", "Heritage"]
       });
     } else if (regionKey === "varanasi") {
       setFilterPreferences({
@@ -114,74 +136,183 @@ export default function Home() {
         duration: 3,
         dates: new Date().toISOString().split("T")[0],
         travelers: 2,
-        pacing: "Moderate",
+        pacing: "Relaxed",
         famousRatio: 80,
-        dietary: "pureVeg",
+        dietary: "jain",
         language: "Hindi",
-        interests: ["Spiritual", "Pilgrimage", "Rituals"]
+        interests: ["Ghats", "Temples", "Aarti"]
       });
+    } else if (regionKey === "hampi") {
+      setFilterPreferences({
+        category: "adventure",
+        region: "Karnataka",
+        duration: 3,
+        dates: new Date().toISOString().split("T")[0],
+        travelers: 2,
+        pacing: "Intensive",
+        famousRatio: 50,
+        dietary: "pureVeg",
+        language: "English",
+        interests: ["Ruins", "Boulders", "Trekking"]
+      });
+    }
+
+    setActiveTab("itinerary");
+  };
+
+  // Global Toast State for Saved Trip
+  const [savedTripToast, setSavedTripToast] = useState<{ title: string; message: string } | null>(null);
+
+  // Confirm & Save Trip into User Profile, then Reset Planner and Live Map
+  const handleSaveTrip = (tripToSave: PreloadedTrip) => {
+    const tripWithId: PreloadedTrip = {
+      ...tripToSave,
+      id: tripToSave.id || `trip-${Date.now()}`
+    };
+    setUserProfile((prev) => {
+      const existing = prev.savedTrips || [];
+      const filtered = existing.filter((t) => t.id !== tripWithId.id && t.title !== tripWithId.title);
+      const updatedTrips = [tripWithId, ...filtered];
+      return {
+        ...prev,
+        savedTrips: updatedTrips
+      };
+    });
+
+    // 1. Reset Live Map Active Itinerary
+    setActiveTrip(null);
+    setActiveStopId("");
+
+    // 2. Reset AI Trip Planner Wizard Preferences to clean defaults
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setFilterPreferences({
+      category: "nature",
+      region: "Kerala",
+      duration: 3,
+      dates: tomorrow.toISOString().split("T")[0],
+      travelers: 2,
+      pacing: "Moderate",
+      famousRatio: 60,
+      dietary: userProfile.dietary,
+      language: "Hindi",
+      interests: ["Nature", "Scenic"]
+    });
+
+    // 3. Show Celebration Toast & Redirect cleanly to Home
+    setSavedTripToast({
+      title: "Trip Confirmed & Saved!",
+      message: `"${tripWithId.title}" is saved in your Profile. Planner and Live Map have been reset for your next journey.`
+    });
+    setActiveTab("home");
+
+    setTimeout(() => {
+      setSavedTripToast(null);
+    }, 6000);
+  };
+
+  // Cancel Trip Planning & Reset to Home
+  const handleCancelTrip = () => {
+    setActiveTrip(null);
+    setActiveStopId("");
+    setActiveTab("home");
+  };
+
+  // Load Saved Trip from User Profile
+  const handleLoadSavedTrip = (savedTrip: PreloadedTrip) => {
+    setActiveTrip(savedTrip);
+    if (savedTrip.itinerary[0]?.stops[0]) {
+      setActiveStopId(savedTrip.itinerary[0].stops[0].id);
+    }
+    if (savedTrip.culturalFilter) {
+      setFilterPreferences((prev) => ({
+        ...prev,
+        category: savedTrip.category || prev.category,
+        region: savedTrip.region || prev.region,
+        duration: savedTrip.itinerary.length || prev.duration,
+        dietary: savedTrip.culturalFilter?.dietary || prev.dietary,
+        language: savedTrip.culturalFilter?.language || prev.language
+      }));
     }
     setActiveTab("itinerary");
   };
 
+  // Delete Saved Trip from User Profile
+  const handleDeleteSavedTrip = (tripId: string) => {
+    setUserProfile((prev) => ({
+      ...prev,
+      savedTrips: (prev.savedTrips || []).filter((t) => t.id !== tripId)
+    }));
+  };
+
   const handleOpenDetailsById = (monumentId: string) => {
-    const mon = monuments.find((m) => m.id === monumentId);
-    if (mon) {
-      setSelectedDetailMonument(mon);
+    let found = monuments.find((m) => m.id === monumentId);
+    if (!found) {
+      found = monuments.find(
+        (m) =>
+          m.name.toLowerCase() === monumentId.toLowerCase() ||
+          m.name.toLowerCase().includes(monumentId.toLowerCase()) ||
+          monumentId.toLowerCase().includes(m.name.toLowerCase())
+      );
+    }
+
+    // Fallback: If it's a custom stop from the active itinerary, build dynamic monument record
+    if (!found && activeTrip) {
+      for (const day of activeTrip.itinerary) {
+        const stop = day.stops.find(
+          (s) => s.id === monumentId || s.monumentId === monumentId || s.title === monumentId
+        );
+        if (stop) {
+          found = {
+            id: stop.id,
+            name: stop.title,
+            state: activeTrip.region || "India",
+            era: "Curated Destination",
+            category: (stop.type as "heritage" | "nature" | "spiritual" | "adventure") || "heritage",
+            isOffbeat: false,
+            imageUrl: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+            panoramaUrl: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+            folklore: {
+              en: stop.desc,
+              hi: stop.desc,
+              mr: stop.desc,
+              gu: stop.desc,
+              bn: stop.desc,
+              ta: stop.desc
+            },
+            languagesAvailable: ["en", "hi", "mr", "gu", "bn", "ta"],
+            coordinates: { lat: stop.lat || 20.0, lng: stop.lng || 78.0 }
+          };
+          break;
+        }
+      }
+    }
+
+    if (found) {
+      setSelectedDetailMonument(found);
     }
   };
 
-  // Homestay dynamic matchmaking calculation
+  // Filter homestays based on user dietary preference and region
   const getFilteredHomestays = (): Homestay[] => {
-    const query = searchQuery.toLowerCase();
-    
-    const searchedHomestays = homestays.filter((home) => {
-      if (!searchQuery) return true;
-      return (
-        home.name.toLowerCase().includes(query) ||
-        home.hostName.toLowerCase().includes(query) ||
-        home.hostOrigin.toLowerCase().includes(query) ||
-        home.foodSpecialty.toLowerCase().includes(query) ||
-        (home.category && home.category.toLowerCase().includes(query))
-      );
-    });
+    return homestays
+      .map((stay) => {
+        let foodScore = 70;
+        if (userProfile.dietary === "pureVeg" && stay.dietaryReady === "pureVeg") foodScore = 98;
+        if (userProfile.dietary === "jain" && stay.dietaryReady === "jain") foodScore = 100;
+        if (userProfile.dietary === "halal" && stay.dietaryReady === "halal") foodScore = 98;
 
-    if (!filterPreferences) return searchedHomestays;
-
-    return searchedHomestays
-      .map((home) => {
-        let foodScore = 50;
-        let languageScore = 50;
-        let heritageScore = 80;
-
-        // 1. Food compliance
-        if (home.dietaryReady === filterPreferences.dietary) {
-          foodScore = 100;
-        } else if (filterPreferences.dietary === "pureVeg" && home.dietaryReady === "jain") {
-          foodScore = 95;
-        } else if (filterPreferences.dietary === "jain" && home.dietaryReady === "pureVeg") {
-          foodScore = 65;
+        let languageScore = 75;
+        const requestedLangName = currentLang === "en" ? "English" : currentLang === "hi" ? "Hindi" : currentLang === "mr" ? "Marathi" : currentLang === "gu" ? "Gujarati" : currentLang === "bn" ? "Bengali" : "Tamil";
+        if (stay.languagesSpoken.some((l) => l.toLowerCase().includes(requestedLangName.toLowerCase()))) {
+          languageScore = 95;
         }
 
-        // 2. Language alignment
-        const speaksDialect = home.languagesSpoken.some(
-          (lang) => lang.toLowerCase() === filterPreferences.language.toLowerCase()
-        );
-        languageScore = speaksDialect ? 100 : 60;
-
-        // 3. Category & Interest guidance
-        const matchesInterests = filterPreferences.interests.some(
-          (interest) => 
-            home.about.toLowerCase().includes(interest.toLowerCase()) || 
-            home.foodSpecialty.toLowerCase().includes(interest.toLowerCase()) ||
-            (home.category && home.category.toLowerCase() === filterPreferences.category)
-        );
-        heritageScore = matchesInterests ? 98 : 80;
-
-        const overall = Math.round((foodScore * 0.45) + (languageScore * 0.3) + (heritageScore * 0.25));
+        const heritageScore = 88;
+        const overall = Math.round((foodScore * 0.4) + (languageScore * 0.3) + (heritageScore * 0.3));
 
         return {
-          ...home,
+          ...stay,
           compatibilityScore: {
             food: foodScore,
             language: languageScore,
@@ -193,9 +324,13 @@ export default function Home() {
       .sort((a, b) => (b.compatibilityScore?.overall || 0) - (a.compatibilityScore?.overall || 0));
   };
 
+  const isCurrentTripSaved = Boolean(
+    activeTrip && userProfile.savedTrips?.some((t) => (t.id && t.id === activeTrip.id) || t.title === activeTrip.title)
+  );
+
   return (
     <div className="flex flex-col min-h-screen bg-[#faf9f5] text-stone-900 font-sans">
-      {/* Top Editorial Navbar */}
+      {/* Top Editorial Navbar with User Profile & Saved Trips Popover */}
       <Navbar
         currentLang={currentLang}
         setCurrentLang={setCurrentLang}
@@ -209,6 +344,8 @@ export default function Home() {
         }}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        onLoadSavedTrip={handleLoadSavedTrip}
+        onDeleteSavedTrip={handleDeleteSavedTrip}
       />
 
       {/* Main Content Area */}
@@ -217,6 +354,7 @@ export default function Home() {
         {/* 1. Landing Entrance Portal */}
         {activeTab === "home" && (
           <DashboardView
+            currentLang={currentLang}
             onLoadTrip={handleLoadDemoTrip}
             onNavigateTab={setActiveTab}
           />
@@ -240,13 +378,14 @@ export default function Home() {
             activeTrip={activeTrip}
             setActiveTrip={setActiveTrip}
             setActiveStopId={setActiveStopId}
+            filterPreferences={filterPreferences}
             setFilterPreferences={setFilterPreferences}
             onNavigateToItinerary={() => setActiveTab("itinerary")}
             onLoadPresetTrip={handleLoadDemoTrip}
           />
         )}
 
-        {/* 4. DEDICATED FEATURE: Itinerary & Live Route Map (With live add/remove destinations) */}
+        {/* 4. DEDICATED FEATURE: Itinerary & Live Route Map (With live add/remove, confirm & cancel trip) */}
         {activeTab === "itinerary" && (
           <ItineraryMapView
             currentLang={currentLang}
@@ -257,6 +396,9 @@ export default function Home() {
             onOpenDetails={handleOpenDetailsById}
             onNavigateToPlanner={() => setActiveTab("planner")}
             onLoadPresetTrip={handleLoadDemoTrip}
+            onSaveTrip={handleSaveTrip}
+            onCancelTrip={handleCancelTrip}
+            isTripSaved={isCurrentTripSaved}
           />
         )}
 
@@ -289,24 +431,48 @@ export default function Home() {
 
       </main>
 
-      {/* Museum Footer */}
+      {/* 360-Degree Virtual Preview Modal */}
+      {selected360Monument && (
+        <PanoramaViewerModal
+          isOpen={Boolean(selected360Monument)}
+          monument={selected360Monument}
+          currentLang={currentLang}
+          onClose={() => setSelected360Monument(null)}
+        />
+      )}
+
+      {/* Full Editorial Heritage Story Modal with Vernacular Audio Narration */}
+      {selectedDetailMonument && (
+        <HeritageDetailsView
+          monument={selectedDetailMonument}
+          onClose={() => setSelectedDetailMonument(null)}
+          currentLang={currentLang}
+          setCurrentLang={setCurrentLang}
+          onOpen360={(m) => setSelected360Monument(m)}
+        />
+      )}
+
+      {/* Global Saved Trip Toast Notification */}
+      {savedTripToast && (
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm bg-stone-900 text-white p-4 rounded-3xl shadow-2xl border border-emerald-500/60 flex items-start gap-3.5 animate-in slide-in-from-bottom duration-300">
+          <div className="h-9 w-9 rounded-2xl bg-emerald-500 text-stone-950 flex items-center justify-center font-black text-sm shrink-0 mt-0.5">
+            ✓
+          </div>
+          <div className="flex-1 space-y-1">
+            <h5 className="text-xs font-bold text-white">{savedTripToast.title}</h5>
+            <p className="text-[11px] text-stone-300 leading-relaxed">{savedTripToast.message}</p>
+          </div>
+          <button
+            onClick={() => setSavedTripToast(null)}
+            className="text-stone-400 hover:text-white p-1"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+      {/* Modern Global Footer */}
       <Footer />
-
-      {/* Modals overlays */}
-      <HeritageDetailsView
-        monument={selectedDetailMonument}
-        onClose={() => setSelectedDetailMonument(null)}
-        currentLang={currentLang}
-        setCurrentLang={setCurrentLang}
-        onOpen360={setSelected360Monument}
-      />
-
-      <PanoramaViewerModal
-        isOpen={!!selected360Monument}
-        onClose={() => setSelected360Monument(null)}
-        monument={selected360Monument}
-        currentLang={currentLang}
-      />
     </div>
   );
 }

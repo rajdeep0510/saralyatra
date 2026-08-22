@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Compass, Search, Globe, User, Landmark, Map, Home, Sparkles, X, ChevronDown, Check, ShieldCheck, MapPin } from "lucide-react";
+import { Compass, Search, Globe, User, Landmark, Map, Home, Sparkles, X, ChevronDown, Check, ShieldCheck, MapPin, BookmarkCheck, Route, Clock, Trash2, ArrowRight } from "lucide-react";
 import { translations, indianStates } from "@/data/mockData";
-import { DietaryType, FilterPreferences, LanguageCode, UserProfile } from "@/types";
+import { DietaryType, FilterPreferences, LanguageCode, PreloadedTrip, UserProfile } from "@/types";
 
 interface NavbarProps {
   currentLang: LanguageCode;
@@ -15,6 +15,8 @@ interface NavbarProps {
   setUserProfile?: (profile: UserProfile) => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  onLoadSavedTrip?: (trip: PreloadedTrip) => void;
+  onDeleteSavedTrip?: (tripId: string) => void;
 }
 
 export default function Navbar({
@@ -23,13 +25,16 @@ export default function Navbar({
   searchQuery,
   setSearchQuery,
   userPreferences,
-  userProfile = { name: "Aarav Patel", dietary: "pureVeg", homeState: "Gujarat" },
+  userProfile = { name: "Aarav Patel", dietary: "pureVeg", homeState: "Gujarat", savedTrips: [] },
   setUserProfile,
   activeTab,
-  setActiveTab
+  setActiveTab,
+  onLoadSavedTrip,
+  onDeleteSavedTrip
 }: NavbarProps) {
   const t = translations[currentLang] || translations.en;
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
+  const [activeProfileTab, setActiveProfileTab] = useState<"profile" | "trips">("profile");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close profile dropdown when clicking outside
@@ -61,6 +66,8 @@ export default function Navbar({
     { id: "itinerary", label: t.itineraryTab || "Live Map", icon: Map },
     { id: "homestays", label: t.homestaysTab || "Stays", icon: Home },
   ];
+
+  const savedTrips = userProfile.savedTrips || [];
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
@@ -175,17 +182,17 @@ export default function Navbar({
                 className={`flex items-center gap-2 pl-2 sm:pl-3 border-l border-stone-200 shrink-0 cursor-pointer p-1 rounded-xl transition-all ${
                   isProfileModalOpen ? "bg-stone-100" : "hover:bg-stone-50"
                 }`}
-                title="Edit Traveler Profile & Preferences"
+                title="Edit Traveler Profile & Saved Trips"
               >
                 <div className="flex flex-col items-end text-right shrink-0">
                   <div className="flex items-center gap-1">
-                    <span className="text-xs font-bold text-stone-900 leading-tight whitespace-nowrap">
+                    <span suppressHydrationWarning className="text-xs font-bold text-stone-900 leading-tight whitespace-nowrap">
                       {userProfile.name || "Traveler Profile"}
                     </span>
                     <ChevronDown className={`h-3 w-3 text-stone-400 transition-transform ${isProfileModalOpen ? "rotate-180 text-stone-800" : ""}`} />
                   </div>
-                  <span className="text-[9px] font-bold text-terracotta-700 bg-terracotta-50 px-1.5 py-0.5 rounded border border-terracotta-200/70 whitespace-nowrap leading-none mt-0.5">
-                    {dietaryLabels[userProfile.dietary] || "Pure Veg"} • {userProfile.homeState || "India"}
+                  <span suppressHydrationWarning className="text-[9px] font-bold text-terracotta-700 bg-terracotta-50 px-1.5 py-0.5 rounded border border-terracotta-200/70 whitespace-nowrap leading-none mt-0.5">
+                    {dietaryLabels[userProfile.dietary] || "Pure Veg"} • {savedTrips.length > 0 ? `${savedTrips.length} Saved` : userProfile.homeState || "India"}
                   </span>
                 </div>
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-stone-900 text-white ring-2 ring-white shadow-xs shrink-0 font-bold text-xs">
@@ -193,101 +200,206 @@ export default function Navbar({
                 </div>
               </button>
 
-              {/* Profile Configuration Popover Drawer */}
+              {/* Profile Configuration & Saved Trips Popover Drawer */}
               {isProfileModalOpen && (
-                <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 rounded-2xl bg-white border border-stone-200 shadow-xl p-4 z-50 space-y-4 animate-in fade-in duration-150">
+                <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-3xl bg-white border border-stone-200 shadow-2xl p-5 z-50 space-y-4 animate-in fade-in duration-150">
+                  
+                  {/* Top Bar with Tab Switcher */}
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
-                    <div className="flex items-center gap-1.5">
-                      <User className="h-4 w-4 text-terracotta-600" />
-                      <h4 className="text-xs font-bold text-stone-900 uppercase tracking-wider">
-                        Traveler Profile & Customs
-                      </h4>
+                    <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl">
+                      <button
+                        type="button"
+                        onClick={() => setActiveProfileTab("profile")}
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          activeProfileTab === "profile"
+                            ? "bg-white text-stone-900 shadow-2xs"
+                            : "text-stone-500 hover:text-stone-800"
+                        }`}
+                      >
+                        Profile & Customs
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveProfileTab("trips")}
+                        className={`flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          activeProfileTab === "trips"
+                            ? "bg-white text-stone-900 shadow-2xs"
+                            : "text-stone-500 hover:text-stone-800"
+                        }`}
+                      >
+                        <BookmarkCheck className="h-3.5 w-3.5 text-terracotta-600" />
+                        <span>Saved Trips ({savedTrips.length})</span>
+                      </button>
                     </div>
+
                     <button
                       type="button"
                       onClick={() => setIsProfileModalOpen(false)}
-                      className="text-stone-400 hover:text-stone-900 p-1"
+                      className="text-stone-400 hover:text-stone-900 p-1 cursor-pointer"
                     >
-                      <X className="h-3.5 w-3.5" />
+                      <X className="h-4 w-4" />
                     </button>
                   </div>
 
-                  {/* Field 1: User Name Input */}
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-stone-700 flex items-center justify-between">
-                      <span>Your Name</span>
-                      <span className="text-[9px] text-stone-400">Displayed across trips</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={userProfile.name}
-                      onChange={(e) => {
-                        if (setUserProfile) {
-                          setUserProfile({ ...userProfile, name: e.target.value });
-                        }
-                      }}
-                      placeholder="Enter traveler name..."
-                      className="w-full rounded-xl bg-stone-50 border border-stone-200 py-1.5 px-3 text-xs font-bold text-stone-900 focus:border-stone-400 focus:bg-white focus:outline-none"
-                    />
-                  </div>
+                  {/* TAB 1: Profile & Customs */}
+                  {activeProfileTab === "profile" && (
+                    <div className="space-y-3.5">
+                      {/* Field 1: User Name Input */}
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-stone-700 flex items-center justify-between">
+                          <span>Your Name</span>
+                          <span className="text-[9px] text-stone-400">Displayed across trips</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={userProfile.name}
+                          onChange={(e) => {
+                            if (setUserProfile) {
+                              setUserProfile({ ...userProfile, name: e.target.value });
+                            }
+                          }}
+                          placeholder="Enter traveler name..."
+                          className="w-full rounded-xl bg-stone-50 border border-stone-200 py-1.5 px-3 text-xs font-bold text-stone-900 focus:border-stone-400 focus:bg-white focus:outline-none"
+                        />
+                      </div>
 
-                  {/* Field 2: Food & Dietary Selection */}
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
-                      <ShieldCheck className="h-3.5 w-3.5 text-terracotta-600" />
-                      <span>Food & Dietary Preference</span>
-                    </label>
-                    <select
-                      value={userProfile.dietary}
-                      onChange={(e) => {
-                        if (setUserProfile) {
-                          setUserProfile({ ...userProfile, dietary: e.target.value as DietaryType });
-                        }
-                      }}
-                      className="w-full rounded-xl bg-stone-50 border border-stone-200 py-2 px-3 text-xs font-bold text-stone-900 focus:border-stone-400 focus:bg-white focus:outline-none cursor-pointer"
-                    >
-                      <option value="pureVeg">🥦 100% Pure Vegetarian</option>
-                      <option value="jain">🪔 Jain Satvik Kitchen (No Onion/Garlic)</option>
-                      <option value="halal">🥩 Halal Certified Specialty</option>
-                      <option value="any">🍽️ Any Regional Cuisine</option>
-                    </select>
-                  </div>
+                      {/* Field 2: Food & Dietary Selection */}
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                          <ShieldCheck className="h-3.5 w-3.5 text-terracotta-600" />
+                          <span>Food & Dietary Preference</span>
+                        </label>
+                        <select
+                          value={userProfile.dietary}
+                          onChange={(e) => {
+                            if (setUserProfile) {
+                              setUserProfile({ ...userProfile, dietary: e.target.value as DietaryType });
+                            }
+                          }}
+                          className="w-full rounded-xl bg-stone-50 border border-stone-200 py-2 px-3 text-xs font-bold text-stone-900 focus:border-stone-400 focus:bg-white focus:outline-none cursor-pointer"
+                        >
+                          <option value="pureVeg">🥦 100% Pure Vegetarian</option>
+                          <option value="jain">🪔 Jain Satvik Kitchen (No Onion/Garlic)</option>
+                          <option value="halal">🥩 Halal Certified Specialty</option>
+                          <option value="any">🍽️ Any Regional Cuisine</option>
+                        </select>
+                      </div>
 
-                  {/* Field 3: Home State / Origin */}
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5 text-terracotta-600" />
-                      <span>Home State / Region of Origin</span>
-                    </label>
-                    <select
-                      value={userProfile.homeState}
-                      onChange={(e) => {
-                        if (setUserProfile) {
-                          setUserProfile({ ...userProfile, homeState: e.target.value });
-                        }
-                      }}
-                      className="w-full rounded-xl bg-stone-50 border border-stone-200 py-2 px-3 text-xs font-bold text-stone-900 focus:border-stone-400 focus:bg-white focus:outline-none cursor-pointer max-h-40"
-                    >
-                      {indianStates.map((st) => (
-                        <option key={st.id} value={st.name}>
-                          {st.name} ({st.zone} Zone)
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                      {/* Field 3: Home State / Origin */}
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                          <MapPin className="h-3.5 w-3.5 text-terracotta-600" />
+                          <span>Home State / Region of Origin</span>
+                        </label>
+                        <select
+                          value={userProfile.homeState}
+                          onChange={(e) => {
+                            if (setUserProfile) {
+                              setUserProfile({ ...userProfile, homeState: e.target.value });
+                            }
+                          }}
+                          className="w-full rounded-xl bg-stone-50 border border-stone-200 py-2 px-3 text-xs font-bold text-stone-900 focus:border-stone-400 focus:bg-white focus:outline-none cursor-pointer max-h-40"
+                        >
+                          {indianStates.map((st) => (
+                            <option key={st.id} value={st.name}>
+                              {st.name} ({st.zone} Zone)
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
-                  <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
-                    <span className="text-[10px] text-stone-500 font-medium">
-                      Preferences sync live across homestays & dining
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setIsProfileModalOpen(false)}
-                      className="px-3 py-1.5 rounded-lg bg-stone-900 text-white text-xs font-bold hover:bg-stone-800 cursor-pointer shadow-2xs"
-                    >
-                      Done
-                    </button>
-                  </div>
+                      <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
+                        <span className="text-[10px] text-stone-500 font-medium">
+                          Preferences sync live across homestays & dining
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setIsProfileModalOpen(false)}
+                          className="px-3 py-1.5 rounded-lg bg-stone-900 text-white text-xs font-bold hover:bg-stone-800 cursor-pointer shadow-2xs"
+                        >
+                          Done
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 2: Confirmed & Saved Trips */}
+                  {activeProfileTab === "trips" && (
+                    <div className="space-y-3">
+                      {savedTrips.length > 0 ? (
+                        <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+                          {savedTrips.map((trip, idx) => (
+                            <div
+                              key={trip.id || idx}
+                              className="p-3 rounded-2xl bg-stone-50 border border-stone-200/90 space-y-2 hover:border-terracotta-300 transition-all"
+                            >
+                              <div className="flex items-start justify-between gap-2">
+                                <div>
+                                  <h5 className="text-xs font-bold text-stone-900 line-clamp-1">
+                                    {trip.title}
+                                  </h5>
+                                  <div className="flex items-center gap-1.5 text-[10px] text-stone-500 font-medium mt-0.5">
+                                    <span>{trip.region || "Custom Region"}</span>
+                                    <span>•</span>
+                                    <span>{trip.itinerary.length} Days</span>
+                                    <span>•</span>
+                                    <span>{trip.stats.totalDistance}</span>
+                                  </div>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (onDeleteSavedTrip && trip.id) {
+                                      onDeleteSavedTrip(trip.id);
+                                    }
+                                  }}
+                                  className="text-stone-400 hover:text-rose-600 p-1 cursor-pointer transition-colors"
+                                  title="Delete saved trip"
+                                >
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                </button>
+                              </div>
+
+                              <div className="pt-1 flex items-center justify-between">
+                                <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                                  ✓ Confirmed
+                                </span>
+
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (onLoadSavedTrip) {
+                                      onLoadSavedTrip(trip);
+                                    }
+                                    setActiveTab("itinerary");
+                                    setIsProfileModalOpen(false);
+                                  }}
+                                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-[10px] font-bold transition-all cursor-pointer shadow-2xs"
+                                >
+                                  <span>View Route</span>
+                                  <ArrowRight className="h-3 w-3" />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="py-8 text-center space-y-2 bg-stone-50 rounded-2xl border border-stone-200/80 p-4">
+                          <div className="h-10 w-10 rounded-full bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center mx-auto text-lg">
+                            🗺️
+                          </div>
+                          <h5 className="text-xs font-bold text-stone-800">
+                            No Confirmed Trips Yet
+                          </h5>
+                          <p className="text-[11px] text-stone-500 max-w-xs mx-auto leading-relaxed">
+                            Generate a custom itinerary in AI Planner and click <strong>&quot;Confirm Trip&quot;</strong> to save it here for easy access!
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                 </div>
               )}
             </div>

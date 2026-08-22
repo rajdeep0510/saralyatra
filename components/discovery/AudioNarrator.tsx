@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Play, Square, Music } from "lucide-react";
 import { LanguageCode } from "@/types";
+import { translations } from "@/data/mockData";
 
 interface AudioNarratorProps {
   text: string;
@@ -13,33 +14,86 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isDroneOn, setIsDroneOn] = useState<boolean>(true);
   const [speechRate, setSpeechRate] = useState<number>(1.0);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
   const oscillatorsRef = useRef<OscillatorNode[]>([]);
   const gainNodeRef = useRef<GainNode | null>(null);
 
+  // Audio stream reference for neural TTS
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Persistent reference for Web Speech synthesis
+  const activeUtterancesRef = useRef<SpeechSynthesisUtterance[]>([]);
+  const currentSentenceIdxRef = useRef<number>(0);
+  const isPlayingRef = useRef<boolean>(false);
+
+  const t = translations[currentLang] || translations.en;
+
+  // Load available voices asynchronously
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+
+    const updateVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        setAvailableVoices(voices);
+      }
+    };
+
+    updateVoices();
+    window.speechSynthesis.onvoiceschanged = updateVoices;
+
+    return () => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.onvoiceschanged = null;
+      }
+    };
+  }, []);
+
   function stopDrone() {
     if (oscillatorsRef.current.length > 0) {
-      oscillatorsRef.current.forEach(osc => {
-        try { osc.stop(); } catch { }
+      oscillatorsRef.current.forEach((osc) => {
+        try {
+          osc.stop();
+        } catch { }
       });
       oscillatorsRef.current = [];
     }
     if (audioCtxRef.current) {
-      try { audioCtxRef.current.close(); } catch { }
+      try {
+        audioCtxRef.current.close();
+      } catch { }
       audioCtxRef.current = null;
     }
   }
 
   function stopAll() {
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      window.speechSynthesis.cancel();
+    isPlayingRef.current = false;
+    currentSentenceIdxRef.current = 0;
+    activeUtterancesRef.current = [];
+
+    // Detach listeners and stop HTML5 Audio Stream if active
+    if (currentAudioRef.current) {
+      try {
+        const audio = currentAudioRef.current;
+        audio.onended = null;
+        audio.onerror = null;
+        audio.pause();
+        audio.src = "";
+      } catch { }
+      currentAudioRef.current = null;
     }
+
+    // Stop Browser Web Speech if active
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      try {
+        window.speechSynthesis.cancel();
+      } catch { }
+    }
+
     stopDrone();
-    setIsPlaying(prev => {
-      if (prev) return false;
-      return prev;
-    });
+    setIsPlaying(false);
   }
 
   useEffect(() => {
@@ -52,7 +106,9 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
     try {
       if (typeof window === "undefined" || audioCtxRef.current) return;
 
-      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
 
       const ctx = new AudioContextClass();
@@ -68,7 +124,7 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
       filter.frequency.setValueAtTime(350, ctx.currentTime);
       filter.connect(masterGain);
 
-      const pitches = [196.00, 130.81, 130.81, 65.41];
+      const pitches = [196.0, 130.81, 130.81, 65.41];
       const types: OscillatorType[] = ["sawtooth", "triangle", "sawtooth", "triangle"];
 
       pitches.forEach((freq, idx) => {
@@ -118,47 +174,143 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
     }
   };
 
-  const startSpeech = () => {
+  // Splits paragraph into sentence chunks of max ~150 chars for neural TTS streaming
+  const chunkTextForAudio = (fullText: string): string[] => {
+    const rawSentences = fullText
+      .split(/(?<=[।.\n!?])/g)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+
+    const chunks: string[] = [];
+    let currentChunk = "";
+
+    for (const sent of rawSentences) {
+      if ((currentChunk + " " + sent).length < 160) {
+        currentChunk = currentChunk ? `${currentChunk} ${sent}` : sent;
+      } else {
+        if (currentChunk) chunks.push(currentChunk);
+        currentChunk = sent;
+      }
+    }
+    if (currentChunk) chunks.push(currentChunk);
+    return chunks.length > 0 ? chunks : [fullText];
+  };
+
+  // Primary High-Fidelity Audio Streamer (Crystal clear for Gujarati, Marathi, Bengali, Tamil, Hindi)
+  const playAudioStream = (chunks: string[], langCode: string) => {
+    if (!isPlayingRef.current || chunks.length === 0) {
+      stopAll();
+      return;
+    }
+
+    let chunkIdx = 0;
+
+    const playNextChunk = () => {
+      if (!isPlayingRef.current || chunkIdx >= chunks.length) {
+        stopAll();
+        return;
+      }
+
+      const chunk = chunks[chunkIdx];
+      const streamUrl = `/api/tts?text=${encodeURIComponent(chunk)}&lang=${encodeURIComponent(langCode)}`;
+
+      const audio = new Audio(streamUrl);
+      currentAudioRef.current = audio;
+      audio.playbackRate = speechRate;
+
+      audio.onended = () => {
+        chunkIdx++;
+        if (isPlayingRef.current) {
+          playNextChunk();
+        }
+      };
+
+      audio.onerror = () => {
+        if (!isPlayingRef.current) return;
+        console.warn("Neural audio stream failed, falling back to Web Speech synthesis");
+        playWebSpeechFallback();
+      };
+
+      audio.play().catch((err) => {
+        if (!isPlayingRef.current) return;
+        if (err && err.name === "AbortError") return;
+        playWebSpeechFallback();
+      });
+    };
+
+    playNextChunk();
+  };
+
+  // Fallback: Browser Web Speech API
+  const playWebSpeechFallback = () => {
+    if (!isPlayingRef.current) return;
+
     if (typeof window === "undefined" || !window.speechSynthesis) {
-      alert("Text-to-speech is not supported in this browser.");
+      stopAll();
       return;
     }
 
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
     const langMap: Record<LanguageCode, string> = {
       en: "en-IN",
       hi: "hi-IN",
-      gu: "gu-IN",
-      ta: "ta-IN",
       mr: "mr-IN",
-      bn: "bn-IN"
+      gu: "gu-IN",
+      bn: "bn-IN",
+      ta: "ta-IN"
     };
 
-    utterance.lang = langMap[currentLang] || "en-IN";
-    utterance.rate = speechRate;
+    const targetLangCode = langMap[currentLang] || "en-IN";
+    const voices = availableVoices.length > 0 ? availableVoices : window.speechSynthesis.getVoices();
 
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang.startsWith(utterance.lang));
-    if (voice) {
-      utterance.voice = voice;
+    const matchedVoice =
+      voices.find((v) => v.lang.toLowerCase().replace("_", "-") === targetLangCode.toLowerCase()) ||
+      voices.find((v) => v.lang.toLowerCase().startsWith(currentLang.toLowerCase())) ||
+      voices.find((v) => v.lang.toLowerCase().includes("in"));
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = targetLangCode;
+    utterance.rate = speechRate;
+    if (matchedVoice) {
+      utterance.voice = matchedVoice;
     }
 
     utterance.onend = () => {
       stopAll();
     };
-
     utterance.onerror = () => {
       stopAll();
     };
 
+    activeUtterancesRef.current = [utterance];
     window.speechSynthesis.speak(utterance);
+  };
+
+  const startSpeech = () => {
+    stopAll();
+
+    isPlayingRef.current = true;
     setIsPlaying(true);
 
     if (isDroneOn) {
       startDrone();
     }
+
+    const ttsLangMap: Record<LanguageCode, string> = {
+      en: "en",
+      hi: "hi",
+      mr: "mr",
+      gu: "gu",
+      bn: "bn",
+      ta: "ta"
+    };
+
+    const targetCode = ttsLangMap[currentLang] || "gu";
+    const textChunks = chunkTextForAudio(text);
+
+    // Play high quality neural native speech stream for selected language
+    playAudioStream(textChunks, targetCode);
   };
 
   const handleTogglePlay = () => {
@@ -190,10 +342,10 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
           </button>
           <div>
             <h5 className="text-sm font-serif font-bold text-stone-900">
-              {isPlaying ? "Narration Playing..." : "Oral History & Folklore Story"}
+              {isPlaying ? t.audioPlaying || "Narration Playing..." : t.oralHistoryFolklore || "Oral Folklore & Traditions"}
             </h5>
             <p className="text-[11px] text-stone-500 font-medium">
-              Audio Language: <span className="font-bold text-stone-700 uppercase">{currentLang}</span>
+              {t.audioLanguage || "Audio Language"}: <span className="font-bold text-stone-700 uppercase">{currentLang}</span>
             </p>
           </div>
         </div>
@@ -211,7 +363,7 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
               title="Toggle ambient tambura drone"
             >
               <Music className={`h-3.5 w-3.5 ${isDroneOn ? "animate-bounce" : ""}`} />
-              <span>{isDroneOn ? "Tambura Drone ON" : "Drone Muted"}</span>
+              <span>{isDroneOn ? t.tamburaOn || "Tambura Drone ON" : t.tamburaMuted || "Drone Muted"}</span>
             </button>
           )}
 
@@ -222,8 +374,8 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
                 key={rate}
                 onClick={() => {
                   setSpeechRate(rate);
-                  if (isPlaying) {
-                    startSpeech();
+                  if (isPlaying && currentAudioRef.current) {
+                    currentAudioRef.current.playbackRate = rate;
                   }
                 }}
                 className={`px-2 py-0.5 rounded text-xs font-medium transition-all ${
@@ -240,7 +392,7 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
       </div>
 
       {/* Folklore Reader Text */}
-      <div className="text-sm font-serif italic text-stone-700 leading-relaxed max-h-36 overflow-y-auto pr-2 border-t border-stone-200/60 pt-3">
+      <div className="text-sm font-serif italic text-stone-800 leading-relaxed max-h-36 overflow-y-auto pr-2 border-t border-stone-200/60 pt-3">
         &ldquo;{text}&rdquo;
       </div>
     </div>

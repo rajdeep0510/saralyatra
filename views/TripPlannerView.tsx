@@ -12,6 +12,7 @@ interface TripPlannerViewProps {
   activeTrip: PreloadedTrip | null;
   setActiveTrip: (trip: PreloadedTrip) => void;
   setActiveStopId: (id: string) => void;
+  filterPreferences: FilterPreferences | null;
   setFilterPreferences: (prefs: FilterPreferences) => void;
   onNavigateToItinerary: () => void;
   onLoadPresetTrip: (key: string) => void;
@@ -22,13 +23,21 @@ export default function TripPlannerView({
   activeTrip,
   setActiveTrip,
   setActiveStopId,
+  filterPreferences,
   setFilterPreferences,
   onNavigateToItinerary,
   onLoadPresetTrip
 }: TripPlannerViewProps) {
   const [wizardStep, setWizardStep] = useState<number>(1);
-  const [wizardDraft, setWizardDraft] = useState<FilterPreferences | null>(null);
+  const [wizardDraft, setWizardDraft] = useState<FilterPreferences | null>(() => filterPreferences || null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Sync draft if filterPreferences change
+  React.useEffect(() => {
+    if (filterPreferences) {
+      setWizardDraft(filterPreferences);
+    }
+  }, [filterPreferences]);
 
   const handleStepChange = (step: number, currentFormData: FilterPreferences) => {
     setWizardStep(step);
@@ -109,6 +118,7 @@ export default function TripPlannerView({
         <div className="lg:col-span-7 space-y-6">
           <PreferenceWizard
             currentLang={currentLang}
+            initialPreferences={filterPreferences}
             onGenerate={handleGenerateTrip}
             onStepChange={handleStepChange}
           />

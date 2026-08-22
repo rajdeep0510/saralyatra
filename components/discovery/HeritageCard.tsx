@@ -25,36 +25,37 @@ export default function HeritageCard({
     if (folklore[currentLang]) {
       return folklore[currentLang]!;
     }
-    return folklore.en;
+    return folklore.en || folklore.hi || "";
   };
 
-  const truncatedStory = getFolkloreText().length > 135
-    ? getFolkloreText().slice(0, 135) + "..."
-    : getFolkloreText();
+  const textToDisplay = getFolkloreText();
+  const truncatedStory = textToDisplay.length > 135
+    ? textToDisplay.slice(0, 135) + "..."
+    : textToDisplay;
 
   const getCategoryBadge = () => {
     switch (category) {
       case "nature":
         return {
-          label: "Nature & Scenic",
+          label: t.natureTheme || "Nature & Scenic",
           icon: Trees,
           color: "bg-emerald-800/90 text-emerald-100 border-emerald-500/30"
         };
       case "spiritual":
         return {
-          label: "Spiritual & Pilgrimage",
+          label: t.spiritualTheme || "Spiritual & Sacred",
           icon: Flame,
           color: "bg-amber-800/90 text-amber-100 border-amber-500/30"
         };
       case "adventure":
         return {
-          label: "Adventure & Wildlife",
+          label: t.adventureTheme || "Adventure & Wildlife",
           icon: Mountain,
           color: "bg-teal-800/90 text-teal-100 border-teal-500/30"
         };
       default:
         return {
-          label: "Heritage & Culture",
+          label: t.heritageTheme || "Heritage & History",
           icon: Landmark,
           color: "bg-stone-900/85 text-stone-100 border-stone-700/30"
         };
@@ -65,7 +66,10 @@ export default function HeritageCard({
   const CategoryIcon = badgeInfo.icon;
 
   return (
-    <div className="group relative bg-white rounded-3xl border border-stone-200/90 overflow-hidden flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_22px_40px_-10px_rgba(217,119,6,0.22),0_12px_24px_-6px_rgba(28,25,23,0.08)] hover:border-amber-400 hover:ring-4 hover:ring-amber-400/15 cursor-pointer">
+    <div 
+      onClick={() => onOpenDetails(monument)}
+      className="group relative bg-white rounded-3xl border border-stone-200/90 overflow-hidden flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_22px_40px_-10px_rgba(217,119,6,0.22),0_12px_24px_-6px_rgba(28,25,23,0.08)] hover:border-amber-400 hover:ring-4 hover:ring-amber-400/15 cursor-pointer"
+    >
       
       {/* Subtle Golden/Terracotta Accent Glow Bar on Top */}
       <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 via-terracotta-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
@@ -101,7 +105,7 @@ export default function HeritageCard({
           <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
             <span className="flex items-center gap-1 text-[10px] font-extrabold bg-amber-400 text-stone-950 px-2 py-0.5 rounded-full shadow-md">
               <Sparkles className="h-3 w-3 fill-current" />
-              <span>Explore</span>
+              <span>{t.viewDetails || "Explore"}</span>
             </span>
           </div>
 
@@ -132,7 +136,7 @@ export default function HeritageCard({
           {/* Language translation availability chips */}
           <div className="flex items-center gap-2 pt-1">
             <span className="text-[10px] font-semibold text-stone-400 uppercase tracking-wider">
-              Languages:
+              {t.languages || "Languages"}:
             </span>
             <div className="flex flex-wrap gap-1">
               {languagesAvailable.map((lang) => (
@@ -156,7 +160,10 @@ export default function HeritageCard({
       {/* Action Footer Buttons */}
       <div className="px-5 pb-5 pt-2 flex items-center gap-2 border-t border-stone-100 mt-1">
         <button
-          onClick={() => onOpenDetails(monument)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenDetails(monument);
+          }}
           className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-stone-900 group-hover:bg-terracotta-600 text-white text-xs font-bold transition-all shadow-sm group-hover:shadow-md cursor-pointer"
         >
           <Headphones className="h-3.5 w-3.5 text-sand-300 group-hover:text-amber-200 transition-colors" />
@@ -164,7 +171,10 @@ export default function HeritageCard({
         </button>
 
         <button
-          onClick={() => onOpen360(monument)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpen360(monument);
+          }}
           className="flex items-center justify-center gap-1.5 py-2.5 px-3.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold transition-all border border-stone-200/80 cursor-pointer"
           title="360° Virtual Preview"
         >
