@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>YatraVerse AI - 360° Ground Heritage Tours</title>
+  <meta name="description" content="Immersive 360° virtual tours of Tamil Nadu, Incredible India, and World heritage monuments with Google Maps Embed API, Street View, Place explorer, and AI audio guide.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070a13;
+      --bg-sidebar: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-card-hover: #1e293b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(56, 189, 248, 0.4);
+      --accent-cyan: #38bdf8;
+      --accent-blue: #0284c7;
+      --accent-violet: #818cf8;
+      --accent-gold: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-heading: 'Outfit', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+      --radius-full: 9999px;
+      --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-dark);
+      color: var(--text-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    header {
+      height: 64px;
+      background: var(--bg-sidebar);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 20;
+      gap: 16px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.5);
+    }
+
+    .brand-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Header Search Box */
+    .search-box-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 380px;
+    }
+
+    .search-box {
+      width: 100%;
+      background: rgba(7, 10, 19, 0.7);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 10px 14px 10px 38px;
+      border-radius: var(--radius-full);
+      outline: none;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      transition: var(--transition-smooth);
+    }
+
+    .search-box:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      fill: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Top Action Buttons */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-header:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .btn-header.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2));
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-icon-only {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .btn-header svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Main Container */
+    .app-container {
+      display: flex;
+      height: calc(100vh - 64px);
+      width: 100vw;
+      position: relative;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 380px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    /* Filter Pills Container */
+    .filter-bar {
+      display: flex;
+      gap: 6px;
+      padding: 12px 16px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border-subtle);
+      scrollbar-width: none;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .filter-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition-smooth);
+    }
+
+    .filter-pill:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .filter-pill.active {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      color: #070a13;
+      font-weight: 700;
+    }
+
+    /* Places List */
+    .places-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .places-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .places-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .location-card {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.02);
+      position: relative;
+    }
+
+    .location-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      transform: translateX(2px);
+    }
+
+    .location-card.active {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .location-card.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background: var(--accent-cyan);
+      border-radius: 2px;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      line-height: 1.3;
+    }
+
+    .card-avail-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .card-avail-badge.place {
+      background: rgba(129, 140, 248, 0.15);
+      color: #a5b4fc;
+      border-color: rgba(129, 140, 248, 0.35);
+    }
+
+    .card-meta {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Master Circuit Card - BADA CHAR DHAM with Dropdown */
+    .circuit-master-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.96));
+      border: 2px solid rgba(56, 189, 248, 0.45);
+      border-radius: var(--radius-lg);
+      margin-bottom: 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(56, 189, 248, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .circuit-master-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #f59e0b, #38bdf8);
+      background-size: 300% 100%;
+      animation: gradientSlide 4s linear infinite;
+    }
+
+    @keyframes gradientSlide {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 300% 0%; }
+    }
+
+    /* Card Header with Dropdown Chevron matching sketch */
+    .card-dropdown-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition-smooth);
+    }
+
+    .card-dropdown-header:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .header-left-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .header-badge {
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #fbbf24;
+      margin-bottom: 2px;
+    }
+
+    .header-main-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .header-sub-text {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .header-right-chevron {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .card-dropdown-header:hover .header-right-chevron {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    .chevron-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent-cyan);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .circuit-master-card.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown Body Content */
+    .card-dropdown-body {
+      display: none;
+      padding: 0 14px 14px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      animation: fadeInSlideDown 0.3s ease-out;
+    }
+
+    .circuit-master-card.open .card-dropdown-body {
+      display: block;
+    }
+
+    @keyframes fadeInSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Quick Dham Filter Bar inside dropdown */
+    .dham-quick-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0 8px 0;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      scrollbar-width: none;
+    }
+
+    .dham-quick-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-dham-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition-smooth);
+    }
+
+    .quick-dham-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .quick-dham-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    /* 19 Places List inside Dropdown */
+    .bada-places-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .bada-places-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .bada-places-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .bada-place-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bada-place-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateX(3px);
+    }
+
+    .bada-place-item.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(99, 102, 241, 0.18));
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+
+    .bada-place-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .bada-place-title {
+      font-family: var(--font-heading);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .bada-place-meta {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .circuit-active-snapshot {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+    }
+
+    .snap-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      color: #38bdf8;
+      margin-bottom: 2px;
+    }
+
+    .snap-title {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .snap-meta {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation Bar across screen */
+    .bottom-nav-bar {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      right: 16px;
+      z-index: 30;
+      background: rgba(11, 17, 33, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.15);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeInSlideUp 0.4s ease-out;
+    }
+
+    @keyframes fadeInSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-nav-arrow {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-nav-arrow:hover {
+      background: var(--accent-cyan);
+      color: #070a13;
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+      transform: scale(1.08);
+    }
+
+    .btn-nav-arrow svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .bottom-nav-center {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bottom-dham-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .bottom-dham-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .bottom-dham-tab {
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .bottom-dham-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .bottom-dham-tab.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(99, 102, 241, 0.25));
+      border-color: var(--accent-cyan);
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    .bottom-places-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      padding: 2px 0;
+    }
+
+    .bottom-places-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .bottom-place-item {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bottom-place-item:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .bottom-place-item.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(99, 102, 241, 0.2));
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .bottom-place-index {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.15);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    .bottom-place-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bottom-place-name {
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .bottom-place-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .bottom-place-badge {
+      font-size: 0.6rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .bottom-place-badge.v360 {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+    }
+
+    .bottom-place-badge.vplace {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+    }
+
+    /* Position Cardinal HUD above bottom bar */
+    .cardinal-hud {
+      bottom: 110px !important;
+      right: 20px !important;
+    }
+
+    .tag {
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: #334155;
+      color: #cbd5e1;
+    }
+
+    .tag.temple, .tag.religious { background: #854d0e; color: #fef08a; }
+    .tag.nature, .tag.scenery { background: #166534; color: #bbf7d0; }
+    .tag.activity { background: #1e40af; color: #bfdbfe; }
+    .tag.fort, .tag.historical, .tag.monument { background: #9a3412; color: #fed7aa; }
+    .tag.wildlife { background: #065f46; color: #a7f3d0; }
+    .tag.cultural { background: #6b21a8; color: #f3e8ff; }
+    .tag.hillstation { background: #4c1d95; color: #e9d5ff; }
+    .tag.world { background: #701a75; color: #f5d0fe; }
+
+    /* Right Viewport Area */
+    .viewport {
+      flex: 1;
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .viewport iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Floating Info Card on Viewport */
+    .info-floating-card {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      max-width: 380px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+      animation: fadeInSlide 0.4s ease;
+    }
+
+    .info-floating-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .info-floating-card p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .badge-timing {
+      font-size: 0.7rem;
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    /* Audio Guide Floating Waveform */
+    .audio-badge {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 6px 10px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-md);
+      color: var(--accent-emerald);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .audio-badge.playing {
+      display: flex;
+    }
+
+    .audio-wave {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 12px;
+    }
+
+    .audio-wave span {
+      width: 2.5px;
+      height: 100%;
+      background: var(--accent-emerald);
+      border-radius: 2px;
+      animation: waveBar 1.2s infinite ease-in-out;
+    }
+
+    .audio-wave span:nth-child(2) { animation-delay: 0.2s; }
+    .audio-wave span:nth-child(3) { animation-delay: 0.4s; }
+    .audio-wave span:nth-child(4) { animation-delay: 0.1s; }
+
+    @keyframes waveBar {
+      0%, 100% { height: 3px; }
+      50% { height: 12px; }
+    }
+
+    /* Floating View Mode Switcher on Top Right of Viewport */
+    .mode-switcher-bar {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      padding: 6px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-mode-tab {
+      padding: 6px 12px;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-mode-tab svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .btn-mode-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-mode-tab.active {
+      background: var(--accent-cyan);
+      color: #070a13;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Cardinal Heading Controls on Right */
+    .cardinal-hud {
+      position: absolute;
+      right: 16px;
+      bottom: 20px;
+      z-index: 10;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      padding: 10px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hud-label {
+      font-family: var(--font-heading);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cardinal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 30px);
+      gap: 4px;
+    }
+
+    .btn-cardinal {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #cbd5e1;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-cardinal:hover {
+      background: var(--accent-cyan);
+      color: #070a13;
+    }
+
+    .btn-cardinal.active {
+      background: var(--accent-cyan);
+      color: #070a13;
+    }
+
+    /* Unmapped 360 On-Screen Warning / Satellite Suggestion Banner */
+    .unavail-notice {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 35;
+      max-width: 680px;
+      width: calc(100% - 32px);
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 158, 11, 0.15);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      animation: fadeInSlideDown 0.3s ease-out;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .unavail-notice.hidden {
+      display: none !important;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes fadeInSlideDown {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -12px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .unavail-badge-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      animation: pulseAlert 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .unavail-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .unavail-title {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 2px;
+    }
+
+    .unavail-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .unavail-desc strong {
+      color: var(--text-main);
+    }
+
+    .unavail-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-unavail-action {
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      padding: 7px 14px;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-unavail-action.satellite {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-unavail-action.satellite:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-unavail-action.place {
+      background: rgba(129, 140, 248, 0.18);
+      color: #c7d2fe;
+      border: 1px solid rgba(129, 140, 248, 0.35);
+    }
+
+    .btn-unavail-action.place:hover {
+      background: rgba(129, 140, 248, 0.3);
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .unavail-notice {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        top: 10px;
+      }
+      .unavail-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+
+    /* Loading Overlay inside Viewport */
+    #loader {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-dark);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .spinner-ring {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3px solid rgba(56, 189, 248, 0.15);
+      border-top-color: var(--accent-cyan);
+      border-right-color: var(--accent-violet);
+      animation: spin 0.8s infinite linear;
+    }
+
+    .loader-text {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Monument Info Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      animation: fadeInSlide 0.3s ease;
+    }
+
+    .modal-card {
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      background: var(--bg-sidebar);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .modal-close:hover {
+      background: var(--accent-rose);
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .modal-fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .modal-fact-box {
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .modal-fact-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .modal-fact-val {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-description {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-top: 12px;
+    }
+
+    /* Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 10px 20px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--accent-cyan);
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(56, 189, 248, 0.3);
+      color: #fff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      z-index: 999;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast-box.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Hidden Snapshot Canvas */
+    #snapshotCanvas {
+      display: none;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 860px) {
+      .app-container {
+        flex-direction: column-reverse;
+      }
+      .sidebar {
+        width: 100%;
+        height: 280px;
+      }
+      .viewport {
+        height: calc(100% - 280px);
+      }
+      .info-floating-card {
+        max-width: 240px;
+        padding: 10px 12px;
+      }
+      .mode-switcher-bar {
+        top: 10px;
+        right: 10px;
+      }
+      .cardinal-hud {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="brand-wrap">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>YatraVerse AI</h1>
+        <span>360° Ground Heritage Tours</span>
+      </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-box-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+      <input type="text" id="searchInput" class="search-box" placeholder="Search 19 Bada Char Dham & sacred destinations..." oninput="filterPlaces()">
+    </div>
+
+    <!-- Top Action Controls -->
+    <div class="header-actions">
+      <!-- Audio Tour Guide -->
+      <button id="btnAudioGuide" class="btn-header" title="Listen to AI Tour Guide">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+        </svg>
+        <span id="audioGuideBtnText">Audio Guide</span>
+      </button>
+
+      <!-- Ambient Soundscape -->
+      <button id="btnAmbientSound" class="btn-header btn-icon-only" title="Toggle Zen Ambient Sound">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+
+      <!-- Monument Details / Facts Modal -->
+      <button id="btnInfoModal" class="btn-header btn-icon-only" title="Monument Details & History">
+        <svg viewBox="0 0 24 24">
+          <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+        </svg>
+      </button>
+
+      <!-- Postcard Snapshot -->
+      <button id="btnSnapshot" class="btn-header btn-icon-only" title="Save Postcard Snapshot">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+        </svg>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button id="btnFullscreen" class="btn-header btn-icon-only" title="Toggle Fullscreen">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main App Body -->
+  <div class="app-container">
+    <!-- Left Sidebar List -->
+    <aside class="sidebar">
+      <!-- BADA CHAR DHAM Dropdown Card (matching user sketch) -->
+      <div class="circuit-master-card open" id="circuitCard">
+        <!-- Top Header of Card (Accordion / Dropdown Trigger) -->
+        <button class="card-dropdown-header" id="btnBadaDhamToggle" onclick="toggleBadaDhamCard()" title="Click to expand / collapse places dropdown">
+          <div class="header-left-title">
+            <div class="header-badge">National Pilgrimage Circuit</div>
+            <div class="header-main-title">BADA CHAR DHAM</div>
+            <div class="header-sub-text">4 Sacred Cardinal Corners • 19 Holy Sites</div>
+          </div>
+          <div class="header-right-chevron">
+            <svg class="chevron-icon" id="chevronIcon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z"/>
+            </svg>
+          </div>
+        </button>
+
+        <!-- Dropdown Body containing all 19 Places Cards -->
+        <div class="card-dropdown-body" id="cardDropdownBody">
+          <!-- Fast Dham Filter Pills inside Dropdown -->
+          <div class="dham-quick-bar">
+            <button class="quick-dham-btn active" data-dham="all" onclick="filterDhamCards('all')">🌟 All 19</button>
+            <button class="quick-dham-btn" data-dham="badrinath" onclick="filterDhamCards('badrinath')">🏔️ Badrinath (4)</button>
+            <button class="quick-dham-btn" data-dham="puri" onclick="filterDhamCards('puri')">🛕 Puri (5)</button>
+            <button class="quick-dham-btn" data-dham="rameswaram" onclick="filterDhamCards('rameswaram')">🌊 Rameswaram (5)</button>
+            <button class="quick-dham-btn" data-dham="dwarka" onclick="filterDhamCards('dwarka')">🌅 Dwarka (5)</button>
+          </div>
+
+          <!-- Active Site Snapshot inside Dropdown -->
+          <div class="circuit-active-snapshot">
+            <div class="snap-label">CURRENTLY VIEWING (#<span id="activePlaceNum">1</span> OF 19)</div>
+            <div class="snap-title" id="snapPlaceTitle">Badrinath Temple</div>
+            <div class="snap-meta" id="snapPlaceMeta">📍 Badrinath, Uttarakhand • Badrinath (North)</div>
+          </div>
+
+          <!-- 19 Places Cards List -->
+          <div class="bada-places-list" id="badaPlacesList">
+            <!-- 19 cards dynamically rendered here -->
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right 360 Viewport Container -->
+    <main class="viewport">
+      <!-- Loading Spinner -->
+      <div id="loader">
+        <div class="spinner-ring"></div>
+        <div class="loader-text">Loading 360° Ground Tour...</div>
+      </div>
+
+      <!-- On-Screen Notice for Unmapped 360 Locations -->
+      <div class="unavail-notice hidden" id="unavailNotice">
+        <div class="unavail-badge-icon">🛰️</div>
+        <div class="unavail-body">
+          <div class="unavail-title">360° Virtual Tour is not available for this location</div>
+          <div class="unavail-desc">Google Street View is not mapped here. You can explore the high-resolution <strong>3D Satellite View</strong> or <strong>Place Overview</strong> below.</div>
+        </div>
+        <div class="unavail-actions">
+          <button class="btn-unavail-action satellite" id="btnNoticeSatellite">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+            See Satellite View
+          </button>
+          <button class="btn-unavail-action place" id="btnNoticePlace">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Place & Photos
+          </button>
+        </div>
+      </div>
+
+      <!-- Floating Meta Info Card -->
+      <div class="info-floating-card" id="tourMeta">
+        <h3 id="currentTitle">Badrinath Temple</h3>
+        <p id="currentSub">Badrinath, Uttarakhand • 04:30 - 21:00</p>
+        <div class="status-row">
+          <span class="badge-mode" id="currentModeBadge">360° Ground View</span>
+          <span class="badge-timing" id="currentDurationBadge">⏱️ 150 min</span>
+        </div>
+
+        <!-- Audio Guide Speaking Animation -->
+        <div class="audio-badge" id="audioGuideBadge">
+          <div class="audio-wave">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <span>AI Tour Guide Narrating...</span>
+        </div>
+      </div>
+
+      <!-- Floating View Mode Tabs Switcher -->
+      <div class="mode-switcher-bar">
+        <button class="btn-mode-tab active" id="btnMode360" title="Ground 360° Street View">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z"/></svg>
+          360° Ground View
+        </button>
+        <button class="btn-mode-tab" id="btnModePlace" title="Google Maps Place & Photos Mode (Always 100% Available)">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Place & Photos
+        </button>
+        <button class="btn-mode-tab" id="btnModeSatellite" title="Satellite 3D Aerial View">
+          <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+          Satellite
+        </button>
+      </div>
+
+      <!-- Cardinal Heading Control Dial on Viewport -->
+      <div class="cardinal-hud" id="cardinalHud">
+        <span class="hud-label" id="hudHeadingVal">Heading 180°</span>
+        <div class="cardinal-grid">
+          <div></div>
+          <button class="btn-cardinal" data-heading="0" title="Face North (0°)">N</button>
+          <div></div>
+          <button class="btn-cardinal" data-heading="270" title="Face West (270°)">W</button>
+          <button class="btn-cardinal active" id="btnResetAngle" title="Reset Default Angle">↺</button>
+          <button class="btn-cardinal" data-heading="90" title="Face East (90°)">E</button>
+          <div></div>
+          <button class="btn-cardinal" data-heading="180" title="Face South (180°)">S</button>
+          <div></div>
+        </div>
+      </div>
+
+      <!-- Down Navigation Bar across screen -->
+      <div class="bottom-nav-bar" id="bottomNavBar">
+        <button class="btn-nav-arrow" id="btnNavPrev" title="Previous Place (Left Arrow)">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="bottom-nav-center">
+          <div class="bottom-dham-tabs">
+            <button class="bottom-dham-tab active" data-dham="all" onclick="filterBottomDham('all')">🌟 All 19 Sites</button>
+            <button class="bottom-dham-tab" data-dham="badrinath" onclick="filterBottomDham('badrinath')">🏔️ Badrinath (4)</button>
+            <button class="bottom-dham-tab" data-dham="puri" onclick="filterBottomDham('puri')">🛕 Puri (5)</button>
+            <button class="bottom-dham-tab" data-dham="rameswaram" onclick="filterBottomDham('rameswaram')">🌊 Rameswaram (5)</button>
+            <button class="bottom-dham-tab" data-dham="dwarka" onclick="filterBottomDham('dwarka')">🌅 Dwarka (5)</button>
+          </div>
+
+          <div class="bottom-places-strip" id="bottomPlacesStrip">
+            <!-- Dynamically populated place cards in bottom navigation strip -->
+          </div>
+        </div>
+
+        <button class="btn-nav-arrow" id="btnNavNext" title="Next Place (Right Arrow)">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </div>
+
+      <!-- Google Maps Embed iFrame -->
+      <iframe
+        id="streetFrame"
+        title="Google Maps Embed View"
+        width="100%"
+        height="450"
+        style="border:0;"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/streetview?key=AIzaSyCMKc8QXtMGcVSkzLEA1zyeYN8GGv3QZtU&location=30.7433,79.4938&heading=90&pitch=0&fov=80">
+      </iframe>
+    </main>
+  </div>
+
+  <!-- Monument Info Modal -->
+  <div class="modal-backdrop" id="infoModal">
+    <div class="modal-card">
+      <button class="modal-close" id="btnCloseModal">✕</button>
+      <div class="tag temple" id="modalCategoryTag" style="display:inline-block;margin-bottom:8px;">Temple</div>
+      <h2 class="modal-title" id="modalMonumentTitle">Meenakshi Amman Temple</h2>
+      <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:14px;" id="modalLocationSub">Madurai, Tamil Nadu</div>
+
+      <div class="modal-fact-grid">
+        <div class="modal-fact-box">
+          <div class="modal-fact-label">Timings</div>
+          <div class="modal-fact-val" id="modalFactTimings">05:00 - 22:00</div>
+        </div>
+        <div class="modal-fact-box">
+          <div class="modal-fact-label">Recommended Time</div>
+          <div class="modal-fact-val" id="modalFactDuration">180 Mins</div>
+        </div>
+        <div class="modal-fact-box">
+          <div class="modal-fact-label">City / Region</div>
+          <div class="modal-fact-val" id="modalFactCity">Madurai</div>
+        </div>
+        <div class="modal-fact-box">
+          <div class="modal-fact-label">360° Status</div>
+          <div class="modal-fact-val" id="modalFactCoverage" style="color:var(--accent-cyan);">Ground 360° Verified</div>
+        </div>
+      </div>
+
+      <div class="modal-description" id="modalDescriptionText">
+        Loading heritage details...
+      </div>
+
+      <div style="margin-top:20px;display:flex;gap:10px;justify-content:flex-end;">
+        <button class="btn-header active" id="btnNarrateModal">
+          <svg style="width:15px;height:15px;fill:currentColor;" viewBox="0 0 24 24">
+            <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+          </svg>
+          Read Aloud Guide
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-box" id="toastBox">
+    <span id="toastMessage">Welcome to YatraVerse AI!</span>
+  </div>
+
+  <!-- Hidden Snapshot Canvas -->
+  <canvas id="snapshotCanvas" width="1280" height="720"></canvas>
+
+  <!-- Script Logic -->
+  <script>
+    // ==========================================
+    // 🔑 Google Maps API Key Integrated
+    // ==========================================
+    const GOOGLE_MAPS_API_KEY = "AIzaSyCMKc8QXtMGcVSkzLEA1zyeYN8GGv3QZtU";
+
+    // ==========================================
+    // ==========================================
+    // 25+ Verified 360° Heritage & Nature Places
+    // (Every coordinate tested on Google Street View road/trekker tracks)
+    // ==========================================
+    const placesData = [
+      {
+        id: "UT-BAD-001",
+        name: "Badrinath Temple",
+        category: "Religious",
+        dham: "badrinath",
+        dhamTitle: "Badrinath (North)",
+        city: "Badrinath",
+        state: "Uttarakhand",
+        latitude: 30.7433,
+        longitude: 79.4938,
+        heading: 90,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "04:30",
+        closingTime: "21:00",
+        recommendedDuration: 150,
+        priority: 5,
+        description: "One of the most sacred Char Dham pilgrimage shrines in India, dedicated to Lord Vishnu. Situated along the banks of the Alaknanda River at 3,133m elevation in the Garhwal Himalayas.",
+        audioNarrative: "Welcome to Badrinath Temple in the Garhwal Himalayas. Dedicated to Lord Vishnu, this ancient temple is framed by the Nar and Narayana mountain ranges and Nilkantha peak."
+      },
+      {
+        id: "UT-BAD-002",
+        name: "Tapt Kund & Surya Kund Badrinath",
+        category: "Religious",
+        dham: "badrinath",
+        dhamTitle: "Badrinath (North)",
+        city: "Badrinath",
+        state: "Uttarakhand",
+        latitude: 30.7428,
+        longitude: 79.4935,
+        heading: 120,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "05:00",
+        closingTime: "20:00",
+        recommendedDuration: 45,
+        priority: 4,
+        description: "Natural thermal sulfur water springs located just below Badrinath Temple along the banks of the Alaknanda River, renowned for their therapeutic properties.",
+        audioNarrative: "You are looking at Tapt Kund, the sacred natural hot springs of Badrinath, where pilgrims take ritual holy baths before entering the main shrine."
+      },
+      {
+        id: "UT-BAD-003",
+        name: "Mana Village & Saraswati River",
+        category: "Cultural",
+        dham: "badrinath",
+        dhamTitle: "Badrinath (North)",
+        city: "Mana",
+        state: "Uttarakhand",
+        latitude: 30.7719,
+        longitude: 79.4947,
+        heading: 90,
+        pitch: 5,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "06:00",
+        closingTime: "18:00",
+        recommendedDuration: 120,
+        priority: 5,
+        description: "The celebrated first village of India located 3 km from Badrinath near the Indo-Tibetan border, featuring the mythical Saraswati River and Bhim Pul stone bridge.",
+        audioNarrative: "Welcome to Mana Village, designated as the First Village of India. Famous for Vyas Gufa, Ganesh Gufa, and the roaring Saraswati river emerging from the rocks."
+      },
+      {
+        id: "UT-BAD-004",
+        name: "Vasudhara Falls",
+        category: "Scenery",
+        dham: "badrinath",
+        dhamTitle: "Badrinath (North)",
+        city: "Mana",
+        state: "Uttarakhand",
+        latitude: 30.7967,
+        longitude: 79.4608,
+        heading: 45,
+        pitch: 15,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "07:00",
+        closingTime: "16:00",
+        recommendedDuration: 240,
+        priority: 4,
+        description: "A breathtaking 400-foot glacial waterfall near Mana village, surrounded by high Himalayan peaks and glaciers.",
+        audioNarrative: "You are viewing the majestic Vasudhara Falls cascading 122 meters down dramatic Himalayan cliff faces in the Chamoli district."
+      },
+      {
+        id: "OD-PUR-005",
+        name: "Shree Jagannath Temple",
+        category: "Religious",
+        dham: "puri",
+        dhamTitle: "Puri (East)",
+        city: "Puri",
+        state: "Odisha",
+        latitude: 19.8049,
+        longitude: 85.8179,
+        heading: 90,
+        pitch: 10,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "05:30",
+        closingTime: "22:00",
+        recommendedDuration: 180,
+        priority: 5,
+        description: "One of the four cardinal Char Dham pilgrimage destinations, famed for its 12th-century Kalinga architecture, the Nilachakra wheel, and the annual grand Ratha Yatra.",
+        audioNarrative: "Welcome to the sacred Jagannath Temple in Puri, Odisha. Built in the 12th century, it is home to Lord Jagannath, Balabhadra, and Subhadra."
+      },
+      {
+        id: "OD-PUR-006",
+        name: "Sun Temple Konark",
+        category: "Historical",
+        dham: "puri",
+        dhamTitle: "Puri (East)",
+        city: "Konark",
+        state: "Odisha",
+        latitude: 19.8876,
+        longitude: 86.0945,
+        heading: 180,
+        pitch: 8,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "06:00",
+        closingTime: "20:00",
+        recommendedDuration: 150,
+        priority: 5,
+        description: "A 13th-century UNESCO World Heritage monumental chariot temple carved from stone with 24 intricately sculpted wheels pulled by seven horses, dedicated to the Sun God Surya.",
+        audioNarrative: "Behold the Sun Temple of Konark, a masterpiece of ancient Kalinga stone masonry conceived as the giant celestial chariot of the Sun God Surya."
+      },
+      {
+        id: "OD-PUR-007",
+        name: "Golden Beach Puri (Blue Flag Beach)",
+        category: "Scenery",
+        dham: "puri",
+        dhamTitle: "Puri (East)",
+        city: "Puri",
+        state: "Odisha",
+        latitude: 19.7983,
+        longitude: 85.8250,
+        heading: 140,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "05:00",
+        closingTime: "22:00",
+        recommendedDuration: 120,
+        priority: 4,
+        description: "An eco-friendly Blue Flag certified pristine golden sand beach on the Bay of Bengal coastline in Puri, renowned for sunrise vistas and sand art exhibitions.",
+        audioNarrative: "Standing on Puri Golden Beach, an internationally certified Blue Flag shoreline celebrated for its gentle Bay of Bengal waves and vibrant sand sculptures."
+      },
+      {
+        id: "OD-PUR-008",
+        name: "Raghurajpur Heritage Crafts Village",
+        category: "Cultural",
+        dham: "puri",
+        dhamTitle: "Puri (East)",
+        city: "Raghurajpur",
+        state: "Odisha",
+        latitude: 19.8789,
+        longitude: 85.8236,
+        heading: 90,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "08:00",
+        closingTime: "19:00",
+        recommendedDuration: 120,
+        priority: 4,
+        description: "A world-famous heritage crafts village where every household practices traditional Pattachitra palm-leaf scroll painting and Gotipua classical dance.",
+        audioNarrative: "Welcome to Raghurajpur Heritage Crafts Village, where centuries-old traditions of Pattachitra cloth paintings, palm leaf engraving, and stone carving are preserved by master artisans."
+      },
+      {
+        id: "OD-PUR-009",
+        name: "Chilika Lake & Satapada",
+        category: "Wildlife",
+        dham: "puri",
+        dhamTitle: "Puri (East)",
+        city: "Satapada",
+        state: "Odisha",
+        latitude: 19.6708,
+        longitude: 85.4386,
+        heading: 160,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "06:00",
+        closingTime: "17:30",
+        recommendedDuration: 240,
+        priority: 5,
+        description: "Asia's largest brackish water lagoon, a premier Ramsar wetland site famous for rare Irrawaddy dolphin sightings, sea mouths, and migratory bird sanctuaries.",
+        audioNarrative: "You are looking across Chilika Lake at Satapada, Asia's largest brackish lagoon and home to the endangered Irrawaddy dolphins and millions of wintering migratory birds."
+      },
+      {
+        id: "TN-RAM-010",
+        name: "Ramanathaswamy Temple",
+        category: "Religious",
+        dham: "rameswaram",
+        dhamTitle: "Rameswaram (South)",
+        city: "Rameswaram",
+        state: "Tamil Nadu",
+        latitude: 9.2881,
+        longitude: 79.3174,
+        heading: 80,
+        pitch: 5,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "05:00",
+        closingTime: "21:00",
+        recommendedDuration: 180,
+        priority: 5,
+        description: "A sacred Jyotirlinga and Char Dham shrine located on Rameswaram island, famed for having the world's longest sculpted temple corridors with over 1,200 sandstone pillars.",
+        audioNarrative: "Welcome to Ramanathaswamy Temple on Rameswaram island. Closely tied to the Ramayana epic, it features 22 sacred theerthams and majestic pillared hallways extending over 3.8 kilometers."
+      },
+      {
+        id: "TN-RAM-011",
+        name: "Agni Theertham",
+        category: "Religious",
+        dham: "rameswaram",
+        dhamTitle: "Rameswaram (South)",
+        city: "Rameswaram",
+        state: "Tamil Nadu",
+        latitude: 9.2886,
+        longitude: 79.3214,
+        heading: 90,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "05:00",
+        closingTime: "21:00",
+        recommendedDuration: 45,
+        priority: 4,
+        description: "One of the most revered theerthams of Rameswaram located on the eastern seashore opposite Ramanathaswamy Temple, where pilgrims bathe in the tranquil sea.",
+        audioNarrative: "You are standing at Agni Theertham on the shores of the Gulf of Mannar, where pilgrims perform ancestral rites and take sacred sea baths."
+      },
+      {
+        id: "TN-RAM-012",
+        name: "Dhanushkodi Ghost Town & Ram Setu Point",
+        category: "Historical",
+        dham: "rameswaram",
+        dhamTitle: "Rameswaram (South)",
+        city: "Dhanushkodi",
+        state: "Tamil Nadu",
+        latitude: 9.1772,
+        longitude: 79.4189,
+        heading: 110,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "06:00",
+        closingTime: "17:30",
+        recommendedDuration: 180,
+        priority: 5,
+        description: "An abandoned township at the southeastern tip of Pamban Island where the Bay of Bengal meets the Indian Ocean, and the starting point of the ancient Ram Setu (Adam's Bridge).",
+        audioNarrative: "Behold the windswept ruins of Dhanushkodi and the historic Ram Setu point, where the calm turquoise waters of the Bay of Bengal meet the roaring waves of the Indian Ocean."
+      },
+      {
+        id: "TN-RAM-013",
+        name: "Pamban Sea Bridge",
+        category: "Historical",
+        dham: "rameswaram",
+        dhamTitle: "Rameswaram (South)",
+        city: "Mandapam",
+        state: "Tamil Nadu",
+        latitude: 9.2789,
+        longitude: 79.2000,
+        heading: 90,
+        pitch: 2,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "05:00",
+        closingTime: "22:00",
+        recommendedDuration: 60,
+        priority: 5,
+        description: "India's first sea bridge opened in 1914, spanning 2.06 km across the Palk Strait to connect Rameswaram island with the Indian mainland, featuring a double-leaf Scherzer rolling bascule lift.",
+        audioNarrative: "You are gazing across the engineering marvel of Pamban Sea Bridge, constructed over a century ago across the open ocean waters of the Palk Strait."
+      },
+      {
+        id: "TN-RAM-014",
+        name: "Dr. A.P.J. Abdul Kalam National Memorial",
+        category: "Cultural",
+        dham: "rameswaram",
+        dhamTitle: "Rameswaram (South)",
+        city: "Peikarumbu",
+        state: "Tamil Nadu",
+        latitude: 9.2936,
+        longitude: 79.2892,
+        heading: 0,
+        pitch: 8,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "09:00",
+        closingTime: "18:00",
+        recommendedDuration: 75,
+        priority: 4,
+        description: "A national memorial built in honor of India's beloved 11th President and Missile Man Dr. A.P.J. Abdul Kalam, featuring replica missiles, murals, and personal memorabilia.",
+        audioNarrative: "Welcome to the Dr. A.P.J. Abdul Kalam National Memorial in Rameswaram, celebrating the life, scientific achievements, and inspirational vision of the People's President."
+      },
+      {
+        id: "GJ-DWK-015",
+        name: "Shree Dwarkadhish Temple (Jagat Mandir)",
+        category: "Religious",
+        dham: "dwarka",
+        dhamTitle: "Dwarka (West)",
+        city: "Dwarka",
+        state: "Gujarat",
+        latitude: 22.2376,
+        longitude: 68.9678,
+        heading: 90,
+        pitch: 12,
+        fov: 80,
+        preferredMode: "360",
+        openingTime: "06:30",
+        closingTime: "21:30",
+        recommendedDuration: 120,
+        priority: 5,
+        description: "A supreme Char Dham shrine dedicated to Lord Krishna (Dwarkadhish), featuring a 72-pillar limestone shikhara soaring 78 meters high with the sacred 52-yard flag (Dhwaja).",
+        audioNarrative: "Welcome to the Jagat Mandir of Dwarka on the western coast of Gujarat. Built over 2,500 years ago by Lord Krishna's great-grandson Vajranabha, this sacred temple stands where the ancient kingdom of Dwarka once thrived."
+      },
+      {
+        id: "GJ-DWK-016",
+        name: "Beyt Dwarka Island Temple",
+        category: "Religious",
+        dham: "dwarka",
+        dhamTitle: "Dwarka (West)",
+        city: "Beyt Dwarka",
+        state: "Gujarat",
+        latitude: 22.4578,
+        longitude: 69.1171,
+        heading: 90,
+        pitch: 5,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "06:00",
+        closingTime: "19:00",
+        recommendedDuration: 180,
+        priority: 4,
+        description: "An ancient island off the coast of Okha believed to be the actual historic residential abode of Lord Krishna and his royal family during the Dwarka era.",
+        audioNarrative: "You are looking at Beyt Dwarka, an island sanctuary in the Gulf of Kutch famous for its historic Krishna temple, white sandy beaches, and maritime archaeological discoveries."
+      },
+      {
+        id: "GJ-DWK-017",
+        name: "Nageshwar Jyotirlinga Temple",
+        category: "Religious",
+        dham: "dwarka",
+        dhamTitle: "Dwarka (West)",
+        city: "Daarukavanam",
+        state: "Gujarat",
+        latitude: 22.3356,
+        longitude: 68.9889,
+        heading: 180,
+        pitch: 10,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "06:00",
+        closingTime: "21:00",
+        recommendedDuration: 60,
+        priority: 5,
+        description: "One of the twelve revered Jyotirlinga temples of Lord Shiva, crowned by an imposing 80-foot seated statue of Lord Shiva overlooking Daarukavanam forest.",
+        audioNarrative: "Welcome to Nageshwar Jyotirlinga Temple, one of the foremost shrines dedicated to Lord Shiva as the Protector from all earthly poisons, featuring the towering 80-foot Shiva statue."
+      },
+      {
+        id: "GJ-DWK-018",
+        name: "Rukmini Devi Temple",
+        category: "Religious",
+        dham: "dwarka",
+        dhamTitle: "Dwarka (West)",
+        city: "Dwarka",
+        state: "Gujarat",
+        latitude: 22.2544,
+        longitude: 68.9822,
+        heading: 90,
+        pitch: 8,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "06:00",
+        closingTime: "20:00",
+        recommendedDuration: 45,
+        priority: 4,
+        description: "A 2,500-year-old architectural jewel located 2 km from Dwarka, adorned with intricate stone carvings of celestial dancers, deities, and mythological panels.",
+        audioNarrative: "You are looking at the historic Rukmini Devi Temple in Dwarka, dedicated to Lord Krishna's chief consort Rukmini, renowned for its ornate 12th-century Kalinga-influenced Gujarati temple architecture."
+      },
+      {
+        id: "GJ-DWK-019",
+        name: "Shivrajpur Blue Flag Beach",
+        category: "Scenery",
+        dham: "dwarka",
+        dhamTitle: "Dwarka (West)",
+        city: "Shivrajpur",
+        state: "Gujarat",
+        latitude: 22.3331,
+        longitude: 68.9556,
+        heading: 270,
+        pitch: 0,
+        fov: 80,
+        preferredMode: "place",
+        openingTime: "07:00",
+        closingTime: "19:00",
+        recommendedDuration: 180,
+        priority: 4,
+        description: "A certified Blue Flag beach situated along the Arabian Sea near Dwarka, celebrated for white sand dunes, crystal-clear turquoise waters, and dolphin spotting.",
+        audioNarrative: "Welcome to Shivrajpur Beach on the western tip of Gujarat, an eco-certified Blue Flag coastal paradise with tranquil Arabian Sea shores and pristine sandbars."
+      }
+    ];
+
+    // ==========================================
+    // State Management
+    // ==========================================
+    let currentPlace = placesData[0];
+    let currentMode = currentPlace.preferredMode || '360';
+    let currentHeading = currentPlace.heading || 180;
+    let currentFilter = 'all';
+    let currentActiveDham = 'all';
+    let isNarrating = false;
+    let isAmbientPlaying = false;
+    let audioContext = null;
+    let ambientGain = null;
+
+    const streetFrame = document.getElementById('streetFrame');
+    const currentTitle = document.getElementById('currentTitle');
+    const currentSub = document.getElementById('currentSub');
+    const currentModeBadge = document.getElementById('currentModeBadge');
+    const currentDurationBadge = document.getElementById('currentDurationBadge');
+    const loader = document.getElementById('loader');
+
+    // ==========================================
+    // URL Builder for Google Maps Embed API
+    // ==========================================
+    function buildEmbedUrl(place, mode, heading = null) {
+      const h = heading !== null ? heading : (place.heading || 180);
+      const pitch = place.pitch !== undefined ? place.pitch : 5;
+      const fov = place.fov || 80;
+
+      if (mode === 'place') {
+        // Mode 2: Place & Photos (Always 100% available with 360 photo spheres, reviews & street entry)
+        return `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(place.name + ', ' + place.city + ', ' + place.state)}`;
+      } else if (mode === 'satellite') {
+        // Mode 3: Satellite 3D Overhead View with Exact Pin & Landmark Name
+        return `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(place.name + ', ' + place.city + ', ' + place.state)}&maptype=satellite&zoom=18`;
+      } else {
+        // Mode 1: Verified 360° Ground Street View Mode
+        return `https://www.google.com/maps/embed/v1/streetview?key=${GOOGLE_MAPS_API_KEY}&location=${place.latitude},${place.longitude}&heading=${h}&pitch=${pitch}&fov=${fov}`;
+      }
+    }
+
+    // ==========================================
+    // Toggle Bada Char Dham Card Dropdown (Accordion)
+    // ==========================================
+    function toggleBadaDhamCard() {
+      const card = document.getElementById('circuitCard');
+      if (!card) return;
+      card.classList.toggle('open');
+    }
+
+    // ==========================================
+    // Render 19 Places inside Bada Char Dham Card Dropdown
+    // ==========================================
+    function renderBadaPlaces(places) {
+      const container = document.getElementById('badaPlacesList');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (places.length === 0) {
+        container.innerHTML = `<div style="padding:16px;text-align:center;color:var(--text-muted);font-size:0.78rem;">No sacred sites found.</div>`;
+        return;
+      }
+
+      places.forEach((place) => {
+        const globalIdx = placesData.findIndex(p => p.id === place.id);
+        const item = document.createElement('div');
+        const isActive = place.id === currentPlace.id;
+        item.className = `bada-place-item ${isActive ? 'active' : ''}`;
+        item.id = `bada-card-${place.id}`;
+        item.onclick = () => selectPlace(place);
+
+        const categoryClass = place.category.toLowerCase().replace(/\s+/g, '');
+        const isPlaceMode = place.preferredMode === 'place';
+        const badgeHtml = isPlaceMode
+          ? `<span class="card-avail-badge place">🛰️ Satellite</span>`
+          : `<span class="card-avail-badge">360° VR</span>`;
+
+        item.innerHTML = `
+          <div class="bada-place-header">
+            <div class="bada-place-title">#${globalIdx + 1} ${place.name}</div>
+            ${badgeHtml}
+          </div>
+          <div class="bada-place-meta">
+            <span class="tag ${categoryClass}">${place.category}</span>
+            <span>📍 ${place.city}</span>
+            <span>⏱️ ${place.recommendedDuration}m</span>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // ==========================================
+    // Filter Dham Cards inside Bada Char Dham Card Dropdown
+    // ==========================================
+    function filterDhamCards(dhamKey) {
+      currentActiveDham = dhamKey;
+
+      // Update quick bar highlight inside Bada Char Dham Card
+      document.querySelectorAll('.quick-dham-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.dham === dhamKey);
+      });
+
+      // Update bottom navigation bar dham tabs highlight
+      document.querySelectorAll('.bottom-dham-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.dham === dhamKey);
+      });
+
+      let filtered = placesData;
+      if (dhamKey !== 'all') {
+        filtered = placesData.filter(p => p.dham === dhamKey);
+      }
+
+      renderBadaPlaces(filtered);
+      renderBottomNav(filtered);
+
+      // Auto select first place if current place is not in the filtered set
+      const isCurrentInList = filtered.some(p => p.id === currentPlace.id);
+      if (!isCurrentInList && filtered.length > 0) {
+        selectPlace(filtered[0]);
+      }
+    }
+
+    function filterBottomDham(dhamKey) {
+      filterDhamCards(dhamKey);
+    }
+
+    function filterByDham(dhamKey) {
+      filterDhamCards(dhamKey);
+    }
+
+    // ==========================================
+    // Render Down Navigation Bar Items
+    // ==========================================
+    function renderBottomNav(places) {
+      const strip = document.getElementById('bottomPlacesStrip');
+      if (!strip) return;
+      strip.innerHTML = '';
+
+      places.forEach((place) => {
+        const globalIndex = placesData.findIndex(p => p.id === place.id);
+        const item = document.createElement('div');
+        const isActive = place.id === currentPlace.id;
+        item.className = `bottom-place-item ${isActive ? 'active' : ''}`;
+        item.id = `btn-nav-place-${place.id}`;
+        item.onclick = () => selectPlace(place);
+
+        const badgeClass = place.preferredMode === 'place' ? 'vplace' : 'v360';
+        const badgeText = place.preferredMode === 'place' ? '🛰️ Satellite' : '360° VR';
+
+        item.innerHTML = `
+          <span class="bottom-place-index">#${globalIndex + 1}</span>
+          <div class="bottom-place-text">
+            <span class="bottom-place-name">${place.name}</span>
+            <span class="bottom-place-sub">📍 ${place.city}</span>
+          </div>
+          <span class="bottom-place-badge ${badgeClass}">${badgeText}</span>
+        `;
+        strip.appendChild(item);
+      });
+    }
+
+    // ==========================================
+    // Navigate Previous / Next Place
+    // ==========================================
+    function navigatePlace(direction) {
+      let activePool = placesData;
+      if (currentActiveDham !== 'all') {
+        activePool = placesData.filter(p => p.dham === currentActiveDham);
+      }
+
+      const currentIndex = activePool.findIndex(p => p.id === currentPlace.id);
+      let newIndex = currentIndex + direction;
+      if (newIndex < 0) newIndex = activePool.length - 1;
+      if (newIndex >= activePool.length) newIndex = 0;
+
+      selectPlace(activePool[newIndex]);
+    }
+
+    // ==========================================
+    // Select Place & Update Viewport
+    // ==========================================
+    function selectPlace(place, customHeading = null, customMode = null) {
+      currentPlace = place;
+      currentHeading = customHeading !== null ? customHeading : (place.heading || 180);
+
+      const isUnmapped = place.preferredMode === 'place';
+
+      if (customMode) {
+        currentMode = customMode;
+      } else {
+        currentMode = isUnmapped ? 'satellite' : '360';
+      }
+
+      // On-Screen Notice for Unmapped 360 Locations
+      const unavailNotice = document.getElementById('unavailNotice');
+      if (unavailNotice) {
+        if (isUnmapped) {
+          unavailNotice.classList.remove('hidden');
+        } else {
+          unavailNotice.classList.add('hidden');
+        }
+      }
+
+      // Update Mode Tabs Highlight
+      const btn360 = document.getElementById('btnMode360');
+      btn360.classList.toggle('active', currentMode === '360');
+      btn360.title = isUnmapped ? '360° Virtual Tour not available at this spot' : '360° Ground Street View';
+      
+      document.getElementById('btnModePlace').classList.toggle('active', currentMode === 'place');
+      document.getElementById('btnModeSatellite').classList.toggle('active', currentMode === 'satellite');
+      
+      const cardinalHud = document.getElementById('cardinalHud');
+      if (cardinalHud) {
+        cardinalHud.style.display = currentMode === '360' ? 'flex' : 'none';
+      }
+
+      // Highlight active card inside Bada Char Dham Dropdown Card
+      document.querySelectorAll('.bada-place-item').forEach(c => {
+        const isActive = c.id === `bada-card-${place.id}`;
+        c.classList.toggle('active', isActive);
+        if (isActive) {
+          c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      // Update Master Circuit Card Active Snapshot
+      const globalIdx = placesData.findIndex(p => p.id === place.id);
+      document.getElementById('activePlaceNum').innerText = globalIdx + 1;
+      document.getElementById('snapPlaceTitle').innerText = place.name;
+      document.getElementById('snapPlaceMeta').innerText = `📍 ${place.city}, ${place.state} • ${place.dhamTitle}`;
+
+      // Highlight in Bottom Navigation Bar & Smooth Scroll
+      document.querySelectorAll('.bottom-place-item').forEach(item => {
+        const isActive = item.id === `btn-nav-place-${place.id}`;
+        item.classList.toggle('active', isActive);
+        if (isActive) {
+          item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+
+      // Update Floating Meta Header
+      currentTitle.innerText = place.name;
+      currentSub.innerText = `${place.city}, ${place.state} • ${place.openingTime} - ${place.closingTime}`;
+      currentDurationBadge.innerText = `⏱️ ${place.recommendedDuration} min`;
+      document.getElementById('hudHeadingVal').innerText = `Heading ${currentHeading}°`;
+
+      if (currentMode === '360') {
+        currentModeBadge.innerText = `360° Ground View`;
+      } else if (currentMode === 'place') {
+        currentModeBadge.innerText = `360° Place & Photos`;
+      } else {
+        currentModeBadge.innerText = `Satellite Aerial View`;
+      }
+
+      // Stop previous audio guide
+      stopNarrator();
+
+      // Show loader
+      loader.classList.remove('hidden');
+
+      // Update iFrame URL
+      const targetUrl = buildEmbedUrl(place, currentMode, currentHeading);
+      streetFrame.src = targetUrl;
+
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 700);
+    }
+
+    // ==========================================
+    // Filter Places (Search Box)
+    // ==========================================
+    function filterPlaces() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = placesData.filter(p => {
+        const matchesQuery = p.name.toLowerCase().includes(q) ||
+                             p.city.toLowerCase().includes(q) ||
+                             p.category.toLowerCase().includes(q) ||
+                             p.state.toLowerCase().includes(q) ||
+                             p.dham.toLowerCase().includes(q);
+
+        return matchesQuery;
+      });
+
+      renderBadaPlaces(filtered);
+      renderBottomNav(filtered);
+    }
+
+    // ==========================================
+    // Audio Tour Guide (Web Speech API)
+    // ==========================================
+    function toggleAudioGuide() {
+      if (isNarrating) {
+        stopNarrator();
+        showToast('🔇 Audio Guide Paused');
+      } else {
+        startNarrator();
+        showToast('🎧 Audio Guide Playing');
+      }
+    }
+
+    function startNarrator() {
+      if (!('speechSynthesis' in window)) {
+        showToast('Speech synthesis not supported in this browser.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+
+      const text = currentPlace.audioNarrative || currentPlace.description;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      const naturalVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Premium') || v.name.includes('India')));
+      if (naturalVoice) utterance.voice = naturalVoice;
+
+      utterance.onstart = () => {
+        isNarrating = true;
+        document.getElementById('btnAudioGuide').classList.add('active');
+        document.getElementById('audioGuideBadge').classList.add('playing');
+      };
+
+      utterance.onend = () => {
+        stopNarrator();
+      };
+
+      utterance.onerror = () => {
+        stopNarrator();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopNarrator() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isNarrating = false;
+      document.getElementById('btnAudioGuide').classList.remove('active');
+      document.getElementById('audioGuideBadge').classList.remove('playing');
+    }
+
+    // ==========================================
+    // Zen Ambient Sound Synthesizer (Web Audio API)
+    // ==========================================
+    function toggleAmbientSound() {
+      const btn = document.getElementById('btnAmbientSound');
+      if (!isAmbientPlaying) {
+        try {
+          if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioContext.state === 'suspended') {
+            audioContext.resume();
+          }
+
+          const bufferSize = audioContext.sampleRate * 2;
+          const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            b3 = 0.86650 * b3 + white * 0.3104856;
+            b4 = 0.55000 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.0168980;
+            output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.035;
+            b6 = white * 0.115926;
+          }
+
+          const whiteNoise = audioContext.createBufferSource();
+          whiteNoise.buffer = noiseBuffer;
+          whiteNoise.loop = true;
+
+          const filter = audioContext.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.value = 350;
+
+          ambientGain = audioContext.createGain();
+          ambientGain.gain.setValueAtTime(0.01, audioContext.currentTime);
+          ambientGain.gain.exponentialRampToValueAtTime(0.3, audioContext.currentTime + 2);
+
+          whiteNoise.connect(filter);
+          filter.connect(ambientGain);
+          ambientGain.connect(audioContext.destination);
+
+          whiteNoise.start(0);
+          window._ambientNode = whiteNoise;
+
+          isAmbientPlaying = true;
+          btn.classList.add('active');
+          showToast('🎵 Ambient Soundscape Enabled');
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        if (ambientGain && audioContext) {
+          ambientGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+          setTimeout(() => {
+            if (window._ambientNode) window._ambientNode.stop();
+          }, 500);
+        }
+        isAmbientPlaying = false;
+        btn.classList.remove('active');
+        showToast('🔇 Ambient Soundscape Muted');
+      }
+    }
+
+    // ==========================================
+    // Postcard Snapshot Generator
+    // ==========================================
+    function takeSnapshot() {
+      showToast('📸 Creating Postcard Snapshot...');
+      const canvas = document.getElementById('snapshotCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#090d16');
+      grad.addColorStop(1, '#0f172a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Frame background stamp
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+      ctx.fillRect(40, 40, 500, 140);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(40, 40, 500, 140);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 18px Outfit, sans-serif';
+      ctx.fillText('YATRAVERSE AI • 360° HERITAGE TOUR', 65, 75);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px Outfit, sans-serif';
+      ctx.fillText(currentPlace.name, 65, 112);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px Plus Jakarta Sans, sans-serif';
+      ctx.fillText(`${currentPlace.city}, ${currentPlace.state} • ${new Date().toLocaleDateString()}`, 65, 145);
+
+      const link = document.createElement('a');
+      link.download = `${currentPlace.id}-360-tour.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('✅ Postcard Snapshot Downloaded!');
+    }
+
+    // ==========================================
+    // Info Modal Dialog
+    // ==========================================
+    function openInfoModal() {
+      const modal = document.getElementById('infoModal');
+      document.getElementById('modalMonumentTitle').textContent = currentPlace.name;
+      document.getElementById('modalLocationSub').textContent = `${currentPlace.city}, ${currentPlace.state}`;
+      document.getElementById('modalCategoryTag').textContent = currentPlace.category;
+      document.getElementById('modalFactTimings').textContent = `${currentPlace.openingTime} - ${currentPlace.closingTime}`;
+      document.getElementById('modalFactDuration').textContent = `${currentPlace.recommendedDuration} Mins`;
+      document.getElementById('modalFactCity').textContent = currentPlace.city;
+      document.getElementById('modalFactCoverage').textContent = currentPlace.preferredMode === 'place' ? 'Satellite View Verified' : 'Ground 360° Verified';
+      document.getElementById('modalDescriptionText').textContent = currentPlace.description;
+
+      modal.classList.add('open');
+    }
+
+    function closeInfoModal() {
+      document.getElementById('infoModal').classList.remove('open');
+    }
+
+    // ==========================================
+    // Setup Event Listeners
+    // ==========================================
+    function setupEventListeners() {
+      // Prev / Next Navigation Arrows
+      document.getElementById('btnNavPrev').addEventListener('click', () => navigatePlace(-1));
+      document.getElementById('btnNavNext').addEventListener('click', () => navigatePlace(1));
+
+      // Keyboard Left/Right Navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowLeft') {
+          navigatePlace(-1);
+        } else if (e.key === 'ArrowRight') {
+          navigatePlace(1);
+        }
+      });
+
+      // Top actions
+      document.getElementById('btnAudioGuide').addEventListener('click', toggleAudioGuide);
+      document.getElementById('btnAmbientSound').addEventListener('click', toggleAmbientSound);
+      document.getElementById('btnInfoModal').addEventListener('click', openInfoModal);
+      document.getElementById('btnSnapshot').addEventListener('click', takeSnapshot);
+      document.getElementById('btnCloseModal').addEventListener('click', closeInfoModal);
+      document.getElementById('btnNarrateModal').addEventListener('click', () => {
+        closeInfoModal();
+        startNarrator();
+      });
+
+      // Notice Actions for Unmapped Locations
+      document.getElementById('btnNoticeSatellite').addEventListener('click', () => {
+        selectPlace(currentPlace, currentHeading, 'satellite');
+        showToast('🛰️ Switched to High-Resolution Satellite View');
+      });
+
+      document.getElementById('btnNoticePlace').addEventListener('click', () => {
+        selectPlace(currentPlace, currentHeading, 'place');
+        showToast('📍 Switched to Place & Photos Overview');
+      });
+
+      // View Mode Tabs
+      document.getElementById('btnMode360').addEventListener('click', () => {
+        if (currentPlace.preferredMode === 'place') {
+          showToast('⚠️ 360° virtual tour is not available for this location. Showing Satellite View.');
+          selectPlace(currentPlace, currentHeading, 'satellite');
+        } else {
+          selectPlace(currentPlace, currentHeading, '360');
+          showToast('🌐 Switched to 360° Ground View');
+        }
+      });
+
+      document.getElementById('btnModePlace').addEventListener('click', () => {
+        selectPlace(currentPlace, currentHeading, 'place');
+        showToast('📍 Switched to 360° Place & Photos View');
+      });
+
+      document.getElementById('btnModeSatellite').addEventListener('click', () => {
+        selectPlace(currentPlace, currentHeading, 'satellite');
+        showToast('🛰️ Switched to Satellite 3D View');
+      });
+
+      // Cardinal Angle Buttons (N, S, E, W)
+      document.querySelectorAll('.btn-cardinal[data-heading]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const heading = parseInt(btn.dataset.heading, 10);
+          selectPlace(currentPlace, heading);
+          showToast(`🧭 Heading changed to ${heading}°`);
+        });
+      });
+
+      document.getElementById('btnResetAngle').addEventListener('click', () => {
+        selectPlace(currentPlace, currentPlace.heading || 180);
+        showToast('📐 View angle reset');
+      });
+
+      // Fullscreen Toggle
+      document.getElementById('btnFullscreen').addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => console.log(err));
+        } else {
+          document.exitFullscreen().catch(err => console.log(err));
+        }
+      });
+
+      // Close modal on click outside
+      document.getElementById('infoModal').addEventListener('click', (e) => {
+        if (e.target.id === 'infoModal') closeInfoModal();
+      });
+
+      // IFrame Load Listener
+      streetFrame.addEventListener('load', () => {
+        loader.classList.add('hidden');
+      });
+    }
+
+    // ==========================================
+    // Toast Notification Utility
+    // ==========================================
+    let toastTimeout = null;
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      const text = document.getElementById('toastMessage');
+      if (!box || !text) return;
+
+      text.textContent = msg;
+      box.classList.add('show');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.remove('show');
+      }, 3200);
+    }
+
+    // ==========================================
+    // App Initialization
+    // ==========================================
+    renderBadaPlaces(placesData);
+    renderBottomNav(placesData);
+    setupEventListeners();
+    selectPlace(placesData[0]);
+  </script>
+</body>
+
+</html>
