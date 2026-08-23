@@ -19,6 +19,7 @@ export default function ItineraryPage() {
     handleSaveTrip,
     handleCancelTrip,
     isCurrentTripSaved,
+    filterPreferences,
     isHydrated,
   } = useTravel();
 
@@ -47,6 +48,7 @@ export default function ItineraryPage() {
       onSaveTrip={handleSaveTrip}
       onCancelTrip={handleCancelTrip}
       isTripSaved={isCurrentTripSaved}
+      filterPreferences={filterPreferences}
     />
   );
 }

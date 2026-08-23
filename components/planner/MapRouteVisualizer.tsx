@@ -414,9 +414,8 @@ export default function MapRouteVisualizer({
           </div>
         </div>
 
-        {/* Quick Map Controls: Recenter Entire Route & Layer Style */}
+        {/* Quick Map Controls: Recenter Entire Route */}
         <div className="pointer-events-auto flex items-center gap-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-2xl border border-stone-200 shadow-md">
-          {/* Recenter Entire Route */}
           <button
             onClick={fitEntireRoute}
             className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-[11px] font-bold transition-all cursor-pointer shadow-xs"

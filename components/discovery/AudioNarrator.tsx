@@ -5,6 +5,8 @@ import { Play, Square, Music } from "lucide-react";
 import { LanguageCode } from "@/types";
 import { translations } from "@/data/mockData";
 
+import AtmosphericSoundscapePlayer from "@/components/audio/AtmosphericSoundscapePlayer";
+
 interface AudioNarratorProps {
   text: string;
   currentLang: LanguageCode;
@@ -351,7 +353,10 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
         </div>
 
         {/* Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap justify-end">
+          {/* Atmospheric Ambient Soundscape */}
+          <AtmosphericSoundscapePlayer initialPreset="spiritual" />
+
           {isPlaying && (
             <button
               onClick={toggleDroneMute}
@@ -388,6 +393,48 @@ export default function AudioNarrator({ text, currentLang }: AudioNarratorProps)
               </button>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Live Audio Soundwave Frequency Visualizer */}
+      <div className="rounded-xl bg-stone-900/95 p-3 sm:p-3.5 border border-stone-800 shadow-inner flex flex-col gap-2 overflow-hidden relative">
+        <div className="flex items-center justify-between text-[11px] text-stone-400">
+          <div className="flex items-center gap-2">
+            <span className={`h-2 w-2 rounded-full ${isPlaying ? "bg-emerald-400 animate-ping" : "bg-stone-600"}`} />
+            <span className="font-mono text-[10px] uppercase tracking-wider text-amber-300 font-bold">
+              {isPlaying ? "Live Neural Lore Audio Stream" : "Audio Lore Ready"}
+            </span>
+          </div>
+          <span className="font-mono text-[10px] text-stone-400">
+            {isPlaying ? `${speechRate}x • Vernacular Voice` : "Ready to play"}
+          </span>
+        </div>
+
+        {/* Dynamic Soundwave Bars */}
+        <div className="h-10 sm:h-12 flex items-end justify-between gap-1 sm:gap-1.5 px-1 pt-1">
+          {Array.from({ length: 28 }).map((_, i) => {
+            // Harmonic wave pattern
+            const baseHeight = 15 + Math.sin(i * 0.4) * 12 + ((i * 7) % 25);
+            return (
+              <div
+                key={i}
+                className={`w-full rounded-full transition-all duration-150 ${
+                  isPlaying
+                    ? "bg-gradient-to-t from-amber-500 via-terracotta-500 to-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]"
+                    : "bg-stone-700/60"
+                }`}
+                style={{
+                  height: isPlaying ? `${Math.max(18, (baseHeight + ((i % 5) * 8)) % 95)}%` : "14%",
+                  animationName: isPlaying ? "pulse" : "none",
+                  animationDuration: `${(0.35 + (i % 6) * 0.12).toFixed(2)}s`,
+                  animationTimingFunction: "ease-in-out",
+                  animationIterationCount: "infinite",
+                  animationDirection: "alternate",
+                  animationDelay: `${(i * 0.04).toFixed(2)}s`
+                }}
+              />
+            );
+          })}
         </div>
       </div>
 

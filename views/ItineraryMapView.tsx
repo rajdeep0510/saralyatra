@@ -8,6 +8,14 @@ import { removeDestinationFromTrip, addDestinationToTrip } from "@/utils/tripEng
 import ItineraryTimeline from "@/components/planner/ItineraryTimeline";
 import MapRouteVisualizer from "@/components/planner/MapRouteVisualizer";
 import AddDestinationModal from "@/components/planner/AddDestinationModal";
+import YatraPassModal from "@/components/itinerary/YatraPassModal";
+import EtiquettePackingModal from "@/components/utilities/EtiquettePackingModal";
+import BudgetEstimatorModal from "@/components/utilities/BudgetEstimatorModal";
+import DialectPhrasebookModal from "@/components/utilities/DialectPhrasebookModal";
+import TravelGuideBookletModal from "@/components/itinerary/TravelGuideBookletModal";
+import AtmosphericSoundscapePlayer from "@/components/audio/AtmosphericSoundscapePlayer";
+import MarigoldConfetti from "@/components/wonders/MarigoldConfetti";
+import { FilterPreferences } from "@/types";
 
 interface ItineraryMapViewProps {
   currentLang: LanguageCode;
@@ -21,6 +29,7 @@ interface ItineraryMapViewProps {
   onSaveTrip?: (trip: PreloadedTrip) => void;
   onCancelTrip?: () => void;
   isTripSaved?: boolean;
+  filterPreferences?: FilterPreferences | null;
 }
 
 export default function ItineraryMapView({
@@ -34,10 +43,17 @@ export default function ItineraryMapView({
   onLoadPresetTrip,
   onSaveTrip,
   onCancelTrip,
-  isTripSaved = false
+  isTripSaved = false,
+  filterPreferences = null
 }: ItineraryMapViewProps) {
   const t = translations[currentLang] || translations.en;
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
+  const [isYatraPassOpen, setIsYatraPassOpen] = useState<boolean>(false);
+  const [isPackingModalOpen, setIsPackingModalOpen] = useState<boolean>(false);
+  const [isBudgetModalOpen, setIsBudgetModalOpen] = useState<boolean>(false);
+  const [isPhrasebookModalOpen, setIsPhrasebookModalOpen] = useState<boolean>(false);
+  const [isGuideBookletOpen, setIsGuideBookletOpen] = useState<boolean>(false);
+  const [showMarigoldCelebration, setShowMarigoldCelebration] = useState<boolean>(false);
   const [selectedDayForAdd, setSelectedDayForAdd] = useState<number>(1);
   const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
   const [showSaveSuccessToast, setShowSaveSuccessToast] = useState<boolean>(false);
@@ -132,7 +148,7 @@ export default function ItineraryMapView({
                 className="flex items-center gap-2 px-5 py-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold shadow-md hover:shadow-lg transition-all cursor-pointer group"
               >
                 <Sparkles className="h-4 w-4 text-amber-400" />
-                <span>Launch AI Trip Planner Studio</span>
+                <span>Launch Trip Planner Studio</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -291,13 +307,14 @@ export default function ItineraryMapView({
     if (onSaveTrip) {
       onSaveTrip(activeTrip);
     }
+    setShowMarigoldCelebration(true);
     setShowSaveSuccessToast(true);
     setTimeout(() => {
       setShowSaveSuccessToast(false);
     }, 4000);
   };
 
-  const { title, region, pacing, stats, culturalFilter } = activeTrip;
+  const { title, region, pacing, stats, culturalFilter, category } = activeTrip;
 
   return (
     <div className="space-y-6 py-6 animate-in fade-in duration-300 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -412,20 +429,20 @@ export default function ItineraryMapView({
           )}
         </div>
 
-        {/* Stats & Key Actions (2-Row Layout: Utilities above, Confirm & Cancel below) */}
+        {/* Primary Controls (2 Balanced Rows) */}
         <div className="flex flex-col items-start lg:items-end gap-3 shrink-0">
           
-          {/* Upper Row: Utility & Edit Controls */}
-          <div className="flex flex-wrap items-center gap-2.5">
+          {/* Upper Row: Stats & Secondary Editing */}
+          <div className="flex flex-wrap items-center gap-2">
             {/* Quick Stats Pill */}
-            <div className="flex items-center gap-3 bg-stone-50 p-2.5 rounded-2xl border border-stone-200 text-xs">
+            <div className="flex items-center gap-3 bg-stone-50 p-2 rounded-2xl border border-stone-200 text-xs">
               <div className="flex items-center gap-1.5 text-stone-700 font-semibold">
-                <Route className="h-4 w-4 text-terracotta-600" />
+                <Route className="h-3.5 w-3.5 text-terracotta-600" />
                 <span>{stats?.totalDistance || "180 km"}</span>
               </div>
               <div className="h-3 w-px bg-stone-200" />
               <div className="flex items-center gap-1.5 text-stone-700 font-semibold">
-                <Clock className="h-4 w-4 text-amber-600" />
+                <Clock className="h-3.5 w-3.5 text-amber-600" />
                 <span>{stats?.travelTime || "4.5 hrs transit"}</span>
               </div>
             </div>
@@ -433,34 +450,24 @@ export default function ItineraryMapView({
             {/* Action: Add Place */}
             <button
               onClick={() => handleOpenAddModal(1)}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-800 border border-terracotta-200 text-xs font-bold transition-all cursor-pointer shadow-2xs"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-800 border border-terracotta-200 text-xs font-bold transition-all cursor-pointer shadow-2xs"
             >
-              <PlusCircle className="h-4 w-4 text-terracotta-600" />
+              <PlusCircle className="h-3.5 w-3.5 text-terracotta-600" />
               <span>{t.addPlace || "+ Add Place"}</span>
             </button>
 
             {/* Action: Edit in Planner */}
             <button
               onClick={onNavigateToPlanner}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-stone-900 text-white text-xs font-bold hover:bg-stone-800 transition-all cursor-pointer shadow-xs"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold border border-stone-200 transition-all cursor-pointer"
               title="Adjust preferences and dates"
             >
-              <Compass className="h-4 w-4 text-amber-400" />
+              <Compass className="h-3.5 w-3.5 text-amber-600" />
               <span>{t.editInPlanner || "Edit in Planner"}</span>
-            </button>
-
-            {/* Action: Print */}
-            <button
-              onClick={() => window.print()}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-2.5 rounded-2xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold border border-stone-200 transition-all cursor-pointer"
-              title="Print or Save PDF"
-            >
-              <Printer className="h-4 w-4 text-stone-600" />
-              <span>{t.print || "Print"}</span>
             </button>
           </div>
 
-          {/* Lower Row: Confirm Trip & Cancel Trip (Beside each other) */}
+          {/* Lower Row: Confirm Trip & Cancel Trip */}
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-start lg:justify-end">
             {/* Confirm Trip Button (Green with White font) */}
             <button
@@ -486,6 +493,141 @@ export default function ItineraryMapView({
               <span>{t.cancelTrip || "Cancel Trip"}</span>
             </button>
           </div>
+
+        </div>
+      </div>
+
+      {/* Dedicated Smart Cultural Travel Utilities Ribbon */}
+      <div className="p-4 sm:p-5 rounded-3xl bg-stone-50/80 border border-stone-200/90 shadow-2xs space-y-3">
+        <div className="flex items-center justify-between flex-wrap gap-3 pb-2 border-b border-stone-200/60">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs font-bold uppercase tracking-wider text-terracotta-700 flex items-center gap-1.5">
+              <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+              <span>Smart Cultural & Travel Utilities</span>
+            </span>
+            <span className="text-[10px] font-bold bg-white text-stone-600 border border-stone-200 px-2 py-0.5 rounded-full shadow-2xs">
+              State Guide: {region || "Bharat"}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Atmospheric Soundscapes Player */}
+            <AtmosphericSoundscapePlayer
+              initialPreset={category === "spiritual" ? "spiritual" : category === "nature" ? "nature" : "heritage"}
+            />
+
+            {/* Action: 1-Click Illustrated PDF Travel Guide Booklet */}
+            <button
+              type="button"
+              onClick={() => setIsGuideBookletOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-900 text-xs font-bold border border-terracotta-200 transition-all cursor-pointer shadow-2xs"
+              title="Open illustrated A4 printable booklet"
+            >
+              <span>📖 Illustrated Travel Guide</span>
+            </button>
+
+            {/* Action: Print / Save PDF */}
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-stone-100 text-stone-700 text-xs font-bold border border-stone-200 transition-all cursor-pointer shadow-2xs"
+              title="Print or Save PDF"
+            >
+              <Printer className="h-3.5 w-3.5 text-stone-600" />
+              <span>Print PDF</span>
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Balanced, Spacious Feature Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          
+          {/* 1. Bharat Yatra Pass Card */}
+          <button
+            type="button"
+            onClick={() => setIsYatraPassOpen(true)}
+            className="p-3.5 rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-terracotta-600 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-3 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-amber-200 uppercase block">
+                3D Digital Ticket
+              </span>
+              <h4 className="font-serif font-black text-sm text-white truncate">
+                🎟️ Bharat Yatra Pass
+              </h4>
+              <p className="text-[10px] text-amber-100/90 truncate">
+                Boarding pass & passport stamps
+              </p>
+            </div>
+            <div className="h-8 w-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
+              <Sparkles className="h-4 w-4 text-amber-200" />
+            </div>
+          </button>
+
+          {/* 2. Smart Packing & Cultural Etiquette Card */}
+          <button
+            type="button"
+            onClick={() => setIsPackingModalOpen(true)}
+            className="p-3.5 rounded-2xl bg-white hover:bg-stone-50 border border-stone-200/90 hover:border-stone-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-3 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-stone-400 uppercase block">
+                Checklist & Dress Code
+              </span>
+              <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-terracotta-700 transition-colors">
+                🧳 Packing & Etiquette
+              </h4>
+              <p className="text-[10px] text-stone-500 truncate">
+                Temple rules & weather gear
+              </p>
+            </div>
+            <div className="h-8 w-8 rounded-xl bg-stone-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-sm">🧥</span>
+            </div>
+          </button>
+
+          {/* 3. Trip Expense & Budget Estimator Card */}
+          <button
+            type="button"
+            onClick={() => setIsBudgetModalOpen(true)}
+            className="p-3.5 rounded-2xl bg-white hover:bg-emerald-50/40 border border-stone-200/90 hover:border-emerald-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-3 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-600 uppercase block">
+                Cost & Group Splitter
+              </span>
+              <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-emerald-800 transition-colors">
+                💰 Budget Estimator
+              </h4>
+              <p className="text-[10px] text-stone-500 truncate">
+                Fuel, stay & meals breakdown
+              </p>
+            </div>
+            <div className="h-8 w-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-sm">📊</span>
+            </div>
+          </button>
+
+          {/* 4. Local Dialect Phrasebook Card */}
+          <button
+            type="button"
+            onClick={() => setIsPhrasebookModalOpen(true)}
+            className="p-3.5 rounded-2xl bg-white hover:bg-amber-50/40 border border-stone-200/90 hover:border-amber-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-3 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-amber-600 uppercase block">
+                Audio Lore & Helplines
+              </span>
+              <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-amber-800 transition-colors">
+                🗣️ Dialect Phrasebook
+              </h4>
+              <p className="text-[10px] text-stone-500 truncate">
+                10 spoken phrases & 24/7 safety
+              </p>
+            </div>
+            <div className="h-8 w-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-sm">🔊</span>
+            </div>
+          </button>
 
         </div>
       </div>
@@ -530,6 +672,61 @@ export default function ItineraryMapView({
           onAddDestination={handleAddDestination}
         />
       )}
+
+      {/* 3D Cultural Yatra Pass Modal */}
+      {isYatraPassOpen && (
+        <YatraPassModal
+          trip={activeTrip}
+          preferences={filterPreferences || null}
+          currentLang={currentLang}
+          isOpen={isYatraPassOpen}
+          onClose={() => setIsYatraPassOpen(false)}
+        />
+      )}
+
+      {/* Smart Cultural Etiquette & Packing Checklist Modal */}
+      {isPackingModalOpen && (
+        <EtiquettePackingModal
+          trip={activeTrip}
+          isOpen={isPackingModalOpen}
+          onClose={() => setIsPackingModalOpen(false)}
+        />
+      )}
+
+      {/* Trip Expense & Budget Estimator Modal */}
+      {isBudgetModalOpen && (
+        <BudgetEstimatorModal
+          trip={activeTrip}
+          travelers={filterPreferences?.travelers || 2}
+          isOpen={isBudgetModalOpen}
+          onClose={() => setIsBudgetModalOpen(false)}
+        />
+      )}
+
+      {/* Local Dialect Phrasebook & Emergency Directory Modal */}
+      {isPhrasebookModalOpen && (
+        <DialectPhrasebookModal
+          trip={activeTrip}
+          isOpen={isPhrasebookModalOpen}
+          onClose={() => setIsPhrasebookModalOpen(false)}
+        />
+      )}
+
+      {/* 1-Click Illustrated PDF Travel Guide Booklet Modal */}
+      {isGuideBookletOpen && (
+        <TravelGuideBookletModal
+          trip={activeTrip}
+          preferences={filterPreferences}
+          isOpen={isGuideBookletOpen}
+          onClose={() => setIsGuideBookletOpen(false)}
+        />
+      )}
+
+      {/* Marigold Petal & Rangoli Confetti Celebration */}
+      <MarigoldConfetti
+        active={showMarigoldCelebration}
+        onComplete={() => setShowMarigoldCelebration(false)}
+      />
 
     </div>
   );

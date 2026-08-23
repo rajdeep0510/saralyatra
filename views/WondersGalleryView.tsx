@@ -5,6 +5,8 @@ import { Search, Sparkles, Trees, Flame, Landmark, Mountain, LayoutGrid, MapPin,
 import { monuments, translations } from "@/data/mockData";
 import { LanguageCode, Monument, TripCategory } from "@/types";
 import HeritageCard from "@/components/discovery/HeritageCard";
+import BucketListModal from "@/components/wonders/BucketListModal";
+import MarigoldConfetti from "@/components/wonders/MarigoldConfetti";
 
 interface WondersGalleryViewProps {
   currentLang: LanguageCode;
@@ -24,6 +26,33 @@ export default function WondersGalleryView({
   const [selectedCategory, setSelectedCategory] = useState<TripCategory>("all");
   const [selectedState, setSelectedState] = useState<string>("all");
   const [offbeatFilter, setOffbeatFilter] = useState<"all" | "iconic" | "offbeat">("all");
+  const [isBucketListOpen, setIsBucketListOpen] = useState<boolean>(false);
+  const [showMarigold, setShowMarigold] = useState<boolean>(false);
+  const [bookmarkedIds, setBookmarkedIds] = useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const saved = localStorage.getItem("saralyatra_bucket_list");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleBookmark = (id: string) => {
+    setBookmarkedIds((prev) => {
+      let updated: string[];
+      if (prev.includes(id)) {
+        updated = prev.filter((item) => item !== id);
+      } else {
+        updated = [...prev, id];
+        setShowMarigold(true);
+      }
+      try {
+        localStorage.setItem("saralyatra_bucket_list", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
 
   const t = translations[currentLang] || translations.en;
 
@@ -117,19 +146,31 @@ export default function WondersGalleryView({
             {t.exploreSub || "Explore India's emerald tea valleys, sacred river ghats, royal desert citadels, and ancient temples. Hover over any destination card to unlock its oral folklore or launch 360° virtual previews."}
           </p>
 
-          {/* Search input inside header */}
-          {setSearchQuery && (
-            <div className="relative w-full sm:w-80 pt-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t.searchPlaceholder || "Search monuments, states, hill stations..."}
-                className="w-full rounded-2xl bg-white py-2.5 pl-10 pr-4 text-xs font-medium text-stone-900 placeholder-stone-400 border border-stone-200 focus:border-terracotta-500 focus:outline-none shadow-xs"
-              />
-            </div>
-          )}
+          {/* Search input and Bucket List button inside header */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            {setSearchQuery && (
+              <div className="relative w-full sm:w-80">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={t.searchPlaceholder || "Search monuments, states, hill stations..."}
+                  className="w-full rounded-2xl bg-white py-2.5 pl-10 pr-4 text-xs font-medium text-stone-900 placeholder-stone-400 border border-stone-200 focus:border-terracotta-500 focus:outline-none shadow-xs"
+                />
+              </div>
+            )}
+
+            {/* My Bucket List Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setIsBucketListOpen(true)}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white hover:bg-rose-50 border border-stone-200 hover:border-rose-300 text-stone-800 hover:text-rose-900 text-xs font-bold transition-all cursor-pointer shadow-2xs hover:scale-105"
+            >
+              <Heart className={`h-4 w-4 ${bookmarkedIds.length > 0 ? "text-rose-600 fill-rose-500" : "text-stone-400"}`} />
+              <span>❤️ My Bucket List ({bookmarkedIds.length})</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -275,6 +316,8 @@ export default function WondersGalleryView({
               currentLang={currentLang}
               onOpen360={onOpen360}
               onOpenDetails={onOpenDetails}
+              isBookmarked={bookmarkedIds.includes(monument.id)}
+              onToggleBookmark={toggleBookmark}
             />
           ))}
         </div>
@@ -301,6 +344,26 @@ export default function WondersGalleryView({
           </button>
         </div>
       )}
+
+      {/* Cultural Heritage Bucket List Modal */}
+      {isBucketListOpen && (
+        <BucketListModal
+          bookmarkedIds={bookmarkedIds}
+          onRemoveBookmark={toggleBookmark}
+          onOpenDetails={(id) => {
+            const mon = monuments.find((m) => m.id === id);
+            if (mon) onOpenDetails(mon);
+          }}
+          isOpen={isBucketListOpen}
+          onClose={() => setIsBucketListOpen(false)}
+        />
+      )}
+
+      {/* Marigold Flower Petal Celebration */}
+      <MarigoldConfetti
+        active={showMarigold}
+        onComplete={() => setShowMarigold(false)}
+      />
 
     </div>
   );

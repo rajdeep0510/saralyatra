@@ -6,6 +6,7 @@ import { generateDynamicItinerary } from "@/utils/tripEngine";
 import { FilterPreferences, LanguageCode, PreloadedTrip } from "@/types";
 import { ArrowRight, Sparkles, Map, Route, Clock, Users, MapPin, CheckCircle2, Lock, ShieldCheck, Headphones, Compass, Heart, HelpCircle, ChevronDown, ChevronUp, Star, Globe } from "lucide-react";
 import PreferenceWizard from "@/components/planner/PreferenceWizard";
+import CulturalAtmosphereHero from "@/components/layout/CulturalAtmosphereHero";
 
 interface TripPlannerViewProps {
   currentLang: LanguageCode;
@@ -83,8 +84,8 @@ export default function TripPlannerView({
   return (
     <div className="space-y-12 py-6 animate-in fade-in duration-300 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      {/* 1. Header with Cultural Stickers */}
-      <div className="relative bg-gradient-to-r from-white via-stone-50/70 to-amber-50/30 p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-2xs overflow-hidden">
+      {/* 1. Header with Cultural Atmosphere & Badges */}
+      <CulturalAtmosphereHero className="rounded-3xl border border-stone-200 shadow-xs bg-white/90 p-6 sm:p-8">
         
         {/* Floating Badges */}
         <div className="hidden md:flex items-center gap-3 absolute top-6 right-6 z-10">
@@ -109,7 +110,7 @@ export default function TripPlannerView({
             Configure your travel theme across Nature, Pilgrimage, Heritage, or Adventure. Choose any Indian state, pick your calendar dates, and customize your duration.
           </p>
         </div>
-      </div>
+      </CulturalAtmosphereHero>
 
       {/* 2. Main Studio Grid (Wizard + Blueprint Card) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -222,15 +223,27 @@ export default function TripPlannerView({
                 </div>
               </div>
 
-              {/* View Itinerary CTA */}
-              <button
-                onClick={onNavigateToItinerary}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold shadow-sm transition-all cursor-pointer group mt-2"
-              >
-                <Map className="h-4 w-4 text-amber-400" />
-                <span>Open Live Itinerary & Route Map</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              {/* Step 3 Completion Guidance or Generate CTA */}
+              {wizardStep === 3 ? (
+                <button
+                  onClick={() => wizardDraft && handleGenerateTrip(wizardDraft)}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-terracotta-600 hover:bg-terracotta-700 text-white text-xs font-bold shadow-sm transition-all cursor-pointer group mt-2"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  <span>Generate Final {wizardDraft?.duration}D {wizardDraft?.region} Itinerary</span>
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              ) : (
+                <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-center space-y-1 mt-2">
+                  <div className="text-[11px] font-bold text-amber-900 flex items-center justify-center gap-1">
+                    <span>✨</span>
+                    <span>Step {wizardStep} of 3 in Progress</span>
+                  </div>
+                  <p className="text-[10px] text-amber-700 leading-tight">
+                    Complete all 3 customization steps to unlock your live route & map blueprint.
+                  </p>
+                </div>
+              )}
             </div>
           )}
 

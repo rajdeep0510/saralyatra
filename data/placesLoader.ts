@@ -24,6 +24,9 @@ import odishaDetail from "./place_details_json/ODISHA_LOC_DETAILS.json";
 import rajasthanDetail from "./place_details_json/RAJASTHAN_LOC_DETAILS.json";
 import tamilnaduDetail from "./place_details_json/TAMINADU_LOC_DETAILS.json";
 
+// Import multilingual translation dictionary for all 180+ places
+import placeTranslations from "./place_translations.json";
+
 interface RawLocation {
   id: string;
   name: string;
@@ -187,6 +190,8 @@ export function loadAndTransformPlaces(): Monument[] {
       ? detail["360Tour"]
       : "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=2400&q=80";
 
+    const translated = (placeTranslations as Record<string, { hi?: string; gu?: string; mr?: string; bn?: string; ta?: string }>)[loc.id];
+
     const monument: Monument = {
       id: loc.id,
       name: loc.name,
@@ -201,11 +206,11 @@ export function loadAndTransformPlaces(): Monument[] {
       panoramaUrl,
       folklore: {
         en: fullStory,
-        hi: fullStory,
-        mr: fullStory,
-        gu: fullStory,
-        bn: fullStory,
-        ta: fullStory
+        hi: translated?.hi || fullStory,
+        mr: translated?.mr || fullStory,
+        gu: translated?.gu || fullStory,
+        bn: translated?.bn || fullStory,
+        ta: translated?.ta || fullStory
       },
       languagesAvailable: ["en", "hi", "mr", "gu", "bn", "ta"],
       coordinates: {

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Headphones, Eye, Gem, Trees, Flame, Landmark, Mountain, Sparkles } from "lucide-react";
+import { Headphones, Eye, Gem, Trees, Flame, Landmark, Mountain, Sparkles, Heart } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, Monument } from "@/types";
 
@@ -10,13 +10,17 @@ interface HeritageCardProps {
   currentLang: LanguageCode;
   onOpen360: (monument: Monument) => void;
   onOpenDetails: (monument: Monument) => void;
+  isBookmarked?: boolean;
+  onToggleBookmark?: (monumentId: string) => void;
 }
 
 export default function HeritageCard({
   monument,
   currentLang,
   onOpen360,
-  onOpenDetails
+  onOpenDetails,
+  isBookmarked = false,
+  onToggleBookmark
 }: HeritageCardProps) {
   const t = translations[currentLang] || translations.en;
   const { name, state, era, isOffbeat, category, subCategory, imageUrl, folklore, languagesAvailable } = monument;
@@ -101,13 +105,24 @@ export default function HeritageCard({
             )}
           </div>
 
-          {/* Quick Hover Badge */}
-          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-            <span className="flex items-center gap-1 text-[10px] font-extrabold bg-amber-400 text-stone-950 px-2 py-0.5 rounded-full shadow-md">
-              <Sparkles className="h-3 w-3 fill-current" />
-              <span>{t.viewDetails || "Explore"}</span>
-            </span>
-          </div>
+          {/* Bookmark / Bucket List Heart Button */}
+          {onToggleBookmark && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleBookmark(monument.id);
+              }}
+              className={`absolute top-3 right-3 z-20 h-8 w-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-sm ${
+                isBookmarked
+                  ? "bg-rose-600 text-white scale-105 shadow-md shadow-rose-900/30"
+                  : "bg-black/35 hover:bg-black/60 text-white/90 hover:text-white"
+              }`}
+              title={isBookmarked ? "Saved in Bucket List" : "Add to Bucket List"}
+            >
+              <Heart className={`h-4 w-4 ${isBookmarked ? "fill-white" : ""}`} />
+            </button>
+          )}
 
           {/* Location Chip on Image Bottom */}
           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-bold z-10">

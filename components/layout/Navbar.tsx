@@ -73,7 +73,7 @@ export default function Navbar(props: NavbarProps) {
   const navItems = [
     { id: "home", href: "/", label: "", icon: Home, isHome: true },
     { id: "wonders", href: "/wonders", label: t.exploreTab || "Wonders", icon: Landmark },
-    { id: "planner", href: "/planner", label: t.plannerTab || "AI Planner", icon: Sparkles },
+    { id: "planner", href: "/planner", label: t.plannerTab || "Trip Planner", icon: Sparkles },
     { id: "itinerary", href: "/itinerary", label: t.itineraryTab || "Live Map", icon: Map },
     { id: "homestays", href: "/homestays", label: t.homestaysTab || "Stays", icon: Home },
   ];
@@ -403,7 +403,7 @@ export default function Navbar(props: NavbarProps) {
                             No Confirmed Trips Yet
                           </h5>
                           <p className="text-[11px] text-stone-500 max-w-xs mx-auto leading-relaxed">
-                            Generate a custom itinerary in AI Planner and click <strong>&quot;Confirm Trip&quot;</strong> to save it here for easy access!
+                            Generate a custom itinerary in Trip Planner and click <strong>&quot;Confirm Trip&quot;</strong> to save it here for easy access!
                           </p>
                         </div>
                       )}
