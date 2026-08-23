@@ -1,4 +1,5 @@
 import { Monument, Homestay, PreloadedTrip, Translations } from "../types";
+import { regionalJsonMonuments } from "./placesLoader";
 
 export interface StateInfo {
   id: string;
@@ -535,7 +536,7 @@ export const translations: Translations = {
   }
 };
 
-export const monuments: Monument[] = [
+const baseMonuments: Monument[] = [
   // 1. KERALA (NATURE & BACKWATERS)
   {
     id: "munnar_tea",
@@ -1019,6 +1020,17 @@ export const monuments: Monument[] = [
   }
 ];
 
+// Merge loaded regional JSON places with baseline curated monuments (deduplicated by ID)
+const allMonumentsMap = new Map<string, Monument>();
+for (const m of regionalJsonMonuments) {
+  allMonumentsMap.set(m.id, m);
+}
+for (const m of baseMonuments) {
+  allMonumentsMap.set(m.id, m);
+}
+
+export const monuments: Monument[] = Array.from(allMonumentsMap.values());
+
 export const homestays: Homestay[] = [
   {
     id: "kerala_nature_stay",
@@ -1481,6 +1493,199 @@ export const preloadedTrips: Record<string, PreloadedTrip> = {
             duration: "3.5 hours",
             lat: 15.2678,
             lng: 76.5411
+          }
+        ]
+      }
+    ]
+  },
+  gujarat: {
+    id: "gujarat",
+    title: "3-Day Gujarat Heritage, Sacred Shrines & Stepwells",
+    category: "heritage",
+    region: "Gujarat",
+    duration: 3,
+    pacing: "Moderate",
+    siteMix: "70% Sacred & Heritage / 30% Architecture",
+    stats: {
+      totalDistance: "380 km",
+      travelTime: "7.5 hours total driving",
+      monumentsCount: 4
+    },
+    culturalFilter: {
+      category: "heritage",
+      dietary: "pureVeg",
+      language: "Gujarati",
+      interests: ["Somnath Jyotirlinga", "Dwarkadhish", "Rani Ki Vav", "Sun Temple"]
+    },
+    itinerary: [
+      {
+        day: 1,
+        date: "Day 1",
+        stops: [
+          {
+            id: "gj1",
+            time: "08:30 AM",
+            type: "spiritual",
+            title: "Shree Somnath Jyotirlinga Temple",
+            desc: "First of the twelve sacred Jyotirlinga shrines facing the Arabian Sea.",
+            monumentId: "GJ-SOM-001",
+            duration: "2 hours",
+            lat: 20.888,
+            lng: 70.4012
+          },
+          {
+            id: "gj1-lunch",
+            time: "01:00 PM",
+            type: "lunch",
+            title: "Authentic Kathiyawadi & Gujarati Thali",
+            desc: "Pure vegetarian traditional meal with bajra rotla, ringna no olo, and fresh chaas.",
+            duration: "1 hour"
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "Day 2",
+        stops: [
+          {
+            id: "gj2",
+            time: "09:00 AM",
+            type: "spiritual",
+            title: "Shree Dwarkadhish Temple",
+            desc: "Ancient Char Dham kingdom of Lord Krishna on the sacred Gomti river bank.",
+            monumentId: "GJ-DWK-002",
+            duration: "2.5 hours",
+            lat: 22.2376,
+            lng: 68.9678
+          }
+        ]
+      },
+      {
+        day: 3,
+        date: "Day 3",
+        stops: [
+          {
+            id: "gj3",
+            time: "10:00 AM",
+            type: "heritage",
+            title: "Rani Ki Vav Stepwell",
+            desc: "UNESCO World Heritage subterranean stepwell with over 500 intricate sculptures.",
+            monumentId: "GJ-PAT-014",
+            duration: "2 hours",
+            lat: 23.8589,
+            lng: 72.1014
+          }
+        ]
+      }
+    ]
+  },
+  kashmir: {
+    id: "kashmir",
+    title: "3-Day Kashmir Valleys & Alpine Heritage Circuit",
+    category: "nature",
+    region: "Jammu & Kashmir",
+    duration: 3,
+    pacing: "Relaxed",
+    siteMix: "80% Alpine Valleys / 20% Ancient Ruins",
+    stats: {
+      totalDistance: "190 km",
+      travelTime: "4.5 hours total driving",
+      monumentsCount: 3
+    },
+    culturalFilter: {
+      category: "nature",
+      dietary: "any",
+      language: "Hindi",
+      interests: ["Pari Mahal", "Martand Sun Temple", "Alpine Valleys", "Lakes"]
+    },
+    itinerary: [
+      {
+        day: 1,
+        date: "Day 1",
+        stops: [
+          {
+            id: "jk1",
+            time: "09:30 AM",
+            type: "heritage",
+            title: "Pari Mahal",
+            desc: "Six-terraced Mughal palace and historic astronomy observatory overlooking Dal Lake.",
+            monumentId: "JK-KAS-003",
+            duration: "1.5 hours",
+            lat: 34.0867,
+            lng: 74.8821
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "Day 2",
+        stops: [
+          {
+            id: "jk2",
+            time: "10:30 AM",
+            type: "heritage",
+            title: "Martand Sun Temple",
+            desc: "Majestic 8th-century colonnaded stone temple ruins perched above Anantnag valley.",
+            monumentId: "JK-KAS-001",
+            duration: "1.5 hours",
+            lat: 33.7431,
+            lng: 75.2215
+          }
+        ]
+      }
+    ]
+  },
+  meghalaya: {
+    id: "meghalaya",
+    title: "3-Day Meghalaya Living Root Bridges & Sacred Groves",
+    category: "nature",
+    region: "Meghalaya",
+    duration: 3,
+    pacing: "Moderate",
+    siteMix: "90% Rainforest & Waterfalls / 10% Tribal Lore",
+    stats: {
+      totalDistance: "160 km",
+      travelTime: "4 hours total driving",
+      monumentsCount: 3
+    },
+    culturalFilter: {
+      category: "nature",
+      dietary: "any",
+      language: "English",
+      interests: ["Living Root Bridge", "Mawphlang Sacred Grove", "Waterfalls", "Tribal Lore"]
+    },
+    itinerary: [
+      {
+        day: 1,
+        date: "Day 1",
+        stops: [
+          {
+            id: "ml1",
+            time: "09:30 AM",
+            type: "nature",
+            title: "Mawphlang Sacred Grove",
+            desc: "Centuries-old pristine ancient forest preserved by Khasi tribal customs and folklore.",
+            monumentId: "ML-EKH-002",
+            duration: "2 hours",
+            lat: 25.4422,
+            lng: 75.7511
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "Day 2",
+        stops: [
+          {
+            id: "ml2",
+            time: "08:00 AM",
+            type: "adventure",
+            title: "Double Decker Living Root Bridge",
+            desc: "Iconic bio-engineered living ficus elastica root bridge in the rainforests of Nongriat.",
+            monumentId: "ML-EKH-003",
+            duration: "4 hours",
+            lat: 25.2443,
+            lng: 91.6669
           }
         ]
       }

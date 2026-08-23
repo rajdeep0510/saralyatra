@@ -106,6 +106,22 @@ export default function DashboardView({
               <span>🛕 Kashi (Spiritual)</span>
               <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
             </button>
+
+            <button
+              onClick={() => onLoadTrip("gujarat")}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            >
+              <span>🪔 Gujarat (Heritage)</span>
+              <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => onLoadTrip("meghalaya")}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            >
+              <span>🌧️ Meghalaya (Roots)</span>
+              <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
 
         </div>

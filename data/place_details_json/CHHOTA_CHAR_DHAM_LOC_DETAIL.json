@@ -1,0 +1,340 @@
+[
+  {
+    "id": "UT-YAM-101",
+    "description": "The sacred source of the river Yamuna and the first shrine of the Chhota Char Dham circuit, located at an altitude of 3,291 meters.",
+    "history": "Built in 1839 by Naresh Sudarshan Shah of Tehri Garhwal and later rebuilt by Maharani Gularia of Jaipur in the late 19th century following glacial damage.",
+    "gallery": [
+      "https://example.com/images/yamunotri-temple-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/yamunotri",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "hotWaterSprings": true,
+      "ponyDoliService": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-YAM-102",
+    "description": "Natural thermal sulphur springs and a sacred rock pillar worshipped before entering Yamunotri Temple.",
+    "history": "Pilgrims cook rice and potatoes in cloth bags inside the near-boiling Surya Kund water to take home as prasad.",
+    "gallery": [
+      "https://example.com/images/surya-kund-yamunotri.jpg"
+    ],
+    "360Tour": "https://example.com/360/surya-kund-yamunotri",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "bathingKund": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-YAM-103",
+    "description": "The major base camp and motorhead from where the 6 km pedestrian trek to Yamunotri commences.",
+    "history": "A traditional staging ground along the old pilgrim route, named after thermal springs and local settlements.",
+    "gallery": [
+      "https://example.com/images/janki-chatti.jpg"
+    ],
+    "360Tour": "https://example.com/360/janki-chatti",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lodges": true,
+      "ponyStands": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "ponyChargeApprox": 1500,
+      "doliChargeApprox": 4000
+    }
+  },
+  {
+    "id": "UT-YAM-104",
+    "description": "A quiet village across the river from Janki Chatti, housing an ancient wood-and-stone pagoda-style Shani Dev temple.",
+    "history": "The ancestral seat of the Yamunotri Panda priests and the official winter seat of Goddess Yamuna when the main shrine shuts.",
+    "gallery": [
+      "https://example.com/images/kharsali-shani.jpg"
+    ],
+    "360Tour": "https://example.com/360/kharsali",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "helipad": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-GAN-105",
+    "description": "The high-altitude seat of Goddess Ganga on the banks of the Bhagirathi River at an elevation of 3,100 meters.",
+    "history": "Constructed in the early 18th century by Nepalese General Amar Singh Thapa; later renovated by the Maharaja of Jaipur.",
+    "gallery": [
+      "https://example.com/images/gangotri-temple-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/gangotri",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "ashrams": true,
+      "ghats": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-GAN-106",
+    "description": "The physical snout of the Gangotri Glacier where the Bhagirathi river emerges, leading to the Tapovan alpine meadow.",
+    "history": "A revered pilgrimage and mountaineering trail studied for centuries as one of the largest glaciers in the Himalayas.",
+    "gallery": [
+      "https://example.com/images/gaumukh-glacier.jpg"
+    ],
+    "360Tour": "https://example.com/360/gaumukh",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "forestPermitOffice": true
+    },
+    "ticketPrices": {
+      "forestPermitIndian": 150,
+      "forestPermitForeigner": 600
+    }
+  },
+  {
+    "id": "UT-GAN-107",
+    "description": "A picturesque Himalayan valley paired with a 150-year-old cliffside wooden bridge pathway clinging to the granite walls of Nelang Valley.",
+    "history": "Carved by Peshawari Pathans for trade between India and Tibet along the ancient Silk Route; restored in 2021.",
+    "gallery": [
+      "https://example.com/images/gartang-gali.jpg"
+    ],
+    "360Tour": "https://example.com/360/gartang-gali",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "homestays": true
+    },
+    "ticketPrices": {
+      "gartangGaliEntry": 150
+    }
+  },
+  {
+    "id": "UT-GAN-108",
+    "description": "An ancient temple dedicated to Lord Shiva, housing a heavy brass trident (*Trishul*) inscribed with historic inscriptions.",
+    "history": "Rebuilt by Maharani Khaneti of Tehri in 1857 on ancient foundations mentioned in the Kedar Khand scriptures.",
+    "gallery": [
+      "https://example.com/images/kashi-vishwanath-uttarkashi.jpg"
+    ],
+    "360Tour": "https://example.com/360/uttarkashi-vishwanath",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-KED-109",
+    "description": "One of the twelve Jyotirlingas and the most prominent of the Panch Kedar temples, situated at 3,583 meters near the Mandakini River.",
+    "history": "Historically attributed to the Pandavas and revived by Adi Shankaracharya in the 8th century CE, who attained Samadhi behind the shrine.",
+    "gallery": [
+      "https://example.com/images/kedarnath-temple-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/kedarnath",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "gmvnTents": true,
+      "helipad": true,
+      "ponyDoliService": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "helicopterOneWayApprox": 3000,
+      "ponyTrekApprox": 3000
+    }
+  },
+  {
+    "id": "UT-KED-110",
+    "description": "A cliffside temple overlooking Kedarnath valley, dedicated to Lord Bhairav, the guardian deity of the Kedarnath shrine.",
+    "history": "Tradition dictates visiting Bhairavnath during the Kedarnath pilgrimage, as Bhairav is believed to guard the valley in winter.",
+    "gallery": [
+      "https://example.com/images/bhairavnath-kedarnath.jpg"
+    ],
+    "360Tour": "https://example.com/360/bhairavnath-kedarnath",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "steepTrail": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-KED-111",
+    "description": "A temple village celebrated as the celestial wedding site of Lord Shiva and Goddess Parvati, featuring an eternal flame.",
+    "history": "The *Akhand Dhuni* (eternal fire) is believed to have been burning continuously since the divine wedding in the Satya Yuga.",
+    "gallery": [
+      "https://example.com/images/triyuginarayan.jpg"
+    ],
+    "360Tour": "https://example.com/360/triyuginarayan",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "sacredKunds": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-KED-112",
+    "description": "The highest Shiva temple in the world (3,680 m) and the highest of the Panch Kedars, with a summit climb to Chandrashila.",
+    "history": "Associated with the arms (*bahu*) of Lord Shiva appearing during the Pandava penance; built in north Indian stone architecture.",
+    "gallery": [
+      "https://example.com/images/tungnath.jpg"
+    ],
+    "360Tour": "https://example.com/360/tungnath",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "pavedPonyTrack": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-BAD-113",
+    "description": "The final destination of the Chhota Char Dham circuit, dedicated to Lord Vishnu as Badrinarayan.",
+    "history": "Established by Adi Shankaracharya in the 8th century after retrieving the black Saligram idol from the Alaknanda River at Narad Kund.",
+    "gallery": [
+      "https://example.com/images/badrinath-temple-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/badrinath",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "taptKundBaths": true,
+      "brahmaKapalGhat": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "specialPujaBooking": 500
+    }
+  },
+  {
+    "id": "UT-BAD-114",
+    "description": "A UNESCO World Heritage alpine valley blanketed with over 500 species of endemic Himalayan wildflowers.",
+    "history": "Discovered for the modern world by British mountaineer Frank S. Smythe in 1931 and protected as a national park in 1982.",
+    "gallery": [
+      "https://example.com/images/valley-of-flowers.jpg"
+    ],
+    "360Tour": "https://example.com/360/valley-of-flowers",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "checkpost": true
+    },
+    "ticketPrices": {
+      "entryFeeIndian": 200,
+      "entryFeeForeigner": 800
+    }
+  },
+  {
+    "id": "UT-BAD-115",
+    "description": "A high-altitude Sikh Gurudwara and glacial lake (4,329 m) surrounded by seven snow-clad mountain peaks.",
+    "history": "Associated with the Dasam Granth, commemorating the site where Guru Gobind Singh meditated in his previous incarnation as Dusht Daman.",
+    "gallery": [
+      "https://example.com/images/hemkund-sahib.jpg"
+    ],
+    "360Tour": "https://example.com/360/hemkund-sahib",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "langarHall": true,
+      "doliPonyService": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-PRY-116",
+    "description": "The primary Panch Prayag confluence where the Bhagirathi and Alaknanda rivers merge to formally form the River Ganga.",
+    "history": "Home to the ancient stone Raghunathji Temple, one of the 108 Divya Desams dedicated to Lord Rama.",
+    "gallery": [
+      "https://example.com/images/devprayag-sangam.jpg"
+    ],
+    "360Tour": "https://example.com/360/devprayag",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "bathingGhat": true,
+      "suspensionBridges": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-PRY-117",
+    "description": "The Panch Prayag confluence point of the emerald Alaknanda and the swift Mandakini coming from Kedarnath.",
+    "history": "Named after Lord Shiva's Rudra avatar; ancient seat where Sage Narada was blessed with mastery over the Veena.",
+    "gallery": [
+      "https://example.com/images/rudraprayag-sangam.jpg"
+    ],
+    "360Tour": "https://example.com/360/rudraprayag",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "sangamGhat": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-DHR-118",
+    "description": "A revered guardian temple of Uttarakhand located over the waters of the Alaknanda River between Srinagar and Rudraprayag.",
+    "history": "Revered as the upper half of the goddess Kali idol (the lower half being in Kalimath); venerated as the protector of the Char Dham yatra.",
+    "gallery": [
+      "https://example.com/images/dhari-devi.jpg"
+    ],
+    "360Tour": "https://example.com/360/dhari-devi",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "pedestrianBridge": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  }
+]

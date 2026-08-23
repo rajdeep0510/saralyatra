@@ -1,37 +1,36 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Compass, Search, Globe, User, Landmark, Map, Home, Sparkles, X, ChevronDown, Check, ShieldCheck, MapPin, BookmarkCheck, Route, Clock, Trash2, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { Compass, Search, Globe, User, Landmark, Map, Home, Sparkles, X, ChevronDown, ShieldCheck, MapPin, BookmarkCheck, Trash2, ArrowRight } from "lucide-react";
 import { translations, indianStates } from "@/data/mockData";
-import { DietaryType, FilterPreferences, LanguageCode, PreloadedTrip, UserProfile } from "@/types";
+import { DietaryType, LanguageCode } from "@/types";
+import { useTravel } from "@/context/TravelContext";
 
 interface NavbarProps {
-  currentLang: LanguageCode;
-  setCurrentLang: (lang: LanguageCode) => void;
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  userPreferences: FilterPreferences;
-  userProfile?: UserProfile;
-  setUserProfile?: (profile: UserProfile) => void;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  onLoadSavedTrip?: (trip: PreloadedTrip) => void;
-  onDeleteSavedTrip?: (tripId: string) => void;
+  currentLang?: LanguageCode;
+  setCurrentLang?: (lang: LanguageCode) => void;
+  searchQuery?: string;
+  setSearchQuery?: (query: string) => void;
+  activeTab?: string;
+  setActiveTab?: (tab: string) => void;
 }
 
-export default function Navbar({
-  currentLang,
-  setCurrentLang,
-  searchQuery,
-  setSearchQuery,
-  userPreferences,
-  userProfile = { name: "Aarav Patel", dietary: "pureVeg", homeState: "Gujarat", savedTrips: [] },
-  setUserProfile,
-  activeTab,
-  setActiveTab,
-  onLoadSavedTrip,
-  onDeleteSavedTrip
-}: NavbarProps) {
+export default function Navbar(props: NavbarProps) {
+  const travel = useTravel();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const currentLang = props.currentLang ?? travel.currentLang;
+  const setCurrentLang = props.setCurrentLang ?? travel.setCurrentLang;
+  const searchQuery = props.searchQuery ?? travel.searchQuery;
+  const setSearchQuery = props.setSearchQuery ?? travel.setSearchQuery;
+  const userProfile = travel.userProfile;
+  const setUserProfile = travel.setUserProfile;
+  const onLoadSavedTrip = travel.handleLoadSavedTrip;
+  const onDeleteSavedTrip = travel.handleDeleteSavedTrip;
+
   const t = translations[currentLang] || translations.en;
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
   const [activeProfileTab, setActiveProfileTab] = useState<"profile" | "trips">("profile");
@@ -59,12 +58,24 @@ export default function Navbar({
     any: "Any Cuisine"
   };
 
+  const getActiveTab = () => {
+    if (props.activeTab) return props.activeTab;
+    if (pathname === "/") return "home";
+    if (pathname?.startsWith("/wonders") || pathname?.startsWith("/explore")) return "wonders";
+    if (pathname?.startsWith("/planner")) return "planner";
+    if (pathname?.startsWith("/itinerary")) return "itinerary";
+    if (pathname?.startsWith("/homestays")) return "homestays";
+    return "home";
+  };
+
+  const currentTab = getActiveTab();
+
   const navItems = [
-    { id: "home", label: "", icon: Home, isHome: true },
-    { id: "wonders", label: t.exploreTab || "Wonders", icon: Landmark },
-    { id: "planner", label: t.plannerTab || "AI Planner", icon: Sparkles },
-    { id: "itinerary", label: t.itineraryTab || "Live Map", icon: Map },
-    { id: "homestays", label: t.homestaysTab || "Stays", icon: Home },
+    { id: "home", href: "/", label: "", icon: Home, isHome: true },
+    { id: "wonders", href: "/wonders", label: t.exploreTab || "Wonders", icon: Landmark },
+    { id: "planner", href: "/planner", label: t.plannerTab || "AI Planner", icon: Sparkles },
+    { id: "itinerary", href: "/itinerary", label: t.itineraryTab || "Live Map", icon: Map },
+    { id: "homestays", href: "/homestays", label: t.homestaysTab || "Stays", icon: Home },
   ];
 
   const savedTrips = userProfile.savedTrips || [];
@@ -78,8 +89,8 @@ export default function Navbar({
           <div className="flex items-center gap-3 sm:gap-5 lg:gap-6 min-w-0">
             
             {/* Brand Logo with 'Smart Yatra' positioned below the title */}
-            <div 
-              onClick={() => setActiveTab("home")}
+            <Link 
+              href="/"
               className="flex items-center gap-2.5 cursor-pointer group shrink-0"
             >
               <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-stone-900 text-stone-50 group-hover:bg-terracotta-600 transition-colors shadow-sm shrink-0">
@@ -93,19 +104,19 @@ export default function Navbar({
                   Smart Yatra
                 </span>
               </div>
-            </div>
+            </Link>
 
             {/* Navigation Tabs (With Home icon and compact pills) */}
             <nav className="hidden lg:flex items-center gap-1 bg-stone-100/90 p-1 rounded-full border border-stone-200/70 shrink-0">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = activeTab === item.id;
+                const isActive = currentTab === item.id;
                 
                 if (item.isHome) {
                   return (
-                    <button
+                    <Link
                       key={item.id}
-                      onClick={() => setActiveTab(item.id)}
+                      href={item.href}
                       title="Home"
                       className={`flex items-center justify-center p-2 rounded-full transition-all cursor-pointer ${
                         isActive
@@ -114,14 +125,14 @@ export default function Navbar({
                       }`}
                     >
                       <Icon className={`h-4 w-4 ${isActive ? "text-terracotta-600" : "text-stone-500"}`} />
-                    </button>
+                    </Link>
                   );
                 }
 
                 return (
-                  <button
+                  <Link
                     key={item.id}
-                    onClick={() => setActiveTab(item.id)}
+                    href={item.href}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                       isActive
                         ? "bg-white text-stone-900 shadow-xs border border-stone-200 font-bold"
@@ -130,7 +141,7 @@ export default function Navbar({
                   >
                     <Icon className={`h-3.5 w-3.5 ${isActive ? "text-terracotta-600" : "text-stone-400"}`} />
                     <span>{item.label}</span>
-                  </button>
+                  </Link>
                 );
               })}
             </nav>
@@ -148,8 +159,8 @@ export default function Navbar({
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  if (activeTab === "home") {
-                    setActiveTab("wonders");
+                  if (pathname === "/") {
+                    router.push("/wonders");
                   }
                 }}
                 placeholder="Search..."
@@ -372,7 +383,6 @@ export default function Navbar({
                                     if (onLoadSavedTrip) {
                                       onLoadSavedTrip(trip);
                                     }
-                                    setActiveTab("itinerary");
                                     setIsProfileModalOpen(false);
                                   }}
                                   className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-[10px] font-bold transition-all cursor-pointer shadow-2xs"
@@ -412,11 +422,11 @@ export default function Navbar({
         <div className="flex lg:hidden overflow-x-auto py-2 gap-1.5 border-t border-stone-100 no-scrollbar">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeTab === item.id;
+            const isActive = currentTab === item.id;
             return (
-              <button
+              <Link
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                href={item.href}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
                   isActive
                     ? "bg-stone-900 text-white font-bold shadow-xs"
@@ -425,7 +435,7 @@ export default function Navbar({
               >
                 <Icon className="h-3.5 w-3.5" />
                 <span>{item.isHome ? "Home" : item.label}</span>
-              </button>
+              </Link>
             );
           })}
         </div>

@@ -1,0 +1,291 @@
+[
+    {
+        "id": "RJ-RJ-001",
+        "description": "A majestic hilltop fortress built with red sandstone and marble, known for its artistic Hindu style elements and the grand Sheesh Mahal (Mirror Palace).",
+        "history": "Originally built by Raja Man Singh I in 1592 and later expanded by Sawai Jai Singh II.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "elephantRide": "Available at the entrance",
+            "parking": "Available",
+            "audioGuide": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 50",
+            "foreignAdult": "INR 500",
+            "elephantRide": "INR 1100 for two"
+        }
+    },
+    {
+        "id": "RJ-RJ-002",
+        "description": "One of the largest forts in India, situated on a high hill overlooking the blue-painted city of Jodhpur.",
+        "history": "Founded around 1459 by Rao Jodha, with additions made over subsequent centuries by various rulers.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "elevator": "Available for elderly visitors",
+            "museum": "Inside the fort complex",
+            "audioGuide": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 100",
+            "foreignAdult": "INR 600"
+        }
+    },
+    {
+        "id": "RJ-RJ-003",
+        "description": "A massive and historically prominent fort spanning across a high hill, symbolizing Rajput valor, romance, and sacrifice.",
+        "history": "Ruled by the Guhila dynasty of Mewar, it was besieged multiple times by Delhi sultans and Mughal emperors.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "guideService": "Available at the gate"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 40",
+            "foreignAdult": "INR 600"
+        }
+    },
+    {
+        "id": "RJ-RJ-004",
+        "description": "A sprawling palace complex situated along the banks of Lake Pichola, blending Rajasthani and Mughal architectural styles.",
+        "history": "Started by Maharana Udai Singh II in 1559 as the capital of the Mewar kingdom.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "guidedTours": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 300",
+            "foreignAdult": "INR 400"
+        }
+    },
+    {
+        "id": "RJ-RJ-005",
+        "description": "A group of stunning Svetambara Jain temples renowned for their extraordinary and intricate marble stone carvings.",
+        "history": "Built between the 11th and 13th centuries by Vastupal and Tejpal.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "shoeStand": "Mandatory outside the complex",
+            "locker": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "Free",
+            "foreignAdult": "Free"
+        }
+    },
+    {
+        "id": "RJ-RJ-006",
+        "description": "A rare and revered 14th-century Hindu temple dedicated to Lord Brahma, located close to the holy Pushkar Lake.",
+        "history": "Believed to be over 2,000 years old, with current structures largely dating back to the 14th century.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "shoeStand": "Available",
+            "securityCheck": "Mandatory"
+        },
+        "ticketPrices": {
+            "indianAdult": "Free",
+            "foreignAdult": "Free"
+        }
+    },
+    {
+        "id": "RJ-RJ-007",
+        "description": "A famous 20th-century temple dedicated to Karni Mata, where thousands of black rats roam freely and are considered sacred.",
+        "history": "Built by Maharaja Ganga Singh of Bikaner in the early 20th century.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "shoeStand": "Available",
+            "parking": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "Free",
+            "foreignAdult": "Free"
+        }
+    },
+    {
+        "id": "RJ-RJ-008",
+        "description": "Also known as Taragarh Fort, this stunning palace complex features magnificent Bundi miniature-style mural paintings.",
+        "history": "Built by Rao Raja Chattisal Singh in the 17th century.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "guideService": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 100",
+            "foreignAdult": "INR 500"
+        }
+    },
+    {
+        "id": "RJ-RJ-009",
+        "description": "A major wildlife sanctuary and tiger reserve in Sawai Madhopur, famous for its wild Bengal tigers.",
+        "history": "Established as Sawai Madhopur Game Sanctuary in 1955 and declared a tiger reserve in 1973.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "canterSafari": "Available",
+            "jeepSafari": "Available"
+        },
+        "ticketPrices": {
+            "safariBooking": "Varies by zone and vehicle type"
+        }
+    },
+    {
+        "id": "RJ-RJ-010",
+        "description": "A renowned avian sanctuary and UNESCO World Heritage Site famous for hosting thousands of migratory birds.",
+        "history": "Created as a duck shooting reserve in the 1850s, later declared a national park in 1982.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "bicycleRental": "Available at gate",
+            "rickshawRide": "Bird-watching guides available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 75",
+            "foreignAdult": "INR 500"
+        }
+    },
+    {
+        "id": "RJ-RJ-011",
+        "description": "A protected wildlife sanctuary and tiger reserve located in the Alwar district of Rajasthan.",
+        "history": "Declared a wildlife sanctuary in 1958 and upgraded to a tiger reserve in 1978.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "jeepSafari": "Available",
+            "forestRestHouse": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "INR 50",
+            "safariCharges": "As per forest department rates"
+        }
+    },
+    {
+        "id": "RJ-RJ-012",
+        "description": "One of the largest national parks in India, located in the Thar Desert, known for desert wildlife like the Great Indian Bustard.",
+        "history": "Established in 1980 to protect the unique ecosystem and fossil remains of the Thar Desert.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "jeepSafari": "Available at Sam Sand Dunes"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 100",
+            "foreignAdult": "INR 300"
+        }
+    },
+    {
+        "id": "RJ-RJ-013",
+        "description": "India's largest inland saltwater lake, surrounded by historical salt-producing facilities and rich birdlife.",
+        "history": "Historically ruled by Chauhan kings and Mughal emperors as a major salt trading hub.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "Free"
+        }
+    },
+    {
+        "id": "RJ-RJ-014",
+        "description": "A sacred and picturesque freshwater lake located in the hill station of Mount Abu.",
+        "history": "Associated with Hindu mythology; believed to have been dug out by the gods using their fingernails.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "boating": "Available",
+            "restaurants": "Surrounding the lake"
+        },
+        "ticketPrices": {
+            "boatingFee": "INR 200 - 400 per boat"
+        }
+    },
+    {
+        "id": "RJ-RJ-015",
+        "description": "A scenic dam on the Jawai River known for its high concentration of wild leopards co-existing peacefully with local communities.",
+        "history": "Built during the mid-20th century by Maharaja Umaid Singh of Jodhpur.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "leopardSafari": "Available via local operators"
+        },
+        "ticketPrices": {
+            "safariCharges": "INR 1500 - 2500 per jeep"
+        }
+    },
+    {
+        "id": "RJ-RJ-016",
+        "description": "A sprawling wildlife sanctuary in the Aravalli Range known for rugged terrain, valleys, and rich flora and fauna.",
+        "history": "Established in 1983 to preserve the diverse ecological zones of central Rajasthan.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "natureTrails": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "INR 50 per person"
+        }
+    },
+    {
+        "id": "RJ-RJ-017",
+        "description": "An adventurous overnight desert camping experience under the stars atop camels in the Thar Desert.",
+        "history": "A traditional mode of transport transformed into an immersive eco-tourism cultural experience.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "tents": "Luxury and standard desert camps",
+            "culturalShows": "Folk dance and music included"
+        },
+        "ticketPrices": {
+            "safariPackage": "INR 1500 - 5000 per person"
+        }
+    },
+    {
+        "id": "RJ-RJ-018",
+        "description": "An exhilarating morning aerial adventure offering panoramic bird's-eye views of Jaipur's forts, palaces, and pink city landscape.",
+        "history": "A modern recreational tourism activity licensed and operated over historical zones.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "hotelPickup": "Provided by operators"
+        },
+        "ticketPrices": {
+            "ticketPerPerson": "INR 6000 - 10000"
+        }
+    },
+    {
+        "id": "RJ-RJ-019",
+        "description": "A serene boat trip on Lake Pichola offering stunning views of Jag Mandir, the City Palace, and lakeside ghats.",
+        "history": "Lake Pichola was expanded over centuries following its creation in 1362 AD.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "boatJettys": "City Palace jetty and Rameshwar Ghat"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 400 - 700",
+            "foreignAdult": "INR 700 - 1000"
+        }
+    },
+    {
+        "id": "RJ-RJ-020",
+        "description": "One of the world's largest camel and livestock fairs, featuring vibrant cultural performances, competitions, and religious gatherings.",
+        "history": "An ancient annual traditional trading fair held in Pushkar during Kartik Shukla Ekadashi to Purnima.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "tentCity": "Temporary luxury tourist camps",
+            "medicalCamps": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "Free (Event viewing)"
+        }
+    }
+]

@@ -11,6 +11,7 @@ export interface Monument {
   id: string;
   name: string;
   state: string;
+  city?: string;
   era?: string;
   category: "heritage" | "nature" | "spiritual" | "adventure";
   subCategory?: string;
@@ -23,10 +24,18 @@ export interface Monument {
     hi?: string;
     gu?: string;
     ta?: string;
+    mr?: string;
+    bn?: string;
     [key: string]: string | undefined;
   };
   languagesAvailable: LanguageCode[];
   coordinates: Coordinates;
+  openingTime?: string;
+  closingTime?: string;
+  recommendedDuration?: number;
+  priority?: number;
+  facilities?: Record<string, boolean | string | number | undefined>;
+  ticketPrices?: Record<string, number | string | undefined>;
 }
 
 export interface CompatibilityScore {

@@ -357,16 +357,24 @@ export default function ItineraryMapView({
       )}
 
       {/* Top Banner & Trip Overview Controls */}
-      <div className="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className={`p-6 rounded-3xl border shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6 transition-all duration-300 ${
+        isTripSaved
+          ? "bg-gradient-to-r from-emerald-50/50 via-white to-white border-emerald-500/40 ring-2 ring-emerald-500/10"
+          : "bg-white border-stone-200"
+      }`}>
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-terracotta-50 text-terracotta-700 border border-terracotta-200">
               Live Route Navigation
             </span>
             {isTripSaved ? (
-              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
-                <BookmarkCheck className="h-3.5 w-3.5 text-emerald-600" />
-                <span>Confirmed & Saved</span>
+              <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-100/90 text-emerald-900 border border-emerald-300 flex items-center gap-1.5 shadow-2xs animate-in fade-in zoom-in duration-200">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+                </span>
+                <BookmarkCheck className="h-3.5 w-3.5 text-emerald-700" />
+                <span>Trip Confirmed & Saved</span>
               </span>
             ) : (
               <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200">
@@ -385,9 +393,16 @@ export default function ItineraryMapView({
             )}
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-serif font-black text-stone-900 tracking-tight">
-            {title}
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-2xl sm:text-3xl font-serif font-black text-stone-900 tracking-tight">
+              {title}
+            </h2>
+            {isTripSaved && (
+              <span className="hidden sm:inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
+                ✓ Saved in Profile
+              </span>
+            )}
+          </div>
 
           {region && (
             <p className="text-xs text-stone-500 font-medium flex items-center gap-1.5">
@@ -450,10 +465,14 @@ export default function ItineraryMapView({
             {/* Confirm Trip Button (Green with White font) */}
             <button
               onClick={handleConfirmAndSave}
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer shadow-sm ${
+                isTripSaved
+                  ? "bg-emerald-700 hover:bg-emerald-800 text-white ring-2 ring-emerald-400/40 shadow-emerald-700/20 shadow-md"
+                  : "bg-emerald-600 hover:bg-emerald-700 text-white"
+              }`}
               title="Confirm and save trip to profile"
             >
-              <Check className="h-4 w-4" />
+              <Check className={`h-4 w-4 ${isTripSaved ? "text-emerald-200 stroke-[3]" : "text-white"}`} />
               <span>{isTripSaved ? (t.tripConfirmed || "Trip Confirmed ✓") : (t.confirmTrip || "Confirm Trip")}</span>
             </button>
 

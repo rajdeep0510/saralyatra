@@ -1,0 +1,298 @@
+[
+    {
+        "id": "RJ-OD-001",
+        "description": "The Konark Sun Temple is a 13th-century CE Sun temple at Konark in Odisha, designed as a colossal chariot with 24 wheels pulled by seven horses.",
+        "history": "Built by King Narasimhadeva I of the Eastern Ganga Dynasty around 1250 CE. Designated a UNESCO World Heritage Site in 1984.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available",
+            "guidedTours": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 40",
+            "foreignAdult": "INR 600",
+            "children": "Free"
+        }
+    },
+    {
+        "id": "RJ-OD-002",
+        "description": "Partially artificial and natural caves of archaeological, historical, and religious importance near Bhubaneswar.",
+        "history": "Carved out during the 2nd century BCE as residential blocks for Jain monks under King Kharavela.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 25",
+            "foreignAdult": "INR 300"
+        }
+    },
+    {
+        "id": "RJ-OD-003",
+        "description": "A Buddhist stupa monument overlooking the Daya River, where the Kalinga War is believed to have been fought.",
+        "history": "Built in 1972 by the Japan Buddha Sangha and the Kalinga Nippon Buddha Sangha.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "Free",
+            "foreignAdult": "Free"
+        }
+    },
+    {
+        "id": "RJ-OD-004",
+        "description": "A hilltop major Buddhist monastic complex containing numerous shrines, sculptures, and a large stupa.",
+        "history": "Dates back to the 5th to 13th century CE, serving as a prominent center of Buddhist learning in ancient India.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 25",
+            "foreignAdult": "INR 300"
+        }
+    },
+    {
+        "id": "RJ-OD-005",
+        "description": "A famous Hindu temple dedicated to Jagannath, a form of Vishnu, located in Puri.",
+        "history": "Originally built by King Anantavarman Chodaganga Deva in the 12th century. One of the Char Dham pilgrimage sites.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "shoeStand": "Available",
+            "cloakRoom": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "Free (Only Hindus allowed inside)",
+            "foreignAdult": "Restricted entry to inner sanctum"
+        }
+    },
+    {
+        "id": "RJ-OD-006",
+        "description": "One of the oldest temples in Bhubaneswar, dedicated to Lord Shiva, showcasing Kalinga architecture.",
+        "history": "Built by the Somavamshi king Jajati I in the 11th century.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "Free (Only Hindus allowed inside)",
+            "foreignAdult": "Restricted entry"
+        }
+    },
+    {
+        "id": "RJ-OD-007",
+        "description": "A 10th-century Hindu temple known as the 'gem of Odisha architecture' dedicated to Lord Shiva.",
+        "history": "Built around 950-975 CE during the Somavamshi dynasty, famous for its exquisite torana (archway).",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 25",
+            "foreignAdult": "INR 300"
+        }
+    },
+    {
+        "id": "RJ-OD-008",
+        "description": "A large wildlife sanctuary and national park featuring dense forests, waterfalls, and diverse wildlife including tigers and elephants.",
+        "history": "Established as a tiger reserve in 1956 and designated a national park in 1980; part of the UNESCO World Network of Biosphere Reserves.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "jeepSafari": "Available",
+            "forestLodges": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "INR 50 per person",
+            "vehicleEntry": "INR 500",
+            "safariCharges": "As per forest department rates"
+        }
+    },
+    {
+        "id": "RJ-OD-009",
+        "description": "A national park in Odisha known for its rich mangrove ecosystem, saltwater crocodiles, and migratory birds.",
+        "history": "Declared a national park in 1998, renowned for conservation efforts of the saltwater crocodile.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "boatSafari": "Available",
+            "guestHouse": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 40",
+            "foreignAdult": "INR 200",
+            "boatRide": "Varies by route"
+        }
+    },
+    {
+        "id": "RJ-OD-010",
+        "description": "A tiger reserve situated along the Mahanadi River, featuring deep gorges, rugged terrain, and rich biodiversity.",
+        "history": "Declared a sanctuary in 1976 and later designated as a tiger reserve.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "boating": "Available",
+            "natureCamps": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "INR 30 per person"
+        }
+    },
+    {
+        "id": "RJ-OD-011",
+        "description": "A premier zoo and botanical garden near Bhubaneswar, famous for housing India's first captive white tigers.",
+        "history": "Established in 1960 and opened to the public in 1968; set around the Chandaka forest and Kanjia lake.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "batteryCar": "Available",
+            "boating": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "adult": "INR 50",
+            "child": "INR 20",
+            "foreignAdult": "INR 200"
+        }
+    },
+    {
+        "id": "RJ-OD-012",
+        "description": "Asia's largest brackish water lagoon, famous for winter migratory birds and Irrawaddy dolphins.",
+        "history": "A Ramsar site supporting a rich ecosystem and livelihood for local fishing communities.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "boatRentals": "Available at Satapada and Mangalajodi",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "boatRide": "INR 1000 - 2500 per boat depending on distance"
+        }
+    },
+    {
+        "id": "RJ-OD-013",
+        "description": "A hill station known as the 'Kashmir of Odisha', famous for pine forests, waterfalls, and cold climate.",
+        "history": "Developed as a hill station getaway during the colonial period and post-independence.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "hotels": "Available",
+            "parking": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "Free"
+        }
+    },
+    {
+        "id": "RJ-OD-014",
+        "description": "The highest peak in Odisha, located in the Koraput district, offering panoramic views of the Eastern Ghats.",
+        "history": "A popular trekking and nature tourism destination.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Limited",
+            "viewpoint": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "Free"
+        }
+    },
+    {
+        "id": "RJ-OD-015",
+        "description": "A stunning two-tiered waterfall located within the Similipal National Park region.",
+        "history": "One of the highest waterfalls in India, plunging from a height of nearly 399 meters.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "viewpoint": "Available",
+            "guide": "Available through forest department"
+        },
+        "ticketPrices": {
+            "entryFee": "Included with Similipal National Park entry"
+        }
+    },
+    {
+        "id": "RJ-OD-016",
+        "description": "A guided boat safari experience at Satapada in Chilika Lake to spot endangered Irrawaddy dolphins.",
+        "history": "A major eco-tourism initiative managed jointly by the local community and Odisha Tourism.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "lifeJackets": "Mandatory and provided",
+            "guide": "Boatman acts as guide"
+        },
+        "ticketPrices": {
+            "boatBooking": "INR 1200 - 2000 per boat"
+        }
+    },
+    {
+        "id": "RJ-OD-017",
+        "description": "An annual natural phenomenon where hundreds of thousands of Olive Ridley sea turtles arrive to nest.",
+        "history": "Gahirmatha beach is recognized as the world's largest rookery for these endangered sea turtles.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "forestDeptCamps": "Restricted access for conservation"
+        },
+        "ticketPrices": {
+            "access": "Requires prior permission from forest department"
+        }
+    },
+    {
+        "id": "RJ-OD-018",
+        "description": "The grand annual chariot festival in Puri where deities Jagannath, Balabhadra, and Subhadra are pulled in massive wooden chariots.",
+        "history": "Centuries-old annual Hindu tradition celebrated on Ashadha Shukla Paksha Dwitiya.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "medicalCamps": "Setup extensively",
+            "security": "Heavy police deployment"
+        },
+        "ticketPrices": {
+            "viewing": "Free (Paid rooftop view stands available privately)"
+        }
+    },
+    {
+        "id": "RJ-OD-019",
+        "description": "A heritage village near Puri famous for traditional Pattachitra paintings and master palm-leaf engravers and weavers.",
+        "history": "Declared a model heritage village, where nearly every family is involved in traditional crafts.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "artShops": "Available",
+            "guidedWalks": "Available"
+        },
+        "ticketPrices": {
+            "entryFee": "Free"
+        }
+    },
+    {
+        "id": "RJ-OD-020",
+        "description": "A 9th-century Hindu temple in Bhubaneswar known for its unique erotic carvings and pink sandstone architecture.",
+        "history": "Built during the Somavamshi dynasty, often called the 'Love Temple' due to its romantic sculptures.",
+        "gallery": [],
+        "360Tour": "",
+        "facilities": {
+            "parking": "Available",
+            "restrooms": "Available"
+        },
+        "ticketPrices": {
+            "indianAdult": "INR 25",
+            "foreignAdult": "INR 300"
+        }
+    }
+]

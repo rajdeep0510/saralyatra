@@ -1,0 +1,255 @@
+[
+  {
+    "id": "ML-EKH-001",
+    "description": "A 16 km historical mule track connecting Assam and Bangladesh.",
+    "history": "Built in the early 1800s by a British administrator, this scenic trail takes you through river crossings, arched bridges, and sweeping valleys, serving as a direct piece of colonial history.",
+    "gallery": [
+      "https://example.com/images/david-scott-1.jpg",
+      "https://example.com/images/david-scott-2.jpg"
+    ],
+    "360Tour": "https://example.com/360/david-scott",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 50
+    }
+  },
+  {
+    "id": "ML-EKH-002",
+    "description": "An 800-year-old protected forest linked to Khasi religious beliefs.",
+    "history": "Preserved by the local Khasi tribes, it stands as a living record of their ancient religious beliefs and indigenous conservation practices. The strict rule is that nothing can be taken out of the forest.",
+    "gallery": [
+      "https://example.com/images/mawphlang-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/mawphlang",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 100,
+      "camera": 50
+    }
+  },
+  {
+    "id": "ML-EKH-003",
+    "description": "A rare, two-story natural bridge crafted from living rubber tree roots.",
+    "history": "A masterpiece of historical bioengineering, the practice of guiding these roots across rivers has been passed down through generations of Khasi and Jaintia tribes for centuries.",
+    "gallery": [
+      "https://example.com/images/root-bridge-1.jpg",
+      "https://example.com/images/root-bridge-2.jpg"
+    ],
+    "360Tour": "https://example.com/360/root-bridge",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 50
+    }
+  },
+  {
+    "id": "ML-SGH-004",
+    "description": "A hidden river canyon tucked deep within the dense jungles.",
+    "history": "Located in the South Garo Hills, it offers kayaking through towering, narrow gorges that feel entirely prehistoric and untouched by modern tourism.",
+    "gallery": [
+      "https://example.com/images/wari-chora-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/wari-chora",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0,
+      "kayaking": 500
+    }
+  },
+  {
+    "id": "ML-EKH-005",
+    "description": "Fondly known as the 'Mini Dzukou' of Meghalaya.",
+    "history": "A completely off-the-beaten-path destination featuring rolling green meadows and a breathtaking sea of morning clouds, ideal for early risers and campers.",
+    "gallery": [
+      "https://example.com/images/markham-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/markham",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-EKH-006",
+    "description": "The Whistling Village of the East Khasi Hills.",
+    "history": "A cultural marvel where every resident is addressed by a specific, unique whistled tune instead of a spoken name—a tradition known as 'Jingrwai Iawbei'.",
+    "gallery": [
+      "https://example.com/images/kongthong-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/kongthong",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-WKH-007",
+    "description": "Asia’s second-largest river island, located on the Kynshi River.",
+    "history": "An untouched and unhurried haven perfect for riverside camping and swimming on sandy inland beaches, separated from the mainland by beautiful rivers.",
+    "gallery": [
+      "https://example.com/images/nongkhnum-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/nongkhnum",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-WKH-008",
+    "description": "A scenic highland village surrounded by serene lakes.",
+    "history": "Characterized by rolling hills, pine forests, and cool breezes, it is an idyllic spot for slow travel and experiencing authentic Khasi village hospitality.",
+    "gallery": [
+      "https://example.com/images/mawphanlur-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/mawphanlur",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-EKH-009",
+    "description": "A spectacular, four-tiered hidden waterfall.",
+    "history": "Surrounded by thick, untouched greenery, each of the four tiers drops into calm, crystal-clear natural pools perfect for a secluded swim.",
+    "gallery": [
+      "https://example.com/images/synrangkhit-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/synrangkhit",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-EKH-010",
+    "description": "Walk on narrow bamboo bridges built by locals over deep gorges.",
+    "history": "Known as the scariest trek in Meghalaya, it requires navigating steep cliff sides on indigenous bamboo structures to reach the massive U Mawryngkhang rock.",
+    "gallery": [
+      "https://example.com/images/bamboo-trek-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/bamboo-trek",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 100
+    }
+  },
+  {
+    "id": "ML-EJH-011",
+    "description": "One of the longest natural caves in Southeast Asia.",
+    "history": "A rugged subterranean trek located in the East Jaintia Hills. It involves scrambling and muddy crawls through vast caverns and intricate limestone formations.",
+    "gallery": [
+      "https://example.com/images/cave-trek-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/cave-trek",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": true,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 200
+    }
+  },
+  {
+    "id": "ML-EKH-012",
+    "description": "India's tallest plunge waterfall.",
+    "history": "An iconic sight where water drops dramatically from a high green plateau into a vibrant blue pool, surrounded by the dramatic cliffs of Cherrapunji.",
+    "gallery": [
+      "https://example.com/images/nohkalikai-1.jpg",
+      "https://example.com/images/nohkalikai-2.jpg"
+    ],
+    "360Tour": "https://example.com/360/nohkalikai",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 30
+    }
+  },
+  {
+    "id": "ML-WJH-013",
+    "description": "Famous for its glass-like, crystal-clear water.",
+    "history": "Situated near the Bangladesh border, the river is so clear that boats appear to be floating in mid-air above the rocky riverbed. It is a premier spot for boating and camping.",
+    "gallery": [
+      "https://example.com/images/dawki-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/dawki",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0,
+      "boating": 800
+    }
+  }
+]

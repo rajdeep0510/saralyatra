@@ -1,0 +1,251 @@
+[
+  {
+    "id": "JK-KAS-001",
+    "description": "Massive, awe-inspiring ruins of an 8th-century Hindu temple dedicated to Surya.",
+    "history": "Built by King Lalitaditya Muktapida of the Karkota dynasty, it stands as a testament to the architectural brilliance of ancient Kashmir before its eventual destruction.",
+    "gallery": [
+      "https://example.com/images/martand-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/martand",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 25
+    }
+  },
+  {
+    "id": "JK-KAS-002",
+    "description": "The remains of two 9th-century Hindu temples featuring intricate stone carvings.",
+    "history": "Situated on the banks of the Jhelum River, these temples were built by King Awantivarman, dedicated to Lord Vishnu and Lord Shiva.",
+    "gallery": [
+      "https://example.com/images/awantipora-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/awantipora",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 25
+    }
+  },
+  {
+    "id": "JK-KAS-003",
+    "description": "A seven-terraced Mughal garden and historical monument overlooking Dal Lake.",
+    "history": "Built in the mid-1600s by Mughal Prince Dara Shikoh, it originally served as a library, an observatory, and a spiritual retreat.",
+    "gallery": [
+      "https://example.com/images/pari-mahal-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/pari-mahal",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 30
+    }
+  },
+  {
+    "id": "JK-KAS-004",
+    "description": "An imposing fortification sitting on a hill above Srinagar.",
+    "history": "While the site's fortification dates back to the Mughal era under Akbar, the current structure was heavily built upon by the Durrani Empire in the 18th century.",
+    "gallery": [
+      "https://example.com/images/hari-parbat-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/hari-parbat",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 50
+    }
+  },
+  {
+    "id": "JK-KAS-005",
+    "description": "A highly restricted but accessible valley famous for its pyramid-shaped Habba Khatoon peak.",
+    "history": "Located close to the Line of Control, it preserves the unique, ancient Dard-Shina indigenous culture and was historically part of the ancient Silk Route.",
+    "gallery": [
+      "https://example.com/images/gurez-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/gurez",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-006",
+    "description": "A massive, untouched biosphere and alpine meadow in the Kupwara district.",
+    "history": "Surrounded by the Shamsabari and Leepa mountain ranges, it remains one of the most pristine and unexplored ecological zones in Kashmir.",
+    "gallery": [
+      "https://example.com/images/bangus-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/bangus",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-007",
+    "description": "A quiet, completely off-grid destination in South Kashmir with pine forests and streams.",
+    "history": "Often referred to as a 'mini Pahalgam' without the commercialization, offering raw natural beauty.",
+    "gallery": [
+      "https://example.com/images/chatpal-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/chatpal",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-008",
+    "description": "An oval-shaped valley known for its vast fruit orchards and natural springs.",
+    "history": "Besides its natural beauty, the valley is home to the mysterious ancient Kalaroos caves, which local legends suggest connect all the way to Russia.",
+    "gallery": [
+      "https://example.com/images/lolab-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/lolab",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-009",
+    "description": "The summer capital of Jammu and Kashmir, famous for Dal Lake and houseboats.",
+    "history": "Founded by King Pravarasena II over 2,000 years ago, it became a major hub under the Mughal Empire, resulting in the creation of the famous UNESCO-listed terraced gardens.",
+    "gallery": [
+      "https://example.com/images/srinagar-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/srinagar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0,
+      "shikaraRide": 700
+    }
+  },
+  {
+    "id": "JK-KAS-010",
+    "description": "The premier ski resort destination in India known as the 'Meadow of Flowers'.",
+    "history": "Originally named Gaurimarg by shepherds, it was renamed by the 16th-century Sultan Yusuf Shah. It now hosts one of the highest cable cars in the world.",
+    "gallery": [
+      "https://example.com/images/gulmarg-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/gulmarg",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": true,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0,
+      "gondolaPhase1": 800
+    }
+  },
+  {
+    "id": "JK-KAS-011",
+    "description": "The Valley of Shepherds, famous for its lush landscapes in Betaab and Aru Valley.",
+    "history": "Historically a humble shepherd village, it has grown into a major tourism hub and serves as the traditional base camp for the ancient Amarnath Yatra pilgrimage.",
+    "gallery": [
+      "https://example.com/images/pahalgam-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/pahalgam",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-012",
+    "description": "A stunning trek to two massive, twin alpine lakes separated by a mountain.",
+    "history": "A pristine natural route through the Aru Valley that has long been used by local Gujjar shepherds before becoming a popular modern trekking trail.",
+    "gallery": [
+      "https://example.com/images/tarsar-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/tarsar",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-013",
+    "description": "A challenging route tracing up the Lidder River to the highest glacier in Kashmir.",
+    "history": "The Kolahoi Glacier is the main source of the Jhelum River system, making it historically and ecologically vital to the entire Kashmir valley.",
+    "gallery": [
+      "https://example.com/images/kolahoi-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/kolahoi",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  }
+]

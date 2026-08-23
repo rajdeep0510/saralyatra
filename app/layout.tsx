@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { TravelProvider } from "@/context/TravelContext";
+import ClientLayoutShell from "@/components/layout/ClientLayoutShell";
 
 export const metadata: Metadata = {
   title: "Saral Yatra — Wonders of India & Cultural Tourism Planner",
@@ -33,7 +35,11 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#faf9f5] text-stone-900 overflow-x-hidden antialiased selection:bg-terracotta-100 selection:text-terracotta-800 min-h-screen flex flex-col font-sans">
-        {children}
+        <TravelProvider>
+          <ClientLayoutShell>
+            {children}
+          </ClientLayoutShell>
+        </TravelProvider>
       </body>
     </html>
   );

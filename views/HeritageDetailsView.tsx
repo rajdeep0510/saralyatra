@@ -209,6 +209,33 @@ export default function HeritageDetailsView({
               text={textToRead}
               currentLang={currentLang}
             />
+
+            {/* Practical Visitor Info if available */}
+            {(monument.openingTime || monument.facilities || monument.ticketPrices) && (
+              <div className="bg-stone-50 rounded-2xl p-3.5 border border-stone-200/80 space-y-2 text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  {monument.openingTime && monument.closingTime && (
+                    <span className="font-semibold text-stone-700">
+                      🕒 Timings: <strong className="text-stone-900">{monument.openingTime} – {monument.closingTime}</strong>
+                    </span>
+                  )}
+                  {monument.ticketPrices && (
+                    <span className="font-semibold text-stone-700">
+                      🎟️ Entry: <strong className="text-stone-900">{monument.ticketPrices.general === 0 ? "Free / Open" : `₹${monument.ticketPrices.general}`}</strong>
+                    </span>
+                  )}
+                </div>
+                {monument.facilities && (
+                  <div className="flex flex-wrap gap-1.5 pt-1 border-t border-stone-200/50">
+                    {monument.facilities.parking && <span className="bg-white border border-stone-200 px-2 py-0.5 rounded-md text-[10px] font-bold text-stone-600">🅿️ Parking</span>}
+                    {monument.facilities.wheelchairAccessible && <span className="bg-white border border-stone-200 px-2 py-0.5 rounded-md text-[10px] font-bold text-emerald-700">♿ Accessible</span>}
+                    {monument.facilities.restrooms && <span className="bg-white border border-stone-200 px-2 py-0.5 rounded-md text-[10px] font-bold text-stone-600">🚻 Restrooms</span>}
+                    {monument.facilities.lockerRoom && <span className="bg-white border border-stone-200 px-2 py-0.5 rounded-md text-[10px] font-bold text-stone-600">🛅 Locker</span>}
+                    {monument.facilities.shoeStand && <span className="bg-white border border-stone-200 px-2 py-0.5 rounded-md text-[10px] font-bold text-stone-600">👞 Shoe Stand</span>}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Action CTAs: Launch 360 virtual preview */}
