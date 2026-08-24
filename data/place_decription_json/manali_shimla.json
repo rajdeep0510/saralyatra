@@ -1,0 +1,321 @@
+[
+  {
+    "id": "HP-SHI-001",
+    "description": "An imposing heritage building that served as the summer residence of the British Viceroy.",
+    "history": "Completed in 1888 under Lord Dufferin, this Jacobethan-style mansion was the venue for pivotal colonial political events, including the 1945 Shimla Conference and early partition discussions.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Viceregal_Lodge,_Shimla,_Himachal_Pradesh.JPG",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Full_view_of_Vice_Regal_Lodge_(Rashtrapati_Niwas).jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Viceregal+Lodge+Shimla",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "guidedTours": true
+    },
+    "ticketPrices": {
+      "general": 50,
+      "foreignNational": 200
+    }
+  },
+  {
+    "id": "HP-KUL-002",
+    "description": "A 15th-century wood and stone castle overlooking the Kullu Valley.",
+    "history": "Built around 1460 AD by Raja Sidh Singh of Kullu, it served as the royal seat for centuries. Constructed in the indigenous Kath Kuni earthquake-resistant style, it survived the 1905 Kangra earthquake.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Naggar_Castle_Himachal.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Naggar_Castle_Architecture.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Naggar+Castle+Manali",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "artGallery": true
+    },
+    "ticketPrices": {
+      "general": 30
+    }
+  },
+  {
+    "id": "HP-MAN-003",
+    "description": "A four-tiered wooden pagoda temple set inside the Dhungri cedar forest.",
+    "history": "Built in 1553 by Maharaja Bahadur Singh, the temple is dedicated to Hidimba Devi from the Mahabharata. It is built over a massive natural cave outcrop where the deity is said to have meditated.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Hidimba_devi_mandir.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Devi_Hidimba_Temple_Manali.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Hidimba+Devi+Temple+Manali",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "shoeStand": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-SHI-004",
+    "description": "A 19th-century mock-Tudor heritage estate situated near the Shimla Mall Road.",
+    "history": "Historically the summer palace of the Maharaja of Sirmaur, it was constructed during the colonial era and later converted into a cultural hub preserving historical Himachali artifacts.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Bantony_Castle_Shimla.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Bantony_Castle_Heritage.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Bantony+Castle+Shimla",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "museumExhibits": true
+    },
+    "ticketPrices": {
+      "general": 20
+    }
+  },
+  {
+    "id": "HP-MAN-005",
+    "description": "A secluded Buddhist village situated in the Hampta Valley known for igloo stays.",
+    "history": "Originally settled by the Khampa tribe of migrants, it has maintained its traditional agrarian identity while becoming a hotspot for winter bouldering and snowboarding.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Sethan_Village_Snow.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Sethan_Valley_Manali.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Sethan+Village+Manali",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "iglooCamps": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-SHI-006",
+    "description": "A quiet vantage settlement nestled in pine forests along the Hindustan-Tibet Road.",
+    "history": "Historically a stage stop for travelers along the old trade route into Tibet, Fagu is now known for its high-altitude terraced apple and potato cultivation.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Fagu_Valley_Shimla.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Fagu_Apple_Orchards.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Fagu+Shimla",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-KUL-007",
+    "description": "An off-the-grid valley preserving ancient timber architecture and rural traditions.",
+    "history": "Largely bypassed by highway development, Hallan Valley retains ancient wood-carving practices and traditional community customs that have existed in Kullu for generations.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Hallan_Valley_Kullu.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Himachal_Wood_Carvings.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Hallan+Valley+Manali",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-SHI-008",
+    "description": "A quiet town situated at 2,708 meters, serving as a gateway to apple country and skiing slopes.",
+    "history": "Historically connected to ancient routes across the Shivalik range, Narkanda serves as the base for reaching the historical Hatu Peak and the ancient Hatu Mata Temple.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Narkanda_Ski_Slopes.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Narkanda_Hatu_Peak.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Narkanda+Shimla",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "skiRentals": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-SHI-009",
+    "description": "The historical birthplace of commercial apple cultivation in Himachal Pradesh.",
+    "history": "In 1916, American missionary Samuel Stokes introduced Delicious apple saplings to Thanedar, transforming the agrarian economy of the entire state forever.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Thanedar_Apples.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Stokes_Farm_Thanedar.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Thanedar+Shimla",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-MAN-010",
+    "description": "A tranquil village known for its wooden architecture and the secluded Sajla Waterfall.",
+    "history": "Home to the ancient stone and timber temple of Vishnu, the village has maintained its indigenous architecture and rural lifestyle separate from Manali's commercial hubs.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Sajla_Waterfall.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Sajla_Vishnu_Temple.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Sajla+Village+Waterfall",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "localEateries": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-MAN-011",
+    "description": "A high-altitude glacial lake trek reaching an elevation of approximately 4,300 meters.",
+    "history": "Named after Maharishi Bhrigu, who according to Hindu tradition meditated near the lake. Local beliefs state the lake never freezes completely even during peak winter.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Bhrigu_Lake.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Bhrigu_Lake_Trek_Manali.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Bhrigu+Lake+Trek",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-SHI-012",
+    "description": "A trek to the highest peak in the outer Himalayas and the Shivalik range at 3,647 meters.",
+    "history": "Topped by an ancient stone temple dedicated to Shirgul Maharaj (Lord Shiva), the peak has served as a revered pilgrimage and shepherd route for centuries.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Churdhar_Peak.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Churdhar_Temple_Snow.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Churdhar+Peak+Trek",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-MAN-013",
+    "description": "A strenuous ridge trek ascending to 4,220 meters through dense birch and deodar forests.",
+    "history": "Historically utilized as a summer vantage and high alpine grazing route by Kullu shepherds before being documented as a modern acclimatization trek for mountaineering.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Patalsu_Peak.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Patalsu_Peak_Trek.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Patalsu+Peak+Trek",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-KUL-014",
+    "description": "A high mountain pass at 3,978 meters connecting Kullu Valley to Lahaul and Spiti.",
+    "history": "Historically an essential, dangerous trade corridor on the ancient trade route connecting northern India with western Tibet across the Pir Panjal range.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Rhotang_Pass.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Rohtang_Pass_A_Gateway_to_Himalayas.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Rohtang+Pass",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "snowActivities": true
+    },
+    "ticketPrices": {
+      "general": 500,
+      "permitRequired": true
+    }
+  },
+  {
+    "id": "HP-SHI-015",
+    "description": "The historical and cultural pedestrian open space at the center of Shimla.",
+    "history": "Built during the British colonial period to serve as the civic heart of the summer capital, featuring the prominent neo-Gothic Christ Church constructed between 1844 and 1857.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Christ_Church_Shimla.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/The_Ridge_Shimla.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=The+Ridge+Shimla",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "benches": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-MAN-016",
+    "description": "A side valley at the top of the Kullu Valley known for high-altitude sports.",
+    "history": "Originally a peaceful alpine meadow utilized for transhumant pastoralism, it transitioned into northern India's primary hub for paragliding, skiing, and winter adventure sports.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Solang_Valley_Manali.JPG",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Paragliding_in_Solang_Valley.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Solang+Valley",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "cableCar": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "HP-MAN-017",
+    "description": "The historic upper section of Manali characterized by traditional timber architecture.",
+    "history": "Originally the village of Manali named after sage Manu, it retains ancient wood-and-stone homes, apple orchards, and the historic Manu Maharishi Temple.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Old_Manali_Village.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Manu_Temple_Manali.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Old+Manali",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "cafes": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  }
+]

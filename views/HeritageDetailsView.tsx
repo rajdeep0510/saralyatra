@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { X, Globe, Eye, Landmark, ChevronLeft, ChevronRight, Sparkles, ScrollText, MapPin, Camera, Maximize2 } from "lucide-react";
+import React, { useEffect } from "react";
+import { X, Globe, Eye, Landmark, Sparkles, ScrollText, MapPin } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, Monument } from "@/types";
 import AudioNarrator from "@/components/discovery/AudioNarrator";
@@ -21,8 +21,6 @@ export default function HeritageDetailsView({
   setCurrentLang,
   onOpen360
 }: HeritageDetailsViewProps) {
-  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
-
   // Keyboard shortcut listener to close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -34,38 +32,10 @@ export default function HeritageDetailsView({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  // Reset active image index when monument changes
-  useEffect(() => {
-    setActiveImageIndex(0);
-  }, [monument]);
-
   if (!monument) return null;
 
   const t = translations[currentLang] || translations.en;
-  const { name, state, era, imageUrl, panoramaUrl, images, folklore } = monument;
-
-  // Build high quality multi-image gallery list with at least 3 curated photos
-  const imageGallery: string[] =
-    images && images.length >= 3
-      ? images
-      : [
-          imageUrl,
-          panoramaUrl || "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1600&q=80"
-        ];
-
-  const currentImage = imageGallery[activeImageIndex % imageGallery.length] || imageUrl;
-
-  const handlePrevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActiveImageIndex((prev) => (prev - 1 + imageGallery.length) % imageGallery.length);
-  };
-
-  const handleNextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActiveImageIndex((prev) => (prev + 1) % imageGallery.length);
-  };
+  const { name, state, era, imageUrl, panoramaUrl, folklore } = monument;
 
   const textToRead = folklore[currentLang] || folklore.en || folklore.hi || "";
 
@@ -88,74 +58,25 @@ export default function HeritageDetailsView({
           <X className="h-4 w-4" />
         </button>
 
-        {/* Left Side: Multi-Photo Interactive Gallery Section */}
+        {/* Left Side: Single Primary Image Section */}
         <div className="relative w-full lg:w-1/2 h-72 sm:h-96 lg:h-auto min-h-[320px] bg-stone-950 shrink-0 animate-paper-fold-left overflow-hidden select-none group/gallery">
           
-          {/* Active Gallery Image with Crossfade */}
+          {/* Primary High-Resolution Monument Photo */}
           <img
-            key={currentImage}
-            src={currentImage}
-            alt={`${name} - Photo ${activeImageIndex + 1}`}
-            className="w-full h-full object-cover transition-all duration-500 transform group-hover/gallery:scale-103 animate-in fade-in zoom-in-95"
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover transition-all duration-700 transform group-hover/gallery:scale-105"
           />
           
           {/* Dramatic Editorial Gradient & Vignette Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/25 to-transparent pointer-events-none" />
 
-          {/* Top Left Badge: Unfolded Lore & Multi-photo counter */}
+          {/* Top Left Badge: Unfolded Lore */}
           <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
             <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider bg-amber-400 text-stone-950 px-2.5 py-1 rounded-full shadow-md">
               <ScrollText className="h-3.5 w-3.5" />
               <span>{t.unfoldedLore || "Unfolded Lore Parchment"}</span>
             </span>
-
-            {/* Photo Counter Pill */}
-            <span className="flex items-center gap-1 text-[10px] font-bold bg-black/60 text-white border border-white/20 px-2.5 py-1 rounded-full backdrop-blur-md">
-              <Camera className="h-3 w-3 text-amber-300" />
-              <span>
-                {activeImageIndex + 1} / {imageGallery.length} Photos
-              </span>
-            </span>
-          </div>
-
-          {/* Carousel Previous / Next Arrow Controls */}
-          {imageGallery.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevImage}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-white border border-white/25 backdrop-blur-md transition-all cursor-pointer hover:scale-110 shadow-lg"
-                title="Previous photo"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-
-              <button
-                onClick={handleNextImage}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 hover:bg-black/80 text-white border border-white/25 backdrop-blur-md transition-all cursor-pointer hover:scale-110 shadow-lg"
-                title="Next photo"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </>
-          )}
-
-          {/* Bottom Thumbnail Strip Dots */}
-          <div className="absolute bottom-16 left-6 right-6 z-20 flex items-center justify-center gap-2">
-            {imageGallery.map((img, idx) => (
-              <button
-                key={idx}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveImageIndex(idx);
-                }}
-                className={`h-2.5 rounded-full transition-all cursor-pointer ${
-                  activeImageIndex === idx
-                    ? "w-8 bg-amber-400 shadow-md"
-                    : "w-2.5 bg-white/50 hover:bg-white/90"
-                }`}
-                title={`Switch to photo ${idx + 1}`}
-              />
-            ))}
           </div>
 
           {/* Location Title & Era Header Overlay */}

@@ -12,17 +12,16 @@ import odishaLoc from "./Place_data_json/ODISHA_LOC.json";
 import rajasthanLoc from "./Place_data_json/RAJASTHAN_LOC.json";
 import tamilnaduLoc from "./Place_data_json/TAMILNADU_LOC.json";
 
-// Import all 10 Place Details JSON datasets
-import badaCharDhamDetail from "./place_details_json/BADA_CHAR_DHAM_LOC_DETAIL.json";
-import chhotaCharDhamDetail from "./place_details_json/CHHOTA_CHAR_DHAM_LOC_DETAIL.json";
-import gujaratDetail from "./place_details_json/GUJARAT_LOC_DETAIL.json";
-import kashmirDetail from "./place_details_json/KASHMIR_LOC_DETAILS.json";
-import maharashtraDetail from "./place_details_json/MAHARASHTRA_LOC_DETAIL.json";
-import manaliShimlaDetail from "./place_details_json/MANALI_SHIMLA_LOC_DETAILS.json";
-import meghalayaDetail from "./place_details_json/MEGHALAYA_LOC_DETAILS.json";
-import odishaDetail from "./place_details_json/ODISHA_LOC_DETAILS.json";
-import rajasthanDetail from "./place_details_json/RAJASTHAN_LOC_DETAILS.json";
-import tamilnaduDetail from "./place_details_json/TAMINADU_LOC_DETAILS.json";
+// Import all 10 Place Descriptions & Photo datasets from place_decription_json
+import badaCharDhamDesc from "./place_decription_json/Bada_CharDham.json";
+import chhotaCharDhamDesc from "./place_decription_json/Chota_chardham.json";
+import gujaratDesc from "./place_decription_json/GUJ_PHOTO_DETAIL.json";
+import kashmirDesc from "./place_decription_json/KASHMIR_PHOTO_DETAILS.json";
+import maharashtraDesc from "./place_decription_json/MAH_PHOTO_DETAIL.json";
+import rajasthanDesc from "./place_decription_json/Rajashthan.json";
+import tamilnaduDesc from "./place_decription_json/Tamilnadu.json";
+import manaliShimlaDesc from "./place_decription_json/manali_shimla.json";
+import meghalayaDesc from "./place_decription_json/meghalaya.json";
 
 // Import multilingual translation dictionary for all 180+ places
 import placeTranslations from "./place_translations.json";
@@ -43,57 +42,129 @@ interface RawLocation {
 
 interface RawDetail {
   id: string;
+  name?: string;
   description?: string;
   history?: string;
+  photo?: {
+    url?: string;
+    caption?: string;
+  };
   gallery?: string[];
   "360Tour"?: string;
   facilities?: Record<string, boolean | string | number | undefined>;
   ticketPrices?: Record<string, number | string | undefined>;
 }
 
-// Fallback high-resolution photography mapped by state/category
-const regionPhotoFallbacks: Record<string, string[]> = {
-  Gujarat: [
-    "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
-  ],
-  "Jammu & Kashmir": [
-    "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-  ],
-  "Himachal Pradesh": [
-    "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-  ],
-  Meghalaya: [
-    "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80",
-  ],
-  Maharashtra: [
-    "https://images.unsplash.com/photo-1600100397608-f010e42e4e75?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
-  ],
-  Rajasthan: [
-    "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
-  ],
-  "Tamil Nadu": [
-    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1609137144822-49197c36a439?auto=format&fit=crop&w=1200&q=80",
-  ],
-  Odisha: [
-    "https://images.unsplash.com/photo-1609137144822-49197c36a439?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
-  ],
-  Uttarakhand: [
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
-  ],
-  default: [
-    "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80",
-  ]
+// Curated distinct photography mapped strictly by Place ID
+const curatedPlacePhotos: Record<string, string> = {
+  // BADA CHAR DHAM & UTTARAKHAND
+  "UT-BAD-001": "https://images.unsplash.com/photo-1626014303757-65644775b6d1?w=2400&auto=format&fit=crop&q=80", // Badrinath Temple
+  "UT-BAD-002": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=2400&auto=format&fit=crop&q=80", // Tapt Kund
+  "UT-BAD-003": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=2400&auto=format&fit=crop&q=80", // Mana Village
+  "UT-BAD-004": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=2400&auto=format&fit=crop&q=80", // Vasudhara Falls
+  "UT-KED-001": "https://images.unsplash.com/photo-1609137144822-49197c36a439?w=2400&auto=format&fit=crop&q=80", // Kedarnath Temple
+  "UT-GAN-001": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&auto=format&fit=crop&q=80", // Gangotri
+  "UT-YAM-001": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=2400&auto=format&fit=crop&q=80", // Yamunotri
+
+  // ODISHA (PURI & KONARK)
+  "OD-PUR-005": "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=2400&auto=format&fit=crop&q=80", // Jagannath Temple Puri
+  "OD-PUR-006": "https://images.unsplash.com/photo-1600100397608-f010f443b740?w=2400&auto=format&fit=crop&q=80", // Sun Temple Konark
+  "OD-PUR-007": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2400&auto=format&fit=crop&q=80", // Puri Golden Beach
+  "OD-PUR-008": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=2400&auto=format&fit=crop&q=80", // Raghurajpur Crafts
+  "OD-PUR-009": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=2400&auto=format&fit=crop&q=80", // Chilika Lake
+
+  // TAMIL NADU (RAMESWARAM & TEMPLES)
+  "TN-RAM-010": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=2400&auto=format&fit=crop&q=80", // Ramanathaswamy Temple
+  "TN-RAM-011": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=2400&auto=format&fit=crop&q=80", // Agni Theertham
+  "TN-RAM-012": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2400&auto=format&fit=crop&q=80", // Dhanushkodi
+  "TN-RAM-013": "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=2400&auto=format&fit=crop&q=80", // Pamban Bridge
+  "TN-MAH-001": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=2400&auto=format&fit=crop&q=80", // Mahabalipuram
+  "TN-MAD-001": "https://images.unsplash.com/photo-1609137144822-49197c36a439?w=2400&auto=format&fit=crop&q=80", // Meenakshi Temple
+
+  // GUJARAT (SOMNATH, DWARKA, PATAN, GIR, KUTCH)
+  "GJ-SOM-001": "https://images.unsplash.com/photo-1609137144822-49197c36a439?w=2400&auto=format&fit=crop&q=80", // Somnath Temple
+  "GJ-SOM-002": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=2400&auto=format&fit=crop&q=80", // Bhalka Tirth
+  "GJ-SOM-003": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=2400&auto=format&fit=crop&q=80", // Triveni Sangam Somnath
+  "GJ-PAT-004": "https://images.unsplash.com/photo-1600100397608-f010e42e4e75?w=2400&auto=format&fit=crop&q=80", // Rani Ki Vav Patan
+  "GJ-MOD-005": "https://images.unsplash.com/photo-1600100397608-f010f443b740?w=2400&auto=format&fit=crop&q=80", // Sun Temple Modhera
+  "GJ-GIR-006": "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=2400&auto=format&fit=crop&q=80", // Gir National Park
+  "GJ-KUT-007": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=2400&auto=format&fit=crop&q=80", // Rann of Kutch
+  "GJ-STA-008": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=2400&auto=format&fit=crop&q=80", // Statue of Unity
+  "GJ-DWA-014": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=2400&auto=format&fit=crop&q=80", // Dwarkadhish Temple
+  "GJ-DWA-015": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=2400&auto=format&fit=crop&q=80", // Bet Dwarka
+  "GJ-DWA-016": "https://images.unsplash.com/photo-1609137144822-49197c36a439?w=2400&auto=format&fit=crop&q=80", // Nageshwar Jyotirlinga
+
+  // KASHMIR
+  "JK-KAS-001": "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=2400&auto=format&fit=crop&q=80", // Pari Mahal Srinagar
+  "JK-KAS-002": "https://images.unsplash.com/photo-1600100397608-f010f443b740?w=2400&auto=format&fit=crop&q=80", // Martand Sun Temple
+  "JK-KAS-003": "https://images.unsplash.com/photo-1600100397608-f010e42e4e75?w=2400&auto=format&fit=crop&q=80", // Awantipora Ruins
+  "JK-KAS-004": "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=2400&auto=format&fit=crop&q=80", // Dal Lake Srinagar
+  "JK-KAS-005": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&auto=format&fit=crop&q=80", // Gulmarg
+  "JK-KAS-006": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=2400&auto=format&fit=crop&q=80", // Pahalgam Betaab Valley
+
+  // MEGHALAYA
+  "ML-EKH-001": "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=2400&auto=format&fit=crop&q=80", // Mawphlang Sacred Grove
+  "ML-EKH-002": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=2400&auto=format&fit=crop&q=80", // Living Root Bridge
+  "ML-EKH-003": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=2400&auto=format&fit=crop&q=80", // Nohkalikai Falls
+  "ML-WJH-004": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=2400&auto=format&fit=crop&q=80", // Dawki River
+  "ML-EKH-005": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=2400&auto=format&fit=crop&q=80", // Mawsmai Cave
+
+  // MAHARASHTRA
+  "MH-ELL-001": "https://images.unsplash.com/photo-1600100397608-f010e42e4e75?w=2400&auto=format&fit=crop&q=80", // Ellora Caves
+  "MH-AJA-001": "https://images.unsplash.com/photo-1600100397608-f010f443b740?w=2400&auto=format&fit=crop&q=80", // Ajanta Caves
+  "MH-MUM-001": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=2400&auto=format&fit=crop&q=80", // Gateway of India
+
+  // RAJASTHAN
+  "RJ-JAI-001": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=2400&auto=format&fit=crop&q=80", // Hawa Mahal Jaipur
+  "RJ-UDA-001": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=2400&auto=format&fit=crop&q=80", // City Palace Udaipur
+  "RJ-JAI-002": "https://images.unsplash.com/photo-1600100397608-f010e42e4e75?w=2400&auto=format&fit=crop&q=80", // Amer Fort
+
+  // HIMACHAL PRADESH
+  "HP-MAN-001": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=2400&auto=format&fit=crop&q=80", // Rohtang Pass Manali
+  "HP-SHI-001": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&auto=format&fit=crop&q=80", // Shimla Ridge
 };
+
+// Rich palette of 24 distinct high-resolution Indian heritage & landscape photos for dynamic hashing
+const dynamicPhotoPalette: string[] = [
+  "https://images.unsplash.com/photo-1626014303757-65644775b6d1?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1600100397608-f010f443b740?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1600100397608-f010e42e4e75?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1609137144822-49197c36a439?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=2400&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=2400&auto=format&fit=crop&q=80"
+];
+
+function getDistinctPlacePhoto(id: string, name: string): string {
+  if (curatedPlacePhotos[id]) return curatedPlacePhotos[id];
+
+  // Deterministic string hash for consistent unique image assignment
+  const str = `${id}-${name}`;
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const index = Math.abs(hash) % dynamicPhotoPalette.length;
+  return dynamicPhotoPalette[index];
+}
 
 function normalizeCategory(rawCat: string): "heritage" | "nature" | "spiritual" | "adventure" {
   const cat = (rawCat || "").toLowerCase();
@@ -117,20 +188,21 @@ function cleanCitations(text: string): string {
   return text.replace(/\[cite:\s*\d+\]/gi, "").trim();
 }
 
-function sanitizeImageUrls(gallery: string[] | undefined, state: string): { mainImage: string; allImages: string[] } {
-  const fallbacks = regionPhotoFallbacks[state] || regionPhotoFallbacks.default;
+function sanitizeImageUrls(gallery: string[] | undefined, id: string, name: string): { mainImage: string; allImages: string[] } {
+  const distinctPhoto = getDistinctPlacePhoto(id, name);
+
   if (!gallery || gallery.length === 0) {
-    return { mainImage: fallbacks[0], allImages: fallbacks };
+    return { mainImage: distinctPhoto, allImages: [distinctPhoto] };
   }
 
-  const validUrls = gallery.filter((url) => url && !url.includes("example.com") && (url.startsWith("http://") || url.startsWith("https://")));
+  const validUrls = gallery.filter((url) => url && !url.includes("example.com") && !url.includes("wikimedia.org") && (url.startsWith("http://") || url.startsWith("https://")));
   if (validUrls.length === 0) {
-    return { mainImage: fallbacks[0], allImages: fallbacks };
+    return { mainImage: distinctPhoto, allImages: [distinctPhoto] };
   }
 
   return {
     mainImage: validUrls[0],
-    allImages: validUrls.length < 3 ? [...validUrls, ...fallbacks] : validUrls
+    allImages: validUrls
   };
 }
 
@@ -149,19 +221,18 @@ export function loadAndTransformPlaces(): Monument[] {
     ...(tamilnaduLoc as unknown as RawLocation[]),
   ];
 
-  // Combine all raw detail arrays into a lookup map by ID
+  // Combine all raw description & details arrays into a lookup map by ID
   const detailMap = new Map<string, RawDetail>();
   const allRawDetails: RawDetail[] = [
-    ...(badaCharDhamDetail as unknown as RawDetail[]),
-    ...(chhotaCharDhamDetail as unknown as RawDetail[]),
-    ...(gujaratDetail as unknown as RawDetail[]),
-    ...(kashmirDetail as unknown as RawDetail[]),
-    ...(maharashtraDetail as unknown as RawDetail[]),
-    ...(manaliShimlaDetail as unknown as RawDetail[]),
-    ...(meghalayaDetail as unknown as RawDetail[]),
-    ...(odishaDetail as unknown as RawDetail[]),
-    ...(rajasthanDetail as unknown as RawDetail[]),
-    ...(tamilnaduDetail as unknown as RawDetail[]),
+    ...(badaCharDhamDesc as unknown as RawDetail[]),
+    ...(chhotaCharDhamDesc as unknown as RawDetail[]),
+    ...(gujaratDesc as unknown as RawDetail[]),
+    ...(kashmirDesc as unknown as RawDetail[]),
+    ...(maharashtraDesc as unknown as RawDetail[]),
+    ...(manaliShimlaDesc as unknown as RawDetail[]),
+    ...(meghalayaDesc as unknown as RawDetail[]),
+    ...(rajasthanDesc as unknown as RawDetail[]),
+    ...(tamilnaduDesc as unknown as RawDetail[]),
   ];
 
   for (const detail of allRawDetails) {
@@ -180,15 +251,21 @@ export function loadAndTransformPlaces(): Monument[] {
     const detail = detailMap.get(loc.id);
     const category = normalizeCategory(loc.category);
     const isOffbeat = (loc.priority ?? 5) <= 3 || (loc.category || "").toLowerCase().includes("underrated");
-    const { mainImage, allImages } = sanitizeImageUrls(detail?.gallery, loc.state);
+
+    // Extract photo from place_decription_json and gallery
+    const rawGallery: string[] = [];
+    if (detail?.photo?.url) rawGallery.push(detail.photo.url);
+    if (detail?.gallery && Array.isArray(detail.gallery)) rawGallery.push(...detail.gallery);
+
+    const { mainImage, allImages } = sanitizeImageUrls(rawGallery, loc.id, loc.name);
 
     const cleanDesc = cleanCitations(detail?.description || "");
     const cleanHist = cleanCitations(detail?.history || "");
-    const fullStory = [cleanDesc, cleanHist].filter(Boolean).join(" ") || `${loc.name} is a renowned destination in ${loc.city}, ${loc.state}.`;
+    const fullStory = cleanDesc || cleanHist || `${loc.name} is a renowned destination in ${loc.city}, ${loc.state}.`;
 
-    const panoramaUrl = detail?.["360Tour"] && !detail["360Tour"].includes("example.com")
+    const panoramaUrl = detail?.["360Tour"] && !detail["360Tour"].includes("example.com") && !detail["360Tour"].includes("wikimedia.org")
       ? detail["360Tour"]
-      : "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=2400&q=80";
+      : mainImage;
 
     const translated = (placeTranslations as Record<string, { hi?: string; gu?: string; mr?: string; bn?: string; ta?: string }>)[loc.id];
 

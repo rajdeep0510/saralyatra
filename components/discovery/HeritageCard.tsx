@@ -143,9 +143,9 @@ export default function HeritageCard({
             {name}
           </h4>
 
-          {/* Folklore snippet */}
-          <p className="text-xs text-stone-600 leading-relaxed font-normal">
-            {truncatedStory}
+          {/* Description snippet from place_decription_json */}
+          <p className="text-xs text-stone-600 leading-relaxed font-normal line-clamp-3 min-h-[3.6rem]">
+            {textToDisplay}
           </p>
 
           {/* Language translation availability chips */}

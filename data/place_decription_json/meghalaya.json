@@ -1,0 +1,251 @@
+[
+  {
+    "id": "ML-EKH-001",
+    "description": "A 16 km historical mule track connecting Assam and Bangladesh through sweeping valleys.",
+    "history": "Built in the early 1800s by a British administrator, David Scott, this scenic trail takes you through river crossings, arched bridges, and sweeping valleys, serving as a direct piece of colonial trade history.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/David_Scott_Trail.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Khasi_Hills,_Mawphlang.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=David+Scott+Trail+Meghalaya",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "guideServices": true
+    },
+    "ticketPrices": {
+      "general": 50
+    }
+  },
+  {
+    "id": "ML-EKH-002",
+    "description": "An 800-year-old protected forest linked to Khasi religious beliefs where nothing can be removed.",
+    "history": "Preserved by the local Khasi tribes, it stands as a living record of their ancient religious beliefs and indigenous conservation practices. The strict rule is that not even a dead leaf can be taken out.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Mawphlang_Sacred_Forest_of_India.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Trees_of_Mawphlang_Sacred_Forest_Meghalaya.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Mawphlang+Sacred+Grove",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "localGuides": true
+    },
+    "ticketPrices": {
+      "general": 100,
+      "camera": 50
+    }
+  },
+  {
+    "id": "ML-EKH-003",
+    "description": "A rare, two-story natural bridge crafted from living rubber tree roots.",
+    "history": "A masterpiece of historical bioengineering, the practice of guiding these roots across rivers has been passed down through generations of Khasi and Jaintia tribes for centuries to survive monsoon floods.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Double_Decker_Living_Root_Bridge_Nongriat.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Living_root_bridges.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Double+Decker+Living+Root+Bridge+Nongriat",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "homestays": true
+    },
+    "ticketPrices": {
+      "general": 50
+    }
+  },
+  {
+    "id": "ML-SGH-004",
+    "description": "A hidden river canyon tucked deep within the dense jungles of the South Garo Hills.",
+    "history": "For centuries, it remained a localized secret among the Garo tribes until recent exploration revealed its towering, narrow gorges that feel entirely prehistoric and untouched by modern tourism.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Garo_Hills_River.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Meghalaya_Canyon.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Wari+Chora+Garo+Hills",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "kayakRentals": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "kayaking": 500
+    }
+  },
+  {
+    "id": "ML-EKH-005",
+    "description": "Fondly known as the 'Mini Dzukou' of Meghalaya, featuring rolling green meadows.",
+    "history": "Historically a grazing ground for local livestock, it has emerged as an off-the-beaten-path destination known for its breathtaking sea of morning clouds.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Meghalaya_Meadows.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Shillong_Valley.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Markham+Valley+Meghalaya",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "campingSites": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-EKH-006",
+    "description": "The Whistling Village of the East Khasi Hills where people are addressed by tunes.",
+    "history": "A cultural marvel where every resident is addressed by a specific, unique whistled tune instead of a spoken name—a centuries-old survival and communication tradition known as 'Jingrwai Iawbei'.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Kongthong_Village.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Khasi_Village_Houses.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Kongthong+Village+Meghalaya",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "homestays": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-WKH-007",
+    "description": "Asia’s second-largest river island, located on the picturesque Kynshi River.",
+    "history": "Formed by the bifurcation of the Kynshi river, the island remains an untouched haven that has historically sustained local fishing and agricultural communities.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Nongkhnum_Island.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Kynshi_River.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Nongkhnum+Island+Meghalaya",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "camping": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-WKH-008",
+    "description": "A scenic highland village surrounded by rolling hills, pine forests, and serene lakes.",
+    "history": "An idyllic settlement that preserves authentic Khasi village hospitality and traditional agricultural layouts, historically isolated from the main trade routes.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Mawphanlur_Lake.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Meghalaya_Highlands.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Mawphanlur+Meghalaya",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "boating": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-EKH-009",
+    "description": "A spectacular, four-tiered hidden waterfall surrounded by thick greenery.",
+    "history": "Tucked away in the Pynursla region, the waterfall has served as a natural water source for deep-forest foraging routes used by indigenous communities.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Synrangkhit_Falls.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Meghalaya_Jungle_Waterfall.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Synrangkhit+Waterfall+Meghalaya",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "ML-EKH-010",
+    "description": "A thrilling walk on narrow bamboo bridges built by locals over deep gorges.",
+    "history": "Known as the scariest trek in Meghalaya, it features indigenous bamboo engineering used historically by Khasi hunters to navigate steep cliff sides and reach the sacred U Mawryngkhang rock.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Mawryngkhang_Trek.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Bamboo_Bridge_Meghalaya.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Mawryngkhang+Bamboo+Trek",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "firstAid": false
+    },
+    "ticketPrices": {
+      "general": 100
+    }
+  },
+  {
+    "id": "ML-EJH-011",
+    "description": "A rugged subterranean trek through one of the longest natural caves in Southeast Asia.",
+    "history": "Discovered and mapped extensively over the last few decades, its vast caverns and intricate limestone formations showcase millions of years of geological history.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Krem_Liat_Prah.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Meghalaya_Cave_Limestone.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Krem+Liat+Prah+Cave",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "cavingGearRentals": true
+    },
+    "ticketPrices": {
+      "general": 200
+    }
+  },
+  {
+    "id": "ML-EKH-012",
+    "description": "India's tallest plunge waterfall, dropping dramatically into a vibrant blue pool.",
+    "history": "The falls are named after a tragic Khasi legend involving a local woman named Likai who jumped off the cliff, giving it the name 'Nohkalikai' (The Leap of Likai).",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Nohkalikai_Fall.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Nohkalikai_Falls,_Cherrapunji.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Nohkalikai+Falls",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "viewingDeck": true
+    },
+    "ticketPrices": {
+      "general": 30
+    }
+  },
+  {
+    "id": "ML-WJH-013",
+    "description": "Famous for its glass-like, crystal-clear water where boats appear to be floating in mid-air.",
+    "history": "Situated on the Bangladesh border, the Umngot River has historically served as a vital trade waterway and a natural boundary line between the Jaintia Hills and the plains.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Dawki_Bridge_from_Umngot_River.jpg",
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Umngot_River_Clear_Water.jpg"
+    ],
+    "360Tour": "https://www.google.com/maps/search/?api=1&query=Dawki+Umngot+River",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "boatRentals": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "boating": 800
+    }
+  }
+]

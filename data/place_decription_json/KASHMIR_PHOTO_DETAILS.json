@@ -1,0 +1,303 @@
+[
+  {
+    "id": "JK-KAS-001",
+    "name": "Martand Sun Temple",
+    "description": "Massive, awe-inspiring ruins of an 8th-century Hindu temple complex dedicated to the sun deity Surya[cite: 1]. Perched atop a plateau near Anantnag, it features a grand colonnade, intricate stone pediments, and a central sanctuary showcasing a rare synthesis of Kashmiri, Gandharan, and Greco-Roman classical architectural traditions[cite: 1].",
+    "history": "Built in the 8th century by King Lalitaditya Muktapida of the Karkota dynasty, the temple symbolized the imperial power and cultural zenith of ancient Kashmir[cite: 1]. Surpassing other regional shrines in scale, it operated as a key center of Hindu worship for centuries before facing eventual destruction and ruin[cite: 1].",
+    "photos": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsMopzT7V-sW-tPH66dmZHraRGO76jDGEpbm0iJUxwew&s=10"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/e/eb/Martand_Sun_Temple_in_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/martand",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 25
+    }
+  },
+  {
+    "id": "JK-KAS-002",
+    "name": "Awantipora Ruins",
+    "description": "The archaeological remains of two distinct 9th-century temple complexes, Avantiswami and Avantisvara, characterized by intricate monolithic bas-reliefs, sculpted columns, and expansive stone courtyards[cite: 1].",
+    "history": "Commissioned along the banks of the Jhelum River by King Awantivarman, founder of the Utpala dynasty[cite: 1]. The Avantiswami temple was dedicated to Lord Vishnu, while Avantisvara honored Lord Shiva, serving as major monastic and theological focal points during Kashmir's classical era[cite: 1].",
+    "photos": [
+      "https://upload.wikimedia.org/wikipedia/commons/3/3c/Avantipura_ruins.JPG?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/1/18/Avantiswami_Temple_Awantipora_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/awantipora",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 25
+    }
+  },
+  {
+    "id": "JK-KAS-003",
+    "name": "Pari Mahal",
+    "description": "A seven-terraced Mughal architectural monument and botanical garden set against the Zabarwan mountain range, offering sweeping panoramic views over Dal Lake and the Srinagar valley[cite: 1].",
+    "history": "Established in the mid-1600s by Mughal Prince Dara Shikoh, the eldest son of Emperor Shah Jahan[cite: 1]. Dedicated to Sufi scholarly pursuits, the complex functioned as a school of astrology, an observatory, a library, and a peaceful spiritual sanctuary[cite: 1].",
+    "photos": [
+      "https://upload.wikimedia.org/wikipedia/commons/e/e0/A_view_of_Pari_Mahal_Jammu_and_Kashmir_India.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/8/87/Pari_Mahal_Srinagar_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/pari-mahal",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 30
+    }
+  },
+  {
+    "id": "JK-KAS-004",
+    "name": "Hari Parbat Fort",
+    "description": "A fortified hilltop citadel overlooking Srinagar, surrounded by historic stone ramparts, bastions, and shared religious shrines revered across Hindu, Muslim, and Sikh traditions[cite: 1].",
+    "history": "Initial ramparts were erected in the late 16th century under Mughal Emperor Akbar[cite: 1]. The current fortification was extensively expanded in the 18th century by Atta Mohammad Khan, governor under the Afghan Durrani Empire, to secure defense over the Kashmir Valley[cite: 1].",
+    "photos": [
+      "https://upload.wikimedia.org/wikipedia/commons/3/3e/Hari_Parbat%2C_Srinagar%2C_J%26K.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/7/76/Hari_Parbat_Fort_Srinagar.jpg"
+    ],
+    "360Tour": "https://example.com/360/hari-parbat",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 50
+    }
+  },
+  {
+    "id": "JK-KAS-005",
+    "name": "Gurez Valley",
+    "description": "A high-altitude, remote alpine valley framed by the Kishanganga River and the distinctive pyramid-shaped Habba Khatoon peak[cite: 1].",
+    "history": "Situated adjacent to the Line of Control, Gurez served as a vital section of the ancient Silk Route connecting Kashmir to Gilgit and Central Asia[cite: 1]. It remains the ancestral home of the Dard-Shin people, preserving their distinct Shina language, folklore, and wooden architecture[cite: 1].",
+    "photos": [
+      "https://holaciti.com/assets/place/1765697360place.webp"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/1/1a/Habba_Khatoon_Peak_Gurez_Valley.jpg"
+    ],
+    "360Tour": "https://example.com/360/gurez",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-006",
+    "name": "Bangus Valley",
+    "description": "An expansive, pristine biosphere valley in Kupwara district composed of Bodh Bangus (Big Bangus) and Lokut Bangus (Small Bangus), surrounded by dense deodar and pine forests[cite: 1].",
+    "history": "Sheltered by the Shamsabari, Chowkibal, and Leepa mountain ranges, Bangus has remained largely uncommercialized for centuries, historically utilized by nomadic pastoralist tribes for seasonal grazing[cite: 1].",
+    "photos": [
+      "https://brownchinarkashmir.com/wp-content/uploads/2024/10/bangus-valley_brown_chinar_kashmir.jpg.webp"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/0/07/Bangus_Valley_Kupwara.jpg"
+    ],
+    "360Tour": "https://example.com/360/bangus",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-007",
+    "name": "Chatpal",
+    "description": "A secluded and serene off-grid forested retreat in Shangus, South Kashmir, known for its yellow and white wildflower meadows, babbling streams, and pine-clad hills[cite: 1].",
+    "history": "Long tucked away from mainstream transit corridors, Chatpal historically functioned as an untouched hamlet inhabited by pastoral communities, retaining its raw alpine environment away from heavy commercial development[cite: 1].",
+    "photos": [
+      "https://sandeepachetan.com/wp-content/uploads/2014/06/IN_CHA201306151951.jpg"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/a/ad/Chatpal_Kashmir_Landscape.jpg"
+    ],
+    "360Tour": "https://example.com/360/chatpal",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-008",
+    "name": "Lolab Valley",
+    "description": "An oval-shaped fertile valley known as the 'Land of Love', celebrated for its vast apple, walnut, and cherry orchards, dense deodar woodlands, and freshwater springs[cite: 1].",
+    "history": "Praised by ancient poets and travelers for its natural charm, the valley holds historical intrigue through the ancient Kalaroos caves and the Stone Age megalithic structures documented across its forested terrain[cite: 1].",
+    "photos": [
+      "https://holaciti.com/assets/place/1765693601place.webp"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/5/52/Lolab_Valley_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/lolab",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-009",
+    "name": "Srinagar",
+    "description": "The summer capital of Jammu and Kashmir, resting along the banks of the Jhelum River, renowned for its heritage wooden houseboats, shikara rides on Dal and Nigeen Lakes, and traditional craft markets[cite: 1].",
+    "history": "Founded as Pravarapura by King Pravarasena II in the 6th century, Srinagar evolved over millennia into a thriving center for trade, Sanskrit scholarship, and later Mughal imperial leisure, which birthed Shalimar and Nishat Bagh[cite: 1].",
+    "photos": [
+      "https://static.toiimg.com/photo/113548484.cms"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/7/72/Dal_Lake_Srinagar_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/srinagar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0,
+      "shikaraRide": 700
+    }
+  },
+  {
+    "id": "JK-KAS-010",
+    "name": "Gulmarg",
+    "description": "A premier alpine plateau and winter ski resort destination in the Pir Panjal Range, surrounded by pine forests and high snow peaks[cite: 1].",
+    "history": "Originally named Gaurimarg in honor of Goddess Parvati, it was renamed Gulmarg ('Meadow of Flowers') in the 16th century by Sultan Yusuf Shah[cite: 1]. It later became a favored hill resort during the British colonial era and now operates the high-altitude Gulmarg Gondola[cite: 1].",
+    "photos": [
+      "https://tripmore.in/wp-content/uploads/2022/04/Gulmarg-Beautiful-1024x1024.jpg"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/a/af/Gulmarg_Meadow_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/gulmarg",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": true,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0,
+      "gondolaPhase1": 800
+    }
+  },
+  {
+    "id": "JK-KAS-011",
+    "name": "Pahalgam",
+    "description": "A mountain resort town situated at the confluence of the Lidder River and the Sheshnag stream, known as the 'Valley of Shepherds' and gateway to Betaab, Aru, and Chandanwari valleys[cite: 1].",
+    "history": "Centuries ago, Pahalgam was a humble pastoral settlement for Gujjar and Bakarwal shepherds before becoming the starting point for the holy Amarnath Yatra pilgrimage and a central location for Indian cinema[cite: 1].",
+    "photos": [
+      "https://assets.cntraveller.in/photos/60ba1148a1a415b43b10b8a0/1:1/w_1080,h_1080,c_limit/Getaways-Lead.jpg"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pahalgam_Valley_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/pahalgam",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-012",
+    "name": "Tarsar Marsar Trek",
+    "description": "An alpine wilderness trekking circuit featuring two glacial almond-shaped lakes, Tarsar and Marsar, divided by a sheer granite ridge amidst meadows[cite: 1].",
+    "history": "These trails have been navigated for generations by nomadic shepherds migrating between the Dachigam catchment and Aru Valley, retaining cultural mentions in Kashmiri poetic folklore, notably through the verses of Habba Khatoon[cite: 1].",
+    "photos": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBWgofWtkVlqg5LDS6me4ymOsGTlHPOB0BPgXv3xosuLIxuZkY1QupVNg&s=10"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/0/05/Tarsar_Lake_Kashmir.jpg"
+    ],
+    "360Tour": "https://example.com/360/tarsar",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "JK-KAS-013",
+    "name": "Kolahoi Glacier",
+    "description": "A hanging valley glacier positioned beneath the Kolahoi Peak (Goddess of Light) at an elevation exceeding 4,700 meters, surrounded by crevasses and alpine moraines[cite: 1].",
+    "history": "As the principal perennial water reservoir feeding the Lidder and Jhelum river systems, the Kolahoi Glacier has historically underpinned the agricultural economy and ecological balance of the entire Kashmir Valley[cite: 1].",
+    "photos": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8V_bFeziWdbd5nBoXC_xQigBIbTzoxpkG6z3b2J_Om-YmYfFtiBw98KA&s=10"
+    ],
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/9/91/Kolahoi_Glacier_Trek.jpg"
+    ],
+    "360Tour": "https://example.com/360/kolahoi",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "lockerRoom": false,
+      "shoeStand": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  }
+]

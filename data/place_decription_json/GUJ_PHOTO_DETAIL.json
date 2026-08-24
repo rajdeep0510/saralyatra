@@ -1,0 +1,496 @@
+[
+  {
+    "id": "GJ-SOM-001",
+    "name": "Somnath Temple",
+    "photo": {
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtwqnII8E4nNjUXFKPGpGgXuTFCt_c_Uhke4XxcROwszer8exVf2QXpUU&s=10",
+      "caption": "Shree Somnath Jyotirlinga Temple on the Arabian Sea coast"
+    },
+    "description": "Standing on the rugged coast of the Arabian Sea at Prabhas Patan near Veraval, Somnath is revered as the first (Aadi) of the twelve sacred Jyotirlinga shrines of Lord Shiva. Constructed in the grand Kailash Mahameru Prasad style of Chaulukya (Solanki) temple architecture, the temple features an imposing seven-tiered main spire (shikhara) rising to a height of 155 feet, topped with a 10-ton stone kalash and a 27-foot flag pole. The sprawling sanctum, assembly hall (nrityamandapa), and pillared porches are carved from honey-colored sandstones with intricate sculptures of deities, guardians, and musicians. A notable feature on the temple's southern sea-facing perimeter wall is the ancient Baan Stambh (Arrow Pillar), bearing a Sanskrit inscription marking an uninterrupted sea route running in a straight meridian line directly from the temple to Antarctica without touching any landmass.",
+    "history": "Referred to across ancient Puranic literature, the original temple was mythologically believed to have been founded in gold by the Moon God Soma to relieve a curse, rebuilt in silver by Ravana, and in wood by Lord Krishna. Historically, the temple's coastal wealth and religious prestige made it a frequent target for foreign invasions and medieval raids, beginning with the sacking by Mahmud of Ghazni in 1026 CE, followed by repeated destructions under the Delhi Sultanate and the Mughal Emperor Aurangzeb. In the late 18th century, Queen Ahilyabai Holkar of Indore built a safe adjacent underground shrine to preserve the holy lingam. The present grand temple was initiated immediately following Indian Independence in November 1947, when Deputy Prime Minister Sardar Vallabhbhai Patel pledged its reconstruction. Master architect Prabhashankar Sompura designed the new stone edifice, leading to the formal consecration (Pran-Pratishtha) on May 11, 1951, by the first President of India, Dr. Rajendra Prasad.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtwqnII8E4nNjUXFKPGpGgXuTFCt_c_Uhke4XxcROwszer8exVf2QXpUU&s=10"
+    ],
+    "360Tour": "https://example.com/360/somnath",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "lockerRoom": true,
+      "shoeStand": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "lightAndSoundShowAdult": 30,
+      "lightAndSoundShowChild": 15
+    }
+  },
+  {
+    "id": "GJ-DWK-002",
+    "name": "Dwarkadhish Temple",
+    "photo": {
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnAkPjZaBfQF6eiYbsEskdrs78mG3MGMkFANG9_Yimnw&s=10",
+      "caption": "The multi-tiered spire of Jagat Mandir at Dwarka"
+    },
+    "description": "Dwarkadhish Temple, also known as Jagat Mandir (Universal Shrine) or Trilok Sundar, is a premier Char Dham pilgrimage destination situated near the confluence where the sacred Gomti River empties into the Arabian Sea. The magnificent main shrine rises five stories high and is supported by 72 exquisitely carved sandstone columns. The 43-meter-high tiered spire (shikhara) is crowned by the sacred 'Dhwaja'—a gigantic 52-yard triangular flag depicting the sun and moon that is ceremonially replaced five times a day. Pilgrims access the temple through two monumental carved gateways: Swarga Dwar (Gate to Heaven), approached by climbing 56 steps from the Gomti ghats, and Moksha Dwar (Gate to Liberation), which serves as the primary exit.",
+    "history": "According to Hindu tradition and the Mahabharata, the original sanctuary was founded over 2,500 years ago by Vajranabha, the great-grandson of Lord Krishna, on the residential palace grounds of the ancient submerged golden city of Dvaraka. In the 8th century CE, the philosopher-theologian Adi Shankaracharya visited the temple and established the Sharada Peeth matha here, cementing Dwarka as one of the four cardinal Char Dham pilgrimage centers across India. The central temple was rebuilt and expanded during the Chaulukya and medieval Gujarat Sultanate periods, with the current ornate five-story tiered sandstone mandapa and soaring spire dating primarily to the structural renovations of the 16th and 17th centuries.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dwarka_Temple.jpg"
+    ],
+    "360Tour": "https://example.com/360/dwarka",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": true,
+      "shoeStand": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "vipDarshan": 0
+    }
+  },
+  {
+    "id": "GJ-ABJ-004",
+    "name": "Ambaji Temple & Gabbar Hill",
+    "photo": {
+      "url": "https://res.cloudinary.com/kmadmin/image/upload/v1721214863/kiomoi/Gabbar_Hill_0465.jpg",
+      "caption": "Pristine marble structure of Shree Ambaji Mata Temple"
+    },
+    "description": "Located amidst the ancient Aravalli mountain ranges in Banaskantha district, Ambaji is one of the most venerated Shakti Peethas in Western India. Uniquely, the temple houses no physical anthropomorphic idol; instead, the presiding deity, Goddess Amba, is worshipped through the sacred 'Viso Yantra'—a holy geometric brass diagram inscribed with Vedic mantras, decorated with ornaments and attired in silk robes. The temple is built from pristine white marble sourced from nearby Makrana, featuring a towering gold-plated spire (kalash) weighing over three tons. Four kilometers away stands Gabbar Hill, a steep 999-step geological formation reachable by foot or ropeway, housing the eternal flame representing the original holy seat of the Goddess.",
+    "history": "Mythologically categorized as one of the 51 primary Shakti Peethas, scripture records that Gabbar Hill is the sacred site where the heart of Goddess Sati fell following Shiva's Tandava dance. The shrine holds centuries-old cultural ties to the local Garasia and Bhil tribal populations who served as original mountain guardians. The temple was patronized heavily by the medieval Paramara and Chaulukya rulers of Gujarat, and later by the royal house of Danta, who performed all major coronations with the blessings of Ambaji. The contemporary white marble temple complex and surrounding 51 Shakti Peeth Parikrama path on Gabbar were extensively developed over the past three decades to accommodate millions of walking pilgrims (padayatris) during the annual Bhadarvi Poonam fair.",
+    "gallery": [
+      "https://res.cloudinary.com/kmadmin/image/upload/v1721214863/kiomoi/Ambaji_Temple_0464.jpg"
+    ],
+    "360Tour": "https://example.com/360/ambaji",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "ropeway": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "gabbarRopeway": 130
+    }
+  },
+  {
+    "id": "GJ-PLT-005",
+    "name": "Palitana Shatrunjaya Temples",
+    "photo": {
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdXRr9tNzSmiKLwte_8-FxcWcwJ2MNiazNxHiZzwdGag&s=10",
+      "caption": "Carved white marble temple complex atop Shatrunjaya Hill in Palitana"
+    },
+    "description": "Rising above the town of Palitana in Bhavnagar district, Shatrunjaya Hill is the world's largest temple city complex, consisting of over 860 white marble and limestone Jain shrines arranged in fortified clusters known as 'tuks'. Reached by ascending over 3,750 carved stone steps, the hilltop is completely dedicated to spiritual worship; no one, including priests, is permitted to stay overnight on the sacred hill. The architecture is characterized by ribbed domes, geometric tessellations, intricately chiseled bracket pillars, and marble floors that glow in the sun. The largest and most ornate shrine on the summit is dedicated to Rishabhanatha (Adinath), featuring jewel-encrusted idols and soaring, multi-tiered spires.",
+    "history": "Shatrunjaya is considered the holiest pilgrimage site (Tirtha) in the Svetambara Jain tradition, revered as the sacred mountain where Adinath, the first Tirthankara, gave his inaugural sermon, and where millions of monks attained spiritual liberation (moksha). The construction of this holy citadel was an extraordinary multi-generational endeavor spanning over 900 years, beginning around the 11th century CE. Wealthy Jain merchants, royal ministers like Vastupala and Tejapala, and community guilds funded successive waves of construction to rebuild the shrines after sackings during the 14th-century Khalji invasions. In 2014, Palitana achieved global distinction by becoming the world's first legally recognized, completely vegetarian city by state mandate.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdXRr9tNzSmiKLwte_8-FxcWcwJ2MNiazNxHiZzwdGag&s=10"
+    ],
+    "360Tour": "https://example.com/360/palitana",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "doliService": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "doliServiceApprox": 2000
+    }
+  },
+  {
+    "id": "GJ-PAT-014",
+    "name": "Rani ki Vav",
+    "photo": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rani_ki_vav_08.jpg",
+      "caption": "Seven-tiered subterranean corridors of Rani ki Vav in Patan"
+    },
+    "description": "Constructed as an inverted temple on the banks of the ancient Saraswati River, Rani ki Vav (The Queen's Stepwell) in Patan is a UNESCO World Heritage Masterpiece of subterranean Maru-Gurjara stepwell architecture. Stepping down seven distinct levels to a depth of over 27 meters, the stepwell measures approximately 65 meters long and 20 meters wide. It contains more than 500 major sculptures and over a thousand minor sculptural reliefs carved into high-quality sandstone walls. The ornamental panels depict the Dashavatara (ten incarnations of Lord Vishnu), accompanied by celestial damsels (Apsaras/Vishakanyas) adorning themselves, Dikpalas, and intricate geometric stone friezes.",
+    "history": "This subterranean memorial was commissioned in 1063 CE by Queen Udayamati as a royal memorial to her deceased husband, King Bhima I of the Chaulukya (Solanki) dynasty. Stepwells in arid Gujarat were built not only as crucial public water-management infrastructures but also as civic sanctuaries and spiritual retreats for caravans and travelers. Following a catastrophic shift in the course of the Saraswati River during the 13th century, silt and alluvial mud flooded the stepwell, completely burying it underground for centuries. This layer of silt effectively preserved the delicate stone sculptures from weather erosion and iconoclasm until the Archaeological Survey of India (ASI) carefully excavated and restored the monument during the 1980s.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rani_ki_vav_08.jpg"
+    ],
+    "360Tour": "https://example.com/360/ranikivav",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "garden": true
+    },
+    "ticketPrices": {
+      "indianAdult": 40,
+      "foreignAdult": 600,
+      "childrenBelow15": 0
+    }
+  },
+  {
+    "id": "GJ-MSH-016",
+    "name": "Modhera Sun Temple",
+    "photo": {
+      "url": "https://assets.architecturaldigest.in/photos/65956285104be36899da0d0f/master/w_1600%2Cc_limit/22%252010%252013%2520ILDL%2520MODHERA%2520SUN%2520TEMPLE%2520%25C2%25A9%2520NOUGHTS%2520AND%2520CROSSES%2520256_1.jpg",
+      "caption": "Surya Kund stepped tank and pillared assembly hall at Modhera Sun Temple"
+    },
+    "description": "Set along the banks of the Pushpavati River in Mehsana district, the Sun Temple of Modhera is an architectural masterpiece of the Solanki era. The complex is divided into three axially aligned components: the Surya Kund (Ramakund), a massive rectangular stepped water tank adorned with 108 miniature shrines on its stepped terraces; the Sabha Mandapa (Assembly Hall), an open pillared hall supported by 52 elaborately carved pillars representing the weeks of the year; and the Guda Mandapa (Inner Sanctum). Built on a high plinth without mortar, the exterior walls feature sculptural friezes displaying the twelve Adityas, Dikpalas, celestial musicians, and scenes from the Ramayana and Mahabharata.",
+    "history": "The temple was built in 1026–1027 CE by King Bhima I of the Chaulukya dynasty, shortly after the raid of Somnath, to honor the solar deity Surya and rejuvenate the kingdom's cultural prestige. The monument was masterfully engineered with astronomical precision: the layout was oriented so that during the solar equinoxes (March 21 and September 23), the first rays of the rising sun traveled through the open pillared halls to illuminate the jewel-seated golden idol of Surya inside the inner sanctum. Although the main idol and upper shikhara were damaged during later sultanate raids, the surviving halls and stepwell remain protected monuments of national importance.",
+    "gallery": [
+      "https://assets.architecturaldigest.in/photos/65956285104be36899da0d0f/master/w_1600%2Cc_limit/22%252010%252013%2520ILDL%2520MODHERA%2520SUN%2520TEMPLE%2520%25C2%25A9%2520NOUGHTS%2520AND%2520CROSSES%2520256_1.jpg"
+    ],
+    "360Tour": "https://example.com/360/modhera",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "museum": true,
+      "cafeteria": true
+    },
+    "ticketPrices": {
+      "indianAdult": 40,
+      "foreignAdult": 600,
+      "childrenBelow15": 0
+    }
+  },
+  {
+    "id": "GJ-KCH-017",
+    "name": "Dholavira",
+    "photo": {
+      "url": "https://assets.cntraveller.in/photos/60fffeeca77bf98b83f53693/1:1/w_3318,h_3318,c_limit/1128240810",
+      "caption": "Excavated stone-cut water reservoir system of the Indus Valley metropolis at Dholavira"
+    },
+    "description": "Dholavira is a UNESCO World Heritage archaeological site situated on Khadir Bet island in the Great Rann of Kutch. Spanning over 100 hectares, this ancient Bronze Age metropolis exhibits a distinct tripartite urban layout comprising a strongly fortified Citadel (Castle and Bailey), a Middle Town for administrators, and a Lower Town for common citizens, all constructed with cut limestone rather than the baked brick typical of other Harappan settlements. The defining engineering marvel of Dholavira is its sophisticated hydraulic system: a massive network of 16 rock-cut interconnected reservoirs, stone dams, and specialized storm-water drainage channels designed to harvest and store every drop of monsoon water.",
+    "history": "Flourishing continuously for over a millennium from roughly 2650 BCE to 1450 BCE, Dholavira was a thriving commercial maritime trading hub connecting the interior Indian subcontinent with ancient Mesopotamia and Oman. Excavations conducted by the Archaeological Survey of India under archaeologist R.S. Bisht between 1990 and 2005 unearthed workshops for lapidary beads, shell jewelry, copper smelting, and pottery. One of the most famous archaeological discoveries at the site is the 'Dholavira Signboard'—a ten-character Harappan inscription made of white gypsum paste tiles that represents one of the earliest preserved examples of public signage in world history.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dholavira.jpg"
+    ],
+    "360Tour": "https://example.com/360/dholavira",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "museum": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "museumEntry": 5
+    }
+  },
+  {
+    "id": "GJ-BRD-020",
+    "name": "Laxmi Vilas Palace",
+    "photo": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lukshmi_Vilas_Palace_Vadodara.jpg",
+      "caption": "Grand Indo-Saracenic facade of the Laxmi Vilas Palace in Vadodara"
+    },
+    "description": "Sprawling across 500 acres of manicured estate in Vadodara, the Laxmi Vilas Palace is a majestic example of the Indo-Saracenic style of architecture. Four times the size of Buckingham Palace, the royal palace features an intricate blend of Indian domes, Rajput jharokhas, Islamic minarets, and European Gothic towers built from Agra sandstone, blue trapstone, and Italian marble. The interior houses the famed Durbar Hall, which features Venetian mosaic floors, Belgian stained-glass windows, and walls adorned with bronze sculptures and oil paintings by Raja Ravi Varma. The palace grounds include private golf greens, banquet halls, and the Maharaja Fateh Singh Museum.",
+    "history": "Commissioned in 1890 by Maharaja Sayajirao Gaekwad III, one of the most progressive visionary monarchs of the princely state of Baroda, the palace was designed by British architect Major Charles Mant. When Mant passed away during construction fearing structural miscalculations, the project was completed by architect Robert Fellowes Chisholm. Built at a cost of £180,000, the palace was fitted with modern engineering amenities rare for its era, including internal hydraulic elevators, central electrical wiring, and advanced drainage. It continues to serve as the official private residence of the royal Gaekwad family.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lukshmi_Vilas_Palace_Vadodara.jpg"
+    ],
+    "360Tour": "https://example.com/360/laxmi-vilas",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "audioGuide": true,
+      "cafe": true
+    },
+    "ticketPrices": {
+      "indianAdult": 250,
+      "foreignAdult": 600,
+      "palaceAndMuseumCombo": 350
+    }
+  },
+  {
+    "id": "GJ-AMD-029",
+    "name": "Old Ahmedabad Historic City & Pols",
+    "photo": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/A_Pol_in_Ahmedabad.jpg",
+      "caption": "Traditional wooden pol house architecture in the historic walled city of Ahmedabad"
+    },
+    "description": "The Historic City of Ahmedabad, inscribed as India's first UNESCO World Heritage City, is a dense urban fabric on the eastern bank of the Sabarmati River. The settlement is organized into hundreds of self-contained residential clusters called 'Pols'—tightly knit neighborhoods entered through private gates that open into winding pedestrian streets, dead ends, and open central squares. These timber-frame townhouses (Haveli architecture) showcase intricately hand-carved wooden facades, brackets, balconies, and internal courtyards with rainwater harvesting tanks (tankas). The public squares feature wooden bird-feeders (chabutras) and historic community wells.",
+    "history": "The walled city was founded in 1411 CE by Sultan Ahmed Shah of the Muzaffarid dynasty as the new capital of the Gujarat Sultanate. The Pol system developed as an indigenous response to security and microclimate demands, allowing community groups defined by caste, trade, or religion to live in tightly bonded units with integrated defensive watchtowers and secret exit networks. The city served as a major manufacturing and textile trading powerhouse through the Mughal and British periods, producing world-famous brocades and block prints. The heritage core preserves landmark religious monuments such as the Jama Masjid and the Sidi Saiyyed Mosque with its famed tree-of-life stone latticework.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/A_Pol_in_Ahmedabad.jpg"
+    ],
+    "360Tour": "https://example.com/360/ahmedabad-pols",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "guidedHeritageWalk": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "amcHeritageWalk": 200
+    }
+  },
+  {
+    "id": "GJ-AMD-030",
+    "name": "Sabarmati Ashram",
+    "photo": {
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaxljQJSPY2mGdz_rOGo1OyGfqubKIOJ2d465bKbJsQQ&s=10",
+      "caption": "Hriday Kunj, the residence of Mahatma Gandhi at Sabarmati Ashram"
+    },
+    "description": "Situated peacefully on the tranquil western bank of the Sabarmati River in Ahmedabad, Sabarmati Ashram (also known as Harijan Ashram or Satyagraha Ashram) served as the primary residence and national headquarters of Mahatma Gandhi and Kasturba Gandhi from 1917 to 1930. Built with whitewashed walls, red clay-tiled roofs, and open brick-paved verandahs, the ashram includes Hriday Kunj (Gandhi's residence), Vinoba-Mira Kutir, Nandini guest house, and Udyog Mandir (the workshop for spinning khadi). The central museum, designed by famed architect Charles Correa, houses original manuscripts, personal artifacts, charkhas (spinning wheels), and photographic archives documenting the freedom struggle.",
+    "history": "Originally established by Gandhi in 1915 in the Kochrab area, the ashram was relocated to this riverbank site in 1917 to facilitate agricultural farming, spinning, and sanitation experiments. It became the epicenter of India's non-violent freedom movement, functioning as a school for civil disobedience, community living, and cottage industry revival. On March 12, 1930, Gandhi marched from this ashram with 78 followers on the historic 241-mile Dandi Salt March to protest the British salt tax, vowing not to return to Sabarmati until India attained complete independence. The ashram is preserved as a national memorial and research center dedicated to peace and non-violence.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaxljQJSPY2mGdz_rOGo1OyGfqubKIOJ2d465bKbJsQQ&s=10"
+    ],
+    "360Tour": "https://example.com/360/sabarmati-ashram",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "bookstore": true,
+      "archives": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-NMD-031",
+    "name": "Statue of Unity",
+    "photo": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Statue_of_Unity.jpg",
+      "caption": "The 182-meter tall Statue of Unity honoring Sardar Vallabhbhai Patel"
+    },
+    "description": "Standing on Sadhu Bet island facing the Narmada River and Sardar Sarovar Dam in Kevadia (Ekta Nagar), the Statue of Unity is the world's tallest monument, rising to a height of 182 meters (597 feet). The colossus portrays Sardar Vallabhbhai Patel in characteristic traditional attire, engineered with twin reinforced concrete cores clad in 6,500 bronze panels. Inside, high-speed elevators carry visitors to an observation gallery located at the 153-meter chest level, offering views of the Satpura and Vindhya mountain ranges. The surrounding complex contains an exhibition museum, a 3-star hotel, landscaped valley of flowers, musical fountains, and clean electric mobility transport networks.",
+    "history": "The monument was built to commemorate Sardar Vallabhbhai Patel, India's first Deputy Prime Minister and Home Minister, celebrated as the 'Iron Man of India' for integrating 562 princely states into the Indian Union following the 1947 partition. Designed by sculptor Ram V. Sutar, construction began in October 2013 by Larsen & Toubro, using iron farm tools contributed by millions of farmers across India. The statue was formally inaugurated on October 31, 2018, marking Sardar Patel's 143rd birth anniversary. Since opening, the area has evolved into a comprehensive ecotourism corridor encompassing jungle safaris, river rafting, and biodiversity parks.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Statue_of_Unity.jpg"
+    ],
+    "360Tour": "https://example.com/360/statue-of-unity",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "foodCourt": true,
+      "eBusService": true
+    },
+    "ticketPrices": {
+      "basicEntryAdult": 150,
+      "basicEntryChild": 90,
+      "viewingGalleryAdult": 380,
+      "expressTicket": 1030
+    }
+  },
+  {
+    "id": "GJ-KCH-032",
+    "name": "Nirona & Kutch Craft Villages",
+    "photo": {
+      "url": "https://nirona.in/wp-content/uploads/2025/02/Ashish_Kansara_Rogan_Art_199.jpg",
+      "caption": "Master artisan demonstrating freehand Rogan textile art in Nirona"
+    },
+    "description": "Nirona, along with nearby artisan villages like Bhujodi, Ajrakhpur, and Hodka in the Kutch district, represents a vibrant center of world-renowned traditional handicrafts. Nirona is globally unique as the exclusive home of Rogan Art—an intricate freehand textile painting technique created using boiled castor-seed paste mixed with natural earth pigments, applied onto fabric using a metal stylus without direct touch. The village is also famous for traditional copper-coated iron bell-making, tuned by hand to produce distinct musical chords, as well as lacquer-work wooden spoons and kitchenware colored with natural tree resins.",
+    "history": "These craft traditions have been preserved for generations by artisan communities who migrated from Sindh, Balochistan, and Rajasthan centuries ago. The Khatri community preserved the rare Persian-originated Rogan craft through single-family lineages, while the Luhar community forged cattle bells for desert pastoralists. Following the devastating 2001 Gujarat earthquake, these craft traditions received worldwide recognition through community craft trusts and state heritage initiatives. Rogan art gained global acclaim when handmade Rogan tree-of-life paintings were presented by Indian Prime Minister Narendra Modi as state gifts to world leaders, including the President of the United States.",
+    "gallery": [
+      "https://nirona.in/wp-content/uploads/2025/02/Ashish_Kansara_Rogan_Art_199.jpg"
+    ],
+    "360Tour": "https://example.com/360/kutch-crafts",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "artisanWorkshops": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-KCH-037",
+    "name": "White Rann of Kutch",
+    "photo": {
+      "url": "https://www.tripsavvy.com/thmb/Yh7C0nh6CKbB5BmhRz3il-V8sm8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-537000923-541774dbe2d44759815fdf0719b04685.jpg",
+      "caption": "Crystalline salt crust and vast expanses of the Great Rann of Kutch"
+    },
+    "description": "The White Rann of Kutch is one of the largest seasonal salt deserts in the world, spanning over 7,500 square kilometers within the Great Rann of Kutch along the India-Pakistan border. During the annual monsoon, Arabian Sea seawater and river runoff flood the low-lying mudflats; as summer waters evaporate under the desert sun, a pristine, blindingly white crust of pure mineral salt forms across the vast desert basin. The landscape is an expansive flat horizon that glows under the light of full-moon nights. During winter, the edge of the desert at Dhordo transforms into the vibrant Rann Utsav cultural tent city, offering camel cart safaris, Kutchi folk music stages, and hot-air ballooning.",
+    "history": "Geologically, the Rann was once a navigable gulf and inlet of the Arabian Sea that silted up over millennia due to tectonic movements and sediment deposits from rivers like the ancient Saraswati and Indus. The region experienced further major topographical changes following the 1819 Rann of Kutch earthquake, which raised an 80-kilometer natural dam ridge known as the 'Allah Bund' and altered river drainage patterns. In 2006, the state government launched the Rann Utsav festival to transform the remote, seasonal salt desert into an international ecotourism destination celebrating Kutchi embroidery, music, and cuisine.",
+    "gallery": [
+      "https://www.tripsavvy.com/thmb/Yh7C0nh6CKbB5BmhRz3il-V8sm8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-537000923-541774dbe2d44759815fdf0719b04685.jpg"
+    ],
+    "360Tour": "https://example.com/360/white-rann",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "camelSafari": true,
+      "culturalStage": true
+    },
+    "ticketPrices": {
+      "permitAdult": 100,
+      "permitChild": 50,
+      "vehiclePermit": 50
+    }
+  },
+  {
+    "id": "GJ-SAS-039",
+    "name": "Gir National Park & Wildlife Sanctuary",
+    "photo": {
+      "url": "https://www.tripsavvy.com/thmb/ldxtGQ7kKuG89A1ul5-zw8cBvhk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1081266451-5ab50c7f8023b90036495226.jpg",
+      "caption": "Wild Asiatic lion in the dry deciduous woodlands of Gir"
+    },
+    "description": "Spanning roughly 1,412 square kilometers in the Saurashtra peninsula across Junagadh, Gir Somnath, and Amreli districts, Gir National Park and Wildlife Sanctuary is an ecologically diverse sanctuary consisting of dry deciduous teak forests, thorny acacia scrubland, and rocky riverine corridors. The sanctuary is fed by seven perennial rivers, including the Hiran, Raval, and Shetrunji. Beyond being the exclusive natural wilderness refuge of the endangered Asiatic lion (Panthera leo persica), Gir supports high densities of Indian leopards, striped hyenas, sambar deer, chital (spotted deer), four-horned antelopes (chousingha), and mugger crocodiles.",
+    "history": "By the late 19th century, excessive trophy hunting by colonial officers and royal elites had driven the Asiatic lion to the brink of global extinction, with fewer than 20 individuals surviving in the Gir forests. Recognizing the crisis, Nawab Muhammad Rasul Khanji of the princely state of Junagadh instituted strict hunting bans and royal protection laws in the early 1900s. Following independence, the area was designated a wildlife sanctuary in 1965 and later elevated to a National Park. Through co-management between the Gujarat Forest Department and indigenous Maldhari pastoralists living in forest settlements (nesses), the wild lion population has rebounded to over 670 individuals, representing a prominent wildlife conservation success.",
+    "gallery": [
+      "https://www.tripsavvy.com/thmb/ldxtGQ7kKuG89A1ul5-zw8cBvhk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1081266451-5ab50c7f8023b90036495226.jpg"
+    ],
+    "360Tour": "https://example.com/360/gir-safari",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "safariBookingCenter": true
+    },
+    "ticketPrices": {
+      "safariPermitIndian": 800,
+      "safariPermitForeigner": 4800,
+      "gypsyAndGuideExtra": 2500
+    }
+  },
+  {
+    "id": "GJ-DNG-046",
+    "name": "Saputara",
+    "photo": {
+      "url": "https://blogs.tripzygo.in/wp-content/uploads/2025/06/saputara-hill-station-1024x683.jpg",
+      "caption": "Saputara Lake surrounded by hills in the Western Ghats"
+    },
+    "description": "Perched on a forested plateau at an altitude of approximately 1,000 meters in the Dang district, Saputara is Gujarat's sole hill station, located in the Sahyadri range of the Western Ghats. The landscape is covered with moist deciduous forests, bamboo thickets, and waterfalls. The town surrounds the central Saputara Lake, which provides boating, and features sunrise/sunset viewpoints like Gandhi Shikhar, Governor's Hill, and Table Land. Additional attractions include the Step Garden, Rose Garden, a passenger ropeway cable car spanning the valley, and the Saputara Tribal Museum showcasing the culture of local indigenous communities.",
+    "history": "In the local Dangi tribal language, Saputara translates literally to the 'Abode of Serpents', derived from the tribal tradition of worshipping the serpent deity Sarpaganga along the river banks, particularly during the festival of Holi. For centuries, the region was governed by the indigenous Bhil and Dangi kings who maintained administrative independence in the Dang forests against Mughal and Maratha control. In the post-independence era, the state government carefully developed the town into a planned mountain eco-resort in the mid-20th century to boost regional tourism while preserving the artistic heritage, bamboo craft traditions, and Warli paintings of the Dang tribes.",
+    "gallery": [
+      "https://blogs.tripzygo.in/wp-content/uploads/2025/06/saputara-hill-station-1024x683.jpg"
+    ],
+    "360Tour": "https://example.com/360/saputara-plateau",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "hotels": true,
+      "ropeway": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "lakeBoating": 50,
+      "cableCar": 100
+    }
+  },
+  {
+    "id": "GJ-DWK-049",
+    "name": "Shivrajpur Beach",
+    "photo": {
+      "url": "https://gujarattourism.com/content/dam/gujrattourism/images/destinations/dwarka/beaches/shivrajpur-beach.jpg",
+      "caption": "Pristine coastal waters of the Arabian Sea along the Dwarka shoreline"
+    },
+    "description": "Situated 12 kilometers north of Dwarka along the Arabian Sea coast, Shivrajpur is an internationally acclaimed Blue Flag-certified beach. The beach features white sands, gentle gradients, and clear waters suitable for swimming. The shoreline is equipped with modern eco-friendly public infrastructure, including solar-powered lighting, changing rooms, outdoor shower facilities, a designated swimming zone, and an illuminated seaside promenade. The beach operates as a prime center for marine water sports in Saurashtra, offering guided scuba diving, snorkeling, sea kayaking, and boat tours.",
+    "history": "Historically a quiet coastal village with an early 20th-century lighthouse built during the Baroda State era, Shivrajpur remained relatively unknown outside local fishing communities. Recognizing its pristine coastal environment, the Gujarat Tourism Development Corporation and the Union Ministry of Environment undertook a comprehensive coastal management project to develop the shoreline in line with rigorous global environmental and water-safety standards. In October 2020, Shivrajpur was officially awarded the prestigious international 'Blue Flag' certification by the Foundation for Environmental Education (FEE) Denmark, placing it among India's cleanest coastal recreational reserves.",
+    "gallery": [
+      "https://gujarattourism.com/content/dam/gujrattourism/images/destinations/dwarka/beaches/shivrajpur-beach.jpg"
+    ],
+    "360Tour": "https://example.com/360/shivrajpur-beach",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "scubaDiving": true,
+      "showers": true
+    },
+    "ticketPrices": {
+      "entryAdult": 30,
+      "entryChild": 15,
+      "scubaDivingApprox": 2500
+    }
+  },
+  {
+    "id": "GJ-SKH-051",
+    "name": "Polo Forest",
+    "photo": {
+      "url": "https://api.theindia.co.in/storage/image/places/banner/polo-forest-river-7810.jpg",
+      "caption": "Aravalli mountain ridges and forest canopy bordering the Polo Forest region"
+    },
+    "description": "Located in the Sabarkantha district near Vijaynagar, Polo Forest is an ancient wilderness corridor spanning 400 square kilometers around the perennial Harnav River, nestled against the foothills of the southern Aravalli ranges. The dense dry-mixed deciduous forest is dotted with medieval Hindu and Jain temple ruins dating from the 10th to the 15th centuries. Key archaeological structures include the Lakhena Jain temple, the carved Shiva temple at Sharaneshwar, stepwells, and ancient defensive gateway watchtowers. The river basin and surrounding lakes, such as the Harnav Dam and Vanaj Dam, provide a scenic forest landscape for trekking and camping.",
+    "history": "The word 'Polo' is derived from the Marwari term 'Pol', meaning 'gate' or 'entrance', signifying the forest's historical role as a gateway between the kingdoms of Gujarat and Rajasthan. The ancient settlement was established in the 10th century CE by the Parihar kings of Idar before being conquered in the 15th century by the Rathore Rajputs. Because of its dense forest canopy and natural mountain ramparts, the city served as a hidden royal sanctuary and military refuge during wars with the Delhi and Gujarat Sultanates. The settlements were eventually abandoned to the forest, leaving carved stone ruins that have been conserved as an eco-cultural heritage site.",
+    "gallery": [
+      "https://api.theindia.co.in/storage/image/places/gallery/polo-forest-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/polo-forest",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "campsites": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "tentCampingApprox": 1500
+    }
+  },
+  {
+    "id": "GJ-DNG-052",
+    "name": "Don Hill Station",
+    "photo": {
+      "url": "https://gujarattourism.com/content/dam/gujrattourism/images/flora--fauna/don-hill-station/Don-Hill-Station-Thumbnail.jpg",
+      "caption": "The Sahyadri highland ranges spanning the Dang tribal belt"
+    },
+    "description": "Perched at an elevation of approximately 1,000 to 1,070 meters in the eastern Dang district along the border with Maharashtra, Don is an unspoiled mountain hamlet situated higher in altitude than nearby Saputara. The hill station features gentle rolling plateaus, panoramic viewpoints, terraced rice paddies, and deep river gorges surrounded by the Sahyadri ranges. Blessed with a mild mountain climate, lush monsoon flora, and minimal vehicular traffic, Don offers a peaceful retreat for hikers, birdwatchers, and nature enthusiasts exploring the tribal highlands of South Gujarat.",
+    "history": "Don holds a rich place in regional tribal folklore, with local oral traditions linking these highland forests to the Dandakaranya of the Ramayana epic, where Lord Rama is said to have wandered during his exile, visiting sage Agastya's ashram on the nearby peaks. For generations, the village has been home to the indigenous Dangi tribal people, who maintained sustainable forest farming, herbal medicine, and traditional stone-and-mud thatch dwellings. In recent years, the district administration and the tourism department have introduced community-managed eco-campsites to develop Don as an alternative, low-impact hill retreat that supports the local tribal economy.",
+    "gallery": [
+      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Saputara_Lake.JPG"
+    ],
+    "360Tour": "https://example.com/360/don-hill",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "natureTrek": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-NMD-054",
+    "name": "Zarwani Waterfall",
+    "photo": {
+      "url": "https://gujarattourism.com/content/dam/gujrattourism/images/flora--fauna/zarwani-waterfall/Zarwani-Water-fall-Banner.jpg",
+      "caption": "Narmada River basin surrounding the Shoolpaneshwar forest ecosystem"
+    },
+    "description": "Located deep within the lush green forests of the Shoolpaneshwar Wildlife Sanctuary in Narmada district (approximately 28 kilometers from the Statue of Unity), Zarwani is a perennial forest waterfall cascading over sheer rock cliffs into a natural wading pool. Reached by a nature trail that wades through shallow stream beds and rocky gorges, the site is surrounded by dense teak, bamboo, and mahua forests. The surrounding forest reserve hosts an eco-campsite equipped with rustic cottages, elevated machans (watchtowers) for wildlife viewing, and designated nature trails for trekking.",
+    "history": "Historically the protected domain of indigenous Vasava and Bhil forest tribes, the Shoolpaneshwar wildlife belt was declared a wildlife sanctuary in 1982 to protect the catchment area of the Narmada River and preserve habitat for sloth bears, barking deer, pangolins, and leopards. The Zarwani waterfall project was developed by the Gujarat Forest Department as a community-based ecotourism initiative, with local tribal youth trained as eco-guides, campsite staff, and conservation wardens to generate sustainable rural livelihoods through forest tourism.",
+    "gallery": [
+      "https://gujarattourism.com/content/dam/gujrattourism/images/flora--fauna/zarwani-waterfall/Zarwani-Water-fall-Gallery-1.jpg"
+    ],
+    "360Tour": "https://example.com/360/zarwani-waterfall",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "ecoCamp": true
+    },
+    "ticketPrices": {
+      "forestEntry": 50,
+      "vehicleEntry": 100
+    }
+  },
+  {
+    "id": "GJ-KCH-055",
+    "name": "Kadiya Dhro",
+    "photo": {
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoTvL-zT3qO49__xU4_FRicHMg6SK6WD93KDt3AHWN_1__DK1o1IHYYyM&s=10",
+      "caption": "Geological landscape and terrain typical of the Kutch arid basin"
+    },
+    "description": "Located near Dhrang village in the Nakhatrana taluka of Kutch, Kadiya Dhro is a geological canyon featuring sculpted, multi-colored rock formations carved by seasonal river currents over millions of years. Often referred to by travelers as the 'Mini Grand Canyon of Gujarat' or the 'Moonland of Kutch', the landscape showcases natural sandstone strata banded with vibrant shades of red, ochre, yellow, white, and terracotta, surrounding tranquil pools of emerald-green water. The surrounding desert environment provides a dramatic, wind-sculpted terrain for photography, geology study, and off-road trail explorations.",
+    "history": "In the local Kutchi language, 'Dhro' refers to a natural river pool or small reservoir. For centuries, the ravine remained a local geographical landmark known primarily to regional cattle herders and Maldhari pastoralists who brought their livestock to drink from its pools during desert migrations. Kadiya Dhro transitioned from an obscure desert gorge to an internationally recognized geological destination in 2021 after a series of landscape photographs by local explorer Varun Sachdev were featured in the New York Times as one of the world's must-visit destinations, prompting conservation efforts to protect its fragile sandstone structures.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoTvL-zT3qO49__xU4_FRicHMg6SK6WD93KDt3AHWN_1__DK1o1IHYYyM&s=10"
+    ],
+    "360Tour": "https://example.com/360/kadiya-dhro",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  }
+]
