@@ -23,7 +23,16 @@ export async function signUpUser(email: string, password: string, name: string, 
   })
 
   if (error) throw error
-  return data
+
+  // Supabase returns an empty identities array if the user already exists (to prevent enumeration)
+  if (data.user && data.user.identities && data.user.identities.length === 0) {
+    throw new Error('An account with this email already exists. Please switch to Sign In or reset password.')
+  }
+
+  return {
+    ...data,
+    needsEmailConfirmation: !data.session,
+  }
 }
 
 /**

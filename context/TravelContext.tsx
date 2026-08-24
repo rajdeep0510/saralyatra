@@ -49,12 +49,12 @@ interface TravelContextType {
   currentUser: any | null;
   isAuthLoading: boolean;
   signIn: (email: string, pass: string) => Promise<void>;
-  signUp: (email: string, pass: string, name: string, dietary?: string, homeState?: string) => Promise<void>;
+  signUp: (email: string, pass: string, name: string, dietary?: string, homeState?: string) => Promise<any>;
   signOut: () => Promise<void>;
 }
 
 const defaultUserProfile: UserProfile = {
-  name: "Yaksh Patel",
+  name: "Guest Traveler",
   dietary: "pureVeg",
   homeState: "Gujarat",
   savedTrips: []
@@ -140,8 +140,16 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
     // Listen to Supabase Auth state changes
     const supabase = createClient();
     if (supabase) {
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-        syncAuthSession();
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+        if (event === "SIGNED_OUT") {
+          setCurrentUser(null);
+          setUserProfile(defaultUserProfile);
+          try {
+            localStorage.removeItem("saralyatra_user_profile");
+          } catch { }
+        } else {
+          syncAuthSession();
+        }
       });
       return () => {
         subscription.unsubscribe();
@@ -153,8 +161,8 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!isHydrated) return;
     try {
-      localStorage.setItem("saralyatra_user_profile", JSON.stringify(userProfile));
       if (currentUser) {
+        localStorage.setItem("saralyatra_user_profile", JSON.stringify(userProfile));
         updateSupabaseProfile(userProfile, currentUser.id);
       }
     } catch { }
@@ -179,13 +187,18 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signUp = async (email: string, pass: string, name: string, dietary = "pureVeg", homeState = "Gujarat") => {
-    await signUpUser(email, pass, name, dietary, homeState);
+    const res = await signUpUser(email, pass, name, dietary, homeState);
     await syncAuthSession();
+    return res;
   };
 
   const signOut = async () => {
     await signOutUser();
     setCurrentUser(null);
+    setUserProfile(defaultUserProfile);
+    try {
+      localStorage.removeItem("saralyatra_user_profile");
+    } catch { }
   };
 
   // Load demo trips or dynamically generate for any requested state/region

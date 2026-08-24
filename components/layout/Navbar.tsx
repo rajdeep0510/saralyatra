@@ -206,16 +206,16 @@ export default function Navbar(props: NavbarProps) {
                 <div className="flex flex-col items-end text-right shrink-0">
                   <div className="flex items-center gap-1">
                     <span suppressHydrationWarning className="text-xs font-bold text-stone-900 leading-tight whitespace-nowrap">
-                      {userProfile.name || "Traveler Profile"}
+                      {currentUser ? (userProfile.name || "Traveler Profile") : "Guest Traveler"}
                     </span>
                     <ChevronDown className={`h-3 w-3 text-stone-400 transition-transform ${isProfileModalOpen ? "rotate-180 text-stone-800" : ""}`} />
                   </div>
                   <span suppressHydrationWarning className="text-[9px] font-bold text-terracotta-700 bg-terracotta-50 px-1.5 py-0.5 rounded border border-terracotta-200/70 whitespace-nowrap leading-none mt-0.5">
-                    {dietaryLabels[userProfile.dietary] || "Pure Veg"} • {savedTrips.length > 0 ? `${savedTrips.length} Saved` : userProfile.homeState || "India"}
+                    {dietaryLabels[userProfile.dietary] || "Pure Veg"} • {currentUser ? (savedTrips.length > 0 ? `${savedTrips.length} Saved` : userProfile.homeState || "India") : "Sign In"}
                   </span>
                 </div>
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-stone-900 text-white ring-2 ring-white shadow-xs shrink-0 font-bold text-xs">
-                  {userProfile.name ? userProfile.name.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
+                  {currentUser && userProfile.name ? userProfile.name.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
                 </div>
               </button>
 
@@ -468,45 +468,72 @@ export default function Navbar(props: NavbarProps) {
                             setIsSubmittingAuth(true);
                             try {
                               if (authMode === "signup") {
-                                await signUp(authEmail, authPassword, authName || userProfile.name, userProfile.dietary, userProfile.homeState);
-                                setAuthSuccess("Account created successfully!");
+                                const res = await signUp(authEmail, authPassword, authName || userProfile.name, userProfile.dietary, userProfile.homeState);
+                                if (res?.needsEmailConfirmation) {
+                                  setAuthSuccess("Account created! Supabase has sent a confirmation email. Please confirm it to log in, or disable 'Confirm email' in Supabase Auth settings.");
+                                } else {
+                                  setAuthSuccess("Account created & logged in successfully!");
+                                }
                               } else {
                                 await signIn(authEmail, authPassword);
                                 setAuthSuccess("Signed in successfully!");
                               }
                             } catch (err: any) {
-                              setAuthError(err?.message || "Authentication failed. Please check your credentials.");
+                              const msg = err?.message || "Authentication failed.";
+                              if (msg.toLowerCase().includes("invalid login credentials")) {
+                                setAuthError("Invalid credentials. If you don't have an account yet, switch to 'Create Account' above. If you signed up, make sure to click the email confirmation link.");
+                              } else {
+                                setAuthError(msg);
+                              }
                             } finally {
                               setIsSubmittingAuth(false);
                             }
                           }}
                           className="space-y-3"
                         >
-                          <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-bold text-stone-900">
-                              {authMode === "login" ? "Sign In to SaralYatra" : "Create Supabase Account"}
-                            </h4>
+                          {/* Segmented Auth Mode Switcher */}
+                          <div className="grid grid-cols-2 p-1 bg-stone-100 rounded-xl">
                             <button
                               type="button"
                               onClick={() => {
-                                setAuthMode(authMode === "login" ? "signup" : "login");
+                                setAuthMode("login");
                                 setAuthError(null);
+                                setAuthSuccess(null);
                               }}
-                              className="text-[10px] font-bold text-terracotta-700 hover:underline cursor-pointer"
+                              className={`py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                                authMode === "login"
+                                  ? "bg-white text-stone-900 shadow-2xs"
+                                  : "text-stone-500 hover:text-stone-800"
+                              }`}
                             >
-                              {authMode === "login" ? "Need an account? Sign Up" : "Already have account? Sign In"}
+                              Sign In
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setAuthMode("signup");
+                                setAuthError(null);
+                                setAuthSuccess(null);
+                              }}
+                              className={`py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                                authMode === "signup"
+                                  ? "bg-white text-stone-900 shadow-2xs"
+                                  : "text-stone-500 hover:text-stone-800"
+                              }`}
+                            >
+                              Create Account
                             </button>
                           </div>
 
                           {authError && (
-                            <div className="p-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-[10px]">
-                              {authError}
+                            <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-[11px] leading-relaxed">
+                              ⚠️ {authError}
                             </div>
                           )}
 
                           {authSuccess && (
-                            <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px]">
-                              {authSuccess}
+                            <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] leading-relaxed">
+                              ✅ {authSuccess}
                             </div>
                           )}
 
@@ -551,7 +578,7 @@ export default function Navbar(props: NavbarProps) {
                           <button
                             type="submit"
                             disabled={isSubmittingAuth}
-                            className="w-full py-2 rounded-xl bg-terracotta-600 hover:bg-terracotta-700 text-white text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50"
+                            className="w-full py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50 mt-1"
                           >
                             {isSubmittingAuth ? "Processing..." : authMode === "login" ? "Sign In" : "Create Account"}
                           </button>
