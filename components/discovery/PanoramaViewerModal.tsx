@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useMemo, useCallback } from "react";
-import { X, ZoomIn, ZoomOut, RotateCw, Move, Navigation, Maximize2, Minimize2, Compass, MapPin, Globe, Satellite, Eye, ExternalLink } from "lucide-react";
+import React, { useState, useRef, useMemo } from "react";
+import { X, Navigation, Maximize2, Minimize2, MapPin, Globe, Satellite, Eye, ExternalLink, Move } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, Monument } from "@/types";
-import ThreeJsPanoramaViewer, { Hotspot3D } from "./ThreeJsPanoramaViewer";
 
 interface PanoramaViewerModalProps {
   isOpen: boolean;
@@ -13,15 +12,6 @@ interface PanoramaViewerModalProps {
   currentLang: LanguageCode;
 }
 
-// Fallback high-fidelity equirectangular 360 sphere textures categorized by environment (CORS-enabled)
-const DEFAULT_360_PANORAMAS: Record<string, string> = {
-  heritage: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=2400&q=80",
-  spiritual: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2400&q=80",
-  nature: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
-  adventure: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?auto=format&fit=crop&w=2400&q=80",
-  default: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=2400&q=80"
-};
-
 export default function PanoramaViewerModal({
   isOpen,
   onClose,
@@ -29,14 +19,8 @@ export default function PanoramaViewerModal({
   currentLang
 }: PanoramaViewerModalProps) {
   const modalContainerRef = useRef<HTMLDivElement | null>(null);
-  const [activeMode, setActiveMode] = useState<"satellite" | "streetview" | "webgl">("satellite");
-  const [isAutoRotating, setIsAutoRotating] = useState<boolean>(true);
+  const [activeMode, setActiveMode] = useState<"satellite" | "streetview">("satellite");
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [headingData, setHeadingData] = useState<{ heading: number; pitch: number; fov: number }>({
-    heading: 180,
-    pitch: 0,
-    fov: 75
-  });
 
   const t = translations[currentLang] || translations.en;
 
@@ -54,49 +38,9 @@ export default function PanoramaViewerModal({
     } catch { }
   };
 
-  // Generate strict 1-to-1 Hotspots specific to this active monument
-  const monumentHotspots: Hotspot3D[] = useMemo(() => {
-    if (!monument) return [];
-
-    const spots: Hotspot3D[] = [];
-
-    // Hotspot 1: Primary Sanctum / Architecture Landmark
-    const story = monument.folklore?.[currentLang] || monument.folklore?.en || `${monument.name} in ${monument.state}.`;
-    spots.push({
-      id: `${monument.id}-spot-1`,
-      yaw: 180,
-      pitch: 2,
-      title: `${monument.name} Sanctum`,
-      description: story
-    });
-
-    // Hotspot 2: Architectural Details & Inscriptions
-    spots.push({
-      id: `${monument.id}-spot-2`,
-      yaw: 120,
-      pitch: 18,
-      title: "Monumental Architecture",
-      description: `Intricately preserved structures in ${monument.state}. Recognized for sacred geometry and historic artistry.`
-    });
-
-    // Hotspot 3: Sacred Surrounding / Landscape
-    spots.push({
-      id: `${monument.id}-spot-3`,
-      yaw: 250,
-      pitch: -6,
-      title: "Surrounding Periphery",
-      description: `Elevated vantage point overlooking the sacred grounds of ${monument.city || monument.state}.`
-    });
-
-    return spots;
-  }, [monument, currentLang]);
-
-  // Determine exact 360 panorama URL with strict 1-to-1 mapping guarantee
-  const { panoramaSrc, fallbackSrc, streetViewEmbedUrl, satelliteEmbedUrl, googleEarthUrl, googleMapsUrl } = useMemo(() => {
-    if (!monument) return { panoramaSrc: "", fallbackSrc: "", streetViewEmbedUrl: "", satelliteEmbedUrl: "", googleEarthUrl: "", googleMapsUrl: "" };
-
-    const categoryKey = monument.category || "heritage";
-    const categoryFallback = DEFAULT_360_PANORAMAS[categoryKey] || DEFAULT_360_PANORAMAS.default;
+  // Determine exact 360 & satellite URLs
+  const { streetViewEmbedUrl, satelliteEmbedUrl, googleEarthUrl, googleMapsUrl } = useMemo(() => {
+    if (!monument) return { streetViewEmbedUrl: "", satelliteEmbedUrl: "", googleEarthUrl: "", googleMapsUrl: "" };
 
     const lat = monument.coordinates?.lat || 20.5937;
     const lng = monument.coordinates?.lng || 78.9629;
@@ -120,11 +64,7 @@ export default function PanoramaViewerModal({
     // 4. Direct Fullscreen Google Maps Street View Pano
     const mapsPanoUrl = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
 
-    const fallback = monument.imageUrl || categoryFallback;
-
     return {
-      panoramaSrc: monument.imageUrl || categoryFallback,
-      fallbackSrc: fallback,
       streetViewEmbedUrl: streetUrl,
       satelliteEmbedUrl: satUrl,
       googleEarthUrl: earthUrl,
@@ -132,19 +72,7 @@ export default function PanoramaViewerModal({
     };
   }, [monument]);
 
-  // Memoized Heading Change Callback
-  const handleHeadingChange = useCallback((h: number, p: number, fov: number) => {
-    setHeadingData({ heading: h, pitch: p, fov });
-  }, []);
-
   if (!isOpen || !monument) return null;
-
-  // Convert degrees to cardinal compass point
-  const getCardinalDirection = (deg: number) => {
-    const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-    const index = Math.round(deg / 45) % 8;
-    return directions[index];
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/85 backdrop-blur-md p-2 sm:p-6 animate-in fade-in duration-200">
@@ -204,30 +132,9 @@ export default function PanoramaViewerModal({
               <Eye className="h-3.5 w-3.5" />
               <span>360° Street View</span>
             </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveMode("webgl")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
-                activeMode === "webgl"
-                  ? "bg-terracotta-600 text-white shadow-xs"
-                  : "text-stone-400 hover:text-white"
-              }`}
-            >
-              <Globe className="h-3.5 w-3.5" />
-              <span>3D VR Dome</span>
-            </button>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Live Compass Heading Pill */}
-            {activeMode === "webgl" && (
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-800/90 text-stone-300 text-xs font-mono border border-stone-700">
-                <Compass className="h-3.5 w-3.5 text-amber-400" />
-                <span>{headingData.heading}° {getCardinalDirection(headingData.heading)}</span>
-              </div>
-            )}
-
             {/* Fullscreen Button */}
             <button
               onClick={toggleFullscreen}
@@ -288,28 +195,6 @@ export default function PanoramaViewerModal({
             </div>
           )}
 
-          {/* MODE 3: High-Definition WebGL 3D Photosphere */}
-          {activeMode === "webgl" && (
-            <>
-              <ThreeJsPanoramaViewer
-                key={monument.id}
-                panoramaUrl={panoramaSrc}
-                fallbackUrl={fallbackSrc}
-                initialHeading={180}
-                initialPitch={0}
-                hotspots={monumentHotspots}
-                isAutoRotating={isAutoRotating}
-                onHeadingChange={handleHeadingChange}
-              />
-
-              {/* User Gesture Hint Badge */}
-              <div className="absolute top-4 left-4 bg-stone-900/80 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
-                <Move className="h-3.5 w-3.5 text-terracotta-400" />
-                <span>Drag in any direction • Scroll to zoom</span>
-              </div>
-            </>
-          )}
-
         </div>
 
         {/* Interactive Bottom Control Toolbar */}
@@ -346,21 +231,6 @@ export default function PanoramaViewerModal({
               <span>Open on Google Maps</span>
               <ExternalLink className="h-3 w-3 text-stone-400 ml-0.5" />
             </a>
-
-            {activeMode === "webgl" && (
-              /* Auto Rotate Button */
-              <button
-                onClick={() => setIsAutoRotating(!isAutoRotating)}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                  isAutoRotating
-                    ? "bg-terracotta-600 hover:bg-terracotta-700 text-white border-terracotta-500 shadow-xs"
-                    : "bg-stone-800 hover:bg-stone-700 text-stone-300 border-stone-700"
-                }`}
-              >
-                <RotateCw className={`h-3.5 w-3.5 ${isAutoRotating ? "animate-spin" : ""}`} />
-                <span>{isAutoRotating ? "Auto-Rotate ON" : "Auto-Rotate OFF"}</span>
-              </button>
-            )}
           </div>
         </div>
       </div>
