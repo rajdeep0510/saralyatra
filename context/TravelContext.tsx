@@ -1,10 +1,20 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FilterPreferences, Homestay, LanguageCode, Monument, PreloadedTrip, UserProfile } from "@/types";
 import { preloadedTrips, monuments, homestays } from "@/data/mockData";
 import { generateDynamicItinerary } from "@/utils/tripEngine";
+import { 
+  getCurrentUserProfile, 
+  saveTripToCloud, 
+  deleteTripFromCloud, 
+  signUpUser, 
+  signInUser, 
+  signOutUser,
+  updateUserProfile as updateSupabaseProfile 
+} from "@/lib/supabase/services";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 interface TravelContextType {
   currentLang: LanguageCode;
@@ -34,6 +44,13 @@ interface TravelContextType {
   getFilteredHomestays: () => Homestay[];
   isCurrentTripSaved: boolean;
   isHydrated: boolean;
+  
+  // Auth additions
+  currentUser: any | null;
+  isAuthLoading: boolean;
+  signIn: (email: string, pass: string) => Promise<void>;
+  signUp: (email: string, pass: string, name: string, dietary?: string, homeState?: string) => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 const defaultUserProfile: UserProfile = {
@@ -72,6 +89,35 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
   const [selected360Monument, setSelected360Monument] = useState<Monument | null>(null);
   const [savedTripToast, setSavedTripToast] = useState<{ title: string; message: string } | null>(null);
 
+  // Supabase Auth State
+  const [currentUser, setCurrentUser] = useState<any | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
+
+  // Sync Supabase Auth & Profile
+  const syncAuthSession = useCallback(async () => {
+    if (!isSupabaseConfigured()) {
+      setIsAuthLoading(false);
+      return;
+    }
+    try {
+      const { user, profile } = await getCurrentUserProfile();
+      setCurrentUser(user);
+      if (profile) {
+        setUserProfile((prev) => ({
+          ...prev,
+          name: profile.name || prev.name,
+          dietary: profile.dietary || prev.dietary,
+          homeState: profile.homeState || prev.homeState,
+          savedTrips: profile.savedTrips && profile.savedTrips.length > 0 ? profile.savedTrips : prev.savedTrips
+        }));
+      }
+    } catch (err) {
+      console.warn("Auth session check error:", err);
+    } finally {
+      setIsAuthLoading(false);
+    }
+  }, []);
+
   // Hydrate userProfile and activeTrip from localStorage safely on client mount
   useEffect(() => {
     try {
@@ -89,15 +135,30 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
       }
     } catch { }
     setIsHydrated(true);
-  }, []);
+    syncAuthSession();
 
-  // Save userProfile to localStorage on update
+    // Listen to Supabase Auth state changes
+    const supabase = createClient();
+    if (supabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+        syncAuthSession();
+      });
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
+  }, [syncAuthSession]);
+
+  // Save userProfile to localStorage on update & sync with Supabase if logged in
   useEffect(() => {
     if (!isHydrated) return;
     try {
       localStorage.setItem("saralyatra_user_profile", JSON.stringify(userProfile));
+      if (currentUser) {
+        updateSupabaseProfile(userProfile, currentUser.id);
+      }
     } catch { }
-  }, [userProfile, isHydrated]);
+  }, [userProfile, isHydrated, currentUser]);
 
   // Save activeTrip to localStorage on update
   useEffect(() => {
@@ -111,10 +172,26 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
     } catch { }
   }, [activeTrip, isHydrated]);
 
+  // Auth Action Methods
+  const signIn = async (email: string, pass: string) => {
+    await signInUser(email, pass);
+    await syncAuthSession();
+  };
+
+  const signUp = async (email: string, pass: string, name: string, dietary = "pureVeg", homeState = "Gujarat") => {
+    await signUpUser(email, pass, name, dietary, homeState);
+    await syncAuthSession();
+  };
+
+  const signOut = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
+
   // Load demo trips or dynamically generate for any requested state/region
   const handleLoadDemoTrip = (regionKey: string) => {
-    if (preloadedTrips[regionKey]) {
-      const trip = preloadedTrips[regionKey];
+    const trip = preloadedTrips[regionKey];
+    if (trip) {
       setActiveTrip(trip);
       if (trip.itinerary[0]?.stops[0]) {
         setActiveStopId(trip.itinerary[0].stops[0].id);
@@ -181,22 +258,22 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         language: "Hindi",
         interests: ["Ghats", "Temples", "Aarti"]
       });
-    } else if (regionKey === "hampi") {
+    } else if (regionKey === "himachal") {
       setFilterPreferences({
         category: "adventure",
-        region: "Karnataka",
+        region: "Himachal Pradesh",
         duration: 3,
         dates: new Date().toISOString().split("T")[0],
         travelers: 2,
-        pacing: "Intensive",
-        famousRatio: 50,
-        dietary: "pureVeg",
+        pacing: "Active",
+        famousRatio: 60,
+        dietary: "any",
         language: "English",
-        interests: ["Ruins", "Boulders", "Trekking"]
+        interests: ["Mountains", "Passes", "Trekking"]
       });
     } else if (regionKey === "gujarat") {
       setFilterPreferences({
-        category: "heritage",
+        category: "spiritual",
         region: "Gujarat",
         duration: 3,
         dates: new Date().toISOString().split("T")[0],
@@ -238,7 +315,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
     router.push("/itinerary");
   };
 
-  // Confirm & Save Trip into User Profile (stays on Itinerary page with confirmed state)
+  // Confirm & Save Trip into User Profile + Cloud
   const handleSaveTrip = (tripToSave: PreloadedTrip) => {
     const tripWithId: PreloadedTrip = {
       ...tripToSave,
@@ -257,6 +334,9 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
 
     // Keep activeTrip loaded with its saved ID so it remains visible on the map/timeline
     setActiveTrip(tripWithId);
+
+    // Asynchronously sync to Supabase Cloud if user is logged in
+    saveTripToCloud(tripWithId).catch(() => {});
 
     // Show celebration confirmation toast
     setSavedTripToast({
@@ -295,12 +375,15 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
     router.push("/itinerary");
   };
 
-  // Delete Saved Trip from User Profile
+  // Delete Saved Trip from User Profile + Cloud
   const handleDeleteSavedTrip = (tripId: string) => {
     setUserProfile((prev) => ({
       ...prev,
       savedTrips: (prev.savedTrips || []).filter((t) => t.id !== tripId)
     }));
+
+    // Async delete from Supabase if logged in
+    deleteTripFromCloud(tripId).catch(() => {});
   };
 
   const handleOpenDetailsById = (monumentId: string) => {
@@ -351,39 +434,22 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Filter homestays based on user dietary preference and region
   const getFilteredHomestays = (): Homestay[] => {
-    return homestays
-      .map((stay) => {
-        let foodScore = 70;
-        if (userProfile.dietary === "pureVeg" && stay.dietaryReady === "pureVeg") foodScore = 98;
-        if (userProfile.dietary === "jain" && stay.dietaryReady === "jain") foodScore = 100;
-        if (userProfile.dietary === "halal" && stay.dietaryReady === "halal") foodScore = 98;
-
-        let languageScore = 75;
-        const requestedLangName = currentLang === "en" ? "English" : currentLang === "hi" ? "Hindi" : currentLang === "mr" ? "Marathi" : currentLang === "gu" ? "Gujarati" : currentLang === "bn" ? "Bengali" : "Tamil";
-        if (stay.languagesSpoken.some((l) => l.toLowerCase().includes(requestedLangName.toLowerCase()))) {
-          languageScore = 95;
-        }
-
-        const heritageScore = 88;
-        const overall = Math.round((foodScore * 0.4) + (languageScore * 0.3) + (heritageScore * 0.3));
-
-        return {
-          ...stay,
-          compatibilityScore: {
-            food: foodScore,
-            language: languageScore,
-            heritage: heritageScore,
-            overall
-          }
-        };
-      })
-      .sort((a, b) => (b.compatibilityScore?.overall || 0) - (a.compatibilityScore?.overall || 0));
+    if (!activeTrip || !activeTrip.region) return homestays;
+    const region = activeTrip.region.toLowerCase();
+    const matches = homestays.filter(
+      (h) =>
+        h.hostOrigin.toLowerCase().includes(region) ||
+        region.includes(h.hostOrigin.toLowerCase())
+    );
+    return matches.length > 0 ? matches : homestays;
   };
 
   const isCurrentTripSaved = Boolean(
-    activeTrip && userProfile.savedTrips?.some((t) => (t.id && t.id === activeTrip.id) || t.title === activeTrip.title)
+    activeTrip &&
+    userProfile.savedTrips?.some(
+      (t) => (t.id && activeTrip.id && t.id === activeTrip.id) || t.title === activeTrip.title
+    )
   );
 
   return (
@@ -416,6 +482,13 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         getFilteredHomestays,
         isCurrentTripSaved,
         isHydrated,
+
+        // Auth
+        currentUser,
+        isAuthLoading,
+        signIn,
+        signUp,
+        signOut
       }}
     >
       {children}

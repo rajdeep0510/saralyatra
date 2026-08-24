@@ -30,10 +30,18 @@ export default function Navbar(props: NavbarProps) {
   const setUserProfile = travel.setUserProfile;
   const onLoadSavedTrip = travel.handleLoadSavedTrip;
   const onDeleteSavedTrip = travel.handleDeleteSavedTrip;
+  const { currentUser, isAuthLoading, signIn, signUp, signOut } = travel;
 
   const t = translations[currentLang] || translations.en;
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
-  const [activeProfileTab, setActiveProfileTab] = useState<"profile" | "trips">("profile");
+  const [activeProfileTab, setActiveProfileTab] = useState<"profile" | "trips" | "account">("profile");
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authName, setAuthName] = useState("");
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [authSuccess, setAuthSuccess] = useState<string | null>(null);
+  const [isSubmittingAuth, setIsSubmittingAuth] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close profile dropdown when clicking outside
@@ -241,6 +249,18 @@ export default function Navbar(props: NavbarProps) {
                         <BookmarkCheck className="h-3.5 w-3.5 text-terracotta-600" />
                         <span>Saved Trips ({savedTrips.length})</span>
                       </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveProfileTab("account")}
+                        className={`flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          activeProfileTab === "account"
+                            ? "bg-white text-stone-900 shadow-2xs"
+                            : "text-stone-500 hover:text-stone-800"
+                        }`}
+                      >
+                        <User className="h-3.5 w-3.5 text-stone-700" />
+                        <span>{currentUser ? "Account" : "Sign In"}</span>
+                      </button>
                     </div>
 
                     <button
@@ -321,7 +341,7 @@ export default function Navbar(props: NavbarProps) {
 
                       <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
                         <span className="text-[10px] text-stone-500 font-medium">
-                          Preferences sync live across homestays & dining
+                          {currentUser ? "☁️ Synced with Supabase" : "📱 Saved to device (Sign in to sync)"}
                         </span>
                         <button
                           type="button"
@@ -406,6 +426,136 @@ export default function Navbar(props: NavbarProps) {
                             Generate a custom itinerary in Trip Planner and click <strong>&quot;Confirm Trip&quot;</strong> to save it here for easy access!
                           </p>
                         </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* TAB 3: Supabase Account / Auth */}
+                  {activeProfileTab === "account" && (
+                    <div className="space-y-3.5">
+                      {currentUser ? (
+                        <div className="space-y-3 p-3 bg-stone-50 rounded-2xl border border-stone-200">
+                          <div className="flex items-center gap-2.5">
+                            <div className="h-10 w-10 rounded-full bg-terracotta-600 text-white flex items-center justify-center font-bold text-sm">
+                              {userProfile.name ? userProfile.name.charAt(0).toUpperCase() : "U"}
+                            </div>
+                            <div className="min-w-0">
+                              <h4 className="text-xs font-bold text-stone-900 truncate">{userProfile.name}</h4>
+                              <p className="text-[10px] text-stone-500 truncate">{currentUser.email}</p>
+                            </div>
+                          </div>
+                          <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-medium flex items-center gap-1.5">
+                            <span>☁️</span>
+                            <span>Cloud Sync Active: Trips sync across devices via Supabase.</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              await signOut();
+                              setAuthSuccess("Logged out successfully");
+                            }}
+                            className="w-full py-2 rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-800 text-xs font-bold transition-all cursor-pointer"
+                          >
+                            Sign Out
+                          </button>
+                        </div>
+                      ) : (
+                        <form
+                          onSubmit={async (e) => {
+                            e.preventDefault();
+                            setAuthError(null);
+                            setAuthSuccess(null);
+                            setIsSubmittingAuth(true);
+                            try {
+                              if (authMode === "signup") {
+                                await signUp(authEmail, authPassword, authName || userProfile.name, userProfile.dietary, userProfile.homeState);
+                                setAuthSuccess("Account created successfully!");
+                              } else {
+                                await signIn(authEmail, authPassword);
+                                setAuthSuccess("Signed in successfully!");
+                              }
+                            } catch (err: any) {
+                              setAuthError(err?.message || "Authentication failed. Please check your credentials.");
+                            } finally {
+                              setIsSubmittingAuth(false);
+                            }
+                          }}
+                          className="space-y-3"
+                        >
+                          <div className="flex items-center justify-between">
+                            <h4 className="text-xs font-bold text-stone-900">
+                              {authMode === "login" ? "Sign In to SaralYatra" : "Create Supabase Account"}
+                            </h4>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setAuthMode(authMode === "login" ? "signup" : "login");
+                                setAuthError(null);
+                              }}
+                              className="text-[10px] font-bold text-terracotta-700 hover:underline cursor-pointer"
+                            >
+                              {authMode === "login" ? "Need an account? Sign Up" : "Already have account? Sign In"}
+                            </button>
+                          </div>
+
+                          {authError && (
+                            <div className="p-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-[10px]">
+                              {authError}
+                            </div>
+                          )}
+
+                          {authSuccess && (
+                            <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px]">
+                              {authSuccess}
+                            </div>
+                          )}
+
+                          {authMode === "signup" && (
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold text-stone-600">Full Name</label>
+                              <input
+                                type="text"
+                                required
+                                value={authName}
+                                onChange={(e) => setAuthName(e.target.value)}
+                                placeholder="Your Name"
+                                className="w-full rounded-xl bg-stone-50 border border-stone-200 py-1.5 px-3 text-xs font-medium text-stone-900 focus:outline-none focus:bg-white"
+                              />
+                            </div>
+                          )}
+
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-stone-600">Email Address</label>
+                            <input
+                              type="email"
+                              required
+                              value={authEmail}
+                              onChange={(e) => setAuthEmail(e.target.value)}
+                              placeholder="traveler@example.com"
+                              className="w-full rounded-xl bg-stone-50 border border-stone-200 py-1.5 px-3 text-xs font-medium text-stone-900 focus:outline-none focus:bg-white"
+                            />
+                          </div>
+
+                          <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-stone-600">Password</label>
+                            <input
+                              type="password"
+                              required
+                              value={authPassword}
+                              onChange={(e) => setAuthPassword(e.target.value)}
+                              placeholder="••••••••"
+                              className="w-full rounded-xl bg-stone-50 border border-stone-200 py-1.5 px-3 text-xs font-medium text-stone-900 focus:outline-none focus:bg-white"
+                            />
+                          </div>
+
+                          <button
+                            type="submit"
+                            disabled={isSubmittingAuth}
+                            className="w-full py-2 rounded-xl bg-terracotta-600 hover:bg-terracotta-700 text-white text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50"
+                          >
+                            {isSubmittingAuth ? "Processing..." : authMode === "login" ? "Sign In" : "Create Account"}
+                          </button>
+                        </form>
                       )}
                     </div>
                   )}
