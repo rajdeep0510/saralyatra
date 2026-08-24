@@ -25,6 +25,7 @@ import meghalayaDesc from "./place_decription_json/meghalaya.json";
 
 // Import multilingual translation dictionary for all 180+ places
 import placeTranslations from "./place_translations.json";
+import { verified360ToursMap } from "./verified360Tours";
 
 interface RawLocation {
   id: string;
@@ -259,15 +260,27 @@ export function loadAndTransformPlaces(): Monument[] {
 
     const { mainImage, allImages } = sanitizeImageUrls(rawGallery, loc.id, loc.name);
 
+    const verified360 = verified360ToursMap[loc.id];
+
     const cleanDesc = cleanCitations(detail?.description || "");
     const cleanHist = cleanCitations(detail?.history || "");
     const fullStory = cleanDesc || cleanHist || `${loc.name} is a renowned destination in ${loc.city}, ${loc.state}.`;
 
-    const panoramaUrl = detail?.["360Tour"] && !detail["360Tour"].includes("example.com") && !detail["360Tour"].includes("wikimedia.org")
+    const panoramaUrl = verified360?.tour360Url || (detail?.["360Tour"] && !detail["360Tour"].includes("example.com") && !detail["360Tour"].includes("wikimedia.org")
       ? detail["360Tour"]
-      : mainImage;
+      : mainImage);
 
     const translated = (placeTranslations as Record<string, { hi?: string; gu?: string; mr?: string; bn?: string; ta?: string }>)[loc.id];
+
+    const mergedFacilities = {
+      ...(detail?.facilities || {}),
+      ...(verified360?.facilities || {})
+    };
+
+    const mergedTicketPrices = {
+      ...(detail?.ticketPrices || {}),
+      ...(verified360?.ticketPrices || {})
+    };
 
     const monument: Monument = {
       id: loc.id,
@@ -283,7 +296,7 @@ export function loadAndTransformPlaces(): Monument[] {
       panoramaUrl,
       folklore: {
         en: fullStory,
-        hi: translated?.hi || fullStory,
+        hi: verified360?.hindiNarration || translated?.hi || fullStory,
         mr: translated?.mr || fullStory,
         gu: translated?.gu || fullStory,
         bn: translated?.bn || fullStory,
@@ -298,8 +311,8 @@ export function loadAndTransformPlaces(): Monument[] {
       closingTime: loc.closingTime,
       recommendedDuration: loc.recommendedDuration,
       priority: loc.priority,
-      facilities: detail?.facilities,
-      ticketPrices: detail?.ticketPrices
+      facilities: Object.keys(mergedFacilities).length > 0 ? mergedFacilities : undefined,
+      ticketPrices: Object.keys(mergedTicketPrices).length > 0 ? mergedTicketPrices : undefined
     };
 
     transformedPlaces.push(monument);

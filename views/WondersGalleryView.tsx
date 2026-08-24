@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search, Sparkles, Trees, Flame, Landmark, Mountain, LayoutGrid, MapPin, RotateCcw, Compass, Feather, Train, Utensils, Heart } from "lucide-react";
 import { monuments, translations } from "@/data/mockData";
 import { LanguageCode, Monument, TripCategory } from "@/types";
@@ -28,15 +28,17 @@ export default function WondersGalleryView({
   const [offbeatFilter, setOffbeatFilter] = useState<"all" | "iconic" | "offbeat">("all");
   const [isBucketListOpen, setIsBucketListOpen] = useState<boolean>(false);
   const [showMarigold, setShowMarigold] = useState<boolean>(false);
-  const [bookmarkedIds, setBookmarkedIds] = useState<string[]>(() => {
-    if (typeof window === "undefined") return [];
+  const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
+
+  // Safe client-side hydration from localStorage
+  useEffect(() => {
     try {
       const saved = localStorage.getItem("saralyatra_bucket_list");
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+      if (saved) {
+        setBookmarkedIds(JSON.parse(saved));
+      }
+    } catch {}
+  }, []);
 
   const toggleBookmark = (id: string) => {
     setBookmarkedIds((prev) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useMemo, useCallback } from "react";
-import { X, ZoomIn, ZoomOut, RotateCw, Move, Navigation, Maximize2, Minimize2, Compass, MapPin } from "lucide-react";
+import { X, ZoomIn, ZoomOut, RotateCw, Move, Navigation, Maximize2, Minimize2, Compass, MapPin, Globe, Satellite, Eye, ExternalLink } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, Monument } from "@/types";
 import ThreeJsPanoramaViewer, { Hotspot3D } from "./ThreeJsPanoramaViewer";
@@ -29,6 +29,7 @@ export default function PanoramaViewerModal({
   currentLang
 }: PanoramaViewerModalProps) {
   const modalContainerRef = useRef<HTMLDivElement | null>(null);
+  const [activeMode, setActiveMode] = useState<"satellite" | "streetview" | "webgl">("satellite");
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(true);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [headingData, setHeadingData] = useState<{ heading: number; pitch: number; fov: number }>({
@@ -88,27 +89,46 @@ export default function PanoramaViewerModal({
     });
 
     return spots;
-  }, [monument]);
+  }, [monument, currentLang]);
 
   // Determine exact 360 panorama URL with strict 1-to-1 mapping guarantee
-  const { panoramaSrc, fallbackSrc } = useMemo(() => {
-    if (!monument) return { panoramaSrc: "", fallbackSrc: "" };
+  const { panoramaSrc, fallbackSrc, streetViewEmbedUrl, satelliteEmbedUrl, googleEarthUrl, googleMapsUrl } = useMemo(() => {
+    if (!monument) return { panoramaSrc: "", fallbackSrc: "", streetViewEmbedUrl: "", satelliteEmbedUrl: "", googleEarthUrl: "", googleMapsUrl: "" };
 
     const categoryKey = monument.category || "heritage";
     const categoryFallback = DEFAULT_360_PANORAMAS[categoryKey] || DEFAULT_360_PANORAMAS.default;
 
-    const hasValidPanorama =
-      monument.panoramaUrl &&
-      !monument.panoramaUrl.includes("example.com") &&
-      !monument.panoramaUrl.includes("wikimedia.org") &&
-      (monument.panoramaUrl.startsWith("http://") || monument.panoramaUrl.startsWith("https://"));
+    const lat = monument.coordinates?.lat || 20.5937;
+    const lng = monument.coordinates?.lng || 78.9629;
+    const query = `${monument.name}, ${monument.city ? monument.city + ", " : ""}${monument.state}`;
 
-    const primary = hasValidPanorama ? monument.panoramaUrl! : (monument.imageUrl || categoryFallback);
+    // 1. Google Satellite 3D Embed (100% reliable, crystal-clear high-res terrain)
+    const satUrl = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&ll=${lat},${lng}&t=k&z=18&ie=UTF8&iwloc=&output=embed`;
+
+    // 2. Google Street View official embed (if API key available or custom 360 tour URL)
+    const apiKey = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY : undefined;
+    let streetUrl = monument.panoramaUrl || "";
+    if (apiKey) {
+      streetUrl = `https://www.google.com/maps/embed/v1/streetview?key=${apiKey}&location=${lat},${lng}&heading=180&pitch=0&fov=80`;
+    } else if (!streetUrl || streetUrl === monument.imageUrl) {
+      streetUrl = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&ll=${lat},${lng}&layer=c&cbll=${lat},${lng}&cbp=12,180,,0,0&output=svembed`;
+    }
+
+    // 3. Google Earth 3D Flyover
+    const earthUrl = `https://earth.google.com/web/search/${encodeURIComponent(monument.name + " " + monument.state)}/@${lat},${lng},300a,35d,35y,0h,45t,0r`;
+
+    // 4. Direct Fullscreen Google Maps Street View Pano
+    const mapsPanoUrl = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+
     const fallback = monument.imageUrl || categoryFallback;
 
     return {
-      panoramaSrc: primary,
-      fallbackSrc: fallback
+      panoramaSrc: monument.imageUrl || categoryFallback,
+      fallbackSrc: fallback,
+      streetViewEmbedUrl: streetUrl,
+      satelliteEmbedUrl: satUrl,
+      googleEarthUrl: earthUrl,
+      googleMapsUrl: mapsPanoUrl
     };
   }, [monument]);
 
@@ -127,17 +147,17 @@ export default function PanoramaViewerModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/80 backdrop-blur-md p-2 sm:p-6 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/85 backdrop-blur-md p-2 sm:p-6 animate-in fade-in duration-200">
       <div
         ref={modalContainerRef}
         className={`relative w-full max-w-5xl rounded-3xl bg-stone-900 border border-stone-800 shadow-2xl overflow-hidden flex flex-col transition-all duration-300 ${
-          isFullscreen ? "h-screen max-w-none rounded-none" : "h-[85vh]"
+          isFullscreen ? "h-screen max-w-none rounded-none" : "h-[88vh]"
         }`}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 bg-stone-900/95 border-b border-stone-800/80 z-20 text-white">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 bg-stone-900/95 border-b border-stone-800 z-20 text-white flex-wrap gap-2">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-2xl bg-terracotta-500/20 text-terracotta-400 border border-terracotta-500/30 flex items-center justify-center font-bold">
+            <div className="h-9 w-9 rounded-2xl bg-terracotta-500/20 text-terracotta-400 border border-terracotta-500/30 flex items-center justify-center font-bold shrink-0">
               <Navigation className="h-4.5 w-4.5 rotate-45 text-terracotta-400" />
             </div>
             <div>
@@ -145,23 +165,68 @@ export default function PanoramaViewerModal({
                 <h3 className="text-sm sm:text-base font-serif font-bold text-white tracking-tight flex items-center gap-2">
                   <span>{monument.name}</span>
                 </h3>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-terracotta-500/20 text-terracotta-300 border border-terracotta-500/40">
-                  WebGL 360° VR
-                </span>
               </div>
               <p className="text-[11px] text-stone-400 font-medium flex items-center gap-1 mt-0.5">
                 <MapPin className="h-3 w-3 text-terracotta-400" />
                 <span>{monument.city ? `${monument.city}, ` : ""}{monument.state}</span>
+                <span className="text-stone-600">•</span>
+                <span className="font-mono text-stone-400 text-[10px]">
+                  {monument.coordinates.lat.toFixed(4)}°N, {monument.coordinates.lng.toFixed(4)}°E
+                </span>
               </p>
             </div>
           </div>
 
+          {/* Interactive Mode Tabs */}
+          <div className="flex items-center gap-1.5 bg-stone-950/80 p-1 rounded-2xl border border-stone-800 text-xs">
+            <button
+              type="button"
+              onClick={() => setActiveMode("satellite")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                activeMode === "satellite"
+                  ? "bg-emerald-600 text-white shadow-xs"
+                  : "text-stone-400 hover:text-white"
+              }`}
+            >
+              <Satellite className="h-3.5 w-3.5" />
+              <span>3D Satellite Earth</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveMode("streetview")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                activeMode === "streetview"
+                  ? "bg-amber-600 text-white shadow-xs"
+                  : "text-stone-400 hover:text-white"
+              }`}
+            >
+              <Eye className="h-3.5 w-3.5" />
+              <span>360° Street View</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveMode("webgl")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                activeMode === "webgl"
+                  ? "bg-terracotta-600 text-white shadow-xs"
+                  : "text-stone-400 hover:text-white"
+              }`}
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span>3D VR Dome</span>
+            </button>
+          </div>
+
           <div className="flex items-center gap-2">
             {/* Live Compass Heading Pill */}
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-800/90 text-stone-300 text-xs font-mono border border-stone-700">
-              <Compass className="h-3.5 w-3.5 text-amber-400" />
-              <span>{headingData.heading}° {getCardinalDirection(headingData.heading)}</span>
-            </div>
+            {activeMode === "webgl" && (
+              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-800/90 text-stone-300 text-xs font-mono border border-stone-700">
+                <Compass className="h-3.5 w-3.5 text-amber-400" />
+                <span>{headingData.heading}° {getCardinalDirection(headingData.heading)}</span>
+              </div>
+            )}
 
             {/* Fullscreen Button */}
             <button
@@ -183,47 +248,119 @@ export default function PanoramaViewerModal({
           </div>
         </div>
 
-        {/* Panoramic 3D WebGL Viewer */}
+        {/* Dynamic Multi-Mode Panoramic / Satellite View Container */}
         <div className="flex-1 relative overflow-hidden bg-stone-950">
-          <ThreeJsPanoramaViewer
-            key={monument.id}
-            panoramaUrl={panoramaSrc}
-            fallbackUrl={fallbackSrc}
-            initialHeading={180}
-            initialPitch={0}
-            hotspots={monumentHotspots}
-            isAutoRotating={isAutoRotating}
-            onHeadingChange={handleHeadingChange}
-          />
+          
+          {/* MODE 1: Google 3D Satellite Earth Embed */}
+          {activeMode === "satellite" && (
+            <div className="w-full h-full relative">
+              <iframe
+                src={satelliteEmbedUrl}
+                className="w-full h-full border-0"
+                allowFullScreen
+                loading="lazy"
+                title={`Satellite 3D view of ${monument.name}`}
+              />
 
-          {/* User Gesture Hint Badge */}
-          <div className="absolute top-4 left-4 bg-stone-900/80 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
-            <Move className="h-3.5 w-3.5 text-terracotta-400" />
-            <span>Drag in any direction • Scroll to zoom</span>
-          </div>
+              <div className="absolute top-4 left-4 bg-stone-900/90 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3.5 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
+                <Satellite className="h-3.5 w-3.5 text-emerald-400 animate-pulse" />
+                <span>Live High-Resolution 3D Satellite Imagery • Zoom & Pan to explore topography</span>
+              </div>
+            </div>
+          )}
+
+          {/* MODE 2: Google Street View / 360 Tour Embed */}
+          {activeMode === "streetview" && (
+            <div className="w-full h-full relative">
+              <iframe
+                src={streetViewEmbedUrl}
+                className="w-full h-full border-0"
+                allowFullScreen
+                allow="accelerometer; gyroscope; magnetometer; camera; vr"
+                loading="lazy"
+                title={`360 Street View of ${monument.name}`}
+              />
+
+              <div className="absolute top-4 left-4 bg-stone-900/90 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3.5 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
+                <Move className="h-3.5 w-3.5 text-amber-400" />
+                <span>Interactive 360° Walkthrough • Click & Drag across the temple grounds</span>
+              </div>
+            </div>
+          )}
+
+          {/* MODE 3: High-Definition WebGL 3D Photosphere */}
+          {activeMode === "webgl" && (
+            <>
+              <ThreeJsPanoramaViewer
+                key={monument.id}
+                panoramaUrl={panoramaSrc}
+                fallbackUrl={fallbackSrc}
+                initialHeading={180}
+                initialPitch={0}
+                hotspots={monumentHotspots}
+                isAutoRotating={isAutoRotating}
+                onHeadingChange={handleHeadingChange}
+              />
+
+              {/* User Gesture Hint Badge */}
+              <div className="absolute top-4 left-4 bg-stone-900/80 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
+                <Move className="h-3.5 w-3.5 text-terracotta-400" />
+                <span>Drag in any direction • Scroll to zoom</span>
+              </div>
+            </>
+          )}
+
         </div>
 
         {/* Interactive Bottom Control Toolbar */}
-        <div className="px-5 py-3 bg-stone-900/95 border-t border-stone-800/80 flex items-center justify-between gap-4 z-20">
+        <div className="px-4 sm:px-6 py-3 bg-stone-900/95 border-t border-stone-800 flex items-center justify-between gap-3 z-20 flex-wrap">
           <div className="flex items-center gap-2">
             <span className="text-[11px] text-stone-400 font-medium hidden sm:inline-block">
-              {monument.name} • 360° Ground Inspection
+              {monument.name} • Cultural Ground Inspection
             </span>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            {/* Auto Rotate Button */}
-            <button
-              onClick={() => setIsAutoRotating(!isAutoRotating)}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                isAutoRotating
-                  ? "bg-terracotta-600 hover:bg-terracotta-700 text-white border-terracotta-500 shadow-xs"
-                  : "bg-stone-800 hover:bg-stone-700 text-stone-300 border-stone-700"
-              }`}
+          <div className="flex items-center gap-2.5 flex-wrap">
+            {/* Direct Google Earth 3D Web Launcher */}
+            <a
+              href={googleEarthUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border bg-blue-900/40 hover:bg-blue-800/60 text-blue-200 border-blue-700/60 shadow-xs"
+              title="Launch full 3D flyover in Google Earth"
             >
-              <RotateCw className={`h-3.5 w-3.5 ${isAutoRotating ? "animate-spin" : ""}`} />
-              <span>{isAutoRotating ? "Auto-Rotate ON" : "Auto-Rotate OFF"}</span>
-            </button>
+              <Globe className="h-3.5 w-3.5 text-blue-400" />
+              <span>🌍 Open in Google Earth 3D</span>
+              <ExternalLink className="h-3 w-3 text-blue-300 ml-0.5" />
+            </a>
+
+            {/* Direct Google Maps Pano Link */}
+            <a
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border bg-stone-800 hover:bg-stone-700 text-stone-300 border-stone-700"
+              title="Open direct in Google Maps"
+            >
+              <MapPin className="h-3.5 w-3.5 text-amber-400" />
+              <span>Open on Google Maps</span>
+              <ExternalLink className="h-3 w-3 text-stone-400 ml-0.5" />
+            </a>
+
+            {activeMode === "webgl" && (
+              /* Auto Rotate Button */
+              <button
+                onClick={() => setIsAutoRotating(!isAutoRotating)}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                  isAutoRotating
+                    ? "bg-terracotta-600 hover:bg-terracotta-700 text-white border-terracotta-500 shadow-xs"
+                    : "bg-stone-800 hover:bg-stone-700 text-stone-300 border-stone-700"
+                }`}
+              >
+                <RotateCw className={`h-3.5 w-3.5 ${isAutoRotating ? "animate-spin" : ""}`} />
+                <span>{isAutoRotating ? "Auto-Rotate ON" : "Auto-Rotate OFF"}</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

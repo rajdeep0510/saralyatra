@@ -155,7 +155,7 @@ export default function ThreeJsPanoramaViewer({
     }
 
     // 3. Inverted 360° Sphere Mesh
-    const geometry = new THREE.SphereGeometry(500, 64, 32);
+    const geometry = new THREE.SphereGeometry(500, 128, 64);
     geometry.scale(-1, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       color: 0xffffff,
@@ -186,9 +186,9 @@ export default function ThreeJsPanoramaViewer({
 
     const applyTexture = (texture: THREE.Texture) => {
       texture.colorSpace = THREE.SRGBColorSpace;
-      texture.minFilter = THREE.LinearFilter;
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.magFilter = THREE.LinearFilter;
-      texture.generateMipmaps = false;
 
       material.color.set(0xffffff);
       material.map = texture;
@@ -207,8 +207,20 @@ export default function ThreeJsPanoramaViewer({
       }
     };
 
+    const isNonImageUrl = (u: string) => {
+      return (
+        !u ||
+        u.includes("example.com") ||
+        u.includes("wikimedia.org") ||
+        u.includes("maps.google.com") ||
+        u.includes("360cities.net") ||
+        u.includes("output=svembed") ||
+        u.includes("output=embed")
+      );
+    };
+
     const tryLoad = (url: string, next?: () => void) => {
-      if (!url || url.includes("example.com") || url.includes("wikimedia.org")) {
+      if (isNonImageUrl(url)) {
         if (next) next();
         else loadProcedural();
         return;
