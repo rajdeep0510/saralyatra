@@ -2,16 +2,22 @@
 
 import React from "react";
 import { Sparkles, ArrowRight, Compass, Map, Home, Headphones, Trees, Flame, Landmark, Mountain } from "lucide-react";
+import { LanguageCode } from "@/types";
+import { translations } from "@/data/mockData";
 
 interface DashboardViewProps {
+  currentLang: LanguageCode;
   onLoadTrip: (regionKey: string) => void;
   onNavigateTab: (tab: string) => void;
 }
 
 export default function DashboardView({
+  currentLang,
   onLoadTrip,
   onNavigateTab,
 }: DashboardViewProps) {
+  const t = translations[currentLang] || translations.en;
+
   // Panoramic travel hero image of India's diverse wonders
   const travelHeroImg = "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2400&q=85";
 
@@ -40,26 +46,26 @@ export default function DashboardView({
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-stone-100 text-xs font-semibold shadow-sm">
             <Sparkles className="h-3.5 w-3.5 text-amber-300" />
-            <span>Universal AI Trip Architect • Pan-India Tourism</span>
+            <span>{t.heroBadge || "Universal AI Trip Architect • Pan-India Tourism"}</span>
           </div>
 
           {/* Heading */}
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] drop-shadow-md">
-            Wonders of India
+            {t.heroTitle || "Wonders of India"}
           </h1>
 
           {/* Subtitle */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-200 font-light leading-relaxed drop-shadow-sm">
-            Plan smart journeys across majestic green valleys, royal desert citadels, sacred pilgrimage shrines, and ancient monuments — personalized for any state and duration.
+            {t.heroSub || "Plan smart journeys across majestic green valleys, royal desert citadels, sacred pilgrimage shrines, and ancient monuments — personalized for any state and duration."}
           </p>
 
           {/* Category Quick-Launch Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
             {[
-              { label: "Nature & Scenic", icon: Trees },
-              { label: "Spiritual & Sacred", icon: Flame },
-              { label: "Heritage & History", icon: Landmark },
-              { label: "Adventure & Wildlife", icon: Mountain },
+              { label: t.natureTheme || "Nature & Scenic", icon: Trees },
+              { label: t.spiritualTheme || "Spiritual & Sacred", icon: Flame },
+              { label: t.heritageTheme || "Heritage & History", icon: Landmark },
+              { label: t.adventureTheme || "Adventure & Wildlife", icon: Mountain },
             ].map((cat) => {
               const Icon = cat.icon;
               return (
@@ -81,7 +87,7 @@ export default function DashboardView({
               onClick={() => onLoadTrip("kerala")}
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-stone-950 hover:bg-stone-100 text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
             >
-              <span>🌿 Kerala Nature Retreat</span>
+              <span>🌿 Kerala (Nature)</span>
               <ArrowRight className="h-3.5 w-3.5 text-stone-900 group-hover:translate-x-1 transition-transform" />
             </button>
 
@@ -89,7 +95,7 @@ export default function DashboardView({
               onClick={() => onLoadTrip("rajasthan")}
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
             >
-              <span>🏰 Rajasthan Royal Forts</span>
+              <span>🏰 Rajasthan (Heritage)</span>
               <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
             </button>
 
@@ -97,7 +103,23 @@ export default function DashboardView({
               onClick={() => onLoadTrip("varanasi")}
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
             >
-              <span>🛕 Kashi Pilgrimage</span>
+              <span>🛕 Kashi (Spiritual)</span>
+              <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => onLoadTrip("gujarat")}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            >
+              <span>🪔 Gujarat (Heritage)</span>
+              <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => onLoadTrip("meghalaya")}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white border border-white/30 backdrop-blur-md text-xs font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            >
+              <span>🌧️ Meghalaya (Roots)</span>
               <ArrowRight className="h-3.5 w-3.5 text-white group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -114,14 +136,14 @@ export default function DashboardView({
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-stone-200">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-terracotta-700">
-                Core Planning Architecture
+                {t.exploreTab || "Core Planning Architecture"}
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mt-1">
-                Explore Features & Tourism Modules
+                {t.exploreTitle || "Explore Features & Tourism Modules"}
               </h3>
             </div>
             <p className="text-xs text-stone-500 max-w-sm">
-              Click any module to launch dynamic itinerary generation, interactive Leaflet route maps, Indic voice narrators, or verified regional homestays.
+              {t.exploreSub || "Click any module to launch dynamic itinerary generation, interactive Leaflet route maps, Indic voice narrators, or verified regional homestays."}
             </p>
           </div>
 
@@ -137,14 +159,14 @@ export default function DashboardView({
                   <Headphones className="h-6 w-6" />
                 </div>
                 <h4 className="font-serif text-base font-bold text-stone-900 group-hover:text-terracotta-700 transition-colors">
-                  Wonders & Oral Lore
+                  {t.exploreTab || "Wonders & Oral Lore"}
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Explore Nature Valleys, Sacred Shrines, and Heritage Sites across India with 360° virtual tours and voice narrators in regional Indic dialects.
+                  {t.exploreSub || "Explore Nature Valleys, Sacred Shrines, and Heritage Sites across India with 360° virtual tours and voice narrators."}
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900 group-hover:text-terracotta-700">
-                <span>Browse All States</span>
+                <span>{t.allStates || "Browse All States"}</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
@@ -159,14 +181,14 @@ export default function DashboardView({
                   <Compass className="h-6 w-6" />
                 </div>
                 <h4 className="font-serif text-base font-bold text-stone-900 group-hover:text-terracotta-700 transition-colors">
-                  Universal AI Architect
+                  {t.plannerTab || "Universal AI Architect"}
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Generate customized itineraries for any Indian state (1 to 7+ days) configuring trip theme, pacing, and dietary profiling.
+                  {t.plannerSub || "Generate customized itineraries for any Indian state (1 to 7+ days) configuring trip theme, pacing, and dietary profiling."}
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900 group-hover:text-terracotta-700">
-                <span>Launch Planner</span>
+                <span>{t.startWizard || "Launch Planner"}</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
@@ -181,14 +203,14 @@ export default function DashboardView({
                   <Map className="h-6 w-6" />
                 </div>
                 <h4 className="font-serif text-base font-bold text-stone-900 group-hover:text-stone-700 transition-colors">
-                  Live Route Map
+                  {t.itineraryTab || "Live Route Map"}
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Day-by-day draggable timeline paired with interactive Leaflet route polylines, scenic stops, and live transit indicators.
+                  {t.activeTrip || "Day-by-day draggable timeline paired with interactive Leaflet route polylines, scenic stops, and live transit indicators."}
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900">
-                <span>View Route Map</span>
+                <span>{t.viewRoute || "View Route Map"}</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
@@ -203,14 +225,14 @@ export default function DashboardView({
                   <Home className="h-6 w-6" />
                 </div>
                 <h4 className="font-serif text-base font-bold text-stone-900 group-hover:text-emerald-800 transition-colors">
-                  Eco & Heritage Stays
+                  {t.homestaysTab || "Eco & Heritage Stays"}
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                  Curated tea plantation farmstays, desert havelis, and Vedic ashrams featuring dynamic compatibility scores.
+                  {t.homestaysSub || "Curated tea plantation farmstays, desert havelis, and Vedic ashrams featuring dynamic compatibility scores."}
                 </p>
               </div>
               <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-900 group-hover:text-emerald-800">
-                <span>Browse Stays</span>
+                <span>{t.bookNow || "Browse Stays"}</span>
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>

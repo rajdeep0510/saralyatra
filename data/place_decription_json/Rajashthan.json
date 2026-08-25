@@ -1,0 +1,331 @@
+[
+  {
+    "id": "RJ-RJ-001",
+    "description": "Perched atop the rugged Aravalli hills overlooking Maota Lake, Amber Fort is a breathtaking blend of Rajput and Mughal architecture. Originally commissioned in 1592 by Raja Man Singh I and later expanded by Mirza Raja Jai Singh, this imposing red sandstone and marble fortress served as the royal seat of the Kachwaha Rajputs. Inside its ramparts lie magnificent courtyards like Jaleb Chowk, the pillared Diwan-e-Aam, and the world-famous Sheesh Mahal (Mirror Palace), adorned with thousands of imported convex glass mirrors that illuminate the hall with a single candle flame. Visitors can ascend the cobblestone ramparts via traditional elephant rides or scenic walking trails while soaking in sweeping views of the historic town of Amer. As darkness falls, a captivating sound and light show illuminates the ancient walls, bringing centuries of royal valour, romance, and warfare back to life.",
+    "history": "Originally built by Raja Man Singh I in 1592 and later expanded by Sawai Jai Singh II.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhpaMn4KGWKzbmjacfqMcOMmSWGQfnTqjERnE_dNgusw&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "elephantRide": "Available at the entrance",
+      "parking": "Available",
+      "audioGuide": "Available"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 50",
+      "foreignAdult": "INR 500",
+      "elephantRide": "INR 1100 for two"
+    }
+  },
+  {
+    "id": "RJ-RJ-002",
+    "description": "Rising dramatically 400 feet above the vibrant blue-painted city of Jodhpur, Mehrangarh Fort is one of the largest and most formidable hill forts in India. Founded in 1459 by Rao Jodha, the 15th Rathore ruler of Marwar, the fortress features colossal stone walls up to 120 feet high that seamlessly blend with the natural cliff face. Entry through the massive victory gates, like Jai Pol and Fateh Pol, leads into opulent palaces including Moti Mahal, Phool Mahal, and Sheesh Mahal, which showcase exquisite sandstone filigree work and gold-leaf ceilings. The fort's museum preserves an extraordinary collection of royal palanquins, elephant howdahs, fine miniature paintings, and antique Marwar armaments. From its high battlements mounted with historical cannons, the view of Jodhpur’s sea of blue houses against the desert horizon is truly unforgettable.",
+    "history": "Founded around 1459 by Rao Jodha, with additions made over subsequent centuries by various rulers.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXdwG78QRSR5QMqmtZ9XqNTHSngmt6VwbUYT1Q_b3Fzg&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "elevator": "Available for elderly visitors",
+      "museum": "Inside the fort complex",
+      "audioGuide": "Available"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 100",
+      "foreignAdult": "INR 600"
+    }
+  },
+  {
+    "id": "RJ-RJ-003",
+    "description": "Sprawling across a massive 700-acre hilltop plateau, Chittorgarh Fort stands as an eternal monument to Rajput chivalry, supreme sacrifice, and unyielding pride. Ruled for centuries by the Guhila and Sisodia dynasties of Mewar, this UNESCO World Heritage fortress withstood three epic historic sieges that led to legendary acts of mass self-immolation (Jauhar) by brave queens, including Rani Padmini and Rani Karnavati. The vast complex is dotted with monumental stone marvels, most notably the 9-story Vijay Stambh (Victory Tower) built by Rana Kumbha, and the intricately sculpted Kirti Stambh. Within its perimeter, ancient temples, stepwells, reservoirs, and ruined royal palaces tell profound stories of valour. Exploring Chittorgarh is an emotionally stirring journey through the most heroic chapters of Indian history.",
+    "history": "Ruled by the Guhila dynasty of Mewar, it was besieged multiple times by Delhi sultans and Mughal emperors.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7M70GpyT7NoDnVA8wu5NdeNA5-zVGONCslakKkRnxZg&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "parking": "Available",
+      "guideService": "Available at the gate"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 40",
+      "foreignAdult": "INR 600"
+    }
+  },
+  {
+    "id": "RJ-RJ-004",
+    "description": "Elegantly lining the eastern shoreline of picturesque Lake Pichola, the City Palace in Udaipur is Rajasthan's largest royal palace complex. Initiated in 1559 by Maharana Udai Singh II when he founded the new Mewar capital, the complex grew over four centuries through harmonious architectural additions made by successive Maharanas. The palace is an artistic masterpiece constructed from granite and marble, blending Rajasthani, European, and Mughal influences with ornate cupolas, arched balconies, and colorful stained-glass windows. Inside, visitors can wander through the mirror-lined corridors of the Sheesh Mahal, the vibrant peacock mosaics of Mor Chowk, and the elevated rooftop courtyards of Amar Vilas. Offering breathtaking panoramic views over the shimmering lake and the Lake Palace, it remains the crowning jewel of the Venice of the East.",
+    "history": "Started by Maharana Udai Singh II in 1559 as the capital of the Mewar kingdom.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtILnvDLEFRuuSOYQMd-8VuFcqr1QsJAyFVOxTduaAIA&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "guidedTours": "Available",
+      "restrooms": "Available"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 300",
+      "foreignAdult": "INR 400"
+    }
+  },
+  {
+    "id": "RJ-RJ-005",
+    "description": "Hidden among the lush mango and pine groves of Rajasthan's only hill station, Mount Abu, the Dilwara Temples represent the pinnacle of medieval marble stone carving. Built between the 11th and 13th centuries by wealthy Jain ministers Vastupal and Tejpal, along with Vimal Shah, these five Svetambara temples are renowned for their mind-boggling architectural detail. While the exterior structures appear modest to prevent historical invasions, the interior ceilings, doorways, and pillared halls are carved from translucent white marble with petal-like precision. The central lotus pendants hanging from the ceilings and the miniature dancing celestial maidens carved into every pillar defy belief. It remains an essential pilgrimage destination for spiritual seekers and art connoisseurs from across the globe.",
+    "history": "Built between the 11th and 13th centuries by Vastupal and Tejpal.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmkDmPzZCW6er32sex4yg4Yq0YZVlebKCRtrtIB-mowA&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "shoeStand": "Mandatory outside the complex",
+      "locker": "Available"
+    },
+    "ticketPrices": {
+      "indianAdult": "Free",
+      "foreignAdult": "Free"
+    }
+  },
+  {
+    "id": "RJ-RJ-006",
+    "description": "Set on the banks of the sacred Pushkar Lake, the Jagatpita Brahma Temple is one of the extremely rare and most revered shrines in the world dedicated to Lord Brahma, the creator of the universe. While Hindu scriptures mention the foundational sanctity of the site as thousands of years old, the present stone and marble structure largely dates to the 14th century with distinctive red spires. Devotees climb marble steps inlaid with hundreds of silver coins donated by pilgrims to reach the sanctum, which enshrines a life-size, four-faced idol of Lord Brahma (Chathurmurti). Visiting this sacred shrine during the auspicious Kartik Purnima festival is considered one of the highest spiritual virtues, purifying devotees of lifetime sins. The spiritual aura, ringing brass bells, and scent of rose incense make Pushkar an deeply serene destination.",
+    "history": "Believed to be over 2,000 years old, with current structures largely dating back to the 14th century.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2KuJMurW3iDL_jGu_-HqWcaD63Ms3PLm_3X-rkeeBMg&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "shoeStand": "Available",
+      "securityCheck": "Mandatory"
+    },
+    "ticketPrices": {
+      "indianAdult": "Free",
+      "foreignAdult": "Free"
+    }
+  },
+  {
+    "id": "RJ-RJ-007",
+    "description": "Located 30 kilometers south of Bikaner in the desert town of Deshnoke, the Karni Mata Temple is a globally famous spiritual site celebrated for its unique devotion to rodents. Rebuilt in the early 20th century with intricate white marble facades and solid silver doors by Maharaja Ganga Singh, the temple is home to over 25,000 black rats, locally revered as 'Kabbas'. According to Charan folklore, these rats are the reincarnated souls of the goddess Karni Mata's loyal storytellers and kin. Pilgrims travel from afar to walk barefoot among the roaming rats, sharing sweet milk and prasad with them as a mark of divine blessing. Spotting one of the rare white rats among the scurrying thousands is believed to bring extraordinary luck and prosperity.",
+    "history": "Built by Maharaja Ganga Singh of Bikaner in the early 20th century.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1p0l9AQJA7IXFaLyGqGUngcJ9pjscV4Kg460ziAgZQQ&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "shoeStand": "Available",
+      "parking": "Available"
+    },
+    "ticketPrices": {
+      "indianAdult": "Free",
+      "foreignAdult": "Free"
+    }
+  },
+  {
+    "id": "RJ-RJ-008",
+    "description": "Perched dramatically on the steep, wooded hillsides of Bundi, the Garh Palace and Taragarh Fort form one of Rajasthan's most authentic and unspoiled medieval royal complexes. Constructed in the 17th century by Rao Raja Chattisal Singh, the palace seems to grow organically out of the vertical hillside, featuring sweeping stone ramps, ornate elephant brackets, and airy pavilions. The complex is world-renowned for the 'Chitrashala' or picture gallery, which houses exquisite original murals executed in the distinct Bundi miniature painting style depicting Krishna legends, court processions, and monsoon themes. Unlike heavily modernized tourist centers, Bundi retains a raw, timeless romanticism that transports visitors directly into medieval royal Rajputana.",
+    "history": "Built by Rao Raja Chattisal Singh in the 17th century.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NiI4zhZ2R6ylvYxI_vxm-wLQ5z42aSR8l87QnJjIog&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "parking": "Available",
+      "guideService": "Available"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 100",
+      "foreignAdult": "INR 500"
+    }
+  },
+  {
+    "id": "RJ-RJ-009",
+    "description": "Sprawling across the rugged transition zone between the Aravalli and Vindhya hill ranges, Ranthambore National Park is India's premier tiger reserve. Once the private hunting grounds of the Maharajas of Jaipur, it was established as a wildlife sanctuary in 1955 and incorporated into Project Tiger in 1973. The park is world-famous for offering exceptional daytime sightings of majestic wild Royal Bengal tigers roaming naturally among ancient ruins, banyan trees, and lotus-filled lakes. Open-top jeep and canter safaris traverse its designated zones, where travelers can also spot leopards, sloth bears, marsh crocodiles, and sambar deer against the dramatic backdrop of the 10th-century Ranthambore Fort. It delivers an electrifying wildlife adventure unmatched anywhere in the world.",
+    "history": "Established as Sawai Madhopur Game Sanctuary in 1955 and declared a tiger reserve in 1973.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg-6yNnUpK4Bu8HqlPZ6sqqGmZtKG30LTAm23f7-8vvg&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "canterSafari": "Available",
+      "jeepSafari": "Available"
+    },
+    "ticketPrices": {
+      "safariBooking": "Varies by zone and vehicle type"
+    }
+  },
+  {
+    "id": "RJ-RJ-010",
+    "description": "Formerly known as the Bharatpur Bird Sanctuary, Keoladeo Ghana National Park is a world-renowned, man-made wetland habitat and UNESCO World Heritage Site. Created in the 1850s as a duck-shooting reserve by the Maharajas of Bharatpur, this 29-square-kilometer sanctuary was officially converted into a national park in 1982 to safeguard avian biodiversity. During winter months, the park transforms into a vibrant avian paradise, welcoming over 370 species of resident and migratory birds from as far as Siberia, Central Asia, and Tibet. Visitors explore its tree-lined dikes and water bodies on bicycles or silent cycle-rickshaws driven by certified local naturalists. It is widely considered one of the finest birdwatching and wildlife photography destinations on the planet.",
+    "history": "Created as a duck shooting reserve in the 1850s, later declared a national park in 1982.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9hXKssa4aqiVIWOXYWejIkKxXwB9aJA_vfmM_27rf_A&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "bicycleRental": "Available at gate",
+      "rickshawRide": "Bird-watching guides available"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 75",
+      "foreignAdult": "INR 500"
+    }
+  },
+  {
+    "id": "RJ-RJ-011",
+    "description": "Nestled among the dry deciduous forests and rocky gorges of the Aravalli hills in Alwar, Sariska Tiger Reserve spans over 800 square kilometers of untamed wilderness. Declared a wildlife sanctuary in 1958 and upgraded to a tiger reserve in 1978, it achieved global conservation acclaim as the site of the world's first successful scientific relocation of wild tigers. Guided open-top safari vehicles wind through its scenic valleys, where visitors can encounter tigers, leopards, striped hyenas, jackals, and chital herds. The wilderness is steeped in heritage, dotted with historic ruins like the 10th-century Kankwari Fort, ancient Shiva temples at Neelkanth, and the sacred Pandupol temple associated with the Mahabharata.",
+    "history": "Declared a wildlife sanctuary in 1958 and upgraded to a tiger reserve in 1978.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSLF-21gzVcU2uobUgMW42k31yWHYnbELU5sgMpbrmRQ&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "jeepSafari": "Available",
+      "forestRestHouse": "Available"
+    },
+    "ticketPrices": {
+      "entryFee": "INR 50",
+      "safariCharges": "As per forest department rates"
+    }
+  },
+  {
+    "id": "RJ-RJ-012",
+    "description": "Covering more than 3,160 square kilometers near Jaisalmer, the Desert National Park protects the unique, fragile ecosystem of the great Thar Desert. Established in 1980, the park safeguards extensive sand dunes, craggy rock formations, and salt lake bottoms that support remarkably adapted desert flora and fauna. It serves as the most critical wild sanctuary for the critically endangered Great Indian Bustard, alongside desert foxes, chinkara gazelles, blackbucks, and rare migratory raptors. The park also encompasses the Wood Fossil Park at Akal, containing preserved tree trunks and marine fossils dating back 180 million years to the Jurassic era. It provides an extraordinary look into the prehistoric roots and wild resilience of India's desert borderlands.",
+    "history": "Established in 1980 to protect the unique ecosystem and fossil remains of the Thar Desert.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMNflSyrYq-wcL50gRy28pDOwJ6Od36C7PnoT8FLaOTw&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "jeepSafari": "Available at Sam Sand Dunes"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 100",
+      "foreignAdult": "INR 300"
+    }
+  },
+  {
+    "id": "RJ-RJ-013",
+    "description": "Located roughly 80 kilometers southwest of Jaipur, Sambhar Salt Lake is India’s largest inland saltwater lake and an officially designated Ramsar wetland of international importance. Spanning a vast shallow depression surrounded by the Aravalli hills, the lake has been a prime center for traditional solar salt production for over a millennium, once prized by Chauhan rulers and Mughal emperors. During winter, the shimmering, pinkish-white salt crust is enlivened by tens of thousands of migratory birds, including massive flocks of greater and lesser flamingos. The vintage salt railway, with its century-old diesel engines chugging across narrow tracks over the vast white flats, creates an surreal, cinematic landscape popular among photographers and offbeat travelers.",
+    "history": "Historically ruled by Chauhan kings and Mughal emperors as a major salt trading hub.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw60rwkwx7WUWhlkF0UTSMhYo4HF5pq-5drNyLqBCfAg&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "parking": "Available"
+    },
+    "ticketPrices": {
+      "entryFee": "Free"
+    }
+  },
+  {
+    "id": "RJ-RJ-014",
+    "description": "Cradled in the heart of Mount Abu at an altitude of 1,200 meters, Nakki Lake is a sacred and picturesque freshwater lake steeped in ancient folklore. Hindu legend holds that the gods dug out this high-altitude basin using only their fingernails (nakh) to seek protection from the demon Bashkali. The tranquil waters are fringed by strange, wind-sculpted granite rock formations, including the famous Toad Rock that looms over the water like a giant amphibian. Travelers can rent colorful pedal boats and shikaras to glide across the water while enjoying cool mountain breezes and lush surrounding hills. The lively lakeside promenade lined with gardens, ice cream parlors, and local handicraft shops makes Nakki Lake the social heart of Mount Abu.",
+    "history": "Associated with Hindu mythology; believed to have been dug out by the gods using their fingernails.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Dyw8YoIeR3CWpWX5_TZ0ipg_ebNoaT68uQJ4QOcfsQ&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "boating": "Available",
+      "restaurants": "Surrounding the lake"
+    },
+    "ticketPrices": {
+      "boatingFee": "INR 200 - 400 per boat"
+    }
+  },
+  {
+    "id": "RJ-RJ-015",
+    "description": "Constructed across the Jawai River in Pali by Maharaja Umaid Singh of Jodhpur, Jawai Bandh is famous as India's foremost wild leopard territory. The landscape is defined by billion-year-old volcanic granite boulders and caves that provide ideal natural shelters for more than 50 wild leopards living without fences. What makes Jawai truly remarkable is the peaceful co-existence between these apex predators and the local red-turbaned Rabari shepherd community, who revere leopards as sacred guardians. Thrilling 4x4 open-jeep safaris navigate rocky hill outcroppings, offering close-range sightings of leopards basking on bare boulders alongside marsh crocodiles and migratory flamingos.",
+    "history": "Built during the mid-20th century by Maharaja Umaid Singh of Jodhpur.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgaKZBM17OaNUjNMCzDSADzmASFcG3eqz0PuAbicusAA&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "leopardSafari": "Available via local operators"
+    },
+    "ticketPrices": {
+      "safariCharges": "INR 1500 - 2500 per jeep"
+    }
+  },
+  {
+    "id": "RJ-RJ-016",
+    "description": "Encircling the massive stone fortress of Kumbhalgarh in the Aravalli range, this wildlife sanctuary covers over 570 square kilometers of rugged terrain, hills, and river valleys. Established in 1971, the sanctuary acts as a vital ecological corridor bridging the Marwar desert plains with the verdant Mewar hills. It is home to leopards, Indian wolves, sloth bears, four-horned antelopes (chausingha), and sambar deer navigating steep forest trails. Trekking paths and jeep trails allow visitors to discover natural waterholes, historic watchtowers, and tribal settlements while birdwatching rare forest species. The contrast between ancient fort architecture and pristine wilderness provides a memorable escape for outdoor lovers.",
+    "history": "Established in 1983 to preserve the diverse ecological zones of central Rajasthan.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2m0IGuAHAVnpOSduHFd-fn0Jrg1V1J-3PaOHJOC4OYg&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "natureTrails": "Available"
+    },
+    "ticketPrices": {
+      "entryFee": "INR 50 per person"
+    }
+  },
+  {
+    "id": "RJ-RJ-017",
+    "description": "Located 40 kilometers from the golden city of Jaisalmer, the sweeping Sam Sand Dunes offer the quintessential desert adventure amidst sweeping, wind-carved sand ridges. Travelers embark on leisurely camel rides at dusk, moving across golden ripples as the desert sun sinks below the horizon in an explosion of amber light. Following sunset, the experience shifts to vibrant desert camps where guests are treated to traditional Rajasthani hospitality under starry skies. The nights come alive with roaring bonfires, live Kalbelia folk dances, soulful desert vocals, and authentic local thali dinners in traditional Swiss-style tents. Sleeping under the glittering desert sky offers a deeply romantic and immersive taste of nomadic Rajasthani culture.",
+    "history": "A traditional mode of transport transformed into an immersive eco-tourism cultural experience.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAw-P2SBQdkYLyR9PUXXTDfHMLlRI-zlUW8xY-erbVDw&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "tents": "Luxury and standard desert camps",
+      "culturalShows": "Folk dance and music included"
+    },
+    "ticketPrices": {
+      "safariPackage": "INR 1500 - 5000 per person"
+    }
+  },
+  {
+    "id": "RJ-RJ-018",
+    "description": "Taking flight in the crisp morning air over the Pink City, hot air ballooning in Jaipur delivers an exhilarating, bird's-eye perspective on Rajasthan’s royal landscapes. Floating gently with the morning currents, riders gaze down upon medieval hilltop ramparts, ancient temples, rolling Aravalli peaks, and tranquil village settlements waking up to the dawn. The flight route often drifts close to iconic landmarks such as Amber Fort, Jaigarh, and rural farmsteads, allowing photographers to capture spectacular sunrise vistas. Guided by internationally certified pilots, this sky safari combines peaceful serenity with the thrilling freedom of open-air flight, making it one of Jaipur's premier luxury travel experiences.",
+    "history": "A modern recreational tourism activity licensed and operated over historical zones.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD1VlCggxURO0D1cUzMSN018kh8y1IBfmvkzAcI_xvEA&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "hotelPickup": "Provided by operators"
+    },
+    "ticketPrices": {
+      "ticketPerPerson": "INR 6000 - 10000"
+    }
+  },
+  {
+    "id": "RJ-RJ-019",
+    "description": "A boat cruise across the calm waters of Lake Pichola is an essential and romantic highlight of visiting Udaipur. Created in 1362 AD by a gypsy grain merchant and later expanded by Maharana Udai Singh II, this historic freshwater lake is flanked by palaces, ornate marble ghats, and hill temples. As the boat glides across the water, passengers enjoy views of the City Palace, the historic bathing ghats of Gangaur, and the iconic Jag Mandir island palace with its stone elephant sentinels. The late-afternoon sunset cruise is especially enchanting, when the golden light reflects off the lake surface and the illuminated royal palaces cast glowing reflections across the water.",
+    "history": "Lake Pichola was expanded over centuries following its creation in 1362 AD.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI4VIP-tyyR7n2T0wBKHdPYz5JaLRbEmLu8BouYrXznQ&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "boatJettys": "City Palace jetty and Rameshwar Ghat"
+    },
+    "ticketPrices": {
+      "indianAdult": "INR 400 - 700",
+      "foreignAdult": "INR 700 - 1000"
+    }
+  },
+  {
+    "id": "RJ-RJ-020",
+    "description": "Held annually during the auspicious Hindu lunar month of Kartik (October–November), the Pushkar Fair is one of the world’s largest, most colorful livestock and cultural gatherings. Thousands of rural traders, camel herders, and nomads from across the Thar Desert converge on the dusty dunes of Pushkar with tens of thousands of adorned camels, horses, and cattle. The festival features lively livestock trading alongside traditional competitions like camel beauty pageants, mustache contests, turban-tying duels, and folk matches. Simultaneously, hundreds of thousands of pilgrims gather to take holy dips in Pushkar Lake, creating an unforgettable spectacle of sacred devotion, music, and desert culture.",
+    "history": "An ancient annual traditional trading fair held in Pushkar during Kartik Shukla Ekadashi to Purnima.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt4KM2TUsE62jyXRlwyox6XV6vA-ftvxl6f2dXhXfljw&s=10"
+    ],
+    "360Tour": "",
+    "facilities": {
+      "tentCity": "Temporary luxury tourist camps",
+      "medicalCamps": "Available"
+    },
+    "ticketPrices": {
+      "entryFee": "Free (Event viewing)"
+    }
+  }
+]

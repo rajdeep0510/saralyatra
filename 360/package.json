@@ -1,0 +1,28 @@
+{
+  "name": "omnisphere-360",
+  "version": "1.0.0",
+  "description": "Universal 360° Virtual View Platform with Global Search, WebGL Three.js Sphere, AI Audio Tours & Synchronized Radar Map",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "360",
+    "virtual-tour",
+    "threejs",
+    "webgl",
+    "panoramic",
+    "streetview",
+    "geocoding",
+    "vr"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

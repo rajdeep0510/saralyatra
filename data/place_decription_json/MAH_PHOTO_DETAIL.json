@@ -1,0 +1,376 @@
+[
+  {
+    "id": "MH-SHI-001",
+    "name": "Shirdi Sai Baba Samadhi Mandir",
+    "photo": "https://www.saibabamandirs.com/static/images/sai-baba-mandirs/0001/001.jpg",
+    "description": "The sacred Samadhi Mandir shrine dedicated to the 19th-century saint Sai Baba, attracting millions of multi-faith pilgrims annually from across the globe[cite: 1]. The complex encompasses key spiritual points including Dwarkamai, Chavadi, and the sanctum sanctorum housing the Italian marble idol of Sai Baba[cite: 1].",
+    "history": "Built as a private rest house (wada) by Gopalrao Booty, a wealthy devotee from Nagpur, in 1915[cite: 1]. Sai Baba entered Mahasamadhi in October 1918, after which his mortal remains were entombed within the structure, transforming it into the prime temple[cite: 1].",
+    "360Tour": "https://example.com/360/shirdi",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "prasadalaya": true,
+      "cloakRoom": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "vipDarshan": 200,
+      "morningKakadAarti": 600
+    }
+  },
+  {
+    "id": "MH-NAS-002",
+    "name": "Trimbakeshwar Shiva Temple",
+    "photo": "https://s7ap1.scene7.com/is/image/incredibleindia/1-trimbakeshwar-nashik-maharashtra-attr-hero?qlt=82&ts=1726669890287",
+    "description": "One of the twelve sacred Jyotirlingas, situated at the foothills of Brahmagiri mountain, the source of the holy Godavari River[cite: 1]. It is uniquely revered for its three-faced lingam embodying the holy trinity: Brahma, Vishnu, and Rudra (Shiva)[cite: 1].",
+    "history": "Constructed entirely out of black basalt stone by the Maratha Peshwa Balaji Baji Rao (Nana Saheb) between 1755 and 1786[cite: 1]. The nearby sacred Kushavarta Kund was engineered during the same era and serves as the ritual bathing ground for the Kumbh Mela[cite: 1].",
+    "360Tour": "https://example.com/360/trimbakeshwar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "kushavartaKund": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "specialDarshanPass": 200
+    }
+  },
+  {
+    "id": "MH-KOL-003",
+    "name": "Mahalakshmi Temple (Ambabai Mandir)",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdNUZS2QRZgo7KDtg_hq1o0vN7D1uIedKrL2o5nbESQw&s=10",
+    "description": "A premier 7th-century Shakti Peetha dedicated to Goddess Mahalakshmi (locally revered as Ambabai), celebrated for its intricate carvings and star-shaped stone base in classical Hemadpanthi style[cite: 1].",
+    "history": "Initially established in 700 AD by the Chalukya dynasty, with additions completed by Shilahara and Yadava kings[cite: 1]. The shrine's architectural alignment creates the bi-annual 'Kiranotsav' festival, during which the rays of the setting sun fall directly on the deity's idol[cite: 1].",
+    "360Tour": "https://example.com/360/kolhapur-mahalakshmi",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "shoeStand": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "vipEPass": 100
+    }
+  },
+  {
+    "id": "MH-SOL-004",
+    "name": "Vitthal Rukmini Mandir, Pandharpur",
+    "photo": "https://vitthalrukminimandir.org/images/Temple1.jpg",
+    "description": "The epicentre of the centuries-old Varkari bhakti movement, dedicated to Lord Vitthal (a manifestation of Krishna) and his consort Rakhumai, situated on the crescent curve of the sacred Chandrabhaga (Bhima) River[cite: 1].",
+    "history": "Epigraphical records indicate structural development starting from the 12th century under the Hoysalas and Yadavas of Devagiri[cite: 1]. For over 800 years, it has been the culminating destination for the historic Ashadhi and Kartiki Wari pilgrimages[cite: 1].",
+    "360Tour": "https://example.com/360/pandharpur",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "bhaktNiwas": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "onlineDarshanPass": 0
+    }
+  },
+  {
+    "id": "MH-CSN-005",
+    "name": "Ajanta Caves",
+    "photo": "https://s7ap1.scene7.com/is/image/incredibleindia/ajanta-caves-chhatrapati-sambhaji-nagar-maharashtra-attr-hero-1?qlt=82&ts=1727010611256",
+    "description": "A UNESCO World Heritage site consisting of 30 rock-hewn Buddhist cave temples carved into a horseshoe-shaped gorge above the Waghur River, world-famous for their expressive tempera frescoes and narrative Jataka panels[cite: 1].",
+    "history": "Carved across two distinct periods: the Hinayana phase (2nd century BCE to 1st century CE under the Satavahana dynasty) and the Mahayana phase (5th century CE under Vakataka Emperor Harishena)[cite: 1]. The site fell into disuse until its rediscovery by British officer John Smith in 1819.",
+    "360Tour": "https://example.com/360/ajanta",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "shuttleBus": true,
+      "interpretationCentre": true
+    },
+    "ticketPrices": {
+      "indianAdult": 40,
+      "foreignAdult": 600,
+      "shuttleBusPerTrip": 25
+    }
+  },
+  {
+    "id": "MH-CSN-006",
+    "name": "Ellora Caves (Kailasa Temple)",
+    "photo": "https://cdn.sanity.io/images/nlpqts3z/production/c2242df9e859bc5f70846b40df67beeedfd87e0b-3566x2674.jpg",
+    "description": "A monumental UNESCO World Heritage complex containing 34 rock-cut monasteries and temples representing Hindu, Buddhist, and Jain traditions, headlined by the colossal monolithic Kailasa Temple (Cave 16)[cite: 1].",
+    "history": "Excavated over four centuries (6th to 10th century CE) by the Rashtrakuta and Yadava dynasties[cite: 1]. The centerpiece, Kailasa Temple, was engineered under King Krishna I (r. 756–773 CE) using a top-down vertical cliff excavation technique that displaced over 200,000 tonnes of basalt rock[cite: 1].",
+    "360Tour": "https://example.com/360/ellora",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "golfCartService": true
+    },
+    "ticketPrices": {
+      "indianAdult": 40,
+      "foreignAdult": 600,
+      "childrenBelow15": 0
+    }
+  },
+  {
+    "id": "MH-RGD-007",
+    "name": "Raigad Fort",
+    "photo": "https://vl-prod-static.b-cdn.net/system/images/000/858/452/e4a228b33ffd2e759854be9a9947dbc3/original/Raigad_1.png",
+    "description": "A towering hill fortress situated 820 meters above sea level in the Sahyadri range, characterized by sheer cliff faces, the Maha Darwaja, and the panoramic Takmak Tok cliff edge[cite: 1].",
+    "history": "Originally known as Rairi, it was seized by Chhatrapati Shivaji Maharaj in 1656 and fortified by master architect Hiroji Indulkar[cite: 1]. It served as the official capital of the Maratha Empire where Shivaji's coronation took place in 1674[cite: 1].",
+    "360Tour": "https://example.com/360/raigad",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "ropeway": true,
+      "mtddResort": true
+    },
+    "ticketPrices": {
+      "fortEntry": 25,
+      "ropewayRoundTrip": 350
+    }
+  },
+  {
+    "id": "MH-PUN-008",
+    "name": "Shaniwar Wada",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsJ2lCYrz6WyUedPDIwBOqjNqMp5cZL38RgmweyhbOILNVAtyW8vkrGbe1&s=10",
+    "description": "A historic seven-story fortified palace seat featuring massive teakwood bastioned gateways (such as Dilli Darwaza), stone court foundations, and decorative fountain systems (Hazari Karanje)[cite: 1].",
+    "history": "Commissioned in 1730 and completed in 1732 by Peshwa Baji Rao I as the headquarters of the Maratha Confederacy[cite: 1]. A major portion of the wooden superstructures was destroyed in an extensive 1828 fire, preserving only the stone base fortifications[cite: 1].",
+    "360Tour": "https://example.com/360/shaniwar-wada",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "landscapedLawns": true
+    },
+    "ticketPrices": {
+      "indianAdult": 25,
+      "foreignAdult": 300,
+      "lightAndSoundShow": 50
+    }
+  },
+  {
+    "id": "MH-MUM-009",
+    "name": "Gateway of India",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg/330px-Mumbai_03-2016_30_Gateway_of_India.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "description": "An iconic 26-meter-high basalt triumphal arch built in the Indo-Saracenic style, facing the Arabian Sea at the Apollo Bunder waterfront in South Mumbai[cite: 1].",
+    "history": "Designed by architect George Wittet to commemorate the December 1911 visit of King George V and Queen Mary to India, with construction finishing in 1924[cite: 1]. In February 1948, the First Battalion of the Somerset Light Infantry marched through it during the official British military exit from independent India[cite: 1].",
+    "360Tour": "https://example.com/360/gateway-mumbai",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "elephantaFerryService": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "ferryToElephanta": 260
+    }
+  },
+  {
+    "id": "MH-MUM-10",
+    "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya (CSMVS)",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUnkJyJAwfsrGdfYDJ4PR2mHknYZNfFIbndnHlRbShTQQVH3Yd2IVQSk8&s=10",
+    "description": "Formerly known as the Prince of Wales Museum, this heritage institution houses over 50,000 exhibits across ancient Indian art, archaeological artifacts, European paintings, and natural history[cite: 1].",
+    "history": "Founded in the early 20th century by civic leaders to celebrate the royal visit of the Prince of Wales, designed by George Wittet blending Indo-Saracenic, Maratha, and Mughal architecture, and opened to the public in 1922[cite: 1].",
+    "360Tour": "https://example.com/360/csmvs",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "audioGuide": true,
+      "cafeteria": true
+    },
+    "ticketPrices": {
+      "indianAdult": 150,
+      "foreignAdult": 700,
+      "student": 50
+    }
+  },
+  {
+    "id": "MH-PUN-011",
+    "name": "Raja Dinkar Kelkar Museum",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScA6EQ2IKTTChi7U0SjFVP9yY7u63HLnS2qEkOL1YQ5g&s",
+    "description": "A diverse repository of Indian craftsmanship exhibiting carved doors, musical instruments, war weapons, textiles, and everyday folk artifacts, highlighted by a recreation of Mastani Mahal[cite: 1].",
+    "history": "Assembled over six decades through the travels of Dr. Dinkar G. Kelkar, who dedicated the 20,000-artifact collection to the Government of Maharashtra in 1975 in memory of his son Raja[cite: 1].",
+    "360Tour": "https://example.com/360/kelkar-museum",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "curioShop": true
+    },
+    "ticketPrices": {
+      "indianAdult": 100,
+      "foreignAdult": 300,
+      "child": 30
+    }
+  },
+  {
+    "id": "MH-PUN-012",
+    "name": "Aga Khan Palace",
+    "photo": "hthttps://upload.wikimedia.org/wikipedia/commons/c/cd/Pune_Palace.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+    "description": "A majestic Italianate palace featuring sprawling lawns and arched corridors, serving as a national historic memorial containing the samadhis of Kasturba Gandhi and Mahadev Desai[cite: 1].",
+    "history": "Built in 1892 by Sultan Muhammed Shah Aga Khan III to provide famine relief employment[cite: 1]. It served as an internment camp for Mahatma Gandhi, his wife Kasturba, and secretary Mahadev Desai following the launch of the 1942 Quit India Movement[cite: 1].",
+    "360Tour": "https://example.com/360/aga-khan-palace",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "gandhiMemorial": true
+    },
+    "ticketPrices": {
+      "indianAdult": 25,
+      "foreignAdult": 300,
+      "childrenBelow15": 0
+    }
+  },
+  {
+    "id": "MH-STR-013",
+    "name": "Kaas Plateau (Kaas Pathar)",
+    "photo": "https://www.trawell.in/admin/images/upload/794934986Satara_Kaas_Main.jpg",
+    "description": "A UNESCO World Natural Heritage laterite tableland in the Western Ghats that blooms into a vibrant carpet of over 850 endemic wild plant and orchid species during the late monsoon season[cite: 1].",
+    "history": "Formed through million-year-old volcanic basalt activity, its shallow topsoil creates a unique ecosystem supporting specialized carnivorous and endemic flora found nowhere else on Earth[cite: 1].",
+    "360Tour": "https://example.com/360/kaas-pathar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "forestGuidedBuses": true
+    },
+    "ticketPrices": {
+      "onlineRegistrationFee": 150,
+      "weekendSlotCharge": 200
+    }
+  },
+  {
+    "id": "MH-SAT-014",
+    "name": "Mahabaleshwar Hill Station",
+    "photo": "https://s7ap1.scene7.com/is/image/incredibleindia/pratapgarh-fort-mahabaleshwar-maharashtra-1-attr-nearby?qlt=82&ts=1742177227908",
+    "description": "A picturesque Sahyadri hill station perched at 1,353 meters altitude, known for strawberry and mulberry plantations, vantage viewpoints such as Arthur's Seat, and the perennial Venna Lake[cite: 1].",
+    "history": "Originally developed as a sanatorium and summer capital for the Bombay Presidency in 1828 under Governor Sir John Malcolm, who leased the region from the Raja of Satara[cite: 1].",
+    "360Tour": "https://example.com/360/mahabaleshwar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "boating": true,
+      "resorts": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "vennaLakeBoating": 250,
+      "townPollutionTax": 30
+    }
+  },
+  {
+    "id": "MH-PUN-015",
+    "name": "Lonavala & Khandala Ghats",
+    "photo": "https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_lonavala_tv_destination_img_2_l_664_1000.jpg",
+    "description": "A popular Western Ghats highland pass destination famed for sweeping valley waterfalls, cliff viewpoints, and the nearby ancient Buddhist rock-cut Karla and Bhaja Caves[cite: 1].",
+    "history": "Developed into a colonial rail-sanatorium stopover by Lord Elphinstone in 1871 due to its vital location controlling the Bor Ghat trade passage between Pune and the Arabian Sea ports[cite: 1].",
+    "360Tour": "https://example.com/360/lonavala",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "viewpoints": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "karlaCavesTicket": 25
+    }
+  },
+  {
+    "id": "MH-CHD-016",
+    "name": "Tadoba Andhari Tiger Reserve",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1jbHoaJia_lkkilYvJq5hdRLiag1MS3mAG30la-C-qw&s=10",
+    "description": "Maharashtra's premier tiger reserve, dominated by dry deciduous teak, bamboo thickets, and waterholes sustaining high densities of Bengal tigers, leopards, and sloth bears[cite: 1].",
+    "history": "Established as Maharashtra's first National Park in 1955 and merged with the Andhari Wildlife Sanctuary in 1995 to form the Project Tiger Reserve, named after the local tribal forest deity Taru[cite: 1].",
+    "360Tour": "https://example.com/360/tadoba",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "gypsySafaris": true,
+      "forestLodges": true
+    },
+    "ticketPrices": {
+      "coreGatePermit": 1000,
+      "bufferGatePermit": 800,
+      "gypsyAndGuideExtra": 3500
+    }
+  },
+  {
+    "id": "MH-BLD-017",
+    "name": "Lonar Meteorite Crater Lake",
+    "photo": "https://s7ap1.scene7.com/is/image/incredibleindia/lonar-crater-lake-mumbai-maharashtra-1-attr-hero?qlt=82&ts=1742171044512",
+    "description": "A hyper-alkaline, saline impact crater lake and Ramsar wetland surrounded by dense dry-deciduous forest and medieval temple ruins including the Daitya Sudan shrine[cite: 1].",
+    "history": "Formed approximately 52,000 years ago when a meteorite struck the Deccan Basalt plateau at hypervelocity speeds, creating one of the world's only basalt-impact craters[cite: 1].",
+    "360Tour": "https://example.com/360/lonar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "trekkingTrails": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "MH-SND-018",
+    "name": "Sindhudurg Fort",
+    "photo": "https://www.hindujagruti.org/wp-content/uploads/2015/02/SindhuDurg_640.jpg",
+    "description": "A sea fortress occupying 44 acres on Kurte Island in the Arabian Sea, fortified by 3 km of basalt curtain ramparts and massive watch bastions[cite: 1].",
+    "history": "Engineered between 1664 and 1667 under the direct supervision of Chhatrapati Shivaji Maharaj using molten lead foundations to secure the Konkan coastline against foreign maritime forces[cite: 1].",
+    "360Tour": "https://example.com/360/sindhudurg",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "ferryBoatService": true
+    },
+    "ticketPrices": {
+      "fortEntry": 20,
+      "ferryRoundTrip": 110
+    }
+  },
+  {
+    "id": "MH-AHM-019",
+    "name": "Sandhan Valley",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0opkL0U_Tct3LdR9QIAAY6FZrLO31cV38wAf_wVbV19E5kKNDnejWQys&s=10",
+    "description": "A 200-foot deep and 2 km long natural rock-cut gorge in the Bhandardara region, renowned for extreme adventure canyoning, rappelling, and overnight cliff camping[cite: 1].",
+    "history": "Naturally carved over millions of years by water erosion slicing through basalt bedrock, earning the local title 'Valley of Shadows' due to sunlight failing to reach its narrow depths[cite: 1].",
+    "360Tour": "https://example.com/360/sandhan-valley",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "adventureGuides": true,
+      "campsites": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "guidedTrekApprox": 1200
+    }
+  },
+  {
+    "id": "MH-AHM-020",
+    "name": "Nighoj Potholes (Kund)",
+    "photo": "https://www.morachi-chincholi.com/img/Keywordimg/43.jpg",
+    "description": "A geological wonder along the Kukadi River basin, characterized by thousands of smooth, circular micro-canyons and water-sculpted basalt potholes[cite: 1].",
+    "history": "Formed by high-energy river whirlpools and abrasive gravel churning into volcanic rock beds over centuries, historically linked with the riverside Malganga goddess shrine[cite: 1].",
+    "360Tour": "https://example.com/360/nighoj",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "suspensionBridge": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  }
+]

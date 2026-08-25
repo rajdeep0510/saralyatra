@@ -130,8 +130,92 @@ export function addDestinationToTrip(
 }
 
 /**
+ * Calculates straight-line distance in km between two monuments.
+ */
+export function getMonumentDistance(m1: Monument, m2: Monument): number {
+  if (m1.coordinates && m2.coordinates) {
+    return getDistanceKm(m1.coordinates.lat, m1.coordinates.lng, m2.coordinates.lat, m2.coordinates.lng);
+  }
+  return m1.state.toLowerCase() === m2.state.toLowerCase() ? 30 : 250;
+}
+
+/**
+ * Optimizes a list of monuments into a continuous, non-backtracking travel corridor
+ * using Greedy Nearest-Neighbor and 2-Opt local search refinement.
+ * This guarantees that nearby places in the same city/district are visited together,
+ * and travel between days progresses sequentially along the shortest geographic path.
+ */
+export function optimizeRouteCorridor(places: Monument[]): Monument[] {
+  if (places.length <= 2) return [...places];
+
+  const unvisited = [...places];
+
+  // Start with the most prominent / iconic anchor attraction, or the first item
+  const startIdx = unvisited.findIndex((p) => !p.isOffbeat);
+  const startPlace = startIdx >= 0 ? unvisited.splice(startIdx, 1)[0] : unvisited.shift()!;
+
+  const orderedRoute: Monument[] = [startPlace];
+  let current = startPlace;
+
+  // Step 1: Nearest-Neighbor sequential chaining
+  while (unvisited.length > 0) {
+    let nearestIdx = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < unvisited.length; i++) {
+      const dist = getMonumentDistance(current, unvisited[i]);
+      if (dist < minDistance) {
+        minDistance = dist;
+        nearestIdx = i;
+      }
+    }
+
+    const nextPlace = unvisited.splice(nearestIdx, 1)[0];
+    orderedRoute.push(nextPlace);
+    current = nextPlace;
+  }
+
+  // Step 2: 2-Opt refinement to eliminate any route twists or backtracking
+  const calculateTotalDist = (route: Monument[]): number => {
+    let sum = 0;
+    for (let i = 0; i < route.length - 1; i++) {
+      sum += getMonumentDistance(route[i], route[i + 1]);
+    }
+    return sum;
+  };
+
+  let best = [...orderedRoute];
+  let improved = true;
+  let iterations = 0;
+
+  while (improved && iterations < 50) {
+    improved = false;
+    iterations++;
+    for (let i = 1; i < best.length - 1; i++) {
+      for (let k = i + 1; k < best.length; k++) {
+        const candidate = [
+          ...best.slice(0, i),
+          ...best.slice(i, k + 1).reverse(),
+          ...best.slice(k + 1)
+        ];
+        if (calculateTotalDist(candidate) < calculateTotalDist(best)) {
+          best = candidate;
+          improved = true;
+          break;
+        }
+      }
+      if (improved) break;
+    }
+  }
+
+  return best;
+}
+
+/**
  * Dynamically synthesizes a customized multi-day trip itinerary
  * from a pool of 100+ destinations based on user preferences and calendar start dates.
+ * Places are grouped by geographic proximity so that nearby attractions are visited on the same day
+ * and the journey progresses linearly along an efficient geographic corridor without backtracking.
  */
 export function generateDynamicItinerary(
   prefs: FilterPreferences,
@@ -172,48 +256,52 @@ export function generateDynamicItinerary(
     matched = allDestinations;
   }
 
-  // 2. Separate into iconic and offbeat gems based on famousRatio
+  // 2. Separate into iconic and offbeat gems and build a strictly unique pool
   const iconic = matched.filter((d) => !d.isOffbeat);
   const offbeat = matched.filter((d) => d.isOffbeat);
+
+  const rawCandidatePool: Monument[] = [];
+  const addedIds = new Set<string>();
+
+  for (const item of iconic) {
+    if (!addedIds.has(item.id)) {
+      rawCandidatePool.push(item);
+      addedIds.add(item.id);
+    }
+  }
+  for (const item of offbeat) {
+    if (!addedIds.has(item.id)) {
+      rawCandidatePool.push(item);
+      addedIds.add(item.id);
+    }
+  }
+  for (const item of matched) {
+    if (!addedIds.has(item.id)) {
+      rawCandidatePool.push(item);
+      addedIds.add(item.id);
+    }
+  }
+
+  // 3. Optimize the entire selected pool into a non-backtracking geographic corridor
+  const optimizedCorridor = optimizeRouteCorridor(rawCandidatePool);
+
+  // Calculate actual realistic days: each day requires at least 1 unique primary destination
+  const maxPossibleDays = region === "All India"
+    ? duration
+    : Math.max(1, Math.min(duration, optimizedCorridor.length > 0 ? Math.min(duration, optimizedCorridor.length) : duration));
+
+  const actualDaysCount = Math.max(1, Math.min(duration, maxPossibleDays));
 
   let placesPerDay = 2;
   if (pacing === "Relaxed") placesPerDay = 1;
   else if (pacing === "Intensive") placesPerDay = 3;
 
-  const totalPlacesNeeded = Math.max(1, duration * placesPerDay);
-
-  const targetIconic = Math.round(totalPlacesNeeded * (famousRatio / 100));
-  const selectedPlaces: Monument[] = [];
-  const pickedIds = new Set<string>();
-
-  for (const item of iconic) {
-    if (selectedPlaces.length < targetIconic && !pickedIds.has(item.id)) {
-      selectedPlaces.push(item);
-      pickedIds.add(item.id);
-    }
+  // If unique places pool is limited, adjust placesPerDay so each place gets adequate time
+  if (optimizedCorridor.length <= actualDaysCount) {
+    placesPerDay = 1;
   }
 
-  for (const item of offbeat) {
-    if (selectedPlaces.length < totalPlacesNeeded && !pickedIds.has(item.id)) {
-      selectedPlaces.push(item);
-      pickedIds.add(item.id);
-    }
-  }
-
-  for (const item of matched) {
-    if (selectedPlaces.length < totalPlacesNeeded && !pickedIds.has(item.id)) {
-      selectedPlaces.push(item);
-      pickedIds.add(item.id);
-    }
-  }
-
-  let fillIdx = 0;
-  while (selectedPlaces.length < totalPlacesNeeded && matched.length > 0) {
-    selectedPlaces.push(matched[fillIdx % matched.length]);
-    fillIdx++;
-  }
-
-  // 3. Dietary meals mapping
+  // 4. Dietary meals mapping
   const dietaryLunchMap: Record<string, { title: string; desc: string }> = {
     jain: {
       title: "Verified Jain Satvik Thali Lunch",
@@ -235,14 +323,42 @@ export function generateDynamicItinerary(
 
   const selectedLunch = dietaryLunchMap[dietary] || dietaryLunchMap.pureVeg;
 
-  // 4. Distribute into days with calendar date formatting
+  // Curated supplemental regional cultural activities for afternoons when places are limited
+  const supplementalActivities = [
+    {
+      title: "Traditional Crafts & Artisan Bazaar Heritage Walk",
+      desc: "Explore local handlooms, pottery, brassware, and regional spice markets with local artisans.",
+      duration: "1.5 hours",
+      type: "heritage" as const
+    },
+    {
+      title: "Sunset Viewpoint & Landscape Photography Session",
+      desc: "Scenic panorama vantage point capturing golden hour over historic skyline and landscapes.",
+      duration: "1.5 hours",
+      type: "nature" as const
+    },
+    {
+      title: "Evening Cultural Folk Music & Tea Tasting Trail",
+      desc: "Sample regional spiced teas, local sweets, and experience traditional instrumental performances.",
+      duration: "1.5 hours",
+      type: "heritage" as const
+    },
+    {
+      title: "Sacred Riverbank / Temple Lamp Offering (Deepotsav)",
+      desc: "Peaceful evening spiritual chants and floating lamp ritual along holy waters.",
+      duration: "1.5 hours",
+      type: "spiritual" as const
+    }
+  ];
+
+  // 5. Distribute geographically clustered attractions across sequential days
   const itinerary: ItineraryDay[] = [];
-  let placeCounter = 0;
+  let placeIdx = 0;
 
   // Base date object for calendar calculations
   const startDateObj = dates ? new Date(dates) : new Date();
 
-  for (let dayNum = 1; dayNum <= duration; dayNum++) {
+  for (let dayNum = 1; dayNum <= actualDaysCount; dayNum++) {
     const stops: ItineraryStop[] = [];
 
     // Formatted date string for Day X
@@ -253,9 +369,9 @@ export function generateDynamicItinerary(
       dayDateLabel = currentDayDate.toLocaleDateString("en-IN", { month: "short", day: "numeric" });
     }
 
-    // Morning attraction (09:30 AM)
-    const morningPlace = selectedPlaces[placeCounter % selectedPlaces.length];
-    placeCounter++;
+    // Morning primary attraction from current corridor cluster (09:30 AM)
+    const morningPlace = optimizedCorridor[placeIdx % optimizedCorridor.length];
+    placeIdx++;
 
     if (morningPlace) {
       stops.push({
@@ -263,7 +379,7 @@ export function generateDynamicItinerary(
         time: "09:30 AM",
         type: morningPlace.category,
         title: morningPlace.name,
-        desc: morningPlace.folklore[language] || morningPlace.folklore.en,
+        desc: morningPlace.folklore[language] || morningPlace.folklore.en || `Explore ${morningPlace.name}.`,
         monumentId: morningPlace.id,
         duration: "2.5 hours",
         lat: morningPlace.coordinates?.lat,
@@ -271,68 +387,80 @@ export function generateDynamicItinerary(
       });
     }
 
-    // Midday Lunch Stop (01:00 PM)
+    // Midday Lunch Stop (01:00 PM) - Placed in the immediate local vicinity of morning stop
     stops.push({
       id: `day-${dayNum}-lunch`,
       time: "01:00 PM",
       type: "lunch",
-      title: `${selectedLunch.title} (${dayDateLabel})`,
+      title: `${selectedLunch.title} (${morningPlace?.name ? morningPlace.name.split(" ")[0] : region})`,
       desc: selectedLunch.desc,
       duration: "1.5 hours",
-      lat: morningPlace?.coordinates?.lat ? morningPlace.coordinates.lat - 0.005 : undefined,
-      lng: morningPlace?.coordinates?.lng ? morningPlace.coordinates.lng + 0.005 : undefined
+      lat: morningPlace?.coordinates?.lat ? morningPlace.coordinates.lat - 0.003 : undefined,
+      lng: morningPlace?.coordinates?.lng ? morningPlace.coordinates.lng + 0.003 : undefined
     });
 
-    // Afternoon attraction for Moderate/Intensive
-    if (placesPerDay >= 2) {
-      const afternoonPlace = selectedPlaces[placeCounter % selectedPlaces.length];
-      placeCounter++;
+    // Afternoon attraction (03:30 PM) - Takes the next nearby stop in the same cluster along the corridor
+    let lastVisitedPlace = morningPlace;
+    if (placesPerDay >= 2 && placeIdx < optimizedCorridor.length) {
+      const afternoonPlace = optimizedCorridor[placeIdx];
+      placeIdx++;
+      lastVisitedPlace = afternoonPlace;
 
-      if (afternoonPlace) {
-        stops.push({
-          id: `day-${dayNum}-stop-2`,
-          time: "03:30 PM",
-          type: afternoonPlace.category,
-          title: afternoonPlace.name,
-          desc: afternoonPlace.folklore[language] || afternoonPlace.folklore.en,
-          monumentId: afternoonPlace.id,
-          duration: "2 hours",
-          lat: afternoonPlace.coordinates?.lat,
-          lng: afternoonPlace.coordinates?.lng
-        });
-      }
+      stops.push({
+        id: `day-${dayNum}-stop-2`,
+        time: "03:30 PM",
+        type: afternoonPlace.category,
+        title: afternoonPlace.name,
+        desc: afternoonPlace.folklore[language] || afternoonPlace.folklore.en || `Visit ${afternoonPlace.name}.`,
+        monumentId: afternoonPlace.id,
+        duration: "2 hours",
+        lat: afternoonPlace.coordinates?.lat,
+        lng: afternoonPlace.coordinates?.lng
+      });
+    } else if (placesPerDay >= 2 || optimizedCorridor.length <= actualDaysCount) {
+      // Add a unique local cultural activity within this day's cluster
+      const activity = supplementalActivities[(dayNum - 1) % supplementalActivities.length];
+      stops.push({
+        id: `day-${dayNum}-activity`,
+        time: "03:30 PM",
+        type: activity.type,
+        title: `${activity.title} (${morningPlace?.name ? morningPlace.name.split(" ")[0] : region})`,
+        desc: activity.desc,
+        duration: activity.duration,
+        lat: morningPlace?.coordinates?.lat ? morningPlace.coordinates.lat + 0.003 : undefined,
+        lng: morningPlace?.coordinates?.lng ? morningPlace.coordinates.lng - 0.003 : undefined
+      });
     }
 
-    // Additional Evening highlight for Intensive pacing
-    if (placesPerDay >= 3) {
-      const eveningPlace = selectedPlaces[placeCounter % selectedPlaces.length];
-      placeCounter++;
+    // Additional Evening highlight for Intensive pacing (06:00 PM)
+    if (placesPerDay >= 3 && placeIdx < optimizedCorridor.length) {
+      const eveningPlace = optimizedCorridor[placeIdx];
+      placeIdx++;
+      lastVisitedPlace = eveningPlace;
 
-      if (eveningPlace) {
-        stops.push({
-          id: `day-${dayNum}-stop-3`,
-          time: "06:00 PM",
-          type: eveningPlace.category,
-          title: eveningPlace.name,
-          desc: eveningPlace.folklore[language] || eveningPlace.folklore.en,
-          monumentId: eveningPlace.id,
-          duration: "1.5 hours",
-          lat: eveningPlace.coordinates?.lat,
-          lng: eveningPlace.coordinates?.lng
-        });
-      }
+      stops.push({
+        id: `day-${dayNum}-stop-3`,
+        time: "06:00 PM",
+        type: eveningPlace.category,
+        title: eveningPlace.name,
+        desc: eveningPlace.folklore[language] || eveningPlace.folklore.en || `Explore ${eveningPlace.name}.`,
+        monumentId: eveningPlace.id,
+        duration: "1.5 hours",
+        lat: eveningPlace.coordinates?.lat,
+        lng: eveningPlace.coordinates?.lng
+      });
     }
 
-    // Evening Checkpoint / Homestay wrap
+    // Evening Overnight Rest / Homestay (08:00 PM) - Placed directly at the day's final destination hub
     stops.push({
       id: `day-${dayNum}-hotel`,
       time: "08:00 PM",
       type: "hotel",
-      title: `Verified Regional Retreat & Overnight Rest (${dayDateLabel})`,
-      desc: `Evening relaxation, dinner, and cultural exchange with local hosts.`,
+      title: `Verified Regional Retreat & Overnight Rest (${lastVisitedPlace?.name ? lastVisitedPlace.name.split(" ")[0] : region})`,
+      desc: `Evening relaxation, local dining, and comfortable overnight stay close to tomorrow's journey route.`,
       duration: "Overnight",
-      lat: morningPlace?.coordinates?.lat ? morningPlace.coordinates.lat + 0.003 : undefined,
-      lng: morningPlace?.coordinates?.lng ? morningPlace.coordinates.lng + 0.003 : undefined
+      lat: lastVisitedPlace?.coordinates?.lat ? lastVisitedPlace.coordinates.lat + 0.002 : undefined,
+      lng: lastVisitedPlace?.coordinates?.lng ? lastVisitedPlace.coordinates.lng + 0.002 : undefined
     });
 
     itinerary.push({

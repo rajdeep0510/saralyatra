@@ -1,0 +1,360 @@
+[
+  {
+    "id": "UT-BAD-001",
+    "description": "Nestled at an altitude of 3,100 meters between the snow-draped Nar and Narayana mountain ranges, Badrinath Temple stands as the sacred northern pillar of India's Char Dham. Re-established in the 8th century by Adi Shankaracharya after retrieving the sacred black Saligram idol from the Alaknanda River, this shrine represents deep meditative stillness. Its colorful, arched facade reflects authentic Himalayan hill architecture, standing resilient against extreme weather. Devotees journey from across the globe between May and November to seek blessings from Lord Badrinarayan and perform ancestral rituals at the nearby Brahma Kapal Ghat. Entering this sanctum offers an unforgettable sense of peace, connecting ancient Vedic history with the raw grandeur of the Garhwal Himalayas.",
+    "history": "Established by Adi Shankaracharya in the 8th century after retrieving the black Saligram idol from the Alaknanda River at Narad Kund.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_5Gj1Rrue7spzJk4riExILZg1dEukyPZaEAwYzYlMlQ&s=10"
+    ],
+    "360Tour": "https://example.com/360/badrinath",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "taptKundBaths": true,
+      "brahmaKapalGhat": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "specialPujaBooking": 500
+    }
+  },
+  {
+    "id": "UT-BAD-002",
+    "description": "Just steps below the freezing Himalayan winds of Badrinath, Tapt Kund presents one of nature’s most fascinating thermal wonders. This natural hot spring maintains a steady, therapeutic temperature of around 45°C right alongside the icy currents of the Alaknanda River. Infused with natural sulfur, the steaming waters are renowned for their medicinal qualities that heal skin ailments and soothe muscle fatigue after demanding high-altitude journeys. According to Hindu belief, Lord Agni resides permanently within these waters to purify pilgrims before they step into the divine presence of Lord Vishnu. Taking a warm dip here amidst the cold mountain air is a spiritually uplifting and physically restorative experience.",
+    "history": "Known for constant 45°C medicinal hot springs where pilgrims take a purification dip before entering the sanctum.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vSsllgeC-HfF0g4A9lFbvf4YHcT8APN4cj_cM3dseA&s=10"
+    ],
+    "360Tour": "https://example.com/360/taptkund",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "separateMenWomenBaths": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-BAD-003",
+    "description": "Perched just 3 kilometers beyond Badrinath near the Indo-Tibetan frontier, Mana is celebrated as India's 'First Village'. Inhabited by the indigenous Bhotia community, this picturesque mountain settlement once thrived as a vital trade link via the historic Mana Pass. Walking through its narrow stone lanes brings epic tales to life, from the ancient Vyas and Ganesh Caves where the Mahabharata was transcribed, to the massive natural rock slab known as Bhim Pul over the roaring Saraswati River. Local residents continue to weave traditional sheep wool garments and collect rare Himalayan herbs, preserving a distinct heritage. Enjoying a cup of warm mountain tea at the iconic edge-of-the-nation tea stalls makes visiting Mana genuinely unforgettable.",
+    "history": "An ancient trade gateway connecting India and Tibet via the Mana Pass, noted for wool weaving and herbs.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5UdQUMeiJN_KCYIhw9mUh4TPn4sSxcAyW521qdX_UIg&s"
+    ],
+    "360Tour": "https://example.com/360/mana-village",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "teaShops": true,
+      "handicrafts": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "UT-BAD-004",
+    "description": "Tucked away in the rugged glacial landscapes beyond Mana Village, Vasudhara Falls drops dramatically from a sheer cliff height of 122 meters. Reaching this remote paradise requires a scenic 6-kilometer trek over rocky moraines and rolling alpine meadows. Ancient folklore holds that the pure spray of this glacial cascade drifts away from anyone carrying impure or unrighteous thoughts, making every drop feel sacred. Strong mountain winds catch the descending stream, scattering the crystal-clear water into a misty curtain of floating droplets against the Himalayan sky. For adventurous travelers, the journey to Vasudhara offers pristine mountain serenity, panoramic views of surrounding peaks, and the untamed beauty of the high Himalayas.",
+    "history": "Tradition holds that the pure droplets of the fall turn away from anyone who harbors unrighteous thoughts.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqB8jxV-c_Ty_t2kV1R6VWd6938T3c7U2lz_Ak7StuJQ&s=10"
+    ],
+    "360Tour": "https://example.com/360/vasudhara",
+    "facilities": {
+      "parking": false,
+      "wheelchairAccessible": false,
+      "restrooms": false,
+      "trekkingPath": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "OD-PUR-005",
+    "description": "Dominating the coastal skyline of Odisha, the 12th-century Jagannath Temple in Puri is the revered eastern anchor of the Bada Char Dham. Commissioned by King Anantavarman Chodaganga of the Eastern Ganga dynasty, its massive 65-meter Kalinga-style stone spire shelters Lord Jagannath, Balabhadra, and Subhadra. The complex is globally celebrated for the annual Ratha Yatra, where colossal hand-carved chariots are pulled through cheering crowds of millions. It also houses the Ananda Bazar, one of the world's largest traditional kitchens where thousands of earthen pots cook sacred Mahaprasad daily over wood fires. Every stone in this vast ocean-side sanctuary echoes with devotion, ancient mysteries, and unbroken spiritual traditions.",
+    "history": "Constructed in the 12th century by King Anantavarman Chodaganga of the Eastern Ganga dynasty, world-famous for its annual Ratha Yatra.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc-_4CyfQjRQAnwdxAA0qVE6aPdVWWgRm9B8QP5o1b1w&s"
+    ],
+    "360Tour": "https://example.com/360/puri-jagannath",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "anandaBazarMahaprasad": true,
+      "shoeStand": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "OD-PUR-006",
+    "description": "Engineered in the 13th century under King Narasimhadeva I, the UNESCO World Heritage Konark Sun Temple is an architectural masterpiece dedicated to Surya, the Sun God. The entire monument was conceived as a monumental stone chariot pulled by seven galloping horses and balanced upon 24 intricately sculpted wheels. Beyond their artistic brilliance, these monumental wheels function as high-precision sundials that accurately calculate solar time down to the minute. The temple’s dark khondalite stone walls are densely carved with elaborate reliefs depicting dancers, musicians, celestial beings, and medieval life. As evening falls, a captivating light and sound show brings the historical brilliance of this coastal marvel to life.",
+    "history": "Built around 1250 CE by King Narasimhadeva I of the Eastern Ganga dynasty to honor Surya, the Sun God.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJbbxRl4g28i3cuyKPjBEjGQUH-WUjaVo7zitFot83YA&s=10"
+    ],
+    "360Tour": "https://example.com/360/konark",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "audioGuide": true,
+      "interpretationCentre": true
+    },
+    "ticketPrices": {
+      "indianAdult": 40,
+      "foreignAdult": 600,
+      "lightAndSoundShow": 50
+    }
+  },
+  {
+    "id": "OD-PUR-007",
+    "description": "Stretching along the golden shores of the Bay of Bengal, Puri Beach is a vibrant, Blue Flag-certified coastal haven renowned for its safety and clean waters. For centuries, visiting pilgrims have walked directly from the Jagannath Temple to take early morning purificatory dips in the rolling ocean waves. The beach is equally famous for its dynamic art scene, where celebrated sand artists craft massive, detailed sculptures along the shoreline. With dedicated lifeguards, modern eco-boardwalks, and gentle sea breezes, it offers a refreshing blend of relaxation and culture. Whether catching the sunrise over the ocean or tasting local coastal snacks in the evening, Puri Beach delivers an authentic seaside experience.",
+    "history": "Developed into an eco-certified beach destination equipped with bathing infrastructure and coastal lifeguards.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkQ9wsCxvl7AgYemI-X0fPyUbAK-6_7Kvdp0UbM7_Xdw&s=10"
+    ],
+    "360Tour": "https://example.com/360/puri-beach",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "showers": true,
+      "lifeguards": true
+    },
+    "ticketPrices": {
+      "blueFlagBeachEntry": 20
+    }
+  },
+  {
+    "id": "OD-PUR-008",
+    "description": "Situated amidst lush coconut and betel nut groves near Puri, Raghurajpur is an open-air living museum where art is woven into daily life. Recognized as a national heritage crafts village, every single household here is home to generational master artisans practicing the centuries-old Pattachitra cloth painting technique. The artists create their own organic pigments from crushed river stones, herbs, and burnt coconut shells, painting intricate mythological epics on treated cloth and dried palm leaves. Raghurajpur is also the proud birthplace of classical Odissi maestro Guru Kelucharan Mohapatra and the traditional Gotipua dance form. Walking past its mural-covered houses offers a rare opportunity to connect directly with India's living cultural roots.",
+    "history": "The birthplace of legendary Odissi dance guru Kelucharan Mohapatra, keeping century-old Gotipua dance and folk arts alive.",
+    "gallery": [
+      "https://example.com/images/raghurajpur.jpg"
+    ],
+    "360Tour": "https://example.com/360/raghurajpur",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "artisanGalleries": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "OD-PUR-009",
+    "description": "Where Asia’s largest brackish lagoon flows into the Bay of Bengal, Chilika Lake at Satapada provides a breathtaking ecotourism sanctuary. Recognized as India’s first Ramsar wetland, this sprawling water body serves as an indispensable winter haven for over a million migratory birds traveling from northern continents. Satapada is particularly renowned as one of the few places in the world to observe rare, playful Irrawaddy dolphins gliding through calm waters. Motorboat excursions take visitors past serene sandbars toward the scenic Rajhans Island, where the peaceful lake is separated from the roaring ocean by just a thin strip of sand. It is a must-visit destination for birdwatchers, photographers, and nature lovers seeking untamed coastal tranquility.",
+    "history": "Designated India's first Ramsar wetland of international importance in 1981.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvXLxBMZBEncbNSSv94KcDXJGCpz2h34c8XYIDWyxdJQ&s=10"
+    ],
+    "360Tour": "https://example.com/360/chilika-satapada",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "motorboatCruises": true,
+      "otdcRestaurant": true
+    },
+    "ticketPrices": {
+      "dolphinBoatTourFixed": 1500
+    }
+  },
+  {
+    "id": "TN-RAM-010",
+    "description": "Located on Pamban Island in Tamil Nadu, Ramanathaswamy Temple is the sacred southern anchor of the Char Dham and houses one of the 12 revered Jyotirlingas. Ramayana tradition recounts that Lord Rama consecrated the Shiva lingam here to seek absolution and blessings following his victory in Lanka. The temple is celebrated for its monumental Dravidian architecture, featuring the world’s longest pillared corridors lined with over a thousand intricately sculpted sandstone pillars. Within its sacred perimeter lie 22 historic theerthams (wells), each containing water with distinct mineral flavors where pilgrims bathe for spiritual purification. The magnificent gopurams and echoing chants create a deeply moving spiritual atmosphere.",
+    "history": "Expanded across centuries by the Pandya and Jaffna kings, with the monumental 1,200-meter corridor built by the Setupati rulers of Ramanathapuram.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMwkhkTnzcy1YW0jDqxqQNG2QIkStjvy10lDqbmGDr-Q&s=10"
+    ],
+    "360Tour": "https://example.com/360/rameshwaram",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "theerthamBathingPath": true,
+      "cloakRoom": true
+    },
+    "ticketPrices": {
+      "general": 0,
+      "twentyTwoKundSnanamTicket": 25,
+      "specialDarshan": 100
+    }
+  },
+  {
+    "id": "TN-RAM-011",
+    "description": "Lying directly in front of the towering eastern gateway of the Ramanathaswamy Temple, Agni Theertham is a sacred stretch of the Palk Strait revered for holy ablutions. Pilgrims universally begin their Rameswaram pilgrimage here by taking a ceremonial sea bath to cleanse away negative karma before entering the temple complex. According to mythology, Lord Agni submerged himself into these gentle waters to reaffirm his own purity after testifying for Goddess Sita. The calm, wave-free sea makes it safe for elderly devotees and families to bathe and perform ancestral prayers along the shore. Watching the golden sunrise over these tranquil coastal waters offers a quiet moment of profound reflection.",
+    "history": "Pilgrims take their first purificatory sea bath here before proceeding inside the temple to bathe in the 22 interior wells.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT336JOBakK4EEcPcExIYcem55_8TdC6Sb0aUz-xjSd6g&s=10"
+    ],
+    "360Tour": "https://example.com/360/agni-theertham",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "changingRooms": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "TN-RAM-012",
+    "description": "Resting at the windswept southeastern tip of Pamban Island, Dhanushkodi is a hauntingly beautiful ghost town preserved by nature. Destroyed during the catastrophic 1964 cyclone, the remnants of its railway station, colonial church, hospital, and water tanks still stand half-buried beneath shifting coastal sands. Hindu tradition marks this exact shoreline as the starting point where Lord Rama built the legendary Ram Setu to reach Sri Lanka across the ocean. Today, an asphalt highway cut between the merging waters of the Indian Ocean and the Bay of Bengal leads travelers straight to the edge of the land. Visiting this quiet, historic outpost is an evocative journey through myth, memory, and natural power.",
+    "history": "An active port and railway link to Sri Lanka until December 22, 1964, when a severe cyclone submerged the entire town.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZwD5WH_qJw55r6DiniuOok6vZmO_2-sUAvt1snRA6OQ&s=10"
+    ],
+    "360Tour": "https://example.com/360/dhanushkodi",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "fourWheelDriveAccess": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "TN-RAM-013",
+    "description": "Inaugurated in 1914 as India's first cantilever sea bridge, the iconic Pamban Bridge spans more than 2 kilometers across the open marine waters of the Palk Strait. Connecting mainland Mandapam to Rameswaram Island, this historic railway marvel was engineered with a unique central Scherzer rolling lift span that opens upward to allow maritime vessels to cross beneath. A parallel road bridge built high above offers sweeping panoramic perspectives of rail trains traversing the tracks right over the azure sea. Despite over a century of aggressive coastal corrosion and extreme cyclone winds, this engineering wonder continues to stand strong. Crossing this sea bridge remains one of the most thrilling travel experiences in South India.",
+    "history": "Engineered under British rule to connect mainland India (Mandapam) to Rameswaram Island across the Palk Strait.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVaDxS_OG4OevP20jOeikJJl1gZe_icwIjCHkQ38ayfw&s=10"
+    ],
+    "360Tour": "https://example.com/360/pamban",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": false,
+      "viewingWalkway": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "TN-RAM-014",
+    "description": "Erected at his final resting ground in Pei Karumbu, Rameswaram, this grand national memorial pays homage to India’s beloved 11th President, Dr. A.P.J. Abdul Kalam. Designed and constructed by the DRDO in 2017, its distinctive architectural style blends classical Indian and Mughal elements, topped with a central dome echoing Rashtrapati Bhavan. Inside, curated galleries exhibit Dr. Kalam’s personal artifacts, handwritten notebooks, and scientific awards, alongside full-scale models of Agni and BrahMos missiles. Surrounding courtyards feature hand-painted historical murals and landscaped gardens designed for peaceful reflection. It stands as an inspiring monument that motivates students and visitors to dream boldly and serve the nation.",
+    "history": "Inaugurated in 2017 by the DRDO, displaying Kalam's personal artifacts, missile replicas, and hand-painted murals.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQJ9eSCKRWA3sUiaM5SaJ2oFo1dGR3tneLi_--5c3gHA&s=10"
+    ],
+    "360Tour": "https://example.com/360/kalam-memorial",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "museum": true,
+      "landscapedGardens": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-DWK-015",
+    "description": "Standing proudly at the confluence of the Gomti River and the Arabian Sea, the Dwarkadhish Jagat Mandir is the revered western anchor of India's Char Dham. Dedicated to Lord Krishna as the King of Dwarka, this 16th-century, five-story stone sanctuary is supported by 72 delicately carved pillars in Chalukyan architectural style. A massive 52-yard ceremonial flag flutters high above its 43-meter spire, hoisted five times daily to symbolize royal divine authority. Devotees enter through the Moksha Dwar and exit toward the river through the Swarga Dwar, carrying on centuries of unbroken devotion. The temple also shelters one of the original Sharda Peeths established by Adi Shankaracharya, making it a cornerstone of Vedic culture.",
+    "history": "The current Jagat Mandir structure was built in the 16th century in Chalukya architecture over ancient sanctum foundations.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYVXDG7LmuSC4L-6KsVaA0JswNqbusKDkerjKJzkd_qA&s=10"
+    ],
+    "360Tour": "https://example.com/360/dwarka",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "lockerRoom": true,
+      "shoeStand": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-DWK-016",
+    "description": "Situated as an island sanctuary in the Gulf of Kutch, Beyt Dwarka is revered in Hindu tradition as the personal palace and kingdom of Lord Krishna. It is celebrated as the historic spot where Krishna embraced his impoverished childhood friend Sudama upon receiving a humble offering of parched rice. Archaeological underwater explorations around the island have yielded submerged structural remnants and pottery dating back to the late Harappan civilization. Today, the island is easily accessible by road via the newly built Sudarshan Setu, India’s longest cable-stayed bridge, alongside traditional passenger ferries. The serene island shores and ancient shrines offer visitors an enriching glimpse into prehistoric maritime heritage and sacred legend.",
+    "history": "Archaeological excavations reveal settlement layers dating back to the late Harappan era; connected via the cable-stayed Sudarshan Setu.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC1JHKbqIV6afOAn0CcEndJ2UYqYLwa9xRBNNWh_Kaww&s=10"
+    ],
+    "360Tour": "https://example.com/360/beyt-dwarka",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": false,
+      "restrooms": true,
+      "bridgeAccess": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-DWK-017",
+    "description": "Surrounded by the serene forest belt of Daarukavanam between Dwarka and Beyt Dwarka, Nageshwar Temple houses one of the 12 sacred Jyotirlingas of Lord Shiva. According to the Shiva Purana, worshipping the self-manifested lingam here provides divine protection from all earthly toxins, poisons, and negative energies. Visitors are immediately greeted by a monumental 25-meter seated statue of Lord Shiva in deep meditation towering above the landscaped gardens. The sanctum holds an east-facing lingam made of a distinctive three-faced stone, attracting thousands of devotees during Shravana and Maha Shivratri. Its quiet, green surroundings provide an ideal environment for meditation, personal prayer, and spiritual renewal.",
+    "history": "Mentioned in the Shiva Purana as Nageshvara Jyotirlinga, symbolizing protection from all poisons and earthly harms.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_UY535IYB5GBKW-AAdiD1GzpkvZ9nvRep2oMPPHBF-g&s=10"
+    ],
+    "360Tour": "https://example.com/360/nageshwar",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "gardens": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-DWK-018",
+    "description": "Standing in an open expanse two kilometers away from the bustling town of Dwarka, this 12th-century stone temple is dedicated to Lord Krishna’s chief queen, Rukmini Devi. The shrine's separate location is rooted in folklore involving a curse by the short-tempered sage Durvasa during a journey to their palace. Built in the ornate Nagar architectural style, its exterior walls are densely adorned with intricate stone carvings of elephants, floral patterns, and celestial dancers. A key devotional practice here is Jaldan, the charitable donation of drinking water, which is believed to bring immense spiritual merit. Visiting this calm, historical structure completes the sacred circuit of the Dwarka pilgrimage.",
+    "history": "Built 2 km away from Dwarkadhish Temple due to the mythological curse of Sage Durvasa separating Krishna and Rukmini.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh9FbcCjPy_Sp7ubG0LN4Wx3Bw1bTVOZ16MwjFsPj_Cw&s=10"
+    ],
+    "360Tour": "https://example.com/360/rukmini-dwarka",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true
+    },
+    "ticketPrices": {
+      "general": 0
+    }
+  },
+  {
+    "id": "GJ-DWK-019",
+    "description": "Located just a short drive from Dwarka, Shivrajpur Beach is an internationally recognized, Blue Flag-certified eco-destination that showcases the natural beauty of the Arabian Sea. With powdery white sands, gentle waves, and remarkably clear turquoise waters, it provides a safe, world-class coastal experience for visitors of all ages. Adventure seekers can take part in professional scuba diving and snorkeling tours to explore vibrant nearshore coral formations and diverse marine life. The beachfront is fully equipped with eco-conscious solar lighting, dedicated changing rooms, clean showers, and paved walkways suitable for wheelchairs. It offers the perfect scenic setting to relax and watch a glowing coastal sunset after exploring Gujarat’s holy shrines.",
+    "history": "Developed into an international standard beach with clean waters and conservation measures for local marine life.",
+    "gallery": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBqyRe3D1goKT5dqnVRcjFmWCJE3NtkbiUID979xtVmA&s=10"
+    ],
+    "360Tour": "https://example.com/360/shivrajpur",
+    "facilities": {
+      "parking": true,
+      "wheelchairAccessible": true,
+      "restrooms": true,
+      "scubaDiving": true,
+      "showers": true
+    },
+    "ticketPrices": {
+      "entryAdult": 30,
+      "entryChild": 15,
+      "scubaDivingApprox": 2500
+    }
+  }
+]
