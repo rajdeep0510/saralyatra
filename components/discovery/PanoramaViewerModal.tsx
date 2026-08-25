@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useRef, useMemo } from "react";
-import { X, Navigation, Maximize2, Minimize2, MapPin, Globe, Satellite, Eye, ExternalLink, Move } from "lucide-react";
+import { X, Navigation, Maximize2, Minimize2, MapPin, Globe, Satellite, Eye, ExternalLink, Move, Camera, ShieldCheck } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, Monument } from "@/types";
+import { verified360ToursMap } from "@/data/verified360Tours";
+import GroundPanoramaViewer from "./GroundPanoramaViewer";
 
 interface PanoramaViewerModalProps {
   isOpen: boolean;
@@ -20,9 +22,16 @@ export default function PanoramaViewerModal({
 }: PanoramaViewerModalProps) {
   const modalContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeMode, setActiveMode] = useState<"satellite" | "streetview">("satellite");
+  const [groundViewType, setGroundViewType] = useState<"streetview" | "panorama">("streetview");
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   const t = translations[currentLang] || translations.en;
+
+  // Check if this monument has an authentic, verified Street View tour
+  const hasVerifiedStreetView = useMemo(() => {
+    if (!monument) return false;
+    return !!verified360ToursMap[monument.id];
+  }, [monument]);
 
   // Toggle Native Fullscreen
   const toggleFullscreen = async () => {
@@ -51,11 +60,11 @@ export default function PanoramaViewerModal({
 
     // 2. Google Street View official embed (if API key available or custom 360 tour URL)
     const apiKey = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY : undefined;
-    let streetUrl = monument.panoramaUrl || "";
+    const verified = verified360ToursMap[monument.id];
+    let streetUrl = verified?.tour360Url || monument.panoramaUrl || "";
+
     if (apiKey) {
       streetUrl = `https://www.google.com/maps/embed/v1/streetview?key=${apiKey}&location=${lat},${lng}&heading=180&pitch=0&fov=80`;
-    } else if (!streetUrl || streetUrl === monument.imageUrl) {
-      streetUrl = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&ll=${lat},${lng}&layer=c&cbll=${lat},${lng}&cbp=12,180,,0,0&output=svembed`;
     }
 
     // 3. Google Earth 3D Flyover
@@ -130,7 +139,9 @@ export default function PanoramaViewerModal({
               }`}
             >
               <Eye className="h-3.5 w-3.5" />
-              <span>360° Street View</span>
+              <span>
+                {hasVerifiedStreetView ? "360° Street View" : "360° Ground View"}
+              </span>
             </button>
           </div>
 
@@ -176,22 +187,51 @@ export default function PanoramaViewerModal({
             </div>
           )}
 
-          {/* MODE 2: Google Street View / 360 Tour Embed */}
+          {/* MODE 2: Ground View (Street View Embed or High-Res Ground Panorama) */}
           {activeMode === "streetview" && (
             <div className="w-full h-full relative">
-              <iframe
-                src={streetViewEmbedUrl}
-                className="w-full h-full border-0"
-                allowFullScreen
-                allow="accelerometer; gyroscope; magnetometer; camera; vr"
-                loading="lazy"
-                title={`360 Street View of ${monument.name}`}
-              />
+              {hasVerifiedStreetView && groundViewType === "streetview" ? (
+                <div className="w-full h-full relative">
+                  <iframe
+                    src={streetViewEmbedUrl}
+                    className="w-full h-full border-0"
+                    allowFullScreen
+                    allow="accelerometer; gyroscope; magnetometer; camera; vr"
+                    loading="lazy"
+                    title={`360 Street View of ${monument.name}`}
+                  />
 
-              <div className="absolute top-4 left-4 bg-stone-900/90 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3.5 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
-                <Move className="h-3.5 w-3.5 text-amber-400" />
-                <span>Interactive 360° Walkthrough • Click & Drag across the temple grounds</span>
-              </div>
+                  <div className="absolute top-4 left-4 bg-stone-900/90 backdrop-blur border border-stone-700 text-stone-200 rounded-full px-3.5 py-1.5 flex items-center gap-2 text-[11px] font-semibold pointer-events-none shadow-lg z-10">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>Verified 360° Street View Walkthrough • Drag & Walk to inspect</span>
+                  </div>
+
+                  {/* Toggle to High-Res Ground Panorama */}
+                  <button
+                    type="button"
+                    onClick={() => setGroundViewType("panorama")}
+                    className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-900/85 hover:bg-stone-850 backdrop-blur border border-stone-700 text-stone-200 text-xs font-bold transition-all cursor-pointer shadow-md"
+                  >
+                    <Camera className="h-3.5 w-3.5 text-amber-400" />
+                    <span>Switch to High-Res Ground View</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="w-full h-full relative">
+                  <GroundPanoramaViewer monument={monument} />
+
+                  {hasVerifiedStreetView && (
+                    <button
+                      type="button"
+                      onClick={() => setGroundViewType("streetview")}
+                      className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-900/85 hover:bg-stone-850 backdrop-blur border border-stone-700 text-stone-200 text-xs font-bold transition-all cursor-pointer shadow-md"
+                    >
+                      <Eye className="h-3.5 w-3.5 text-emerald-400" />
+                      <span>Switch to Street View Walkthrough</span>
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
