@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { monuments } from "@/data/mockData";
 import { generateDynamicItinerary } from "@/utils/tripEngine";
 import { FilterPreferences, LanguageCode, PreloadedTrip } from "@/types";
-import { ArrowRight, Sparkles, Map, Route, Clock, Users, MapPin, CheckCircle2, Lock, ShieldCheck, Headphones, Compass, Heart, HelpCircle, ChevronDown, ChevronUp, Star, Globe } from "lucide-react";
+import { ArrowRight, Sparkles, Map, Route, Clock, Users, MapPin, CheckCircle2, Lock, ShieldCheck, Headphones, Compass, Heart, HelpCircle, ChevronDown, ChevronUp, Star, Globe, Plane, ExternalLink, TrendingDown } from "lucide-react";
 import PreferenceWizard from "@/components/planner/PreferenceWizard";
 import CulturalAtmosphereHero from "@/components/layout/CulturalAtmosphereHero";
+import TripTransitReportModal from "@/components/transit/TripTransitReportModal";
 
 interface TripPlannerViewProps {
   currentLang: LanguageCode;
@@ -31,6 +32,7 @@ export default function TripPlannerView({
 }: TripPlannerViewProps) {
   const [wizardStep, setWizardStep] = useState<number>(1);
   const [wizardDraft, setWizardDraft] = useState<FilterPreferences | null>(() => filterPreferences || null);
+  const [isTransitModalOpen, setIsTransitModalOpen] = useState<boolean>(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Sync draft if filterPreferences change
@@ -247,6 +249,48 @@ export default function TripPlannerView({
             </div>
           )}
 
+          {/* SIH 2026 Transit & Fare Compass Card for Active Destination */}
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-sky-900 via-blue-900 to-indigo-950 text-white shadow-md space-y-3 relative overflow-hidden">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-black uppercase tracking-wider bg-sky-400/20 text-sky-300 border border-sky-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <Sparkles className="h-3 w-3" />
+                <span>SIH 2026 Transit Compass</span>
+              </span>
+              <span className="text-xs text-sky-200 font-bold">
+                {wizardDraft?.region || "Destination"}
+              </span>
+            </div>
+
+            <div>
+              <h4 className="font-serif text-base font-bold text-white flex items-center gap-2">
+                <span>✈️ Cheapest Transit to {wizardDraft?.region || "Your Circuit"}</span>
+              </h4>
+              <p className="text-xs text-sky-100/80 mt-1 leading-relaxed">
+                Live flight & train aggregator comparing lowest fares on <strong>Skyscanner, Google Flights, IRCTC & RedBus</strong>.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
+              <div className="p-2.5 rounded-xl bg-white/10 border border-white/15">
+                <div className="text-[10px] text-sky-300 uppercase font-bold">Flights from</div>
+                <div className="text-sm font-black font-mono text-white mt-0.5">₹3,970 <span className="text-[10px] font-sans font-normal opacity-80">/pax</span></div>
+              </div>
+              <div className="p-2.5 rounded-xl bg-white/10 border border-white/15">
+                <div className="text-[10px] text-sky-300 uppercase font-bold">Vande Bharat / 3A</div>
+                <div className="text-sm font-black font-mono text-white mt-0.5">₹1,250 <span className="text-[10px] font-sans font-normal opacity-80">/pax</span></div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsTransitModalOpen(true)}
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-sky-500 hover:bg-sky-400 text-white text-xs font-black transition-all cursor-pointer shadow-sm hover:scale-[1.02]"
+            >
+              <Plane className="h-3.5 w-3.5" />
+              <span>Compare Live Air & Transit Fares ↗</span>
+            </button>
+          </div>
+
           {/* Quick-Load Curated Circuit Presets */}
           <div className="p-6 rounded-3xl bg-white border border-stone-200 shadow-xs space-y-4">
             <div>
@@ -418,6 +462,17 @@ export default function TripPlannerView({
           ))}
         </div>
       </div>
+
+      {/* SIH 2026 Comprehensive Trip Transit & Commute Compass Modal */}
+      {isTransitModalOpen && (
+        <TripTransitReportModal
+          isOpen={isTransitModalOpen}
+          onClose={() => setIsTransitModalOpen(false)}
+          trip={activeTrip}
+          preferences={wizardDraft}
+          homeCity={wizardDraft?.departureCity || "Ahmedabad"}
+        />
+      )}
 
     </div>
   );

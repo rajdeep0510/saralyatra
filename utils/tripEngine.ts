@@ -494,7 +494,8 @@ export function generateDynamicItinerary(
       category,
       dietary,
       language,
-      interests
+      interests,
+      departureCity: prefs.departureCity || "Ahmedabad"
     },
     itinerary
   };

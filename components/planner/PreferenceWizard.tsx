@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import { ChevronRight, ChevronLeft, Sparkles, MapPin, Calendar as CalendarIcon, Users, Sliders, ShieldCheck, Trees, Flame, Landmark, Mountain, Layers, Search, CheckCircle2, Plus, Minus } from "lucide-react";
+import { ChevronRight, ChevronLeft, Sparkles, MapPin, Calendar as CalendarIcon, Users, Sliders, ShieldCheck, Trees, Flame, Landmark, Mountain, Layers, Search, CheckCircle2, Plus, Minus, Plane } from "lucide-react";
 import { translations, indianStates, monuments } from "@/data/mockData";
 import { DietaryType, FilterPreferences, LanguageCode, TripCategory } from "@/types";
+import { MAJOR_TRANSIT_HUBS } from "@/data/transitData";
 import CustomLargeCalendar from "./CustomLargeCalendar";
 
 interface PreferenceWizardProps {
@@ -38,7 +39,10 @@ export default function PreferenceWizard({ currentLang, initialPreferences, onGe
   const defaultStartDate = useMemo(() => {
     const d = new Date();
     d.setDate(d.getDate() + 1);
-    return d.toISOString().split("T")[0];
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
   }, []);
 
   const [formData, setFormData] = useState<FilterPreferences>(() => {
@@ -55,7 +59,8 @@ export default function PreferenceWizard({ currentLang, initialPreferences, onGe
       famousRatio: 60,
       dietary: "pureVeg",
       language: "Hindi",
-      interests: ["Nature", "Scenic"]
+      interests: ["Nature", "Scenic"],
+      departureCity: "Ahmedabad"
     };
   });
 
@@ -348,12 +353,39 @@ export default function PreferenceWizard({ currentLang, initialPreferences, onGe
               </div>
             </div>
 
-            {/* 3. Schedule, Duration & Travelers (2-Column Balanced Card) */}
+            {/* 3. Starting Hub / Home City (For Auto Transit & Fare Report) */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-stone-50/70 border border-stone-200/80 space-y-2">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <label className="text-xs font-bold text-stone-800 flex items-center gap-1.5">
+                  <Plane className="h-4 w-4 text-sky-600" />
+                  <span>3. Starting / Home City (Transit & Fares Compass)</span>
+                </label>
+                <span className="text-[10px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
+                  SIH 2026 Auto-Report
+                </span>
+              </div>
+              <p className="text-[11px] text-stone-500 font-medium leading-tight">
+                Automatically calculates lowest-cost flights, Vande Bharat trains, and local in-trip daily commutes from your home city.
+              </p>
+              <select
+                value={formData.departureCity || "Ahmedabad"}
+                onChange={(e) => updateField("departureCity", e.target.value)}
+                className="w-full h-10 px-3.5 rounded-xl bg-white border border-stone-200 text-xs font-bold text-stone-800 focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer shadow-2xs"
+              >
+                {MAJOR_TRANSIT_HUBS.map((h) => (
+                  <option key={h.city} value={h.city}>
+                    {h.city} ({h.state}) - {h.airportCode} Airport / {h.railwayStationCode} Station
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* 4. Schedule, Duration & Travelers (2-Column Balanced Card) */}
             <div className="p-4 sm:p-5 rounded-2xl bg-stone-50/70 border border-stone-200/80 space-y-4">
               <div className="flex items-center justify-between border-b border-stone-200/70 pb-2.5">
                 <label className="text-xs font-bold text-stone-800 flex items-center gap-1.5">
                   <CalendarIcon className="h-4 w-4 text-terracotta-600" />
-                  <span>3. Schedule, Duration & Travelers</span>
+                  <span>4. Schedule, Duration & Travelers</span>
                 </label>
                 {dateRangeSummary && (
                   <span className="text-[11px] font-bold text-terracotta-800 bg-terracotta-50 border border-terracotta-200 px-2.5 py-0.5 rounded-lg shadow-2xs">
@@ -413,7 +445,10 @@ export default function PreferenceWizard({ currentLang, initialPreferences, onGe
                     ].map((preset) => {
                       const d = new Date();
                       d.setDate(d.getDate() + preset.daysAhead);
-                      const formatted = d.toISOString().split("T")[0];
+                      const y = d.getFullYear();
+                      const m = String(d.getMonth() + 1).padStart(2, "0");
+                      const day = String(d.getDate()).padStart(2, "0");
+                      const formatted = `${y}-${m}-${day}`;
                       const isSelected = formData.dates === formatted;
                       return (
                         <button

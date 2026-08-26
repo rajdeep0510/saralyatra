@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Sparkles, MapPin, Clock, Route, Compass, Printer, PlusCircle, ArrowRight, Trees, Flame, Landmark, Mountain, CheckCircle2, Navigation, Layers, Check, BookmarkCheck, Trash2, X, AlertTriangle, Home } from "lucide-react";
-import { LanguageCode, Monument, PreloadedTrip } from "@/types";
+import { ActivityType, DietaryType, FilterPreferences, ItineraryDay, LanguageCode, Monument, PreloadedTrip } from "@/types";
+import { ArrowRight, Calendar, Check, CheckCircle2, ChevronRight, Clock, Compass, Layers, MapPin, Navigation, PlusCircle, Printer, RotateCcw, Route, ShieldCheck, Sparkles, Trash2, Trees, Landmark, Flame, Mountain, BookmarkCheck, Heart, AlertTriangle, HelpCircle, Share2, Award, Volume2, Plane } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { removeDestinationFromTrip, addDestinationToTrip } from "@/utils/tripEngine";
 import ItineraryTimeline from "@/components/planner/ItineraryTimeline";
@@ -15,7 +15,7 @@ import DialectPhrasebookModal from "@/components/utilities/DialectPhrasebookModa
 import TravelGuideBookletModal from "@/components/itinerary/TravelGuideBookletModal";
 import AtmosphericSoundscapePlayer from "@/components/audio/AtmosphericSoundscapePlayer";
 import MarigoldConfetti from "@/components/wonders/MarigoldConfetti";
-import { FilterPreferences } from "@/types";
+import TripTransitReportModal from "@/components/transit/TripTransitReportModal";
 
 interface ItineraryMapViewProps {
   currentLang: LanguageCode;
@@ -47,12 +47,14 @@ export default function ItineraryMapView({
   filterPreferences = null
 }: ItineraryMapViewProps) {
   const t = translations[currentLang] || translations.en;
+
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [isYatraPassOpen, setIsYatraPassOpen] = useState<boolean>(false);
   const [isPackingModalOpen, setIsPackingModalOpen] = useState<boolean>(false);
   const [isBudgetModalOpen, setIsBudgetModalOpen] = useState<boolean>(false);
   const [isPhrasebookModalOpen, setIsPhrasebookModalOpen] = useState<boolean>(false);
   const [isGuideBookletOpen, setIsGuideBookletOpen] = useState<boolean>(false);
+  const [isTransitModalOpen, setIsTransitModalOpen] = useState<boolean>(false);
   const [showMarigoldCelebration, setShowMarigoldCelebration] = useState<boolean>(false);
   const [selectedDayForAdd, setSelectedDayForAdd] = useState<number>(1);
   const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
@@ -538,8 +540,8 @@ export default function ItineraryMapView({
           </div>
         </div>
 
-        {/* 4 Balanced, Spacious Feature Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {/* 5 Balanced, Spacious Feature Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           
           {/* 1. Bharat Yatra Pass Card */}
           <button
@@ -555,7 +557,7 @@ export default function ItineraryMapView({
                 🎟️ Bharat Yatra Pass
               </h4>
               <p className="text-[10px] text-amber-100/90 truncate">
-                Boarding pass & passport stamps
+                Boarding pass & stamps
               </p>
             </div>
             <div className="h-8 w-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
@@ -563,7 +565,29 @@ export default function ItineraryMapView({
             </div>
           </button>
 
-          {/* 2. Smart Packing & Cultural Etiquette Card */}
+          {/* 2. SIH 2026 Lowest-Cost Transit & Air Fares Card */}
+          <button
+            type="button"
+            onClick={() => setIsTransitModalOpen(true)}
+            className="p-3.5 rounded-2xl bg-gradient-to-br from-sky-600 to-blue-700 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-3 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-sky-200 uppercase block">
+                Skyscanner & IRCTC
+              </span>
+              <h4 className="font-serif font-black text-sm text-white truncate">
+                ✈️ Transit & Fares
+              </h4>
+              <p className="text-[10px] text-sky-100/90 truncate">
+                Cheapest flights & trains
+              </p>
+            </div>
+            <div className="h-8 w-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <Plane className="h-4 w-4 text-sky-200" />
+            </div>
+          </button>
+
+          {/* 3. Smart Packing & Cultural Etiquette Card */}
           <button
             type="button"
             onClick={() => setIsPackingModalOpen(true)}
@@ -577,7 +601,7 @@ export default function ItineraryMapView({
                 🧳 Packing & Etiquette
               </h4>
               <p className="text-[10px] text-stone-500 truncate">
-                Temple rules & weather gear
+                Temple rules & gear
               </p>
             </div>
             <div className="h-8 w-8 rounded-xl bg-stone-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -585,7 +609,7 @@ export default function ItineraryMapView({
             </div>
           </button>
 
-          {/* 3. Trip Expense & Budget Estimator Card */}
+          {/* 4. Trip Expense & Budget Estimator Card */}
           <button
             type="button"
             onClick={() => setIsBudgetModalOpen(true)}
@@ -599,7 +623,7 @@ export default function ItineraryMapView({
                 💰 Budget Estimator
               </h4>
               <p className="text-[10px] text-stone-500 truncate">
-                Fuel, stay & meals breakdown
+                Fuel & stay breakdown
               </p>
             </div>
             <div className="h-8 w-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -607,7 +631,7 @@ export default function ItineraryMapView({
             </div>
           </button>
 
-          {/* 4. Local Dialect Phrasebook Card */}
+          {/* 5. Local Dialect Phrasebook Card */}
           <button
             type="button"
             onClick={() => setIsPhrasebookModalOpen(true)}
@@ -615,13 +639,13 @@ export default function ItineraryMapView({
           >
             <div className="space-y-0.5 min-w-0">
               <span className="text-[9px] font-mono font-bold tracking-widest text-amber-600 uppercase block">
-                Audio Lore & Helplines
+                Audio Lore & Safety
               </span>
               <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-amber-800 transition-colors">
                 🗣️ Dialect Phrasebook
               </h4>
               <p className="text-[10px] text-stone-500 truncate">
-                10 spoken phrases & 24/7 safety
+                10 phrases & helplines
               </p>
             </div>
             <div className="h-8 w-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -719,6 +743,17 @@ export default function ItineraryMapView({
           preferences={filterPreferences}
           isOpen={isGuideBookletOpen}
           onClose={() => setIsGuideBookletOpen(false)}
+        />
+      )}
+
+      {/* SIH 2026 Comprehensive Trip Transit & In-Trip Commute Compass Modal */}
+      {isTransitModalOpen && (
+        <TripTransitReportModal
+          isOpen={isTransitModalOpen}
+          onClose={() => setIsTransitModalOpen(false)}
+          trip={activeTrip}
+          preferences={filterPreferences}
+          homeCity={filterPreferences?.departureCity || "Ahmedabad"}
         />
       )}
 
