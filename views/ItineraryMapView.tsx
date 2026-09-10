@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Sparkles, MapPin, Clock, Route, Compass, Printer, PlusCircle, ArrowRight, Trees, Flame, Landmark, Mountain, CheckCircle2, Navigation, Layers, Check, BookmarkCheck, Trash2, X, AlertTriangle, Home } from "lucide-react";
-import { LanguageCode, Monument, PreloadedTrip } from "@/types";
+import { ActivityType, DietaryType, FilterPreferences, ItineraryDay, LanguageCode, Monument, PreloadedTrip } from "@/types";
+import { ArrowRight, Calendar, Check, CheckCircle2, ChevronRight, Clock, Compass, Layers, MapPin, Navigation, PlusCircle, Printer, RotateCcw, Route, ShieldCheck, Sparkles, Trash2, Trees, Landmark, Flame, Mountain, BookmarkCheck, Heart, AlertTriangle, HelpCircle, Share2, Award, Volume2, Plane } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { removeDestinationFromTrip, addDestinationToTrip } from "@/utils/tripEngine";
 import ItineraryTimeline from "@/components/planner/ItineraryTimeline";
@@ -15,7 +15,9 @@ import DialectPhrasebookModal from "@/components/utilities/DialectPhrasebookModa
 import TravelGuideBookletModal from "@/components/itinerary/TravelGuideBookletModal";
 import AtmosphericSoundscapePlayer from "@/components/audio/AtmosphericSoundscapePlayer";
 import MarigoldConfetti from "@/components/wonders/MarigoldConfetti";
-import { FilterPreferences } from "@/types";
+import TripTransitReportModal from "@/components/transit/TripTransitReportModal";
+import SmartRescheduleModal from "@/components/weather/SmartRescheduleModal";
+import YatraSurakshaModal from "@/components/safety/YatraSurakshaModal";
 
 interface ItineraryMapViewProps {
   currentLang: LanguageCode;
@@ -47,12 +49,16 @@ export default function ItineraryMapView({
   filterPreferences = null
 }: ItineraryMapViewProps) {
   const t = translations[currentLang] || translations.en;
+
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [isYatraPassOpen, setIsYatraPassOpen] = useState<boolean>(false);
   const [isPackingModalOpen, setIsPackingModalOpen] = useState<boolean>(false);
   const [isBudgetModalOpen, setIsBudgetModalOpen] = useState<boolean>(false);
   const [isPhrasebookModalOpen, setIsPhrasebookModalOpen] = useState<boolean>(false);
   const [isGuideBookletOpen, setIsGuideBookletOpen] = useState<boolean>(false);
+  const [isTransitModalOpen, setIsTransitModalOpen] = useState<boolean>(false);
+  const [isWeatherModalOpen, setIsWeatherModalOpen] = useState<boolean>(false);
+  const [isSafetyModalOpen, setIsSafetyModalOpen] = useState<boolean>(false);
   const [showMarigoldCelebration, setShowMarigoldCelebration] = useState<boolean>(false);
   const [selectedDayForAdd, setSelectedDayForAdd] = useState<number>(1);
   const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
@@ -523,7 +529,7 @@ export default function ItineraryMapView({
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-terracotta-50 hover:bg-terracotta-100 text-terracotta-900 text-xs font-bold border border-terracotta-200 transition-all cursor-pointer shadow-2xs"
               title="Open illustrated A4 printable booklet"
             >
-              <span>📖 Illustrated Travel Guide</span>
+              <span>📑 Illustrated Magazine Guide</span>
             </button>
 
             {/* Action: Print / Save PDF */}
@@ -538,94 +544,160 @@ export default function ItineraryMapView({
           </div>
         </div>
 
-        {/* 4 Balanced, Spacious Feature Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {/* 7 Cultural & Safety Travel Utilities Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-2.5">
           
-          {/* 1. Bharat Yatra Pass Card */}
+          {/* 1. Dekho Apna Desh Cultural Passport & Yatra Pass Card */}
           <button
             type="button"
             onClick={() => setIsYatraPassOpen(true)}
-            className="p-3.5 rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-terracotta-600 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-3 group"
+            className="p-3 rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-terracotta-600 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
           >
             <div className="space-y-0.5 min-w-0">
-              <span className="text-[9px] font-mono font-bold tracking-widest text-amber-200 uppercase block">
-                3D Digital Ticket
+              <span className="text-[9px] font-mono font-bold tracking-widest text-amber-200 uppercase block truncate">
+                Dekho Apna Desh
               </span>
-              <h4 className="font-serif font-black text-sm text-white truncate">
-                🎟️ Bharat Yatra Pass
+              <h4 className="font-serif font-black text-xs sm:text-sm text-white truncate">
+                🎖️ Passport Pass
               </h4>
               <p className="text-[10px] text-amber-100/90 truncate">
-                Boarding pass & passport stamps
+                Stamps & badges
               </p>
             </div>
-            <div className="h-8 w-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
-              <Sparkles className="h-4 w-4 text-amber-200" />
+            <div className="h-7 w-7 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
+              <Sparkles className="h-3.5 w-3.5 text-amber-200" />
             </div>
           </button>
 
-          {/* 2. Smart Packing & Cultural Etiquette Card */}
+          {/* 2. SIH 2026 Lowest-Cost Transit & Air Fares Card */}
           <button
             type="button"
-            onClick={() => setIsPackingModalOpen(true)}
-            className="p-3.5 rounded-2xl bg-white hover:bg-stone-50 border border-stone-200/90 hover:border-stone-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-3 group"
+            onClick={() => setIsTransitModalOpen(true)}
+            className="p-3 rounded-2xl bg-gradient-to-br from-sky-600 to-blue-700 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
           >
             <div className="space-y-0.5 min-w-0">
-              <span className="text-[9px] font-mono font-bold tracking-widest text-stone-400 uppercase block">
-                Checklist & Dress Code
+              <span className="text-[9px] font-mono font-bold tracking-widest text-sky-200 uppercase block truncate">
+                Skyscanner & IRCTC
               </span>
-              <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-terracotta-700 transition-colors">
-                🧳 Packing & Etiquette
+              <h4 className="font-serif font-black text-xs sm:text-sm text-white truncate">
+                ✈️ Transit Fares
               </h4>
-              <p className="text-[10px] text-stone-500 truncate">
-                Temple rules & weather gear
+              <p className="text-[10px] text-sky-100/90 truncate">
+                Flights & trains
               </p>
             </div>
-            <div className="h-8 w-8 rounded-xl bg-stone-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <span className="text-sm">🧥</span>
+            <div className="h-7 w-7 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <Plane className="h-3.5 w-3.5 text-sky-200" />
             </div>
           </button>
 
-          {/* 3. Trip Expense & Budget Estimator Card */}
+          {/* 3. Smart Weather, AQI & Live Crowd Rescheduler Card */}
           <button
             type="button"
-            onClick={() => setIsBudgetModalOpen(true)}
-            className="p-3.5 rounded-2xl bg-white hover:bg-emerald-50/40 border border-stone-200/90 hover:border-emerald-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-3 group"
+            onClick={() => setIsWeatherModalOpen(true)}
+            className="p-3 rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
           >
             <div className="space-y-0.5 min-w-0">
-              <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-600 uppercase block">
-                Cost & Group Splitter
+              <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-200 uppercase block truncate">
+                Radar Sensor
               </span>
-              <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-emerald-800 transition-colors">
-                💰 Budget Estimator
+              <h4 className="font-serif font-black text-xs sm:text-sm text-white truncate">
+                🌦️ Weather & AQI
               </h4>
-              <p className="text-[10px] text-stone-500 truncate">
-                Fuel, stay & meals breakdown
+              <p className="text-[10px] text-emerald-100/90 truncate">
+                Crowd & 1-click swap
               </p>
             </div>
-            <div className="h-8 w-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <span className="text-sm">📊</span>
+            <div className="h-7 w-7 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-xs">⚡</span>
             </div>
           </button>
 
-          {/* 4. Local Dialect Phrasebook Card */}
+          {/* 4. Yatra Suraksha Safety Shield & Scam Radar Card */}
+          <button
+            type="button"
+            onClick={() => setIsSafetyModalOpen(true)}
+            className="p-3 rounded-2xl bg-gradient-to-br from-teal-800 via-emerald-900 to-stone-900 text-white text-left transition-all cursor-pointer shadow-xs hover:shadow-md hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-300 uppercase block truncate">
+                Safety Shield
+              </span>
+              <h4 className="font-serif font-black text-xs sm:text-sm text-white truncate">
+                🛡️ Yatra Suraksha
+              </h4>
+              <p className="text-[10px] text-emerald-100/90 truncate">
+                Scams & 24/7 SOS
+              </p>
+            </div>
+            <div className="h-7 w-7 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" />
+            </div>
+          </button>
+
+          {/* 5. Local Dialect Phrasebook Card */}
           <button
             type="button"
             onClick={() => setIsPhrasebookModalOpen(true)}
-            className="p-3.5 rounded-2xl bg-white hover:bg-amber-50/40 border border-stone-200/90 hover:border-amber-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-3 group"
+            className="p-3 rounded-2xl bg-white hover:bg-amber-50/40 border border-stone-200/90 hover:border-amber-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
           >
             <div className="space-y-0.5 min-w-0">
-              <span className="text-[9px] font-mono font-bold tracking-widest text-amber-600 uppercase block">
-                Audio Lore & Helplines
+              <span className="text-[9px] font-mono font-bold tracking-widest text-amber-600 uppercase block truncate">
+                Audio Phrases
               </span>
-              <h4 className="font-serif font-bold text-sm text-stone-900 truncate group-hover:text-amber-800 transition-colors">
-                🗣️ Dialect Phrasebook
+              <h4 className="font-serif font-bold text-xs sm:text-sm text-stone-900 truncate group-hover:text-amber-800 transition-colors">
+                🗣️ Phrasebook
               </h4>
               <p className="text-[10px] text-stone-500 truncate">
-                10 spoken phrases & 24/7 safety
+                Local pronunciations
               </p>
             </div>
-            <div className="h-8 w-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <span className="text-sm">🔊</span>
+            <div className="h-7 w-7 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-xs">🔊</span>
+            </div>
+          </button>
+
+          {/* 6. Smart Packing & Cultural Etiquette Card */}
+          <button
+            type="button"
+            onClick={() => setIsPackingModalOpen(true)}
+            className="p-3 rounded-2xl bg-white hover:bg-stone-50 border border-stone-200/90 hover:border-stone-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-stone-400 uppercase block truncate">
+                Checklist
+              </span>
+              <h4 className="font-serif font-bold text-xs sm:text-sm text-stone-900 truncate group-hover:text-terracotta-700 transition-colors">
+                🧳 Etiquette
+              </h4>
+              <p className="text-[10px] text-stone-500 truncate">
+                Temple dress code
+              </p>
+            </div>
+            <div className="h-7 w-7 rounded-xl bg-stone-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-xs">🧥</span>
+            </div>
+          </button>
+
+          {/* 7. Trip Expense & Budget Estimator Card */}
+          <button
+            type="button"
+            onClick={() => setIsBudgetModalOpen(true)}
+            className="p-3 rounded-2xl bg-white hover:bg-emerald-50/40 border border-stone-200/90 hover:border-emerald-300 text-left transition-all cursor-pointer shadow-2xs hover:shadow-xs hover:scale-[1.02] flex items-center justify-between gap-2.5 group"
+          >
+            <div className="space-y-0.5 min-w-0">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-600 uppercase block truncate">
+                Estimator
+              </span>
+              <h4 className="font-serif font-bold text-xs sm:text-sm text-stone-900 truncate group-hover:text-emerald-800 transition-colors">
+                💰 Budget
+              </h4>
+              <p className="text-[10px] text-stone-500 truncate">
+                Cost breakdown
+              </p>
+            </div>
+            <div className="h-7 w-7 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-xs">📊</span>
             </div>
           </button>
 
@@ -645,6 +717,11 @@ export default function ItineraryMapView({
             onOpenDetails={onOpenDetails}
             onRemoveStop={handleRemoveStop}
             onAddStopClick={handleOpenAddModal}
+            onTripUpdated={(updatedTrip) => {
+              setActiveTrip(updatedTrip);
+              setShowSaveSuccessToast(true);
+              setTimeout(() => setShowSaveSuccessToast(false), 4000);
+            }}
           />
         </div>
 
@@ -719,6 +796,41 @@ export default function ItineraryMapView({
           preferences={filterPreferences}
           isOpen={isGuideBookletOpen}
           onClose={() => setIsGuideBookletOpen(false)}
+        />
+      )}
+
+      {/* SIH 2026 Comprehensive Trip Transit & In-Trip Commute Compass Modal */}
+      {isTransitModalOpen && (
+        <TripTransitReportModal
+          isOpen={isTransitModalOpen}
+          onClose={() => setIsTransitModalOpen(false)}
+          trip={activeTrip}
+          preferences={filterPreferences}
+          homeCity={filterPreferences?.departureCity || "Ahmedabad"}
+        />
+      )}
+
+      {/* Smart Weather, AQI & Live Crowd Rescheduler Modal */}
+      {isWeatherModalOpen && (
+        <SmartRescheduleModal
+          isOpen={isWeatherModalOpen}
+          onClose={() => setIsWeatherModalOpen(false)}
+          trip={activeTrip}
+          onTripUpdated={(updatedTrip) => {
+            setActiveTrip(updatedTrip);
+            setShowSaveSuccessToast(true);
+            setTimeout(() => setShowSaveSuccessToast(false), 4000);
+          }}
+        />
+      )}
+
+      {/* Yatra Suraksha Safety Shield & Scam Radar Modal */}
+      {isSafetyModalOpen && (
+        <YatraSurakshaModal
+          isOpen={isSafetyModalOpen}
+          onClose={() => setIsSafetyModalOpen(false)}
+          trip={activeTrip}
+          stateName={region || undefined}
         />
       )}
 

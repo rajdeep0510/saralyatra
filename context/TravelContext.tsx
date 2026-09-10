@@ -53,6 +53,14 @@ interface TravelContextType {
   signOut: () => Promise<void>;
 }
 
+function getTodayLocalDateStr(): string {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 const defaultUserProfile: UserProfile = {
   name: "Guest Traveler",
   dietary: "pureVeg",
@@ -64,7 +72,7 @@ const defaultPreferences: FilterPreferences = {
   category: "nature",
   region: "Kerala",
   duration: 3,
-  dates: new Date().toISOString().split("T")[0],
+  dates: getTodayLocalDateStr(),
   travelers: 2,
   pacing: "Relaxed",
   famousRatio: 70,
@@ -216,7 +224,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
           category: "all",
           region: regionKey,
           duration: 3,
-          dates: new Date().toISOString().split("T")[0],
+          dates: getTodayLocalDateStr(),
           travelers: 2,
           pacing: "Moderate",
           famousRatio: 60,
@@ -237,7 +245,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "nature",
         region: "Kerala",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Relaxed",
         famousRatio: 70,
@@ -250,7 +258,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "heritage",
         region: "Rajasthan",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Moderate",
         famousRatio: 60,
@@ -263,7 +271,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "spiritual",
         region: "Uttar Pradesh",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Relaxed",
         famousRatio: 80,
@@ -276,7 +284,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "adventure",
         region: "Himachal Pradesh",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Active",
         famousRatio: 60,
@@ -289,7 +297,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "spiritual",
         region: "Gujarat",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Moderate",
         famousRatio: 70,
@@ -302,7 +310,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "nature",
         region: "Jammu & Kashmir",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Relaxed",
         famousRatio: 80,
@@ -315,7 +323,7 @@ export function TravelProvider({ children }: { children: React.ReactNode }) {
         category: "nature",
         region: "Meghalaya",
         duration: 3,
-        dates: new Date().toISOString().split("T")[0],
+        dates: getTodayLocalDateStr(),
         travelers: 2,
         pacing: "Moderate",
         famousRatio: 60,

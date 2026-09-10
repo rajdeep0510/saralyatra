@@ -11,6 +11,23 @@ interface CustomLargeCalendarProps {
   onClose: () => void;
 }
 
+// Local date helpers to eliminate UTC timezone shift bugs
+function formatLocalDate(d: Date): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function parseLocalDate(dateStr: string): Date | null {
+  if (!dateStr) return null;
+  const parts = dateStr.split("-");
+  if (parts.length !== 3) return null;
+  const [year, month, day] = parts.map(Number);
+  if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
+  return new Date(year, month - 1, day, 0, 0, 0, 0);
+}
+
 export default function CustomLargeCalendar({
   selectedDate,
   durationDays,
@@ -22,18 +39,15 @@ export default function CustomLargeCalendar({
 
   // Initialize view month based on selectedDate or current date
   const [viewDate, setViewDate] = useState<Date>(() => {
-    if (selectedDate) {
-      const parsed = new Date(selectedDate);
-      if (!isNaN(parsed.getTime())) return parsed;
-    }
-    return new Date();
+    const parsed = parseLocalDate(selectedDate);
+    return parsed || new Date();
   });
 
   // Sync view date if selectedDate changes
   useEffect(() => {
     if (selectedDate) {
-      const parsed = new Date(selectedDate);
-      if (!isNaN(parsed.getTime())) {
+      const parsed = parseLocalDate(selectedDate);
+      if (parsed) {
         setViewDate(parsed);
       }
     }
@@ -66,10 +80,7 @@ export default function CustomLargeCalendar({
   }, []);
 
   const selectedStartDate = useMemo(() => {
-    if (!selectedDate) return null;
-    const d = new Date(selectedDate);
-    d.setHours(0, 0, 0, 0);
-    return isNaN(d.getTime()) ? null : d;
+    return parseLocalDate(selectedDate);
   }, [selectedDate]);
 
   const selectedEndDate = useMemo(() => {
@@ -119,9 +130,8 @@ export default function CustomLargeCalendar({
     // Previous month filler days
     const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
     for (let i = startingDayOfWeek - 1; i >= 0; i--) {
-      const d = new Date(currentYear, currentMonth - 1, prevMonthLastDay - i);
-      d.setHours(0, 0, 0, 0);
-      const dateStr = d.toISOString().split("T")[0];
+      const d = new Date(currentYear, currentMonth - 1, prevMonthLastDay - i, 0, 0, 0, 0);
+      const dateStr = formatLocalDate(d);
       days.push({
         date: d,
         dateStr,
@@ -137,9 +147,8 @@ export default function CustomLargeCalendar({
 
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
-      const d = new Date(currentYear, currentMonth, day);
-      d.setHours(0, 0, 0, 0);
-      const dateStr = d.toISOString().split("T")[0];
+      const d = new Date(currentYear, currentMonth, day, 0, 0, 0, 0);
+      const dateStr = formatLocalDate(d);
       days.push({
         date: d,
         dateStr,
@@ -156,9 +165,8 @@ export default function CustomLargeCalendar({
     // Next month filler days to complete 35 or 42 grid cells
     const remainingCells = (7 - (days.length % 7)) % 7;
     for (let day = 1; day <= remainingCells; day++) {
-      const d = new Date(currentYear, currentMonth + 1, day);
-      d.setHours(0, 0, 0, 0);
-      const dateStr = d.toISOString().split("T")[0];
+      const d = new Date(currentYear, currentMonth + 1, day, 0, 0, 0, 0);
+      const dateStr = formatLocalDate(d);
       days.push({
         date: d,
         dateStr,
