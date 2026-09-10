@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Compass, Search, Globe, User, Landmark, Map, Home, Sparkles, X, ChevronDown, ShieldCheck, MapPin, BookmarkCheck, Trash2, ArrowRight, Plane } from "lucide-react";
+import { Compass, Search, Globe, User, Landmark, Map, Home, Sparkles, X, ChevronDown, ShieldCheck, MapPin, BookmarkCheck, Trash2, ArrowRight, Plane, Camera } from "lucide-react";
 import { translations, indianStates } from "@/data/mockData";
 import { DietaryType, LanguageCode } from "@/types";
 import { useTravel } from "@/context/TravelContext";
@@ -153,7 +153,7 @@ export default function Navbar(props: NavbarProps) {
             })}
           </nav>
 
-          {/* Right Side: Search, Language Switcher, and Interactive User Profile Customizer */}
+          {/* Right Side: Search and Interactive User Profile Customizer */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             
             {/* Search Input (Responsive width, expands on focus) */}
@@ -173,24 +173,7 @@ export default function Navbar(props: NavbarProps) {
               />
             </div>
 
-            {/* Language Switcher */}
-            <div className="flex items-center gap-1 rounded-full bg-stone-100 border border-stone-200 px-2 py-1.5 text-xs font-medium text-stone-700 hover:border-stone-300 transition-all shrink-0">
-              <Globe className="h-3.5 w-3.5 text-terracotta-600" />
-              <select
-                value={currentLang}
-                onChange={(e) => setCurrentLang(e.target.value as LanguageCode)}
-                className="bg-transparent pr-0.5 text-xs font-semibold text-stone-800 focus:outline-none cursor-pointer"
-              >
-                <option value="en">EN</option>
-                <option value="hi">हिन्दी</option>
-                <option value="mr">मराठी</option>
-                <option value="gu">ગુજરાતી</option>
-                <option value="bn">বাংলা</option>
-                <option value="ta">தமிழ்</option>
-              </select>
-            </div>
-
-            {/* Interactive User Profile Section with Popover Dropdown */}
+            {/* Interactive User Profile Section with Popover Dropdown (Contains Language Selection) */}
             <div className="relative shrink-0" ref={dropdownRef}>
               <button
                 type="button"
@@ -198,7 +181,7 @@ export default function Navbar(props: NavbarProps) {
                 className={`flex items-center gap-2 pl-2 sm:pl-3 border-l border-stone-200 shrink-0 cursor-pointer p-1 rounded-xl transition-all ${
                   isProfileModalOpen ? "bg-stone-100" : "hover:bg-stone-50"
                 }`}
-                title="Edit Traveler Profile & Saved Trips"
+                title="Edit Traveler Profile, Language & Saved Trips"
               >
                 <div className="flex flex-col items-end text-right shrink-0">
                   <div className="flex items-center gap-1">
@@ -207,9 +190,14 @@ export default function Navbar(props: NavbarProps) {
                     </span>
                     <ChevronDown className={`h-3 w-3 text-stone-400 transition-transform ${isProfileModalOpen ? "rotate-180 text-stone-800" : ""}`} />
                   </div>
-                  <span suppressHydrationWarning className="text-[9px] font-bold text-terracotta-700 bg-terracotta-50 px-1.5 py-0.5 rounded border border-terracotta-200/70 whitespace-nowrap leading-none mt-0.5">
-                    {dietaryLabels[userProfile.dietary] || "Pure Veg"} • {currentUser ? (savedTrips.length > 0 ? `${savedTrips.length} Saved` : userProfile.homeState || "India") : "Sign In"}
-                  </span>
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <span suppressHydrationWarning className="text-[9px] font-bold text-terracotta-700 bg-terracotta-50 px-1.5 py-0.5 rounded border border-terracotta-200/70 whitespace-nowrap leading-none">
+                      {dietaryLabels[userProfile.dietary] || "Pure Veg"}
+                    </span>
+                    <span className="text-[9px] font-bold text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200 uppercase leading-none">
+                      🌐 {currentLang}
+                    </span>
+                  </div>
                 </div>
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-stone-900 text-white ring-2 ring-white shadow-xs shrink-0 font-bold text-xs">
                   {currentUser && userProfile.name ? userProfile.name.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
@@ -272,6 +260,43 @@ export default function Navbar(props: NavbarProps) {
                   {/* TAB 1: Profile & Customs */}
                   {activeProfileTab === "profile" && (
                     <div className="space-y-3.5">
+                      
+                      {/* Language Selection Grid */}
+                      <div className="space-y-1.5 p-3 rounded-2xl bg-stone-50 border border-stone-200/80">
+                        <div className="flex items-center justify-between">
+                          <label className="text-[11px] font-bold text-stone-800 flex items-center gap-1.5">
+                            <Globe className="h-3.5 w-3.5 text-terracotta-600" />
+                            <span>App Language / भाषा</span>
+                          </label>
+                          <span className="text-[9px] font-black text-terracotta-700 uppercase bg-terracotta-50 px-1.5 py-0.5 rounded border border-terracotta-200">
+                            {currentLang.toUpperCase()}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-1.5 pt-0.5">
+                          {[
+                            { code: "en", label: "English" },
+                            { code: "hi", label: "हिन्दी" },
+                            { code: "mr", label: "मराठी" },
+                            { code: "gu", label: "ગુજરાતી" },
+                            { code: "bn", label: "বাংলা" },
+                            { code: "ta", label: "தமிழ்" },
+                          ].map((lang) => (
+                            <button
+                              key={lang.code}
+                              type="button"
+                              onClick={() => setCurrentLang(lang.code as LanguageCode)}
+                              className={`py-1 px-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                                currentLang === lang.code
+                                  ? "bg-stone-900 text-white border-stone-900 shadow-2xs scale-102"
+                                  : "bg-white text-stone-700 border-stone-200 hover:bg-stone-100"
+                              }`}
+                            >
+                              {lang.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
                       {/* Field 1: User Name Input */}
                       <div className="space-y-1">
                         <label className="text-[11px] font-bold text-stone-700 flex items-center justify-between">

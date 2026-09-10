@@ -501,3 +501,272 @@ export function generateInTripDailyCommute(
   };
 }
 
+// -------------------------------------------------------------
+// SIH 2026: PRICE DROP PREDICTOR & MULTI-CITY LOOP ROUTING
+// -------------------------------------------------------------
+
+export interface PriceDropPrediction {
+  recommendation: "BUY_NOW" | "WAIT" | "FAIR_PRICE";
+  headline: string;
+  subtext: string;
+  confidencePercent: number;
+  expectedChangeAmount: number;
+  expectedChangeDirection: "UP" | "DOWN";
+  currentFareStatus: string;
+  bestBookingDayOfWeek: string;
+  cheapestFlightSlot: string;
+}
+
+export interface MultiCityLoopRoute {
+  id: string;
+  circuitName: string;
+  tagline: string;
+  totalDuration: string;
+  hoursSaved: number;
+  costSavedPerPerson: number;
+  legs: {
+    legNumber: number;
+    type: "flight" | "train" | "road";
+    from: string;
+    to: string;
+    modeName: string;
+    duration: string;
+    estFare: number;
+    highlight: string;
+  }[];
+  totalLoopCost: number;
+  summaryRationale: string;
+}
+
+// Generates intelligent price drop predictions
+export function generatePriceDropPrediction(
+  originCity: string = "Ahmedabad",
+  destCity: string = "Kochi",
+  travelDate: string = ""
+): PriceDropPrediction {
+  const daysUntilTrip = travelDate 
+    ? Math.max(1, Math.round((new Date(travelDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)))
+    : 14;
+
+  if (daysUntilTrip <= 4) {
+    return {
+      recommendation: "BUY_NOW",
+      headline: "📈 Lock Price Now — Fares Rising Fast",
+      subtext: "Last-minute booking window. Seat inventory across IndiGo & Air India is under 15% and fares will surge 22% in the next 48 hours.",
+      confidencePercent: 96,
+      expectedChangeAmount: 1450,
+      expectedChangeDirection: "UP",
+      currentFareStatus: "Near weekly peak due to imminent departure date",
+      bestBookingDayOfWeek: "Book today before midnight",
+      cheapestFlightSlot: "Early morning 06:15 AM slots offer highest savings"
+    };
+  }
+
+  if (daysUntilTrip >= 21) {
+    return {
+      recommendation: "WAIT",
+      headline: "📉 Wait 2–3 Days — Midweek Fare Dip Expected",
+      subtext: "Airlines release promotional flash inventory on Tuesday nights. Historical fare trends show a potential drop of up to ₹900.",
+      confidencePercent: 88,
+      expectedChangeAmount: 850,
+      expectedChangeDirection: "DOWN",
+      currentFareStatus: "Moderate, waiting for airline flash sale discount",
+      bestBookingDayOfWeek: "Tuesday / Wednesday midnight",
+      cheapestFlightSlot: "Midday 01:30 PM flights save ~₹800 vs evening peak"
+    };
+  }
+
+  return {
+    recommendation: "FAIR_PRICE",
+    headline: "✨ Fair Price Detected — Optimal Booking Window",
+    subtext: "Current fares are at the 30-day historical average. You can safely lock this ticket now or set a price alert.",
+    confidencePercent: 92,
+    expectedChangeAmount: 400,
+    expectedChangeDirection: "UP",
+    currentFareStatus: "At optimal median rate (14–20 days before journey)",
+    bestBookingDayOfWeek: "Wednesday morning",
+    cheapestFlightSlot: "Early morning 06:30 AM flights"
+  };
+}
+
+// Generates multi-city circular loop itineraries that prevent backtracking
+export function generateMultiCityLoopRoutes(
+  originCity: string = "Ahmedabad",
+  destRegion: string = "Rajasthan"
+): MultiCityLoopRoute[] {
+  const reg = destRegion.toLowerCase();
+
+  // 1. Rajasthan Multi-City Open-Jaw Loop (Delhi / Jaipur ➔ Udaipur)
+  if (reg.includes("rajasthan") || reg.includes("jaipur") || reg.includes("udaipur") || reg.includes("jodhpur")) {
+    return [
+      {
+        id: "loop-raj-1",
+        circuitName: "Royal Rajasthan Grand Loop (Open-Jaw)",
+        tagline: "Fly to Jaipur ➔ Road through Jodhpur ➔ Fly out of Udaipur",
+        totalDuration: "5 Days Circuit",
+        hoursSaved: 8.5,
+        costSavedPerPerson: 3200,
+        totalLoopCost: 7450,
+        summaryRationale: "Eliminates 400 km of painful road backtracking from Udaipur back to Jaipur, giving you an extra full day of sightseeing!",
+        legs: [
+          {
+            legNumber: 1,
+            type: "flight",
+            from: originCity,
+            to: "Jaipur (JAI)",
+            modeName: "Direct Flight (IndiGo/Air India)",
+            duration: "1h 15m",
+            estFare: 3100,
+            highlight: "Arrive fresh at Amber & Hawa Mahal in the morning"
+          },
+          {
+            legNumber: 2,
+            type: "train",
+            from: "Jaipur Junction",
+            to: "Jodhpur Cantt",
+            modeName: "Vande Bharat / Express Train",
+            duration: "4h 10m",
+            estFare: 650,
+            highlight: "Scenic Thar desert sunrise journey with meal served"
+          },
+          {
+            legNumber: 3,
+            type: "road",
+            from: "Jodhpur Citadels",
+            to: "Udaipur Lakes",
+            modeName: "Scenic Aravalli Highway Cab via Ranakpur",
+            duration: "4h 45m",
+            estFare: 900,
+            highlight: "Pass through Ranakpur 1444-pillar marble Jain Temple"
+          },
+          {
+            legNumber: 4,
+            type: "flight",
+            from: "Udaipur (UDR)",
+            to: originCity,
+            modeName: "Direct Return Flight",
+            duration: "1h 05m",
+            estFare: 2800,
+            highlight: "Fly directly home from Udaipur without returning to Jaipur!"
+          }
+        ]
+      }
+    ];
+  }
+
+  // 2. Kerala Multi-City Coastal & Hill Loop (Kochi ➔ Munnar ➔ Trivandrum)
+  if (reg.includes("kerala") || reg.includes("munnar") || reg.includes("alleppey") || reg.includes("kochi")) {
+    return [
+      {
+        id: "loop-ker-1",
+        circuitName: "God's Own Country Open-Jaw Loop",
+        tagline: "Fly into Kochi (COK) ➔ Munnar Hills ➔ Alleppey ➔ Fly out of Trivandrum (TRV)",
+        totalDuration: "4 Days Circuit",
+        hoursSaved: 6.0,
+        costSavedPerPerson: 2800,
+        totalLoopCost: 8100,
+        summaryRationale: "Avoids 180 km of heavy highway traffic back to Kochi airport; exit straight through southern Kerala.",
+        legs: [
+          {
+            legNumber: 1,
+            type: "flight",
+            from: originCity,
+            to: "Kochi International (COK)",
+            modeName: "Direct Flight",
+            duration: "2h 00m",
+            estFare: 3600,
+            highlight: "Begin at Fort Kochi heritage spice quarters"
+          },
+          {
+            legNumber: 2,
+            type: "road",
+            from: "Kochi",
+            to: "Munnar Tea Valleys",
+            modeName: "Scenic Western Ghats Cab",
+            duration: "3h 30m",
+            estFare: 800,
+            highlight: "Cheeyappara & Valara cascading roadside waterfalls"
+          },
+          {
+            legNumber: 3,
+            type: "train",
+            from: "Alappuzha (Alleppey)",
+            to: "Trivandrum Central (TVC)",
+            modeName: "Vande Bharat Express (Kasaragod-TVC)",
+            duration: "2h 15m",
+            estFare: 550,
+            highlight: "Smooth coastal rail line with Arabian Sea views"
+          },
+          {
+            legNumber: 4,
+            type: "flight",
+            from: "Trivandrum (TRV)",
+            to: originCity,
+            modeName: "Direct Return Flight",
+            duration: "2h 10m",
+            estFare: 3150,
+            highlight: "Fly home directly after Padmanabhaswamy Temple darshan"
+          }
+        ]
+      }
+    ];
+  }
+
+  // 3. Golden Triangle Multi-City Heritage Loop (Delhi ➔ Agra ➔ Jaipur)
+  return [
+    {
+      id: "loop-gt-1",
+      circuitName: "Golden Triangle Circular Express Loop",
+      tagline: "Fly into Delhi (DEL) ➔ Vande Bharat to Agra ➔ Expressway to Jaipur ➔ Return",
+      totalDuration: "4 Days Circuit",
+      hoursSaved: 5.5,
+      costSavedPerPerson: 2400,
+      totalLoopCost: 6900,
+      summaryRationale: "High-speed rail connections link the 3 imperial cities with zero dead travel time.",
+      legs: [
+        {
+          legNumber: 1,
+          type: "flight",
+          from: originCity,
+          to: "Delhi IGI (DEL)",
+          modeName: "Direct Morning Flight",
+          duration: "1h 30m",
+          estFare: 3200,
+          highlight: "Arrive at capital gateways"
+        },
+        {
+          legNumber: 2,
+          type: "train",
+          from: "Hazrat Nizamuddin (NZM)",
+          to: "Agra Cantt (AGC)",
+          modeName: "Gatimaan / Vande Bharat Express",
+          duration: "1h 40m",
+          estFare: 850,
+          highlight: "India's fastest train directly to the Taj Mahal"
+        },
+        {
+          legNumber: 3,
+          type: "road",
+          from: "Agra Fort",
+          to: "Jaipur Pink City",
+          modeName: "Expressway Transit via Fatehpur Sikri",
+          duration: "3h 45m",
+          estFare: 650,
+          highlight: "Visit UNESCO Fatehpur Sikri midway"
+        },
+        {
+          legNumber: 4,
+          type: "flight",
+          from: "Jaipur (JAI)",
+          to: originCity,
+          modeName: "Direct Return Flight",
+          duration: "1h 15m",
+          estFare: 2200,
+          highlight: "Fly directly back without returning to Delhi"
+        }
+      ]
+    }
+  ];
+}
+
+

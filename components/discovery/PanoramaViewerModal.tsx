@@ -218,7 +218,7 @@ export default function PanoramaViewerModal({
                 </div>
               ) : (
                 <div className="w-full h-full relative">
-                  <GroundPanoramaViewer monument={monument} />
+                  <GroundPanoramaViewer monument={monument} currentLang={currentLang} />
 
                   {hasVerifiedStreetView && (
                     <button

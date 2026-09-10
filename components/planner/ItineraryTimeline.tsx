@@ -5,6 +5,7 @@ import { Compass, PlusCircle } from "lucide-react";
 import { translations } from "@/data/mockData";
 import { LanguageCode, PreloadedTrip } from "@/types";
 import ActivitySlot from "./ActivitySlot";
+import WeatherCrowdWidget from "@/components/weather/WeatherCrowdWidget";
 
 interface ItineraryTimelineProps {
   itinerary: PreloadedTrip | null;
@@ -14,6 +15,7 @@ interface ItineraryTimelineProps {
   onOpenDetails?: (monumentId: string) => void;
   onRemoveStop?: (dayNumber: number, stopId: string) => void;
   onAddStopClick?: (dayNumber: number) => void;
+  onTripUpdated?: (updatedTrip: PreloadedTrip, message: string) => void;
 }
 
 export default function ItineraryTimeline({
@@ -23,7 +25,8 @@ export default function ItineraryTimeline({
   onSelectStop,
   onOpenDetails,
   onRemoveStop,
-  onAddStopClick
+  onAddStopClick,
+  onTripUpdated
 }: ItineraryTimelineProps) {
   const t = translations[currentLang] || translations.en;
   const [activeDay, setActiveDay] = useState<number>(1);
@@ -96,6 +99,15 @@ export default function ItineraryTimeline({
             )}
           </button>
         ))}
+      </div>
+
+      {/* Live Weather, AQI & Crowd Sensor Bar */}
+      <div className="p-3.5 bg-stone-50/60 border-b border-stone-200">
+        <WeatherCrowdWidget
+          trip={itinerary}
+          currentDayNumber={activeDay}
+          onTripUpdated={onTripUpdated}
+        />
       </div>
 
       {/* Timeline Scroll Area */}
